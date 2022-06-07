@@ -1,0 +1,12 @@
+.private-layout {
+    ::ng-deep {
+      .p-sidebar {
+        background-color: white;
+        position: relative;
+      }
+  
+      .p-sidebar-left {
+        top:auto;
+      }
+    }
+}

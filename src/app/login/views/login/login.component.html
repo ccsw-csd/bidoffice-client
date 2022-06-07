@@ -1,0 +1,12 @@
+<div>
+    <span class="p-float-label" style="margin-top: 10px">
+        <input id="username" type="username" pInputText required [(ngModel)]="user"/>
+        <label for="username">Username</label>
+    </span>
+
+    <span class="p-float-label" style="margin-top: 10px">
+        <input id="password" type="password" pInputText required [(ngModel)]="password"/>
+        <label for="password">Contraseña</label>
+    </span>
+    <p-button label="Login" [disabled]="user == '' || password == ''" (click)="login()"></p-button>   
+</div>
