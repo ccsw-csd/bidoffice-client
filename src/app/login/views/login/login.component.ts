@@ -32,25 +32,21 @@ export class LoginComponent implements OnInit {
 
   login() {
 
-    if (this.user == "") return;
-    if (this.password == "") return;
-
+    if (this.user == "" || this.password == "") return;
+    
     this.isloading = true;
-
-    this.loginService.login(this.user, this.password).subscribe(
-      (res: ResponseCredentials) => {
-
+    this.loginService.login(this.user, this.password).subscribe({
+      next: (res: ResponseCredentials) => { 
         this.loginService.putCredentials(res);
-
-        this.router.navigate(['main']);
-        this.isloading = false;
       },
-      () => {
-
+      error: () => {
         this.snackbarService.error('Wrong credentials.');
         this.isloading = false;
-      }
-    );
+      },
+      complete: () => {
+        this.isloading = false;
+        this.router.navigate(['main']);
+      }     
+    });
   }
-  
 }
