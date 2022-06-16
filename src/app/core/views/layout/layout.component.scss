@@ -1,7 +1,9 @@
+@import "./src/assets/scss/master";
+
 .private-layout {
     ::ng-deep {
       .p-sidebar {
-        background-color: white;
+        background-color: $primary;
         position: relative;
       }
   
