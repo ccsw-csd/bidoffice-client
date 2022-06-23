@@ -2,8 +2,8 @@
     <app-header (navOpenEvent)="toggleMenu()">
     </app-header>
 
-    <div class="flex h-full">
-        <p-sidebar [(visible)]="visibleSideBar" [baseZIndex]="10000" [modal]="false" [showCloseIcon]="false">
+    <div class="flex h-full content">
+        <p-sidebar class="" [(visible)]="visibleSideBar" [baseZIndex]="10000" [modal]="false" [showCloseIcon]="false">
             <app-nav></app-nav>
         </p-sidebar>
 

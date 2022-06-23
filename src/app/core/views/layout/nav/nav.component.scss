@@ -1,13 +1,26 @@
 @import "./src/assets/scss/master";
 
-::ng-deep .p-menu {
-      background-color: $primary;
-      border:none;
-      width: 300px;
-    .p-menuitem .p-menuitem-link {
-        box-shadow: none;
-        .p-menuitem-text {
-            color: white;
-        }
-    } 
+.nav{
+    background-color: $primary;
+    ::ng-deep .p-menu {
+        background-color: $primary;
+        border:none;
+        width: 300px;
+        .p-menuitem {
+            .p-menuitem-link {
+              box-shadow: none;
+  
+                .p-menuitem-text {
+                    color: white;
+                }
+            }
+            .p-menuitem-link:not(.p-disabled):hover {
+                background-color: rgba(0,0,0,.04);
+      
+                .p-menuitem-text {
+                    color: white;
+                }
+            } 
+        }   
+    }
 }
