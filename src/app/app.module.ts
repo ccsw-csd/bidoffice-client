@@ -7,10 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
-import { BidModule } from './bid/bid.module';
+import { OfferModule } from './offer/offer.module';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es'
+
 registerLocaleData(localeEs,'es');
 
 @NgModule({
@@ -23,7 +24,7 @@ registerLocaleData(localeEs,'es');
     BrowserAnimationsModule,
     CoreModule,
     LoginModule,
-    BidModule
+    OfferModule
   ],
   providers: [],
   bootstrap: [AppComponent]
