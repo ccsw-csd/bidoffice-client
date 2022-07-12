@@ -1,0 +1,59 @@
+<div class="flex flex-nowrap  gap-3">
+    <div class="flex flex-column p-float-label flex-1 field gap-2">
+        <div class="flex p-float-label field">
+            <div class="flex p-float-label flex-1 field mr4rem">
+                <p-checkbox id="won" name="won" value="won"></p-checkbox>
+                <label class="ml20" for="won">Lidera C&CA</label>
+            </div>
+        </div>
+        <div class="flex p-float-label field">
+            <div class="flex p-float-label flex-1 field mr4rem">
+                <p-checkbox id="won" name="won" value="won"></p-checkbox>
+                <label class="ml20" for="won">Es Multipower</label>
+            </div>
+        </div>
+        <div class="flex p-float-label field">
+            <div class="flex p-float-label flex-1 field">
+                <input class="flex-grow-1" id="client" pInputText />
+                <label for="client">Cliente</label>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-column p-float-label flex-1 field">
+        <p *ngFor="let person of people" class="flex p-float-label flex-1 ml20">
+            {{person.name}}
+        </p>
+    </div>
+</div>
+<div class="flex flex-nowrap  gap-3">
+    <div class="flex p-float-label flex-grow-1 field">
+        <p-dropdown class="flex-grow-1" [style]="{'minWidth':'100%'}" id="sector" [options]="people"
+            optionLabel="sector"></p-dropdown>
+        <label for="sector">Sector</label>
+    </div>
+    <div class="flex p-float-label flex-grow-1 field">
+        <p-dropdown class="flex-grow-1" [style]="{'minWidth':'100%'}" id="projectType" [options]="people"
+            optionLabel="projectType"></p-dropdown>
+        <label for="projectType">Tipo de Proyecto</label>
+    </div>
+</div>
+<div class="flex flex-nowrap  gap-3">
+    <div class="flex p-float-label flex-1 field">
+        <input class= "flex-grow-1" id="prize" pInputText />
+        <label for="prize">Importe</label>
+    </div>
+    <div class="flex p-float-label flex-1 field">
+        <input class= "flex-grow-1" id="persons" pInputText />
+        <label for="persons">Personas de proyecto</label>
+    </div>
+    <div class="flex p-float-label flex-1 field">
+        <input class= "flex-grow-1" id="projectDuration" pInputText />
+        <label for="projectDuration">Duración de proyecto</label>
+    </div>
+</div>
+<div class="flex flex-nowrap  gap-3">
+    <div class="flex p-float-label flex-grow-1 field">
+        <textarea class= "flex-grow-1" id="techDetail" pInputTextarea></textarea>
+        <label for="techDetail">Más detalle de tecnologías</label>
+    </div>
+</div>

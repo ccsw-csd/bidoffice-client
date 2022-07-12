@@ -1,0 +1,74 @@
+<div class="flex flex-nowrap  gap-3">
+    <div class="flex p-float-label flex-1 field">
+        <input class= "flex-grow-1" id="chanceName" pInputText />
+        <label for="chanceName">Nombre Oportunidad</label>
+    </div>
+    <div class="flex p-float-label flex-1 field">
+        <input class= "flex-grow-1" id="client" pInputText />
+        <label for="client">Cliente</label>
+    </div>
+    <div class="flex p-float-label flex-1 field">
+        <input class= "flex-grow-1" id="state" pInputText />
+        <label for="state">Estado</label>
+    </div>
+</div>
+<div class="flex flex-nowrap gap-3">
+    <div class="flex p-float-label flex-grow-1 field">
+        <input class= "flex-grow-1" id="chanceName" pInputText />
+        <label for="chanceName">Solicitante</label>
+    </div>
+    <div class="flex p-float-label flex-grow-1 field">
+        <input class= "flex-grow-1" id="client" pInputText />
+        <label for="client">Responsable</label>
+    </div>
+    <div class="flex p-float-label flex-grow-1 field">
+        <p-calendar [showIcon]="true" [style]="{'minWidth':'100%'}" class= "flex-grow-1" id="state"></p-calendar>
+        <label for="state">Fecha Solicitud</label>
+    </div>
+    <div class="flex p-float-label flex-grow-1 field">
+        <p-dropdown class= "flex-grow-1" [style]="{'minWidth':'100%'}"  id="sector" [options]="cities"  optionLabel="sector"></p-dropdown>
+        <label for="sector">Sector</label>
+    </div>
+    <div class="flex p-float-label flex-grow-1 field">
+        <p-dropdown class= "flex-grow-1" [style]="{'minWidth':'100%'}"  id="projectType" [options]="cities"  optionLabel="projectType"></p-dropdown>
+        <label for="projectType">Tipo de Proyecto</label>
+    </div>
+</div>
+<div class="flex flex-nowrap  gap-3">
+    <div class="flex p-float-label flex-grow-1 field">
+        <textarea class= "flex-grow-1" id="offering" pInputTextarea></textarea>
+        <label for="offering">Offering</label>
+    </div>
+    <div class="flex p-float-label flex-grow-1 field">
+        <textarea class= "flex-grow-1" id="tecnology" pInputTextarea></textarea>
+        <label for="tecnology">Tecnologías</label>
+    </div>
+</div>
+<div class="flex flex-nowrap  gap-3">
+    <div class="flex p-float-label flex-grow-1 field">
+        <p-dropdown class= "flex-grow-1" [style]="{'minWidth':'100%'}" [options]="cities"  optionLabel="name"></p-dropdown><!--<p-dropdown [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>-->
+        <label for="sector">Tipo de Oferta</label>
+    </div>
+    <div class="flex p-float-label flex-grow-1 field">
+        <p-calendar [showIcon]="true" [style]="{'minWidth':'100%'}" class= "flex-grow-1" id="state"></p-calendar>
+        <label for="state">Fecha Go/No Go</label>
+    </div>
+    <div class="flex p-float-label flex-grow-1 field">
+        <p-calendar [showIcon]="true" [style]="{'minWidth':'100%'}" class= "flex-grow-1" id="deliveryDate"></p-calendar>
+        <label for="deliveryDate">Fecha de Entrega</label>
+    </div>
+    <div class="flex p-float-label flex-1 field">
+        <input class= "flex-grow-1" id="bdcCode" pInputText />
+        <label for="bdcCode">Código BDC</label>
+    </div>
+    <div class="flex p-float-label flex-1 field mr4rem">
+        <p-checkbox id="won" name="won" value="won"></p-checkbox>
+        <label class="ml20" for="won">Ganada</label>
+    </div>
+</div>
+<div class="flex flex-nowrap  gap-3">
+    <div class="flex p-float-label flex-grow-1 field">
+        <textarea class= "flex-grow-1" id="remarks" pInputTextarea></textarea>
+        <label for="remarks">Observaciones</label>
+    </div>
+</div>

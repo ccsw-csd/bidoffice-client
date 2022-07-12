@@ -1,14 +1,18 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
 import { LazyLoadEvent } from 'primeng/api';
 import { Pageable } from 'src/app/core/models/Pageable';
 import { OfferItemList } from '../../model/OfferItemList';
 import { OfferPage } from '../../model/OfferPage';
 import { OfferService } from '../../services/offer.service';
+import { OfferEditComponent } from '../offer-edit/offer-edit.component';
 
 @Component({
   selector: 'app-offer-list',
   templateUrl: './offer-list.component.html',
-  styleUrls: ['./offer-list.component.scss']
+  styleUrls: ['./offer-list.component.scss'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class OfferListComponent implements OnInit {
 
@@ -26,7 +30,7 @@ export class OfferListComponent implements OnInit {
   totalElements: number;
   isloading: boolean = false;
 
-  constructor(private offerService: OfferService, private cdRef : ChangeDetectorRef) { }
+  constructor(private offerService: OfferService, private cdRef : ChangeDetectorRef, private dinamicDialogService: DialogService) { }
 
   ngOnInit(): void {
     this.loadPage();
@@ -58,5 +62,12 @@ export class OfferListComponent implements OnInit {
         }     
       });
     }
+  }
+
+  toOfferEdit(){
+    const ref = this.dinamicDialogService.open(OfferEditComponent, {
+      header: 'NUEVA OFERTA',
+      width: '80%',
+  });
   }
 }
