@@ -10,13 +10,17 @@ import { LoginModule } from './login/login.module';
 import { OfferModule } from './offer/offer.module';
 
 import { registerLocaleData } from '@angular/common';
-import localeEs from '@angular/common/locales/es'
+import localeEs from '@angular/common/locales/es';
+import { FileTypeComponent } from './admin/file-type/file-type.component';
+import { AdminModule } from './admin/admin.module';
 
 registerLocaleData(localeEs,'es');
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    //FileTypeComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,8 @@ registerLocaleData(localeEs,'es');
     BrowserAnimationsModule,
     CoreModule,
     LoginModule,
-    OfferModule
+    OfferModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

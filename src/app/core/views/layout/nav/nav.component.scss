@@ -1,6 +1,8 @@
 @import "./src/assets/scss/master";
 
+
 .nav{
+  
   background-color: $primary;
   ::ng-deep .p-menu {
     background-color: $primary;
@@ -9,6 +11,15 @@
     margin-left: 0px;
     padding-left: 0px;
     .p-menuitem {
+      
+      .p-menuitem.p-menuitem{
+        
+        .p-menuitem-text {
+          color: rgb(180, 38, 38);
+          padding-left: 2px;
+        }
+      }
+
       .p-menuitem-link {
         box-shadow: none;
 
@@ -31,4 +42,19 @@
      }
     }   
   }
+  
+}
+
+.nav .admin .p-submenu-header{
+    background-color: #1077ff;
+    margin: 0;
+    padding: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    background: #1077ff;
+
+    font-weight: 400;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    
+
 }

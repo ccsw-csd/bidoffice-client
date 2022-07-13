@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FileTypeComponent } from './admin/file-type/file-type.component';
 import { AuthGuard } from './core/services/auth.guard';
 import { UserResolverService } from './core/services/user-resolver.service';
 import { LayoutComponent } from './core/views/layout/layout.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
     resolve: {user: UserResolverService},
     children: [
       { path: 'main', component: OfferListComponent },
+      { path: 'filetype', component: FileTypeComponent },
       { path: '**', redirectTo: 'main', pathMatch: 'full' }
     ]
   },  
