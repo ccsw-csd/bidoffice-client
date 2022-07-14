@@ -11,7 +11,6 @@ import { OfferModule } from './offer/offer.module';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
-import { AdminFiletypeComponent } from './admin/admin-filetype/admin-filetype.component';
 import { AdminModule } from './admin/admin.module';
 
 

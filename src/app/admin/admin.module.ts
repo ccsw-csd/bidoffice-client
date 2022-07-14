@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminFiletypeComponent } from './admin-filetype/admin-filetype.component';
+
+import { HyperscalerComponent } from './hyperscaler/views/hyperscaler.component';
 import {TableModule} from 'primeng/table';
 
 
 
 @NgModule({
   declarations: [
-    AdminFiletypeComponent,
+    HyperscalerComponent
   ],
   imports: [
     CommonModule,

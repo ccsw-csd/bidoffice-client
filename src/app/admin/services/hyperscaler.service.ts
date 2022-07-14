@@ -6,12 +6,12 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminService {
+export class HyperscalerService {
 
   constructor(private http: HttpClient) { }
 
   getDataHyperscale():Observable<Hyperscaler[]>{
-    let url = "http://localhost:8080/admin/hyperscaler";
+    let url = "http://localhost:8080/hyperscaler";
 
     return this.http.get<Hyperscaler[]>(url);
   }

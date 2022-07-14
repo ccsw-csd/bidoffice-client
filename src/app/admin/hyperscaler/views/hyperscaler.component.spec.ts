@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminFiletypeComponent } from './admin-filetype.component';
+import { HyperscalerComponent } from './hyperscaler.component';
 
-describe('AdminFiletypeComponent', () => {
-  let component: AdminFiletypeComponent;
-  let fixture: ComponentFixture<AdminFiletypeComponent>;
+describe('HyperscalerComponent', () => {
+  let component: HyperscalerComponent;
+  let fixture: ComponentFixture<HyperscalerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminFiletypeComponent ]
+      declarations: [ HyperscalerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminFiletypeComponent);
+    fixture = TestBed.createComponent(HyperscalerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
