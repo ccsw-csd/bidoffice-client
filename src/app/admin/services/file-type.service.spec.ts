@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdminService } from './admin.service';
+import { FileTypeService } from './file-type.service';
 
-describe('AdminService', () => {
-  let service: AdminService;
+describe('FileTypeService', () => {
+  let service: FileTypeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AdminService);
+    service = TestBed.inject(FileTypeService);
   });
 
   it('should be created', () => {

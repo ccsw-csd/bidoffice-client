@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { FileTypeComponent } from './file-type/file-type.component';
+import { FileTypeComponent } from './file-type/views/file-type.component';
 
 
 @NgModule({

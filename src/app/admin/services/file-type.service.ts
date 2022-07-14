@@ -6,14 +6,14 @@ import { FileType } from '../file-type/model/FileType';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminService {
+export class FileTypeService {
 
   constructor(private http: HttpClient) { 
 
   }
 
   getFileTypes(): Observable<FileType[]> {            
-    return this.http.get<FileType[]>('http://localhost:8080/admin/filetype');
+    return this.http.get<FileType[]>('http://localhost:8080/filetype');
 }
 
 }

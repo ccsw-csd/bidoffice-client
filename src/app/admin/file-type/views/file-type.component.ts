@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../services/admin.service';
-import { FileType } from './model/FileType';
+import { FileTypeService } from '../../services/file-type.service';
+import { FileType } from '../model/FileType';
 
 @Component({
   selector: 'app-file-type',
@@ -12,12 +12,12 @@ export class FileTypeComponent implements OnInit {
   public dataSource : FileType[]
 
   constructor(
-    private adminService: AdminService,
+    private fileTypeService: FileTypeService,
     ) { }
 
   ngOnInit(): void {
 
-    this.adminService.getFileTypes().subscribe(
+    this.fileTypeService.getFileTypes().subscribe(
       files=>this.dataSource = files
     )
   }

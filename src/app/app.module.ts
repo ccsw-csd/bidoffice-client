@@ -11,7 +11,6 @@ import { OfferModule } from './offer/offer.module';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
-import { FileTypeComponent } from './admin/file-type/file-type.component';
 import { AdminModule } from './admin/admin.module';
 
 registerLocaleData(localeEs,'es');
@@ -19,7 +18,7 @@ registerLocaleData(localeEs,'es');
 @NgModule({
   declarations: [
     AppComponent,
-    //FileTypeComponent,
+    
     
   ],
   imports: [
