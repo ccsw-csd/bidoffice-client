@@ -1,19 +1,23 @@
 <div class="m-4">  
-    <p-table [value]="cities" [lazy]="true" scrollable="true"
+    <p-table [value]="comments" [lazy]="true" scrollable="true"
     scrollHeight="calc(92vh - 190px)" responsiveLayout="scroll">
         <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="name">name<p-sortIcon field="name"></p-sortIcon>
+            <th pSortableColumn="person">person<p-sortIcon field="person"></p-sortIcon>
             </th>
-            <th pSortableColumn="code">code<p-sortIcon field="code"></p-sortIcon>
+            <th pSortableColumn="comment">comment<p-sortIcon field="comment"></p-sortIcon>
+            </th>
+            <th pSortableColumn="date">date<p-sortIcon field="date"></p-sortIcon>
             </th>
             <th style='flex: 0 0 150px;'>Editar</th>
         </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-offerItemList>
+        <ng-template pTemplate="body" let-comments>
             <tr>
-                <td>{{offerItemList.name}}</td>
-                <td>{{offerItemList.code}}</td>
+                <td>{{comments.person}}</td>
+                <td>{{comments.comment}}</td>
+                <td>{{comments.date}}</td>
+
                 <td style='flex: 0 0 150px;'>
                     <div>
                         <button pButton type="button" icon="pi pi-pencil"
@@ -24,6 +28,6 @@
         </ng-template>
     </p-table>
     <div class="mt-3 flex justify-content-end">
-        <button pButton id="create-offer"  class="p-3">Nueva ciudad</button>
+        <button pButton id="create-offer"  class="p-3">Nuevo comentario</button>
     </div>
 </div> 
