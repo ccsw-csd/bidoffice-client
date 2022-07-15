@@ -11,7 +11,7 @@ export class HyperscalerService {
   constructor(private http: HttpClient) { }
 
   getDataHyperscale():Observable<Hyperscaler[]>{
-    let url = "http://localhost:8080/hyperscaler";
+    let url = "http://localhost:8080/hyperscaler/findAll";
 
     return this.http.get<Hyperscaler[]>(url);
   }
