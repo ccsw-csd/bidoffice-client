@@ -13,7 +13,7 @@ export class FileTypeService {
   }
 
   getFileTypes(): Observable<FileType[]> {            
-    return this.http.get<FileType[]>('http://localhost:8080/filetype');
+    return this.http.get<FileType[]>('http://localhost:8080/filetype/findAll');
 }
 
 }
