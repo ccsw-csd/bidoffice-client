@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { FileType } from '../file-type/model/FileType';
+import { environment } from 'src/environments/environment';
+import { FileType } from '../model/FileType';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class FileTypeService {
   }
 
   getFileTypes(): Observable<FileType[]> {            
-    return this.http.get<FileType[]>('http://localhost:8080/filetype/findAll');
+    return this.http.get<FileType[]>(environment.server +'/filetype/findAll');
 }
 
 }

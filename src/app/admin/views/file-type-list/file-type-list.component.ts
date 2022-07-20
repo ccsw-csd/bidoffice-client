@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FileTypeService } from '../../services/file-type.service';
-import { FileType } from '../model/FileType';
+import { FileType } from '../../model/FileType';
 
 @Component({
   selector: 'app-file-type',
-  templateUrl: './file-type.component.html',
-  styleUrls: ['./file-type.component.scss']
+  templateUrl: './file-type-list.component.html',
+  styleUrls: ['./file-type-list.component.scss']
 })
-export class FileTypeComponent implements OnInit {
+export class FileTypeListComponent implements OnInit {
 
   public dataSource : FileType[]
 

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { FileTypeComponent } from './file-type/views/file-type.component';
+import { FileTypeListComponent } from './views/file-type-list/file-type-list.component';
 
 
 @NgModule({
   declarations: [
-    FileTypeComponent
+    FileTypeListComponent
   ],
   imports: [
     CommonModule,

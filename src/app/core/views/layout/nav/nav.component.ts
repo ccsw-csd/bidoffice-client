@@ -16,6 +16,7 @@ export class NavComponent implements OnInit {
   backVersion : string = "1.0.0";
   items: MenuItem[];
   admin: MenuItem[];
+  translate: any;
 
   constructor(
     public authService: AuthService,
@@ -24,22 +25,22 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.admin=[
-      {label: "Administracion" ,items:[ {   label: 'Tipos de fichero',icon: 'fa-plus', routerLink:"/filetype" },{label: 'siguiente',   icon: 'fa-plus',}]}
+        
+    this.items = [
+      {label: "Ofertas", routerLink: ['/main'],},
+      {label: "Referencias",routerLink: ['/main']},
+      {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'},
+      {label: "Administracion Tipos de ficheros",  routerLink:["/filetype"]},
     ];
 
     
-    this.items = [
-      {label: "Ofertas", routerLink: '/main'},
-      {label: "Referencias"},
-      {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'},
-    ];
 
-    /*this.items = [ {   label: 'File',   icon: 'fa-file-o',   items: [ {   label: 'New',   icon: 'fa-plus', }]}]; // more items]
-*/
+    
     this.utilsService.getAppVersion().subscribe((result: any) => {  
       this.backVersion = result.version;
     });
   }
 
+
+  
 }
