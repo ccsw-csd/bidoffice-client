@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HyperscalerComponent } from './admin/hyperscaler/views/hyperscaler.component';
+import { HyperscalerComponent } from './admin/views/hyperscaler-list/hyperscaler.component';
 import { AuthGuard } from './core/services/auth.guard';
 import { UserResolverService } from './core/services/user-resolver.service';
 import { LayoutComponent } from './core/views/layout/layout.component';

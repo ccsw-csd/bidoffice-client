@@ -10,9 +10,14 @@ import { HyperscalerService } from '../../services/hyperscaler.service';
 export class HyperscalerComponent implements OnInit {
   public listOfData: Hyperscaler[]
   public cols: any[];
+  
   constructor(private hyperscalerService: HyperscalerService) { }
 
   ngOnInit(): void {
+    this.getDataHyperscale()
+  }
+
+  getDataHyperscale(): void{
     this.hyperscalerService.getDataHyperscale().subscribe(
       results => this.listOfData = results
     );

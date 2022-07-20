@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Hyperscaler } from '../model/Hyperscaler';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,6 @@ export class HyperscalerService {
   constructor(private http: HttpClient) { }
 
   getDataHyperscale():Observable<Hyperscaler[]>{
-    let url = "http://localhost:8080/hyperscaler/findAll";
-
-    return this.http.get<Hyperscaler[]>(url);
+    return this.http.get<Hyperscaler[]>(environment.server + "/hyperscaler/findAll");
   }
 }

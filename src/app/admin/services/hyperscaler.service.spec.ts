@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdminService } from './hyperscaler.service';
+import { HyperscalerService } from './hyperscaler.service';
 
-describe('AdminService', () => {
-  let service: AdminService;
+describe('HyperscalerService', () => {
+  let service: HyperscalerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AdminService);
+    service = TestBed.inject(HyperscalerService);
   });
 
   it('should be created', () => {
