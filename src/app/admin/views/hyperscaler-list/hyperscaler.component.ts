@@ -21,12 +21,6 @@ export class HyperscalerComponent implements OnInit {
     this.hyperscalerService.getDataHyperscale().subscribe(
       results => this.listOfData = results
     );
-
-    this.cols = [
-      { field: 'id', header: 'Id' },
-      { field: 'name', header: 'Name' },
-      { field: 'priority', header: 'Priority' },
-  ];
   }
 
 }
