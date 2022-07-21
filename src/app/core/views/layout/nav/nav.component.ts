@@ -26,6 +26,9 @@ export class NavComponent implements OnInit {
     this.items = [
       {label: "Ofertas", routerLink: '/main'},
       {label: "Referencias"},
+      {label: "Administración", items: [
+        {label: "Metodologías", routerLink: '/methodology'}
+      ]},
       {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'}
     ];
 
