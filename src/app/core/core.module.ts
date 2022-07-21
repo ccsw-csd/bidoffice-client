@@ -23,13 +23,11 @@ import { NavComponent } from './views/layout/nav/nav.component';
 
 
 
-
 @NgModule({
   declarations: [
     LayoutComponent,
     HeaderComponent,
-    NavComponent,
-    
+    NavComponent
   ],
   imports: [
     CommonModule,

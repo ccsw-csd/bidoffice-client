@@ -15,7 +15,7 @@ export class NavComponent implements OnInit {
   frontVersion : string = "1.0.0";
   backVersion : string = "1.0.0";
   items: MenuItem[];
-  
+
   constructor(
     public authService: AuthService,
     public dialogService: DialogService,
@@ -23,14 +23,12 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.items = [
       {label: "Ofertas", routerLink: '/main'},
       {label: "Referencias"},
       {label: 'Hyperscaler', routerLink: '/hyperscaler'},
       {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'},
     ]
-    
     this.utilsService.getAppVersion().subscribe((result: any) => {
       this.backVersion = result.version;
     });
