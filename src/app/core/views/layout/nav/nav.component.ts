@@ -28,7 +28,7 @@ export class NavComponent implements OnInit {
       {label: "Referencias"},
       {label: 'Hyperscaler', routerLink: '/hyperscaler'},
       {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'},
-    ]
+    ];
     this.utilsService.getAppVersion().subscribe((result: any) => {
       this.backVersion = result.version;
     });
