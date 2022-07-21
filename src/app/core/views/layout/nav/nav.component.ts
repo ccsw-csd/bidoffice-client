@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-
 import { DialogService } from 'primeng/dynamicdialog';
-
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UtilsService } from 'src/app/core/services/utils.service';
 
@@ -17,7 +15,6 @@ export class NavComponent implements OnInit {
   frontVersion : string = "1.0.0";
   backVersion : string = "1.0.0";
   items: MenuItem[];
-  subItem: MenuItem
   
   constructor(
     public authService: AuthService,
@@ -30,7 +27,7 @@ export class NavComponent implements OnInit {
     this.items = [
       {label: "Ofertas", routerLink: '/main'},
       {label: "Referencias"},
-      {label: 'Hyperscaler', routerLink: '/admin'},
+      {label: 'Hyperscaler', routerLink: '/hyperscaler'},
       {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'},
     ]
     

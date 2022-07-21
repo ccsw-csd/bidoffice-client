@@ -15,14 +15,13 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { MenuModule } from 'primeng/menu';
-import {SlideMenuModule} from 'primeng/slidemenu';
 import { MessageService } from 'primeng/api';
 
 import { LayoutComponent } from './views/layout/layout.component';
 import { HeaderComponent } from './views/layout/header/header.component';
 import { NavComponent } from './views/layout/nav/nav.component';
 
-import {MenuItem} from 'primeng/api';
+
 
 
 @NgModule({
@@ -43,9 +42,7 @@ import {MenuItem} from 'primeng/api';
     ToolbarModule,
     ButtonModule,
     TooltipModule,
-    MenuModule,
-    
-    SlideMenuModule
+    MenuModule
   ],
   providers: [
     HttpClientModule,

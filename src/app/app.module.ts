@@ -18,8 +18,7 @@ registerLocaleData(localeEs,'es');
 
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent 
   ],
   imports: [
     BrowserModule,
@@ -29,7 +28,6 @@ registerLocaleData(localeEs,'es');
     LoginModule,
     OfferModule,
     AdminModule
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

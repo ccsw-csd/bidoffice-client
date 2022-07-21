@@ -16,7 +16,7 @@ const routes: Routes = [
     resolve: {user: UserResolverService},
     children: [
       { path: 'main', component: OfferListComponent },
-      { path: 'admin', component: HyperscalerComponent},
+      { path: 'hyperscaler', component: HyperscalerComponent},
       { path: '**', redirectTo: 'main', pathMatch: 'full' }
     ]
   },  
