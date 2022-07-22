@@ -39,7 +39,8 @@ import { NavComponent } from './views/layout/nav/nav.component';
     ToolbarModule,
     ButtonModule,
     TooltipModule,
-    MenuModule
+    MenuModule,
+    SlideMenuModule
   ],
   providers: [
     HttpClientModule,
