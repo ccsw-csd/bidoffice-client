@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { BaseClass } from 'src/app/offer/model/BaseClass';
+import { Methodology } from '../../model/Methodology';
 
 import { MethodologyListComponent } from './methodology-list.component';
 
@@ -14,7 +14,7 @@ describe('MethodologyListComponent', () => {
   });
 
   it('findAllShouldReturnMethodologies', () => {
-    let methodologyList : BaseClass[];
+    let methodologyList : Methodology[];
     
     mockOfferService.findAll.and.returnValue(of(methodologyList));
     methodologyListComponent.findAll();

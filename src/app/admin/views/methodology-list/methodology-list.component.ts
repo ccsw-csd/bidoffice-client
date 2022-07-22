@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseClass } from 'src/app/offer/model/BaseClass';
+import { Methodology } from '../../model/Methodology';
 import { MethodologyService } from '../../services/methodology.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { MethodologyService } from '../../services/methodology.service';
 })
 export class MethodologyListComponent implements OnInit {
 
-  methodologyItemList: BaseClass[];
+  methodologyItemList: Methodology[];
 
   constructor(private methodologyService: MethodologyService) { }
 
@@ -19,7 +19,7 @@ export class MethodologyListComponent implements OnInit {
 
   findAll() {
     this.methodologyService.findAll().subscribe({
-        next: (res: BaseClass[]) => { 
+        next: (res: Methodology[]) => { 
           this.methodologyItemList = res;
         },
         error: () => {},

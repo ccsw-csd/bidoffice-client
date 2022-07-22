@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { OfferModule } from './offer/offer.module';
-import { MethodologyModule } from './methodology/methodology.module';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
@@ -27,7 +26,6 @@ registerLocaleData(localeEs,'es');
     CoreModule,
     LoginModule,
     OfferModule,
-    MethodologyModule,
     AdminModule
   ],
   providers: [],

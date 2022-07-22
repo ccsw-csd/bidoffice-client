@@ -1,19 +1,17 @@
-<div class="m-4">  
-    <!-- <p-table [value]="methodologyItemList" scrollable="true"
-    scrollHeight="calc(92vh - 190px)" responsiveLayout="scroll"> -->
+<div class="m-4">
     <p-table [value]="methodologyItemList">
         <ng-template pTemplate="header">
         <tr>
-            <th style='width: 80%'>Nombre</th>
-            <th style='width: 10%'>Prioridad</th>
-            <th style='width: 10%'>Acción</th>
+            <th>Nombre</th>
+            <th>Prioridad</th>
+            <th style='flex: 0 0 150px'>Acción</th>
         </tr>
         </ng-template>
         <ng-template pTemplate="body" let-methodologyItemList>
             <tr>
-                <td style='width: 80%'>{{methodologyItemList.name}}</td>
-                <td style='width: 10%'>{{methodologyItemList.priority}}</td>
-                <td style='width: 10%'>
+                <td>{{methodologyItemList.name}}</td>
+                <td>{{methodologyItemList.priority}}</td>
+                <td style='flex: 0 0 150px'>
                     <div>
                         <button pButton type="button" icon="pi pi-pencil"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>

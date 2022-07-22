@@ -14,7 +14,6 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { MenuModule } from 'primeng/menu';
-import { SlideMenuModule } from 'primeng/slidemenu';
 import { MessageService } from 'primeng/api';
 
 import { LayoutComponent } from './views/layout/layout.component';
