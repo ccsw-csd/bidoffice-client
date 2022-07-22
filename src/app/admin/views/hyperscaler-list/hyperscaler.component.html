@@ -1,17 +1,34 @@
 
-<p-table [value]="listOfData">
+<p-table [value]="listOfData" [resizableColumns]="true">
     <ng-template pTemplate="header">
         <tr>
-            <th>Id</th>
             <th>Nombre</th>
-            <th>Prioridad</th>
+            <div  class="flex align-items-center flex-wrap ">
+                <th class="px-2">Prioridad</th>
+                <th class=" hidden px-2">Edit</th>
+                <th class=" hidden px-2">Delete</th>
+            </div>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-element>
         <tr>
-            <td>{{element.id}}</td>
             <td>{{element.name}}</td>
-            <td>{{element.priority}}</td>
+            
+            <div class="flex align-items-center flex-wrap" >
+                <td class="px-5">{{element.priority}}</td>  
+                <td >
+                    <div class="px-2">
+                        <button pButton type="button" icon="pi pi-pencil"
+                            class="p-button-rounded p-button-text p-button-plain icon"></button>
+                    </div>
+                </td>
+                <td >
+                    <div class="px-2">
+                        <button pButton type="button" icon="pi pi-trash"
+                            class="p-button-rounded p-button-text p-button-plain icon"></button>
+                    </div>
+                </td>
+            </div>
         </tr>
     </ng-template>
 </p-table>
