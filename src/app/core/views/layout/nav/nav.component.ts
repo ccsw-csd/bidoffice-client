@@ -27,9 +27,11 @@ export class NavComponent implements OnInit {
       {label: "Ofertas", routerLink: '/main'},
       {label: "usuarios", routerLink: '/user'},
       {label: "Referencias"},
-      {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'}
+      {label: "Tipos de ficheros",  routerLink:["/filetype"]},
+      {label: 'Hyperscaler', routerLink: '/hyperscaler'},
+      {label: "Metodologías", routerLink: '/methodology'},
+      {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'},
     ];
-
     this.utilsService.getAppVersion().subscribe((result: any) => {
       this.backVersion = result.version;
     });
