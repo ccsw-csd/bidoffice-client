@@ -25,6 +25,7 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {label: "Ofertas", routerLink: '/main'},
+      {label: "usuarios", routerLink: '/user'},
       {label: "Referencias"},
       {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'}
     ];

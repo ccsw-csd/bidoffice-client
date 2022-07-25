@@ -1,0 +1,58 @@
+<div class="flex-column m-4">
+
+  <div class="grid p-fluid">
+    <div class="col-12 md:col-4">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-user"></i>
+        </span>
+        <input type="text" pInputText placeholder="username" [(ngModel)]="filterUsername">
+      </div>
+    </div>
+    <div class="col-12 md:col-4">
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-user"></i>
+        </span>
+        <input type="text" pInputText placeholder="name" [(ngModel)]="filterName">
+      </div>
+    </div>
+    <div class="col-12 md:col-2">
+          <button pButton type="button" label="Filtrar" icon="pi pi-filter" (click)="onSearch()"></button>
+    </div>
+    <div class="col-12 md:col-2">
+      <button pButton type="button" label="Limpiar" icon="pi pi-times" class="p-button-danger" (click)="onCleanFilter()"></button>
+    </div>
+  </div>
+
+  <p-table [value]="listOfData" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="isloading" scrollable="true"
+           scrollHeight="calc(90vh - 190px)" responsiveLayout="scroll" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]"
+           [totalRecords]="totalElements" [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} / {totalRecords}"
+           paginatorPosition="bottom">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Nombre</th>
+        <th>Apellidos</th>
+        <th>Rol</th>
+        <th style='flex: 0 0 150px;'>Editar</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-element>
+      <tr>
+        <td>{{element.username}}</td>
+        <td>{{element.email}}</td>
+        <td>{{element.firstName}}</td>
+        <td>{{element.lastName}}</td>
+        <td>{{element.role.name}}</td>
+        <td style='flex: 0 0 150px;'>
+          <div>
+            <button pButton type="button" icon="pi pi-pencil"
+                    class="p-button-rounded p-button-text p-button-plain icon"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
