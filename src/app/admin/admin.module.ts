@@ -7,14 +7,13 @@ import { ButtonModule } from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
-
-
-
+import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
 
 @NgModule({
   declarations: [
     FileTypeListComponent,
-    HyperscalerComponent
+    HyperscalerComponent,
+    MethodologyListComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +22,6 @@ import {MessagesModule} from 'primeng/messages';
     ConfirmDialogModule,
     MessageModule,
     MessagesModule
-    
     
   ]
 })
