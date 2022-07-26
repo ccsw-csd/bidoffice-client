@@ -15,6 +15,10 @@ export class FileTypeService {
 
   getFileTypes(): Observable<FileType[]> {            
     return this.http.get<FileType[]>(environment.server +'/filetype/findAll');
-}
+  }
+
+  deleteFileTypeById(fileType: FileType): Observable<any> {
+    return this.http.delete(environment.server+'/filetype/'+fileType.id);
+  }  
 
 }
