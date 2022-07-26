@@ -12,7 +12,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(pageable: Pageable, username:String, name:String): Observable<UserPage>{
+  findPage(pageable: Pageable, username:String, name:String): Observable<UserPage>{
     return this.http.post<UserPage>(environment.server + "/user/findPage", {pageable:pageable, username:username, name:name});
   }
 

@@ -22,7 +22,7 @@ export class UserListComponent implements OnInit {
   }
 
   userPage: UserPage;
-  public listOfData : User[];
+  listOfData : User[];
   totalElements: number;
   isloading: boolean = false;
   filterUsername: string;
@@ -48,7 +48,7 @@ export class UserListComponent implements OnInit {
     let name = this.filterName;
 
     this.isloading = true;
-    this.userService.getUsers(this.pageable, username, name).subscribe({
+    this.userService.findPage(this.pageable, username, name).subscribe({
       next: (res: UserPage) => {
         this.userPage = res;
       },
@@ -72,7 +72,7 @@ export class UserListComponent implements OnInit {
       this.pageable.pageNumber = event.first / event.rows;
       this.isloading = true;
 
-      this.userService.getUsers(this.pageable, this.filterUsername, this.filterName).subscribe({
+      this.userService.findPage(this.pageable, this.filterUsername, this.filterName).subscribe({
         next: (res: UserPage) => {
           this.userPage = res;
         },

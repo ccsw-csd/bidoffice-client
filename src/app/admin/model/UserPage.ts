@@ -5,10 +5,4 @@ export class UserPage{
   content: User[];
   pageable: Pageable;
   totalElements: number;
-
-  constructor(content: User[], pageable: Pageable, totalElements: number) {
-    this.content = content;
-    this.pageable = pageable;
-    this.totalElements = totalElements;
-  }
 }
