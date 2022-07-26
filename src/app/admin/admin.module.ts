@@ -4,6 +4,10 @@ import { FileTypeListComponent } from './views/file-type-list/file-type-list.com
 import { HyperscalerComponent } from './views/hyperscaler-list/hyperscaler.component';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DialogModule} from 'primeng/dialog';
+import {MessageModule} from 'primeng/message';
+import {MessagesModule} from 'primeng/messages';
 
 
 
@@ -15,7 +19,11 @@ import {ButtonModule} from 'primeng/button';
   imports: [
     CommonModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    ConfirmDialogModule,
+    DialogModule,
+    MessageModule,
+    MessagesModule
   ]
 })
 export class AdminModule { }

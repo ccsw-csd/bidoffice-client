@@ -11,7 +11,15 @@ export class HyperscalerService {
 
   constructor(private http: HttpClient) { }
 
-  getDataHyperscale():Observable<Hyperscaler[]>{
+  getDataHyperscaler():Observable<Hyperscaler[]>{
     return this.http.get<Hyperscaler[]>(environment.server + "/hyperscaler/findAll");
+  }
+
+  deleteHyperscaler(elementId: number):Observable<any>{
+    return this.http.delete(environment.server + "/hyperscaler/"+elementId)
+  }
+
+  checkOffers(elementId: number):Observable<any>{
+    return this.http.get<any>(environment.server + "/hyperscaler/check/"+elementId)
   }
 }

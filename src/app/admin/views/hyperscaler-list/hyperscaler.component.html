@@ -1,37 +1,37 @@
 
-<p-table [value]="listOfData" [resizableColumns]="true">
+<div *ngIf="checkIfExistsOffers == true">
+    <p-messages [(value)]="msg" [enableService]="false"></p-messages>
+</div>
+
+
+<p-table [value]="listOfData" [resizableColumns]="true" >
     <ng-template pTemplate="header">
         <tr>
-            <th>Nombre</th>
-            <div  class="flex align-items-center flex-wrap ">
-                <th class="px-2">Prioridad</th>
-                <th class=" hidden px-2">Edit</th>
-                <th class=" hidden px-2">Delete</th>
-            </div>
+            <th>Nombre</th>    
+            <th style='width: 150px; text-align: center; '>Prioridad</th>
+            <th  style='width: 150px; '></th>        
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-element>
         <tr>
             <td>{{element.name}}</td>
             
-            <div class="flex align-items-center flex-wrap" >
-                <td class="px-5">{{element.priority}}</td>  
-                <td >
-                    <div class="px-2">
+                <td style='width: 150px; text-align: center; '>{{element.priority}}</td>  
+                <td style='width: 150px'>
+                    <div >
                         <button pButton type="button" icon="pi pi-pencil"
+                            class="p-button-rounded p-button-text p-button-plain icon"></button>        
+                    
+                        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"
+                            [transitionOptions]="'0ms'"></p-confirmDialog>
+                        <button pButton type="button"  (click)="deleteRow(element)" icon="pi pi-trash" 
                             class="p-button-rounded p-button-text p-button-plain icon"></button>
                     </div>
                 </td>
-                <td >
-                    <div class="px-2">
-                        <button pButton type="button" icon="pi pi-trash"
-                            class="p-button-rounded p-button-text p-button-plain icon"></button>
-                    </div>
-                </td>
-            </div>
         </tr>
     </ng-template>
 </p-table>
+
 
 
 
