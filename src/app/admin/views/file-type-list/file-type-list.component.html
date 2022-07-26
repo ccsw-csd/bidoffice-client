@@ -1,6 +1,12 @@
 <div class="mt-3 flex justify-content-end">
     <button pButton  class="p-3">Nuevo Tipo de Fichero</button>
 </div>
+<div *ngIf="offersWithSameId==true" >
+
+    <p-messages [(value)]="msg" [enableService]="false"></p-messages>
+
+</div>
+
 <p-table [value]="dataSource">
     <ng-template pTemplate="header">
         <tr>
@@ -19,7 +25,7 @@
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
 
                     <p-confirmDialog header="Confirmation" [transitionOptions]="'0.1ms'" icon="pi pi-exclamation-triangle" ></p-confirmDialog>
-                    <button pButton type="button" icon="pi pi-times" (click)="deleteFileType(element);"
+                    <button pButton type="button" icon="pi pi-times" (click)="deleteFileType(element)"
                     class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>    
