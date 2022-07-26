@@ -5,6 +5,10 @@ import { HyperscalerComponent } from './views/hyperscaler-list/hyperscaler.compo
 import {TableModule} from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {MessageModule} from 'primeng/message';
+import {MessagesModule} from 'primeng/messages';
+
+
 
 
 @NgModule({
@@ -17,6 +21,10 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     TableModule,
     ButtonModule,
     ConfirmDialogModule,
+    MessageModule,
+    MessagesModule
+    
+    
   ]
 })
 export class AdminModule { }
