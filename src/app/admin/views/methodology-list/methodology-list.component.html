@@ -1,27 +1,25 @@
-<div>
-    <p-table [value]="methodologyItemList">
-        <ng-template pTemplate="header">
+<p-table [value]="methodologyItemList" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Prioridad</th>
+        <th style='flex: 0 0 150px'>Acción</th>
+    </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-methodologyItemList>
         <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Prioridad</th>
-            <th style='flex: 0 0 150px'>Acción</th>
+            <td>{{methodologyItemList.id}}</td>
+            <td>{{methodologyItemList.name}}</td>
+            <td>{{methodologyItemList.priority}}</td>
+            <td style='flex: 0 0 150px'>
+                <div>
+                    <button pButton type="button" icon="pi pi-pencil"
+                        class="p-button-rounded p-button-text p-button-plain icon"></button>
+                    <button pButton type="button" icon="pi pi-times"
+                        class="p-button-rounded p-button-text p-button-plain icon"></button>
+                </div>
+            </td>
         </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-methodologyItemList>
-            <tr>
-                <td>{{methodologyItemList.id}}</td>
-                <td>{{methodologyItemList.name}}</td>
-                <td>{{methodologyItemList.priority}}</td>
-                <td style='flex: 0 0 150px'>
-                    <div>
-                        <button pButton type="button" icon="pi pi-pencil"
-                            class="p-button-rounded p-button-text p-button-plain icon"></button>
-                        <button pButton type="button" icon="pi pi-times"
-                            class="p-button-rounded p-button-text p-button-plain icon"></button>
-                    </div>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div> 
+    </ng-template>
+</p-table>
