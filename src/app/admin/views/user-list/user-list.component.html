@@ -2,25 +2,21 @@
 
   <div class="grid p-fluid">
     <div class="col-12 md:col-4">
-      <div class="p-inputgroup">
-        <span class="p-inputgroup-addon">
-          <i class="pi pi-user"></i>
-        </span>
-        <input type="text" pInputText placeholder="username" [(ngModel)]="filterUsername">
+      <div class="p-float-label field">
+        <input id="username" type="username" pInputText [(ngModel)]="filterUsername"/>
+        <label for="username">Username</label>
       </div>
     </div>
     <div class="col-12 md:col-4">
-      <div class="p-inputgroup">
-        <span class="p-inputgroup-addon">
-          <i class="pi pi-user"></i>
-        </span>
-        <input type="text" pInputText placeholder="name" [(ngModel)]="filterName">
+      <div class="p-float-label field">
+        <input id="name" type="username" pInputText [(ngModel)]="filterName"/>
+        <label for="name">Name</label>
       </div>
     </div>
-    <div class="col-12 md:col-2">
-          <button pButton type="button" label="Filtrar" icon="pi pi-filter" (click)="onSearch()"></button>
+    <div class="col-12 md:col-1">
+          <button pButton type="button" label="Filtrar" icon="pi pi-filter" (click)="loadPage(lastTableLazyLoadEvent)"></button>
     </div>
-    <div class="col-12 md:col-2">
+    <div class="col-12 md:col-1">
       <button pButton type="button" label="Limpiar" icon="pi pi-times" class="p-button-danger" (click)="onCleanFilter()"></button>
     </div>
   </div>
@@ -31,11 +27,16 @@
            paginatorPosition="bottom">
     <ng-template pTemplate="header">
       <tr>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Nombre</th>
-        <th>Apellidos</th>
-        <th>Rol</th>
+        <th pSortableColumn="username">Username<p-sortIcon field="username"></p-sortIcon>
+        </th>
+        <th pSortableColumn="email">Email<p-sortIcon field="email"></p-sortIcon>
+        </th>
+        <th pSortableColumn="firstName">Nombre<p-sortIcon field="firstName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="lastName">Apellidos<p-sortIcon field="lastName"></p-sortIcon>
+        </th>
+        <th pSortableColumn="role.name">Rol<p-sortIcon field="role.name"></p-sortIcon>
+        </th>
         <th style='flex: 0 0 150px;'>Editar</th>
       </tr>
     </ng-template>

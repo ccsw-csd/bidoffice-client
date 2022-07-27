@@ -27,6 +27,7 @@ export class UserListComponent implements OnInit {
   isloading: boolean = false;
   filterUsername: string;
   filterName: string;
+  lastTableLazyLoadEvent: LazyLoadEvent;
 
   constructor(
     private userService: UserService,
@@ -40,25 +41,7 @@ export class UserListComponent implements OnInit {
   onCleanFilter(): void {
     this.filterUsername = null;
     this.filterName = null;
-    this.onSearch();
-  }
-
-  onSearch(): void {
-    let username = this.filterUsername;
-    let name = this.filterName;
-
-    this.isloading = true;
-    this.userService.findPage(this.pageable, username, name).subscribe({
-      next: (res: UserPage) => {
-        this.userPage = res;
-      },
-      error: () => {},
-      complete: () => {
-        this.listOfData = this.userPage.content;
-        this.totalElements = this.userPage.totalElements;
-        this.isloading = false;
-      }
-    });
+    this.loadPage(this.lastTableLazyLoadEvent);
   }
 
   ngAfterViewChecked() {
@@ -68,10 +51,15 @@ export class UserListComponent implements OnInit {
   loadPage(event?:LazyLoadEvent) {
 
     if (event != null) {
+      this.lastTableLazyLoadEvent = event;
       this.pageable.pageSize = event.rows;
       this.pageable.pageNumber = event.first / event.rows;
-      this.isloading = true;
 
+      if (event.sortField != null){
+        this.pageable.sort = [{property:event.sortField, direction:event.sortOrder == 1 ? 'asc':'desc'}];
+      }
+
+      this.isloading = true;
       this.userService.findPage(this.pageable, this.filterUsername, this.filterName).subscribe({
         next: (res: UserPage) => {
           this.userPage = res;
