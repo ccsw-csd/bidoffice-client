@@ -4,7 +4,7 @@
         <label for="chanceName">Nombre Oportunidad</label>
     </div>
     <div class="flex p-float-label flex-1 field">
-        <input class= "flex-grow-1" id="client" pInputText />
+        <p-autoComplete [(ngModel)]="filterClient" [suggestions]="results" [forceSelection]="true" (completeMethod)="searchClient($event) "></p-autoComplete>
         <label for="client">Cliente</label>
     </div>
     <div class="flex p-float-label flex-1 field">
@@ -36,17 +36,17 @@
 </div>
 <div class="flex flex-nowrap  gap-3">
     <div class="flex p-float-label flex-grow-1 field">
-        <textarea class= "flex-grow-1" id="offering" pInputTextarea></textarea>
+        <p-multiSelect [options]="offerings" [(ngModel)]="selectedOfferings" optionLabel="name"></p-multiSelect>
         <label for="offering">Offering</label>
     </div>
     <div class="flex p-float-label flex-grow-1 field">
-        <textarea class= "flex-grow-1" id="tecnology" pInputTextarea></textarea>
+        <p-multiSelect [options]="technologies" [(ngModel)]="selectedTechnologies" optionLabel="name"></p-multiSelect>
         <label for="tecnology">Tecnologías</label>
     </div>
 </div>
 <div class="flex flex-nowrap  gap-3">
     <div class="flex p-float-label flex-grow-1 field">
-        <p-dropdown class= "flex-grow-1" [style]="{'minWidth':'100%'}" [options]="cities"  optionLabel="name"></p-dropdown><!--<p-dropdown [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>-->
+        <p-dropdown class= "flex-grow-1" [style]="{'minWidth':'100%'}" [options]="OfferTypes"  [(ngModel)] = "selectedOfferType" optionLabel="name"></p-dropdown><!--<p-dropdown [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>-->
         <label for="sector">Tipo de Oferta</label>
     </div>
     <div class="flex p-float-label flex-grow-1 field">

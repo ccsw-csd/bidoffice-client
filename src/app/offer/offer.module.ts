@@ -17,6 +17,8 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { CheckboxModule } from 'primeng/checkbox';
     InputTextareaModule,
     DropdownModule,
     CalendarModule,
-    CheckboxModule
+    CheckboxModule,
+    MultiSelectModule,
+    AutoCompleteModule
   ]
 })
 export class OfferModule { }

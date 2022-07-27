@@ -1,4 +1,4 @@
-<p-tabView [(activeIndex)]="activeItem">
+<p-tabView [(activeIndex)]="activeItem" (onClose)="handleChange($event)">
     <p-tabPanel header="Oportunidad">
         <app-chance></app-chance>
     </p-tabPanel>
@@ -14,4 +14,7 @@
     <p-tabPanel header="Seguimiento">
         <app-tracing></app-tracing>
     </p-tabPanel>
+    <div class="mt-3 flex justify-content-end">
+        <p-button>Guardar</p-button>
+    </div>
 </p-tabView>

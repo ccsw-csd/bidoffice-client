@@ -14,4 +14,8 @@ export class OfferEditComponent implements OnInit {
    
   }
 
+  handleChange(e) {
+
+ }
+
 }

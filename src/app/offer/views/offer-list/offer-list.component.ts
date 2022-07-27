@@ -66,8 +66,12 @@ export class OfferListComponent implements OnInit {
 
   toOfferEdit(){
     const ref = this.dinamicDialogService.open(OfferEditComponent, {
-      header: 'NUEVA OFERTA',
-      width: '80%',
-  });
+      header: 'Nueva oferta',
+      width: '70%',
+    });
+
+    ref.onClose.subscribe(()=>{
+      
+    })
   }
 }
