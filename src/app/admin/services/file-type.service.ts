@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Offer } from 'src/app/offer/model/Offer';
 import { environment } from 'src/environments/environment';
 import { FileType } from '../model/FileType';
 
@@ -10,9 +9,7 @@ import { FileType } from '../model/FileType';
 })
 export class FileTypeService {
 
-  constructor(private http: HttpClient) { 
-
-  }
+  constructor(private http: HttpClient) { }
 
   getFileTypes(): Observable<FileType[]> {            
     return this.http.get<FileType[]>(environment.server +'/filetype/findAll');

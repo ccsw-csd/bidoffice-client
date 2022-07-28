@@ -4,7 +4,6 @@ import { FileType } from '../../model/FileType';
 import {ConfirmationService} from 'primeng/api';
 import { MessageService } from 'primeng/api';
 
-
 @Component({
   selector: 'app-file-type',
   templateUrl: './file-type-list.component.html',
@@ -16,7 +15,6 @@ export class FileTypeListComponent implements OnInit {
   public dataSource : FileType[]
   public exception: boolean
 
-
   constructor(
     private fileTypeService: FileTypeService,
     private confirmationService: ConfirmationService,
@@ -24,13 +22,10 @@ export class FileTypeListComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-
     this.fileTypeService.getFileTypes().subscribe(
       files=>this.dataSource = files
     )
   }
-
-  
 
   deleteFileType(fileType: FileType) {    
     
@@ -48,19 +43,16 @@ export class FileTypeListComponent implements OnInit {
               this.ngOnInit()
           }
       })
-        
       },
       reject: () =>{
         this.ngOnInit();
       }
     })
-
   }  
 
   showMessageError(){
     this.messageService.add({key: 'deleteError', severity:'error', summary: 'ERROR', detail: 'No puedes borrar un item asociado a una oferta'});
   }
- 
-  
+   
 }
 
