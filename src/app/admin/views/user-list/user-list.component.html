@@ -1,6 +1,6 @@
-<div class="flex-column m-4">
+<div class="flex-column">
 
-  <div class="grid p-fluid">
+  <div class="grid p-fluid p-inputtext-sm">
     <div class="col-12 md:col-4">
       <div class="p-float-label field">
         <input id="username" type="username" pInputText [(ngModel)]="filterUsername"/>
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="col-12 md:col-1">
-          <button pButton type="button" label="Filtrar" icon="pi pi-filter" (click)="loadPage(lastTableLazyLoadEvent)"></button>
+      <button pButton type="button" label="Filtrar" icon="pi pi-filter" (click)="loadPage(lastTableLazyLoadEvent)"></button>
     </div>
     <div class="col-12 md:col-1">
       <button pButton type="button" label="Limpiar" icon="pi pi-times" class="p-button-danger" (click)="onCleanFilter()"></button>
@@ -22,7 +22,7 @@
   </div>
 
   <p-table [value]="listOfData" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="isloading" scrollable="true"
-           scrollHeight="calc(90vh - 190px)" responsiveLayout="scroll" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]"
+           scrollHeight="calc(90vh - 200px)" responsiveLayout="scroll" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]"
            [totalRecords]="totalElements" [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} / {totalRecords}"
            paginatorPosition="bottom">
     <ng-template pTemplate="header">
