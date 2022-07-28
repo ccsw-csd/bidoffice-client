@@ -8,12 +8,16 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
+import { UserListComponent } from './views/user-list/user-list.component';
+import { PaginatorModule } from 'primeng/paginator';
+import { InputTextModule } from "primeng/inputtext";
 
 @NgModule({
   declarations: [
     FileTypeListComponent,
     HyperscalerComponent,
-    MethodologyListComponent
+    MethodologyListComponent,
+    UserListComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +25,10 @@ import { MethodologyListComponent } from './views/methodology-list/methodology-l
     ButtonModule,
     ConfirmDialogModule,
     MessageModule,
-    MessagesModule
+    MessagesModule,
+    PaginatorModule,
+    InputTextModule
+
   ]
 })
 export class AdminModule { }
