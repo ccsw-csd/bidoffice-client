@@ -5,7 +5,6 @@ import { HyperscalerComponent } from './views/hyperscaler-list/hyperscaler.compo
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {DialogModule} from 'primeng/dialog';
 import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
@@ -21,7 +20,6 @@ import { MethodologyListComponent } from './views/methodology-list/methodology-l
     TableModule,
     ButtonModule,
     ConfirmDialogModule,
-    DialogModule,
     MessageModule,
     MessagesModule
   ]
