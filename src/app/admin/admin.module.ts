@@ -4,9 +4,8 @@ import { FileTypeListComponent } from './views/file-type-list/file-type-list.com
 import { HyperscalerComponent } from './views/hyperscaler-list/hyperscaler.component';
 import {TableModule} from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {MessageModule} from 'primeng/message';
-import {MessagesModule} from 'primeng/messages';
 import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
 
 @NgModule({
@@ -20,8 +19,8 @@ import { MethodologyListComponent } from './views/methodology-list/methodology-l
     TableModule,
     ButtonModule,
     ConfirmDialogModule,
-    MessageModule,
-    MessagesModule
+    ToastModule,
+    
     
   ]
 })

@@ -22,11 +22,5 @@ export class FileTypeService {
     return this.http.delete(environment.server+'/filetype/'+fileType.id);
   }  
 
-  checkOffers(id: number): Observable<any>{
-    //console.log("ASDF", this.http.get<boolean>(environment.server +'/filetype/checkOffers/'+id))
-    this.http.get<boolean>(environment.server +'/filetype/checkOffers/'+id).forEach(x=> console.log("Asdf",x))
-
-    return this.http.get<any>(environment.server +'/filetype/checkOffers/'+id);
-  }
 
 }

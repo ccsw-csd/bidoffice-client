@@ -2,25 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { FileTypeService } from '../../services/file-type.service';
 import { FileType } from '../../model/FileType';
 import {ConfirmationService} from 'primeng/api';
-import { finalize } from 'rxjs';
-import {Message} from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-file-type',
   templateUrl: './file-type-list.component.html',
   styleUrls: ['./file-type-list.component.scss'],
-  providers:[ConfirmationService]
+  providers:[ConfirmationService, MessageService]
 })
 export class FileTypeListComponent implements OnInit {
 
   public dataSource : FileType[]
-  public offersWithSameId :boolean
-  public msg: Message[]
+  public exception: boolean
+
 
   constructor(
     private fileTypeService: FileTypeService,
     private confirmationService: ConfirmationService,
+    private messageService: MessageService,
     ) { }
 
   ngOnInit(): void {
@@ -30,37 +30,36 @@ export class FileTypeListComponent implements OnInit {
     )
   }
 
-  checkIfOffers(): boolean{
-    if(this.offersWithSameId==true)
-      return true
-    else return false
-  }
+  
 
   deleteFileType(fileType: FileType) {    
     
-    this.fileTypeService.checkOffers(fileType.id).pipe(finalize(()=>{
-      if(this.offersWithSameId==true){
-         this.msg = [{ severity:'error', summary:'Error', detail:'No puede eliminarse porque tiene asociado una oferta'}]
-
-      }else{
-        this.confirmationService.confirm({
-          message: 'Are you sure that you want to proceed?',
-          accept: () => {
-            this.fileTypeService.deleteFileTypeById(fileType).subscribe(result => {
-            this.ngOnInit();
-          }); 
-        
+    this.confirmationService.confirm({
+      message: 'Seguro que quiere borrar el item?',
+      accept: () => {
+        this.fileTypeService.deleteFileTypeById(fileType).subscribe({
+          next: () =>{
+            this.exception=false 
+            this.ngOnInit()
           },
-          reject: () =>{
-          this.ngOnInit();
+          error:() =>{            
+             this.showMessageError();
+              this.exception=true;
+              this.ngOnInit()
           }
-        })
+      })
+        
+      },
+      reject: () =>{
+        this.ngOnInit();
       }
-    }))
-    .subscribe(result=> this.offersWithSameId=result)
+    })
 
-    
   }  
+
+  showMessageError(){
+    this.messageService.add({key: 'deleteError', severity:'error', summary: 'ERROR', detail: 'No puedes borrar un item asociado a una oferta'});
+  }
  
   
 }
