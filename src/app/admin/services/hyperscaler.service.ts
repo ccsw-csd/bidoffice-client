@@ -18,8 +18,4 @@ export class HyperscalerService {
   deleteHyperscaler(elementId: number):Observable<any>{
     return this.http.delete(environment.server + "/hyperscaler/"+elementId)
   }
-
-  checkOffers(elementId: number):Observable<any>{
-    return this.http.get<any>(environment.server + "/hyperscaler/check/"+elementId)
-  }
 }

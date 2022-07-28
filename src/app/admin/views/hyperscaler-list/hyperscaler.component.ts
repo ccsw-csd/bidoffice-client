@@ -14,7 +14,7 @@ import {Message} from 'primeng/api';
 export class HyperscalerComponent implements OnInit {
   public listOfData: Hyperscaler[]
   public cols: any[];
-  public checkIfExistsOffers: boolean
+  public checkIfExistsMessage: boolean
   public msg: Message[]
 
   
@@ -32,38 +32,49 @@ export class HyperscalerComponent implements OnInit {
       results => this.listOfData = results
     );
   }
-   
-  deleteRow(element: Hyperscaler): void{
-    let existsOffers: boolean 
-    this.hyperscalerService.checkOffers(element.id).subscribe(
-      results => {
-        existsOffers = results;
-        if(existsOffers == false){
-          this.confirmationService.confirm({
-            message: '¿Desea eliminar este elemento?',
-            accept: () => {
-              this.hyperscalerService.deleteHyperscaler(element.id).subscribe(
-                results => this.ngOnInit()
-              );
-            },
-            reject: () => {
-              this.ngOnInit()
-            }
-          });
-        }
-        else{
-          this.checkIfExistsOffers = existsOffers
-          this.msg = [{ severity:'error', 
-                      summary:'Error', 
-                      detail: element.name+' se encuentra asociado a una oferta'
-                    }]
-        }
-    });
-      
-    
-    
 
-    
+  deleteRow(element: Hyperscaler): void{
+    let opt: number
+    this.confirmationService.confirm({
+      message: '¿Desea eliminar este elemento?',
+      accept: () => {
+        this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
+          next:() => {
+            opt=1
+            this.showMessage(opt,element)
+            this.getDataHyperscaler()
+          },
+          error:() => {
+            opt=0
+            this.showMessage(opt,element)
+            this.getDataHyperscaler()
+          } 
+        })
+      },
+      reject: () => {
+        this.getDataHyperscaler()
+      }
+    });
   }
 
+  showMessage(opt: number, element: Hyperscaler){
+    this.checkIfExistsMessage = true
+    if(opt == 0){
+      this.msg = [{ 
+        severity:'error', 
+        summary:'Error', 
+        detail: element.name+' se encuentra asociado a una oferta'
+    }]
+    }
+    else{
+      this.checkIfExistsMessage = true
+            this.msg = [{ 
+              severity:'success', 
+              summary:'Confirmado', 
+              detail: element.name+' se ha eliminado correctamente'
+          }]
+    }
+  }
 }
+
+

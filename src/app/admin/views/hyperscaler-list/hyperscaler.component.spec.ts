@@ -22,7 +22,7 @@ describe('HyperscalerComponent', () => {
     mockHyperscalerService = jasmine.createSpyObj(["getDataHyperscaler","deleteHyperscaler"])
     mockConfirmationService = jasmine.createSpyObj(["confirm","close"])
     hyperscaler = new HyperscalerComponent(mockHyperscalerService,mockConfirmationService)
-  })
+  });
 
   it('getHyperscalerShouldReturnHyperscalerList', () => {
     mockHyperscalerService.getDataHyperscaler.and.returnValue(of(HYPERSCALER_ITEM))
@@ -31,20 +31,13 @@ describe('HyperscalerComponent', () => {
     expect(hyperscaler.listOfData).toEqual(HYPERSCALER_ITEM);
   });
 
-  it('should have called delete once', () => {
-    mockHyperscalerService.deleteHyperscaler.and.returnValue(of(true))
-    hyperscaler.listOfData = HYPERSCALER_ITEM
-    let h = new Hyperscaler()
-    hyperscaler.deleteRow(h)
-    expect(mockHyperscalerService.deleteHyperscaler).toHaveBeenCalledTimes(1)
-  })
 
   it('deleteRowShouldDelete', () =>{ 
-    mockHyperscalerService.deleteHyperscaler.and.returnValue(of(HYPERSCALER_DELETED))
-    hyperscaler.listOfData = HYPERSCALER_ITEM
-    let h = new Hyperscaler()
-    hyperscaler.deleteRow(h)
-    expect(hyperscaler.listOfData.length).toEqual(1)
+    mockHyperscalerService.getDataHyperscaler.and.returnValue(of(HYPERSCALER_DELETED))
+    mockHyperscalerService.deleteHyperscaler.and.returnValue(of(hyperscaler.getDataHyperscaler())) 
+    hyperscaler.deleteRow(HYPERSCALER_ITEM[0])  
+    expect(hyperscaler.listOfData).not.toEqual(null);
+    expect(hyperscaler.listOfData).toBe(HYPERSCALER_DELETED);
   })
 
 

@@ -10,8 +10,6 @@ import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
 
-
-
 @NgModule({
   declarations: [
     FileTypeListComponent,
