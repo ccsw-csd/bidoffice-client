@@ -7,6 +7,7 @@ import { UserResolverService } from './core/services/user-resolver.service';
 import { LayoutComponent } from './core/views/layout/layout.component';
 import { LoginComponent } from './login/views/login/login.component';
 import { OfferListComponent } from './offer/views/offer-list/offer-list.component';
+import { UserListComponent } from "./admin/views/user-list/user-list.component";
 import { MethodologyListComponent } from './admin/views/methodology-list/methodology-list.component';
 
 const routes: Routes = [
@@ -20,10 +21,11 @@ const routes: Routes = [
       { path: 'methodology', component: MethodologyListComponent },
       { path: 'main', component: OfferListComponent },
       { path: 'filetype', component: FileTypeListComponent },
+      { path: 'user', component: UserListComponent },
       { path: 'hyperscaler', component: HyperscalerComponent},
       { path: '**', redirectTo: 'main', pathMatch: 'full' }
     ]
-  },  
+  },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 
