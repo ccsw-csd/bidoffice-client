@@ -19,5 +19,4 @@ export class FileTypeService {
     return this.http.delete(environment.server+'/filetype/'+fileTypeId);
   }  
 
-
 }
