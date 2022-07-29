@@ -32,7 +32,7 @@ export class FileTypeListComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Seguro que quiere borrar el item?',
       accept: () => {
-        this.fileTypeService.deleteFileTypeById(fileType).subscribe({
+        this.fileTypeService.deleteFileTypeById(fileType.id).subscribe({
           next: () =>{
             this.exception=false 
             this.ngOnInit()
