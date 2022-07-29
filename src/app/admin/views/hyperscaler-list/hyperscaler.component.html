@@ -10,21 +10,20 @@
                 Nombre 
                 <p-sortIcon field="name"></p-sortIcon>
             </th>    
-            <th pSortableColumn="priority" class="text-center w-1rem">
+            <th pSortableColumn="priority" style='flex: 0 0 150px;'>
                 Prioridad
                 <p-sortIcon field="priority"></p-sortIcon>
             </th>
-            
-            <th class="w-3"></th>        
+            <th style='flex: 0 0 150px;'></th>        
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-element>
         <tr>
             <td>{{element.name}}</td>
             
-                <td class="text-center w-3">{{element.priority}}</td>  
-                <td class="w-1rem">
-                    <div >
+                <td style='flex: 0 0 150px;' >{{element.priority}}</td>  
+                <td style='flex: 0 0 150px;'>
+                    <div>
                         <button pButton type="button" icon="pi pi-pencil"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>        
 
