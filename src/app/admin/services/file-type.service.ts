@@ -25,9 +25,6 @@ export class FileTypeService {
     if(fileType.id!=null)
       url+='/'+fileType.id
 
-      
-
-      
     return this.http.put<FileType>(environment.server+url,fileType);
   }
 
