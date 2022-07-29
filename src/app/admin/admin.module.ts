@@ -10,6 +10,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
+import { FileTypeEditComponent } from './views/file-type-edit/file-type-edit.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { InputTextModule } from "primeng/inputtext";
     FileTypeListComponent,
     HyperscalerComponent,
     MethodologyListComponent,
-    UserListComponent
+    UserListComponent,
+    FileTypeEditComponent,
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 export class FileType {
     id: number;
-    nombre: string;
-    prioridad: number;
+    name: string;
+    priority: number;
     
     public constructor(init?:Partial<FileType>) {
         Object.assign(this, init);

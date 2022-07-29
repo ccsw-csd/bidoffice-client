@@ -1,0 +1,12 @@
+<br />
+<span class="p-float-label">
+    <input id="float-input" type="text" pInputText [(ngModel)]="fileType.name" name="name" > 
+    <label for="float-input">Nombre</label>
+</span>
+<br />
+<span class="p-float-label">
+    <input id="float-input" type="text" pInputText [(ngModel)]="fileType.priority" name="priority"> 
+    <label for="float-input">Prioridad</label>
+</span>
+<br />
+<p-button label="Guardar" icon="pi pi-check" iconPos="right" (onClick)="onSave()"></p-button>

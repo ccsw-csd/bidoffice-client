@@ -1,6 +1,6 @@
 <div class="mt-3 flex justify-content-end">
     <p-toast key="deleteError" position="top-center"></p-toast>
-    <button pButton  class="p-3">Nuevo Tipo de Fichero</button>
+    <button pButton (click)="saveFileType()" class="p-3">Nuevo Tipo de Fichero</button>
 </div>
 <p-table [value]="dataSource" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
@@ -20,7 +20,7 @@
 <td class=" w-10rem">{{element.priority}}</td>
 <td class=" w-10rem">
     <div>
-        <button pButton type="button" icon="pi pi-pencil"
+        <button pButton type="button" icon="pi pi-pencil" (click)="editFileType(element)"
             class="p-button-rounded p-button-text p-button-plain icon"></button>
 
         <p-confirmDialog header="Confirmation" [transitionOptions]="'0.1ms'" icon="pi pi-exclamation-triangle" ></p-confirmDialog>

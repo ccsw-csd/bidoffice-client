@@ -10,25 +10,27 @@ describe('FileTypeComponent', () => {
   let mockFileTypeService: any;
   let mockConfirmationService: any;
   let mockMessageService: any;
+  let mockDialogService: any;
 
   let FILETYPE_ITEM: FileType[];
   let FILETYPE_ITEM_DELETED: FileType[];
 
   beforeEach(() => {
     FILETYPE_ITEM = [
-      new FileType ({id:1,nombre:"test",prioridad:2}),
-      new FileType({id:2,nombre:"test2",prioridad:3}),
-      new FileType({id:3,nombre:"tes3t",prioridad:1}),
+      new FileType ({id:1,name:"test",priority:2}),
+      new FileType({id:2,name:"test2",priority:3}),
+      new FileType({id:3,name:"tes3t",priority:1}),
     ] ;
     FILETYPE_ITEM_DELETED = [
-      new FileType ({id:1,nombre:"test",prioridad:2}),
-      new FileType({id:2,nombre:"test2",prioridad:3}),
+      new FileType ({id:1,name:"test",priority:2}),
+      new FileType({id:2,name:"test2",priority:3}),
     ] ;
 
     mockFileTypeService = jasmine.createSpyObj(['getFileTypes','deleteFileTypeById']);
     mockConfirmationService= jasmine.createSpyObj(["confirm","close"]);
     mockMessageService = jasmine.createSpyObj([""]);
-    fileTypeListComponent = new FileTypeListComponent(mockFileTypeService,mockConfirmationService,mockMessageService);
+    mockDialogService = jasmine.createSpyObj([""]);
+    fileTypeListComponent = new FileTypeListComponent(mockFileTypeService,mockConfirmationService,mockMessageService,mockDialogService);
     
     });
 
