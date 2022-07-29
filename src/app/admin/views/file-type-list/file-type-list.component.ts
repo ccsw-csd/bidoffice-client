@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileTypeService } from '../../services/file-type.service';
 import { FileType } from '../../model/FileType';
-import {ConfirmationService} from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 
 @Component({
