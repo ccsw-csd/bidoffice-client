@@ -25,9 +25,10 @@
                 </div>
             </td>
         </tr>
-        <div class="mt-3 flex justify-content-end">
-            <p-toast key="deleteError" position="top-center"></p-toast>
-            <button pButton (click)="saveFileType(element)" class="p-3">Nuevo Tipo de Fichero</button>
-        </div>
+        
     </ng-template>
+    <div class="mt-3 flex justify-content-end">
+        <p-toast key="deleteError" position="top-center"></p-toast>
+        <button pButton (click)="saveFileType()" class="p-3">Nuevo Tipo de Fichero</button>
+    </div>
 </p-table>
