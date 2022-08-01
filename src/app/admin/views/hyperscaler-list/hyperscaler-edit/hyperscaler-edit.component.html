@@ -1,0 +1,19 @@
+
+<div class="flex flex-column">
+    <h5>Nombre</h5>
+    <input type="text" pInputText [(ngModel)]="elementHyperscaler.name"> 
+    <h5>Prioridad</h5>
+    <input type="text" pInputText [(ngModel)]="elementHyperscaler.priority">
+    <br>
+</div>
+<div class = "flex ">
+    <div class="flex-grow-1 flex align-items-center justify-content-center ">
+        <button type="button" (click)="saveChanges(elementHyperscaler)" pButton label="Guardar"></button>
+    </div>
+    <div class=" flex-grow-1 flex align-items-right justify-content-center ">
+        <button type="button" (click)="close()" pButton label="Cancelar"></button>
+    </div>   
+</div>
+   
+
+

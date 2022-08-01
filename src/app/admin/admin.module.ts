@@ -11,13 +11,18 @@ import { MethodologyListComponent } from './views/methodology-list/methodology-l
 import { UserListComponent } from './views/user-list/user-list.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { HyperscalerEditComponent } from './views/hyperscaler-list/hyperscaler-edit/hyperscaler-edit.component';
+import {TooltipModule} from 'primeng/tooltip';
+import {Toast, ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [
     FileTypeListComponent,
     HyperscalerComponent,
     MethodologyListComponent,
-    UserListComponent
+    UserListComponent,
+    HyperscalerEditComponent
   ],
   imports: [
     CommonModule,
@@ -27,8 +32,10 @@ import { InputTextModule } from "primeng/inputtext";
     MessageModule,
     MessagesModule,
     PaginatorModule,
-    InputTextModule
-
+    InputTextModule,
+    DynamicDialogModule,
+    TooltipModule,
+    ToastModule
   ]
 })
 export class AdminModule { }

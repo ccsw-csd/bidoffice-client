@@ -1,7 +1,8 @@
 
-<div *ngIf="checkIfExistsMessage == true">
-    <p-messages [(value)]="msg" [enableService]="false"></p-messages>
+<div>
+    <p-toast key="hyperscalerMessage" position="top-center"></p-toast>
 </div>
+
 
 <p-table [value]="listOfData" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
@@ -24,7 +25,7 @@
                 <td style='flex: 0 0 150px;' >{{element.priority}}</td>  
                 <td style='flex: 0 0 150px;'>
                     <div>
-                        <button pButton type="button" icon="pi pi-pencil"
+                        <button pButton type="button" (click)="editHyperscaler(element)" icon="pi pi-pencil"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>        
 
                         <button pButton type="button"  (click)="deleteRow(element)" icon="pi pi-trash" 
