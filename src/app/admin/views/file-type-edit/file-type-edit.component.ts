@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileType } from '../../model/FileType';
 import { FileTypeService } from '../../services/file-type.service';
@@ -16,7 +17,7 @@ export class FileTypeEditComponent implements OnInit {
           public ref: DynamicDialogRef,
           public config: DynamicDialogConfig,
           private fileTypeService: FileTypeService,
-          
+          private messageService: MessageService,
      ) { }
 
   ngOnInit(): void {
@@ -31,15 +32,18 @@ export class FileTypeEditComponent implements OnInit {
 
   onSave() {
     //if(this.validarFechas(this.prestamo)==true && this.validarDiasPrestado(this.prestamo)==true && this.resultsGame==true && this.resultsClient==true)
-    this.fileTypeService.saveFileType(this.fileType).subscribe(result =>  {
-      this.ref.close();
-    }, err=>{
-      
-    }
-    ); 
+    this.fileTypeService.saveFileType(this.fileType).subscribe({
+      next: ()=> {
+          this.ref.close();
+      }, error: ()=>{
+          this.showMessageError()
+      }
+    })
     
-    //this.router.navigate(['welcome']);
+  }  
 
 
-}  
+  showMessageError(){
+    this.messageService.add({key: 'priorityError', severity:'error', summary: 'ERROR', detail: 'Ya hay un item creado con la misma prioridad'});
+  }
 }
