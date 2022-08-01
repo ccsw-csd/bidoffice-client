@@ -22,7 +22,6 @@ export class FileTypeEditComponent implements OnInit {
   ngOnInit(): void {
     if (this.config.data != null) {
       this.fileType = Object.assign({fileType:FileType}, this.config.data.fileType);
-      console.log(this.fileType.id,this.fileType.name,this.fileType.priority)
     }
     else {
       this.fileType = new FileType();
@@ -33,9 +32,13 @@ export class FileTypeEditComponent implements OnInit {
   onSave() {
     //if(this.validarFechas(this.prestamo)==true && this.validarDiasPrestado(this.prestamo)==true && this.resultsGame==true && this.resultsClient==true)
     this.fileTypeService.saveFileType(this.fileType).subscribe(result =>  {
-        
-    }); 
-    this.ref.close();
+      this.ref.close();
+    }, err=>{
+      
+    }
+    ); 
+    
+    //this.router.navigate(['welcome']);
 
 
 }  

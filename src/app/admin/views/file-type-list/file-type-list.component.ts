@@ -37,13 +37,20 @@ export class FileTypeListComponent implements OnInit {
         width: '50%',
         
     });
+    ref.onClose.subscribe(() => {
+      this.ngOnInit()
+    });
   }
+  
 
   saveFileType() {
     const ref = this.dialogService.open(FileTypeEditComponent, {
         
-        header: 'Edite el Item',
-        width: '70%'
+        header: 'Crear nuevo Item',
+        width: '50%'
+    });
+    ref.onClose.subscribe(() => {
+      this.ngOnInit()     
     });
   }
 
