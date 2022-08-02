@@ -1,4 +1,3 @@
-
 <p-toast key="hyperscalerMessage" position="top-center"></p-toast>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
 <p-table [value]="listOfData" [scrollable]="true" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
@@ -11,8 +10,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-element>
         <tr>
-            <td>{{element.name}}</td>
-            
+            <td>{{element.name}}</td>      
                 <td style='flex: 0 0 150px;' >{{element.priority}}</td>  
                 <td style='flex: 0 0 150px;'>
                     <div>
@@ -20,9 +18,7 @@
                             class="p-button-rounded p-button-text p-button-plain icon"></button>        
 
                         <button pButton type="button"  (click)="deleteRow(element)" icon="pi pi-trash" 
-                            class="p-button-rounded p-button-text p-button-plain icon"></button>
-
-                        
+                            class="p-button-rounded p-button-text p-button-plain icon"></button>        
                     </div>
                 </td>
         </tr>
