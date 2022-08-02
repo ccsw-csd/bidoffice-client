@@ -21,8 +21,7 @@ export class HyperscalerEditComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.elementHyperscaler = Object.assign({hyperscalerData:Hyperscaler},this.config.data.hyperscalerData) ;
-    
+    this.elementHyperscaler = Object.assign({hyperscalerData:Hyperscaler},this.config.data.hyperscalerData);
   }
 
   saveChanges(element: Hyperscaler){

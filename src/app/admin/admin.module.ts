@@ -12,7 +12,7 @@ import { UserListComponent } from './views/user-list/user-list.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
-import { HyperscalerEditComponent } from './views/hyperscaler-list/hyperscaler-edit/hyperscaler-edit.component';
+import { HyperscalerEditComponent } from './views/hyperscaler-edit/hyperscaler-edit.component';
 import {TooltipModule} from 'primeng/tooltip';
 import {Toast, ToastModule} from 'primeng/toast';
 

@@ -6,7 +6,7 @@ import {Message} from 'primeng/api';
 import {DialogService} from 'primeng/dynamicdialog';
 import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
-import { HyperscalerEditComponent } from './hyperscaler-edit/hyperscaler-edit.component';
+import { HyperscalerEditComponent } from '../hyperscaler-edit/hyperscaler-edit.component';
 
 @Component({
   selector: 'app-hyperscaler',
@@ -59,9 +59,7 @@ export class HyperscalerComponent implements OnInit {
           width: '40%',
           data: {
             },
-        });
-        message = "Se ha creado un nuevo elemento"
-        
+        });     
     }
     this.onClose(message)
   }
@@ -70,17 +68,8 @@ export class HyperscalerComponent implements OnInit {
     let opt: number
     this.ref.onClose.subscribe( 
       (results:any) => {
-        //if(results!=false)
-          //this.showSuccessMessage(message)    
+        this.getDataHyperscaler()   
     });
-  }
-
-  showSuccessMessage(message?: string): void{
-    this.messageService.add({
-      key:'hyperscalerMessage',
-      severity:'success', 
-      summary:'Confirmado', 
-      detail:message});  
   }
 
   showErrorMessage(message?: string): void{
@@ -100,12 +89,10 @@ export class HyperscalerComponent implements OnInit {
       accept: () => {
         this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
           next:() => {
-           // message = "Se ha eliminado "+element.name+" correctamente"
-           // this.showSuccessMessage(message)
             this.getDataHyperscaler()
           },
           error:() => {
-            message = "No se ha podido eliminar "+element.name
+            message = "El registro no puede ser eliminado porque se está usando en alguna oferta"
             this.showErrorMessage(message)
             this.getDataHyperscaler()
           } 
