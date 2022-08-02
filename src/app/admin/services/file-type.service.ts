@@ -9,12 +9,14 @@ import { FileType } from '../model/FileType';
 })
 export class FileTypeService {
 
-  constructor(private http: HttpClient) { 
-
-  }
+  constructor(private http: HttpClient) { }
 
   getFileTypes(): Observable<FileType[]> {            
     return this.http.get<FileType[]>(environment.server +'/filetype/findAll');
-}
+  }
+
+  deleteFileTypeById(fileTypeId: number): Observable<any> {
+    return this.http.delete(environment.server+'/filetype/'+fileTypeId);
+  }  
 
 }

@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Hyperscaler } from '../../model/Hyperscaler';
 import { HyperscalerService } from '../../services/hyperscaler.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {Message} from 'primeng/api';
 
 
 @Component({

@@ -5,13 +5,11 @@ import { HyperscalerComponent } from './views/hyperscaler-list/hyperscaler.compo
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {MessageModule} from 'primeng/message';
-import {MessagesModule} from 'primeng/messages';
 import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
 import { UserListComponent } from './views/user-list/user-list.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
-import { Toast, ToastModule } from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     FileTypeListComponent,
@@ -24,8 +22,6 @@ import { Toast, ToastModule } from 'primeng/toast';
     TableModule,
     ButtonModule,
     ConfirmDialogModule,
-    MessageModule,
-    MessagesModule,
     PaginatorModule,
     InputTextModule,
     ToastModule

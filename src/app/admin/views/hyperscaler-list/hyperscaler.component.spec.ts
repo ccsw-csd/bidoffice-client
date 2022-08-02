@@ -6,8 +6,6 @@ import { HyperscalerComponent } from './hyperscaler.component';
 
 
 describe('HyperscalerComponent', () => {
-  let component: HyperscalerComponent;
-  let fixture: ComponentFixture<HyperscalerComponent>;
   let hyperscaler: HyperscalerComponent
   let mockHyperscalerService, mockConfirmationService, mockMessageService
 
