@@ -39,7 +39,6 @@ export class FileTypeListComponent implements OnInit {
       rejectLabel:"Cancelar",
       accept: () => 
       {
-        
         this.fileTypeService.deleteFileTypeById(fileType.id).subscribe({
           next: () =>{
             this.getFileTypes()
