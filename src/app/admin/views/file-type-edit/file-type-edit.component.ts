@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileType } from '../../model/FileType';
 import { FileTypeService } from '../../services/file-type.service';
 
@@ -12,6 +12,7 @@ import { FileTypeService } from '../../services/file-type.service';
 export class FileTypeEditComponent implements OnInit {
 
   fileType: FileType
+  exception: boolean
 
   constructor(
           public ref: DynamicDialogRef,
@@ -35,8 +36,9 @@ export class FileTypeEditComponent implements OnInit {
     this.fileTypeService.saveFileType(this.fileType).subscribe({
       next: ()=> {
           this.ref.close();
+          this.exception=false
       }, error: ()=>{
-          this.showMessageError()
+          this.exception=true
       }
     })
     

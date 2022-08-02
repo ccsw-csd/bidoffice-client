@@ -5,8 +5,10 @@
 </span>
 <br />
 <span class="p-float-label">
-    <input id="float-input" type="text" pInputText [(ngModel)]="fileType.priority" name="priority"> 
+    <input id="float-input" type="text" pInputText [(ngModel)]="fileType.priority" name="priority">
+    <small *ngIf="exception" id="priority-help" class="p-error block">Ya hay un item con la misma prioridad</small> 
     <label for="float-input">Prioridad</label>
+    
 </span>
 <br />
 <p-toast key="priorityError" position="top-center"></p-toast>
