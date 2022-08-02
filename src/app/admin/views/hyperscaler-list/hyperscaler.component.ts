@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Hyperscaler } from '../../model/Hyperscaler';
 import { HyperscalerService } from '../../services/hyperscaler.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import {Message} from 'primeng/api';
 import {DialogService} from 'primeng/dynamicdialog';
 import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { HyperscalerEditComponent } from '../hyperscaler-edit/hyperscaler-edit.component';
+
 
 @Component({
   selector: 'app-hyperscaler',
@@ -17,9 +17,6 @@ import { HyperscalerEditComponent } from '../hyperscaler-edit/hyperscaler-edit.c
 export class HyperscalerComponent implements OnInit {
   public listOfData: Hyperscaler[]
   public cols: any[];
-  public checkIfExistsMessage: boolean
-  public msg: Message[]
-  
 
   
   constructor(private hyperscalerService: HyperscalerService, 
@@ -86,6 +83,8 @@ export class HyperscalerComponent implements OnInit {
     this.confirmationService.confirm({
       header: 'Confirmación',
       message: '¿Desea eliminar este elemento?',
+      acceptLabel: 'Aceptar',
+      rejectLabel: 'Cerrar',
       accept: () => {
         this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
           next:() => {
@@ -103,7 +102,6 @@ export class HyperscalerComponent implements OnInit {
       }
     });
   }
-
 }
 
 

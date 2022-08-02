@@ -6,10 +6,8 @@ import { HyperscalerComponent } from './hyperscaler.component';
 
 
 describe('HyperscalerComponent', () => {
-  let component: HyperscalerComponent;
-  let fixture: ComponentFixture<HyperscalerComponent>;
   let hyperscaler: HyperscalerComponent
-  let mockHyperscalerService, mockConfirmationService
+  let mockHyperscalerService, mockConfirmationService, mockMessageService
 
   let HYPERSCALER_ITEM =  [
     new Hyperscaler({id:1, name:"Name 1", priority: 1}),
@@ -21,7 +19,8 @@ describe('HyperscalerComponent', () => {
   beforeEach( () => {
     mockHyperscalerService = jasmine.createSpyObj(["getDataHyperscaler","deleteHyperscaler"])
     mockConfirmationService = jasmine.createSpyObj(["confirm","close"])
-    hyperscaler = new HyperscalerComponent(mockHyperscalerService,mockConfirmationService)
+    mockMessageService = jasmine.createSpyObj([""])
+    hyperscaler = new HyperscalerComponent(mockHyperscalerService,mockConfirmationService,mockMessageService)
   });
 
   it('getHyperscalerShouldReturnHyperscalerList', () => {
