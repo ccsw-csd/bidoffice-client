@@ -2,16 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileTypeListComponent } from './views/file-type-list/file-type-list.component';
 import { HyperscalerComponent } from './views/hyperscaler-list/hyperscaler.component';
-import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
-import {ToastModule} from 'primeng/toast';
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
 import { UserListComponent } from './views/user-list/user-list.component';
-import { TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
 import { FileTypeEditComponent } from './views/file-type-edit/file-type-edit.component';
-
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -26,9 +25,9 @@ import { FileTypeEditComponent } from './views/file-type-edit/file-type-edit.com
     TableModule,
     ButtonModule,
     ConfirmDialogModule,
-    ToastModule,
     PaginatorModule,
-    InputTextModule
+    InputTextModule,
+    ToastModule
   ]
 })
 export class AdminModule { }
