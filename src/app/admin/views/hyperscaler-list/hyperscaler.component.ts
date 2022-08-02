@@ -16,6 +16,7 @@ export class HyperscalerComponent implements OnInit {
   public cols: any[];
   public checkIfExistsMessage: boolean
   public msg: Message[]
+  
 
   
   constructor(private hyperscalerService: HyperscalerService, 
@@ -40,13 +41,11 @@ export class HyperscalerComponent implements OnInit {
       accept: () => {
         this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
           next:() => {
-            opt=1
-            this.showMessage(opt,element)
+            
             this.getDataHyperscaler()
           },
           error:() => {
-            opt=0
-            this.showMessage(opt,element)
+            
             this.getDataHyperscaler()
           } 
         })
@@ -57,23 +56,20 @@ export class HyperscalerComponent implements OnInit {
     });
   }
 
-  showMessage(opt: number, element: Hyperscaler){
-    this.checkIfExistsMessage = true
-    if(opt == 0){
-      this.msg = [{ 
-        severity:'error', 
-        summary:'Error', 
-        detail: element.name+' se encuentra asociado a una oferta'
-    }]
-    }
-    else{
-      this.checkIfExistsMessage = true
-            this.msg = [{ 
-              severity:'success', 
-              summary:'Confirmado', 
-              detail: element.name+' se ha eliminado correctamente'
-          }]
-    }
+  showSuccessMessage(message?: string): void{
+    this.messageService.add({
+      key:'hyperscalerMessage',
+      severity:'success', 
+      summary:'Confirmado', 
+      detail:message});  
+  }
+
+  showErrorMessage(message?: string): void{
+    this.messageService.add({
+      key:'hyperscalerMessage',
+      severity:'error', 
+      summary:'Error', 
+      detail:message});
   }
 }
 
