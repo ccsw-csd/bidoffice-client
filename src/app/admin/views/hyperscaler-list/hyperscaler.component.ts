@@ -14,9 +14,6 @@ import {Message} from 'primeng/api';
 export class HyperscalerComponent implements OnInit {
   public listOfData: Hyperscaler[]
   public cols: any[];
-  public checkIfExistsMessage: boolean
-  public msg: Message[]
-  
 
   
   constructor(private hyperscalerService: HyperscalerService, 
@@ -56,14 +53,6 @@ export class HyperscalerComponent implements OnInit {
         this.getDataHyperscaler()
       }
     });
-  }
-
-  showSuccessMessage(message?: string): void{
-    this.messageService.add({
-      key:'hyperscalerMessage',
-      severity:'success', 
-      summary:'Confirmado', 
-      detail:message});  
   }
 
   showErrorMessage(message?: string): void{

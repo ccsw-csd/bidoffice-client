@@ -1,6 +1,6 @@
 
-<div *ngIf="checkIfExistsMessage == true">
-    <p-messages [(value)]="msg" [enableService]="false"></p-messages>
+<div>
+    <p-toast key="hyperscalerMessage" position="top-center"></p-toast>
 </div>
 
 <p-table [value]="listOfData" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">

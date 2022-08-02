@@ -11,7 +11,7 @@ import { MethodologyListComponent } from './views/methodology-list/methodology-l
 import { UserListComponent } from './views/user-list/user-list.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
-
+import { Toast, ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     FileTypeListComponent,
@@ -27,8 +27,8 @@ import { InputTextModule } from "primeng/inputtext";
     MessageModule,
     MessagesModule,
     PaginatorModule,
-    InputTextModule
-
+    InputTextModule,
+    ToastModule
   ]
 })
 export class AdminModule { }
