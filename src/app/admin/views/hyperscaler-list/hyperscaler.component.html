@@ -1,19 +1,11 @@
 
-<div>
-    <p-toast key="hyperscalerMessage" position="top-center"></p-toast>
-</div>
-
-<p-table [value]="listOfData" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">
+<p-toast key="hyperscalerMessage" position="top-center"></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
+<p-table [value]="listOfData" [scrollable]="true" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
-            <th pSortableColumn="name" >
-                Nombre 
-                <p-sortIcon field="name"></p-sortIcon>
-            </th>    
-            <th pSortableColumn="priority" style='flex: 0 0 150px;'>
-                Prioridad
-                <p-sortIcon field="priority"></p-sortIcon>
-            </th>
+            <th pSortableColumn="name"> Nombre <p-sortIcon field="name"></p-sortIcon> </th>    
+            <th pSortableColumn="priority" style='flex: 0 0 150px;'> Prioridad <p-sortIcon field="priority"></p-sortIcon> </th>
             <th style='flex: 0 0 150px;'></th>        
         </tr>
     </ng-template>
@@ -30,8 +22,7 @@
                         <button pButton type="button"  (click)="deleteRow(element)" icon="pi pi-trash" 
                             class="p-button-rounded p-button-text p-button-plain icon"></button>
 
-                        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"
-                            [transitionOptions]="'0ms'"></p-confirmDialog>
+                        
                     </div>
                 </td>
         </tr>

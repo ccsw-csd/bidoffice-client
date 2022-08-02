@@ -36,10 +36,11 @@ export class HyperscalerComponent implements OnInit {
     let message: string
     this.confirmationService.confirm({
       message: '¿Desea eliminar este elemento?',
+      acceptLabel: 'Aceptar',
+      rejectLabel: 'Cerrar',
       accept: () => {
         this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
-          next:() => {
-            
+          next:() => {  
             this.getDataHyperscaler()
           },
           error:() => {
