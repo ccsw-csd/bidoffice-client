@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Hyperscaler } from '../../model/Hyperscaler';
 import { HyperscalerService } from '../../services/hyperscaler.service';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {Message} from 'primeng/api';
 
 
@@ -21,6 +21,7 @@ export class HyperscalerComponent implements OnInit {
   
   constructor(private hyperscalerService: HyperscalerService, 
     private confirmationService: ConfirmationService,
+    private messageService: MessageService
     ) { }
 
   ngOnInit(): void {
@@ -35,7 +36,7 @@ export class HyperscalerComponent implements OnInit {
   }
 
   deleteRow(element: Hyperscaler): void{
-    let opt: number
+    let message: string
     this.confirmationService.confirm({
       message: '¿Desea eliminar este elemento?',
       accept: () => {
@@ -45,7 +46,8 @@ export class HyperscalerComponent implements OnInit {
             this.getDataHyperscaler()
           },
           error:() => {
-            
+            message = "No se ha podido eliminar "+element.name
+            this.showErrorMessage(message)
             this.getDataHyperscaler()
           } 
         })
