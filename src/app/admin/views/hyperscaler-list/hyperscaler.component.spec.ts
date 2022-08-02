@@ -1,35 +1,44 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { BaseClass } from 'src/app/offer/model/BaseClass';
 import { Hyperscaler } from '../../model/Hyperscaler';
-
 import { HyperscalerComponent } from './hyperscaler.component';
 
+
+
 describe('HyperscalerComponent', () => {
-  let component: HyperscalerComponent;
-  let fixture: ComponentFixture<HyperscalerComponent>;
-
   let hyperscaler: HyperscalerComponent
-  let mockHyperscalerService
+  let mockHyperscalerService, mockConfirmationService, mockMessageService
 
-  let BASE = new BaseClass({id: 1, name: "test", priority: 2})
-  
   let HYPERSCALER_ITEM =  [
-    new Hyperscaler({id:1, name:"Name 1", priority: 1})
+    new Hyperscaler({id:1, name:"Name 1", priority: 1}),
+    new Hyperscaler({id:2, name:"Name 2", priority: 2})
   ]
 
+  let HYPERSCALER_DELETED = [ new Hyperscaler({id:2, name:"Name 2", priority: 2})]
 
   beforeEach( () => {
-    mockHyperscalerService = jasmine.createSpyObj(["getDataHyperscale"])
-    hyperscaler = new HyperscalerComponent(mockHyperscalerService)
-  })
+    mockHyperscalerService = jasmine.createSpyObj(["getDataHyperscaler","deleteHyperscaler"])
+    mockConfirmationService = jasmine.createSpyObj(["confirm","close"])
+    mockMessageService = jasmine.createSpyObj([""])
+    hyperscaler = new HyperscalerComponent(mockHyperscalerService,mockConfirmationService,mockMessageService)
+  });
 
-
-  it('findPageShouldReturnHyperscalerList', () => {
-    mockHyperscalerService.getDataHyperscale.and.returnValue(of(HYPERSCALER_ITEM))
-    hyperscaler.getDataHyperscale()
+  it('getHyperscalerShouldReturnHyperscalerList', () => {
+    mockHyperscalerService.getDataHyperscaler.and.returnValue(of(HYPERSCALER_ITEM))
+    hyperscaler.getDataHyperscaler()
     expect(hyperscaler.listOfData).not.toEqual(null);
     expect(hyperscaler.listOfData).toEqual(HYPERSCALER_ITEM);
   });
+
+
+  it('deleteRowShouldDelete', () =>{ 
+    mockHyperscalerService.getDataHyperscaler.and.returnValue(of(HYPERSCALER_DELETED))
+    mockHyperscalerService.deleteHyperscaler.and.returnValue(of(hyperscaler.getDataHyperscaler())) 
+    hyperscaler.deleteRow(HYPERSCALER_ITEM[0])  
+    expect(hyperscaler.listOfData).not.toEqual(null);
+    expect(hyperscaler.listOfData).toBe(HYPERSCALER_DELETED);
+  })
+
+
 
 });
