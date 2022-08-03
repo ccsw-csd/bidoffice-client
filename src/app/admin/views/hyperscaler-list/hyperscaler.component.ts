@@ -55,7 +55,8 @@ export class HyperscalerComponent implements OnInit {
           header: 'Nuevo elemento',
           width: '40%',
           data: {
-            },
+          },
+          closable: false
         });     
     }
     this.onClose(message)

@@ -20,11 +20,7 @@ export class HyperscalerService {
   }
 
   saveHyperscaler(element: Hyperscaler):Observable<Hyperscaler>{
-    let url = environment.server+"/hyperscaler"
-
-    if(element.id!=null)
-      url+="/"+element.id
-      
+    let url = environment.server+"/hyperscaler"     
     return this.http.put<Hyperscaler>(url,element)
   }
 }

@@ -11,8 +11,10 @@ import { HyperscalerService } from 'src/app/admin/services/hyperscaler.service';
   styleUrls: ['./hyperscaler-edit.component.scss']
 })
 export class HyperscalerEditComponent implements OnInit {
-
+  existsPriority: boolean
+  fieldsNull: boolean
   elementHyperscaler: Hyperscaler
+  elementBeforeChanges: Hyperscaler
   constructor( private ref: DynamicDialogRef, 
     private config: DynamicDialogConfig,
     private hyperscalerService: HyperscalerService,
@@ -25,22 +27,30 @@ export class HyperscalerEditComponent implements OnInit {
   }
 
   saveChanges(element: Hyperscaler){
-    console.log(element.name)
-    console.log(element.priority)
-    this.hyperscalerService.saveHyperscaler(element).subscribe(
-      results => { 
-        this.close()
-      }
-    )
-  }
-
-  close() {
-    
-    if (this.ref) {
-        this.ref.close();
+    if(element.name=="" || element.priority < 1 ){
+      this.fieldsNull = true
+      this.existsPriority = false
+    }
+    else{
+      this.hyperscalerService.saveHyperscaler(element).subscribe({
+        next: () => { 
+          this.existsPriority = false
+          this.fieldsNull = false
+          this.close()
+        },
+        error: () => {
+          this.existsPriority = true;
+          this.fieldsNull = false
+        }
+      })
     }
   }
-
+    close() {
+      if (this.ref) {
+          this.ref.close();
+    }
+  }
+  
 
 
 }
