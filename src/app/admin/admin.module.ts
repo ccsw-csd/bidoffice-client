@@ -10,13 +10,17 @@ import { UserListComponent } from './views/user-list/user-list.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
 import { ToastModule } from 'primeng/toast';
+import { TechnologyListComponent } from './views/technology-list/technology-list.component';
+
 @NgModule({
   declarations: [
     FileTypeListComponent,
     HyperscalerComponent,
     MethodologyListComponent,
-    UserListComponent
+    UserListComponent,
+    TechnologyListComponent
   ],
+ 
   imports: [
     CommonModule,
     TableModule,

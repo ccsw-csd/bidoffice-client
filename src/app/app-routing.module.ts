@@ -9,6 +9,7 @@ import { LoginComponent } from './login/views/login/login.component';
 import { OfferListComponent } from './offer/views/offer-list/offer-list.component';
 import { UserListComponent } from "./admin/views/user-list/user-list.component";
 import { MethodologyListComponent } from './admin/views/methodology-list/methodology-list.component';
+import { TechnologyListComponent } from './admin/views/technology-list/technology-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'filetype', component: FileTypeListComponent },
       { path: 'user', component: UserListComponent },
       { path: 'hyperscaler', component: HyperscalerComponent},
+      { path: 'technology', component: TechnologyListComponent},
       { path: '**', redirectTo: 'main', pathMatch: 'full' }
     ]
   },
