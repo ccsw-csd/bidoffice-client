@@ -1,17 +1,15 @@
 <p-table [value]="technologies" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
-            <th>Id</th>
             <th>Nombre</th>
-            <th>Prioridad</th>
+            <th style="flex: 0 0 150px">Prioridad</th>
             <th style="flex: 0 0 150px">Acción</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-technologies>
         <tr>
-            <td>{{technologies.id}}</td>
             <td>{{technologies.name}}</td>
-            <td>{{technologies.priority}}</td>
+            <td style="flex: 0 0 150px">{{technologies.priority}}</td>
             <td style="flex: 0 0 150px">
                 <div>
                     <button pButton type="button" icon="pi pi-pencil"
