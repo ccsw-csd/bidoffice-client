@@ -1,25 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { of } from 'rxjs';
+import { Technology } from '../../model/Technology';
+import { TechnologyService } from '../../services/technology.service';
 import { TechnologyListComponent } from './technology-list.component';
 
 describe('TechnologyListComponent', () => {
-  let component: TechnologyListComponent;
-  let fixture: ComponentFixture<TechnologyListComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ TechnologyListComponent ]
-    })
-    .compileComponents();
-  });
+    let technologyListComponent: TechnologyListComponent;
+    let mockTechnologyService;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TechnologyListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach (() => {
+        mockTechnologyService = jasmine.createSpyObj(["findAll"]);
+        technologyListComponent = new TechnologyListComponent(mockTechnologyService);
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('findAllShouldReturnTechnologies', () => {
+
+        let technologyList: Technology[];
+
+        mockTechnologyService.findAll.and.returnValue(of(technologyList));
+        technologyListComponent.findAll();
+
+        expect(technologyListComponent.technologies).toEqual(technologyList);
+
+    });
 });

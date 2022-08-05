@@ -18,7 +18,7 @@ export class TechnologyService {
      * Recupera el listado de tecnologías.
      * @returns 
      */
-    getDataTechnologies(): Observable<Technology[]> {
+    findAll(): Observable<Technology[]> {
         
         return this.http.get<Technology[]>(
             environment.server + "/technology/findAll");

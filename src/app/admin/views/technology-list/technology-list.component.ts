@@ -25,7 +25,7 @@ export class TechnologyListComponent implements OnInit {
      * y los carga en el vector.
      */
     findAll() {
-        this.technologyService.getDataTechnologies().subscribe(
+        this.technologyService.findAll().subscribe(
             results => this.technologies = results
         );
     }
