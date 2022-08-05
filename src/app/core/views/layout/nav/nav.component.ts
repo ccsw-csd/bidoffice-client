@@ -32,7 +32,8 @@ export class NavComponent implements OnInit {
           {label: "Usuarios", routerLink: '/user'},
           {label: "Tipos de ficheros",  routerLink: "/filetype"},
           {label: 'Hyperscaler', routerLink: '/hyperscaler'},
-          {label: "Metodologías", routerLink: '/methodology'}
+          {label: "Metodologías", routerLink: '/methodology'},
+          {label: "Tecnologías", routerLink: '/technology'}
         ]
       },
       {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'},
