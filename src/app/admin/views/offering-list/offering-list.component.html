@@ -1,0 +1,23 @@
+<p-table [value]="offeringList" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+    <tr>
+        <th>Nombre</th>
+        <th style='flex: 0 0 300px'>Prioridad</th>
+        <th style='flex: 0 0 130px'>Acción</th>
+    </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-offeringList>
+        <tr>
+            <td>{{offeringList.name}}</td>
+            <td style='flex: 0 0 253px'>{{offeringList.priority}}</td>
+            <td style='flex: 0 0 150px'>
+                <div>
+                    <button pButton type="button" icon="pi pi-pencil"
+                        class="p-button-rounded p-button-text p-button-plain icon"></button>
+                    <button pButton type="button" icon="pi pi-times"
+                        class="p-button-rounded p-button-text p-button-plain icon"></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
