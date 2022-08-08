@@ -27,7 +27,7 @@ export class HyperscalerEditComponent implements OnInit {
   }
 
   saveChanges(element: Hyperscaler){
-    if(element.name=="" || element.priority < 1 ){
+    if(element.name=="" || element.name==null || element.priority==null || element.priority < 1 ){
       this.fieldsNull = true
       this.existsPriority = false
     }
@@ -40,7 +40,7 @@ export class HyperscalerEditComponent implements OnInit {
         },
         error: () => {
           this.existsPriority = true;
-          this.fieldsNull = false
+          this.fieldsNull = false;
         }
       })
     }
