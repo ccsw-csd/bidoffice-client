@@ -11,6 +11,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
 import { FileTypeEditComponent } from './views/file-type-edit/file-type-edit.component';
 import { ToastModule } from 'primeng/toast';
+import { TechnologyListComponent } from './views/technology-list/technology-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ToastModule } from 'primeng/toast';
     MethodologyListComponent,
     UserListComponent,
     FileTypeEditComponent,
+    TechnologyListComponent
   ],
   imports: [
     CommonModule,
