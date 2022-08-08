@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileType } from '../../model/FileType';
 import { FileTypeService } from '../../services/file-type.service';
@@ -11,41 +10,48 @@ import { FileTypeService } from '../../services/file-type.service';
 })
 export class FileTypeEditComponent implements OnInit {
 
+  fileTypeName: string
   fileType: FileType
-  exception: boolean
+  exceptionFail: boolean
+  exceptionMissing: boolean
 
   constructor(
-          public ref: DynamicDialogRef,
-          public config: DynamicDialogConfig,
-          private fileTypeService: FileTypeService,
-          private messageService: MessageService,
-     ) { }
+    public ref: DynamicDialogRef,
+    public config: DynamicDialogConfig,
+    private fileTypeService: FileTypeService, 
+  ) { }
 
   ngOnInit(): void {
     if (this.config.data != null) {
       this.fileType = Object.assign({fileType:FileType}, this.config.data.fileType);
+      this.fileTypeName=this.fileType.name
     }
     else {
       this.fileType = new FileType();
     }
   }
 
-
-  onSave() {
-    //if(this.validarFechas(this.prestamo)==true && this.validarDiasPrestado(this.prestamo)==true && this.resultsGame==true && this.resultsClient==true)
-    this.fileTypeService.saveFileType(this.fileType).subscribe({
-      next: ()=> {
+  onSave(fileType: FileType) {
+    if(fileType.name!="" && fileType.priority>0){
+      this.fileTypeService.saveFileType(fileType).subscribe({
+        next: ()=> {
+          this.exceptionFail=false
+          this.exceptionMissing=false
           this.ref.close();
-          this.exception=false
-      }, error: ()=>{
-          this.exception=true
-      }
-    })
-    
+        }, 
+        error: ()=>{
+              this.exceptionMissing=false
+              this.exceptionFail=true
+        }
+      })
+    }else{
+      this.exceptionFail=false
+      this.exceptionMissing=true
+    }
   }  
 
-
-  showMessageError(){
-    this.messageService.add({key: 'priorityError', severity:'error', summary: 'ERROR', detail: 'Ya hay un item creado con la misma prioridad'});
+  onClose() {
+    this.ref.close();
   }
+  
 }

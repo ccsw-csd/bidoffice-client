@@ -37,7 +37,8 @@ export class FileTypeListComponent implements OnInit {
     const ref = this.dialogService.open(FileTypeEditComponent, {
         data: { fileType: fileType },
         header: 'Edite el Item',
-        width: '50%',
+        width: '40%',
+        closable:false,
         
     });
     ref.onClose.subscribe(() => {
@@ -48,9 +49,9 @@ export class FileTypeListComponent implements OnInit {
 
   saveFileType() {
     const ref = this.dialogService.open(FileTypeEditComponent, {
-        
         header: 'Crear nuevo Item',
-        width: '50%'
+        width: '40%',
+        closable:false,
     });
     ref.onClose.subscribe(() => {
       this.ngOnInit()     

@@ -1,15 +1,22 @@
 <br />
 <span class="p-float-label">
-    <input id="float-input" type="text" pInputText [(ngModel)]="fileType.name" name="name" > 
+    <input id="float-input" class="w-full" type="text" pInputText required [(ngModel)]="fileType.name" name="name" > 
     <label for="float-input">Nombre</label>
 </span>
 <br />
 <span class="p-float-label">
-    <input id="float-input" type="text" pInputText [(ngModel)]="fileType.priority" name="priority">
-    <small *ngIf="exception" id="priority-help" class="p-error block">Ya hay un item con la misma prioridad</small> 
+    <input id="float-input" class="w-full" type="text" pInputText required [(ngModel)]="fileType.priority" name="priority">
     <label for="float-input">Prioridad</label>
-    
 </span>
 <br />
-<p-toast key="priorityError" position="top-center"></p-toast>
-<p-button label="Guardar" icon="pi pi-check" iconPos="right" (onClick)="onSave()"></p-button>
+<small *ngIf="exceptionFail" class="p-error">Ya hay un item con el mismo nombre y/o prioridad</small> 
+<small *ngIf="exceptionMissing" class="p-error">Rellene todos los campos</small> 
+<br>
+<div class="flex flex-row-reverse w-auto">
+    <div>    
+        <button type="button" pButton label="Guardar" class="w-6rem " (click)="onSave(fileType)"></button>
+    </div>
+    <div class="px-2">
+        <button type="button" pButton label="Cerrar" class="p-button-secondary w-6rem " (click)="onClose()"></button>
+    </div>
+</div> 

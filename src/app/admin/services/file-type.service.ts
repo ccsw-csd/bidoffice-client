@@ -22,9 +22,6 @@ export class FileTypeService {
 
   saveFileType(fileType: FileType): Observable<any> {
     let url='/filetype'
-    if(fileType.id!=null)
-      url+='/'+fileType.id
-
     return this.http.put<FileType>(environment.server+url,fileType);
   }
 
