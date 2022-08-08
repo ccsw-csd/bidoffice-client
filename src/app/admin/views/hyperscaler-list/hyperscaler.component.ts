@@ -23,13 +23,11 @@ export class HyperscalerComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,
     private ref: DynamicDialogRef, 
-    private config: DynamicDialogConfig,
     private messageService: MessageService
     ) { }
 
   ngOnInit(): void {
-    this.getDataHyperscaler()
-    
+    this.getDataHyperscaler()  
   }
 
   getDataHyperscaler(): void{
@@ -77,7 +75,6 @@ export class HyperscalerComponent implements OnInit {
       summary:'Error', 
       detail:message});
   }
- 
 
   deleteRow(element: Hyperscaler): void{
     let message: string

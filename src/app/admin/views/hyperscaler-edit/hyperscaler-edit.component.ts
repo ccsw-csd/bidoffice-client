@@ -15,10 +15,10 @@ export class HyperscalerEditComponent implements OnInit {
   fieldsNull: boolean
   elementHyperscaler: Hyperscaler
   elementBeforeChanges: Hyperscaler
+
   constructor( private ref: DynamicDialogRef, 
     private config: DynamicDialogConfig,
     private hyperscalerService: HyperscalerService,
-    private messageService: MessageService
     ) { }
 
 
@@ -45,12 +45,11 @@ export class HyperscalerEditComponent implements OnInit {
       })
     }
   }
-    close() {
-      if (this.ref) {
-          this.ref.close();
+
+  close() {
+    if(this.ref) {
+        this.ref.close();
     }
   }
-  
-
 
 }

@@ -3,25 +3,18 @@
     <span class="p-float-label field">
         <input id="name" type="text" class="w-full" pInputText required [(ngModel)]="elementHyperscaler.name" placeholder="Nombre"> 
         <label for="name">Nombre</label>
-    </span>
-   
+    </span>  
     <span class="p-float-label field">
         <input id="priority" type="text"  class="w-full" pInputText required [(ngModel)]="elementHyperscaler.priority" placeholder="Prioridad">
         <label for="priority">Prioridad</label>
     </span>    
 </div>
 
-<div *ngIf="fieldsNull==true">
-    <small id="priority" class="p-error block">
-       Existe al menos un campo vacío
-    </small>
-</div>
-<div *ngIf="existsPriority==true">
-    <small id="priority" class="p-error block">
-        El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar
-    </small>
-</div>
+<div *ngIf="fieldsNull==true"><small class="p-error block"> Existe al menos un campo vacío</small></div>
+<div *ngIf="existsPriority==true"><small class="p-error block"> El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar</small></div>
+
 <br>
+
 <div class = "flex flex-row-reverse w-auto">
     <div>
         <button type="button" class=" p-button-primary w-6rem" (click)="saveChanges(elementHyperscaler)" pButton label="Guardar"></button>

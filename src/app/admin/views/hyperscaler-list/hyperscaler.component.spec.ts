@@ -7,7 +7,7 @@ import { HyperscalerComponent } from './hyperscaler.component';
 
 describe('HyperscalerComponent', () => {
   let hyperscaler: HyperscalerComponent
-  let mockHyperscalerService, mockConfirmationService, mockMessageService
+  let mockHyperscalerService, mockConfirmationService, mockMessageService, mockDynamicDialogRef, mockDialogService
 
   let HYPERSCALER_ITEM =  [
     new Hyperscaler({id:1, name:"Name 1", priority: 1}),
@@ -17,10 +17,17 @@ describe('HyperscalerComponent', () => {
   let HYPERSCALER_DELETED = [ new Hyperscaler({id:2, name:"Name 2", priority: 2})]
 
   beforeEach( () => {
-    mockHyperscalerService = jasmine.createSpyObj(["getDataHyperscaler","deleteHyperscaler"])
+    mockHyperscalerService = jasmine.createSpyObj(["getDataHyperscaler","deleteHyperscaler","saveHyperscaler"])
     mockConfirmationService = jasmine.createSpyObj(["confirm","close"])
-    mockMessageService = jasmine.createSpyObj([""])
-    hyperscaler = new HyperscalerComponent(mockHyperscalerService,mockConfirmationService,mockMessageService)
+    mockDynamicDialogRef = jasmine.createSpyObj([""])
+    mockDialogService = jasmine.createSpyObj([""])
+    
+    hyperscaler = new HyperscalerComponent(mockHyperscalerService,
+      mockConfirmationService,
+      mockDialogService,
+      mockDynamicDialogRef,
+      mockMessageService
+      )
   });
 
   it('getHyperscalerShouldReturnHyperscalerList', () => {
