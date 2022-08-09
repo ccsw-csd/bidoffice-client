@@ -13,7 +13,7 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import { HyperscalerEditComponent } from './views/hyperscaler-edit/hyperscaler-edit.component';
 import {TooltipModule} from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
-
+import { TechnologyListComponent } from './views/technology-list/technology-list.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,10 @@ import { ToastModule } from 'primeng/toast';
     HyperscalerComponent,
     MethodologyListComponent,
     UserListComponent,
-    HyperscalerEditComponent
+    HyperscalerEditComponent,
+    TechnologyListComponent
   ],
+ 
   imports: [
     CommonModule,
     TableModule,
