@@ -6,17 +6,18 @@ import { MethodologyListComponent } from './methodology-list.component';
 
 describe('MethodologyListComponent', () => {
   let methodologyListComponent: MethodologyListComponent;
-  let mockOfferService;
+  let mockMethodologyService;
+  let mockDynamicDialogService;
 
   beforeEach(() => {
-    mockOfferService = jasmine.createSpyObj(["findAll"]);
-    methodologyListComponent = new MethodologyListComponent(mockOfferService);
+    mockMethodologyService = jasmine.createSpyObj(["findAll"]);
+    methodologyListComponent = new MethodologyListComponent(mockMethodologyService, mockDynamicDialogService);
   });
 
   it('findAllShouldReturnMethodologies', () => {
     let methodologyList : Methodology[];
     
-    mockOfferService.findAll.and.returnValue(of(methodologyList));
+    mockMethodologyService.findAll.and.returnValue(of(methodologyList));
     methodologyListComponent.findAll();
 
     expect(methodologyListComponent.methodologyItemList).toEqual(methodologyList);

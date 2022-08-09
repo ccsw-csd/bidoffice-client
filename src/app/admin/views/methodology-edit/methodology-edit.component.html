@@ -1,0 +1,22 @@
+<br/>
+<span class="p-float-label">
+    <input id="float-input" class="w-full" type="text" pInputText required [(ngModel)]="data.name" name="name" > 
+    <label for="float-input">Nombre</label>
+</span>
+<br/>
+<span class="p-float-label">
+    <input id="float-input" class="w-full" type="text" pInputText required [(ngModel)]="data.priority" name="priority">
+    <label for="float-input">Prioridad</label>
+</span>
+<br/>
+<small *ngIf="showEditMessage" class="p-error">Ya hay un item con el mismo nombre y/o prioridad</small>
+<small *ngIf="showEmptyMessage" class="p-error">Ningún campo puede estar vacío</small>
+<br>
+<div class="flex flex-row-reverse w-auto">
+    <div>    
+        <button type="button" pButton label="Guardar" class="w-6rem " (click)="editMethodology(data)"></button>
+    </div>
+    <div class="px-2">
+        <button type="button" pButton label="Cerrar" class="p-button-secondary w-6rem " (click)="onClose()"></button>
+    </div>
+</div> 
