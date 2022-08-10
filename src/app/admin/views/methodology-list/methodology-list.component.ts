@@ -70,6 +70,7 @@ export class MethodologyListComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Aceptar',
       rejectLabel: 'Cerrar',
+      rejectButtonStyleClass: 'p-button-secondary',
       accept: () => {
         this.methodologyService.delete(methodologyItem.id).subscribe({
           next:() => {  
