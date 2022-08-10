@@ -108,8 +108,5 @@
       }
     }
   },
-  "defaultProject": "bidoffice-client",
-  "cli": {
-    "analytics": false
-  }
+  "defaultProject": "bidoffice-client"
 }
