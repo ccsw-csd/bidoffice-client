@@ -1,21 +1,23 @@
+<p-toast key="methodologyMessage" position="top-center"></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
 <p-table [value]="methodologyItemList" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
     <tr>
-        <th>Nombre</th>
-        <th style='flex: 0 0 150px'>Prioridad</th>
-        <th style='flex: 0 0 150px'>Acción</th>
+        <th pSortableColumn="name"> Nombre <p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="priority"  style='flex: 0 0 150px'>Prioridad <p-sortIcon field="priority"></p-sortIcon></th>
+        <th  style='flex: 0 0 150px'></th>
     </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-methodologyItemList>
+    <ng-template pTemplate="body" let-methodologyItem>
         <tr>
-            <td>{{methodologyItemList.name}}</td>
-            <td style='flex: 0 0 150px'>{{methodologyItemList.priority}}</td>
+            <td>{{methodologyItem.name}}</td>
+            <td style='flex: 0 0 150px'>{{methodologyItem.priority}}</td>
             <td style='flex: 0 0 150px'>
                 <div>
                     <button pButton type="button" icon="pi pi-pencil"
                         class="p-button-rounded p-button-text p-button-plain icon"
                         (click)="showEditDialog(methodologyItemList.id)"></button>
-                    <button pButton type="button" icon="pi pi-times"
+                    <button pButton type="button"  (click)="deleteItem(methodologyItem)" icon="pi pi-trash"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>
