@@ -15,7 +15,7 @@ export class MethodologyService {
     return this.http.get<BaseClass[]>(environment.server + "/methodology/findAll");
   }
 
-  delete(id: number): Observable<BaseClass[]>{
+  delete(id: number): Observable<any>{
     return this.http.delete<BaseClass[]>(environment.server + "/methodology/"+id);
   }
 }
