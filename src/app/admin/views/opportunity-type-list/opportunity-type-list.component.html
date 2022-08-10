@@ -1,0 +1,14 @@
+<p-table [value]="opportunityList" [scrollable]="true" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="name"> Nombre <p-sortIcon field="name"></p-sortIcon> </th>    
+            <th pSortableColumn="priority" style='flex: 0 0 150px;'> Prioridad <p-sortIcon field="priority"></p-sortIcon> </th>         
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-element>
+        <tr>
+            <td>{{element.name}}</td>
+            <td style='flex: 0 0 150px;'>{{element.priority}}</td>
+        </tr>
+    </ng-template>   
+</p-table>
