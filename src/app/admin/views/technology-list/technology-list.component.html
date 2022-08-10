@@ -1,3 +1,5 @@
+<p-toast key="deleteError" position="top-center"></p-toast>
+<p-confirmDialog header="Confirmation" defaultFocus="reject" rejectButtonStyleClass="p-button-outlined"  icon="pi pi-exclamation-triangle" key="techDeleteDialog" [transitionOptions]="'0ms'"></p-confirmDialog>
 <p-table [value]="technologies" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
@@ -14,7 +16,7 @@
                 <div>
                     <button pButton type="button" icon="pi pi-pencil"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
-                    <button pButton type="button" icon="pi pi-times"
+                    <button pButton type="button" icon="pi pi-trash" (click)="deleteTechnology(technologies)"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>

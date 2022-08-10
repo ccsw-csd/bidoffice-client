@@ -16,11 +16,24 @@ export class TechnologyService {
 
     /**
      * Recupera el listado de tecnologías.
-     * @returns 
+     * 
+     * @returns Listado no paginado con las tecnologías.
      */
     findAll(): Observable<Technology[]> {
         
         return this.http.get<Technology[]>(
             environment.server + "/technology/findAll");
+    }
+
+    /**
+     * Borra una tecnología de la base de datos.
+     * 
+     * @param elementId Identificador de la tecnología a borrar.
+     * 
+     * @returns Devuelve si la ha podido borrar correctamente o
+     *          una excepción en caso de error.
+     */
+    deleteTechnology(elementId: number): Observable<any> {
+        return this.http.delete(environment.server + "/technology/" + elementId);
     }
 }
