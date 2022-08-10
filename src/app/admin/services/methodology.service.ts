@@ -17,8 +17,8 @@ export class MethodologyService {
   }
 
   saveMethodology(methodology: Methodology): Observable<void> {
-    let url = 'http://localhost:8080/methodology/' + methodology.id;
-
+    let url = 'http://localhost:8080/methodology';
+    
     return this.http.put<void>(url, methodology);
   }
   

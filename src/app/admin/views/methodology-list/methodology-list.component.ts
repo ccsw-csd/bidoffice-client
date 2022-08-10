@@ -50,6 +50,19 @@ export class MethodologyListComponent implements OnInit {
     });
   }
 
+  showCreateDialog() {
+    this.methodologyItem = new Methodology();
+
+    const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
+      header: "Crear metodología",
+      width: "40%"
+    });
+
+    ref.onClose.subscribe( res => {
+      this.ngOnInit();
+    });
+  }
+
   deleteItem(methodologyItem?: Methodology){
     this.confirmationService.confirm({   
       message: '¿Desea eliminar este elemento?',

@@ -19,7 +19,12 @@ export class MethodologyEditComponent implements OnInit {
     public config: DynamicDialogConfig,) { }
 
   ngOnInit(): void {
-    this.data = Object.assign({methodologyData: Methodology}, this.config.data.methodologyData);
+    
+    if (this.config.data != null)
+      this.data = Object.assign({methodologyData: Methodology}, this.config.data.methodologyData);
+    else
+      this.data = new Methodology();
+
     this.showEditMessage = false;
     this.showEmptyMessage = false;
   }
