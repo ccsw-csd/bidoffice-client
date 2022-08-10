@@ -60,17 +60,17 @@ export class MethodologyListComponent implements OnInit {
       accept: () => {
         this.methodologyService.delete(methodologyItem.id).subscribe({
           next:() => {  
-            this.findAll()
+            this.ngOnInit()
           },
           error:() => {
             this.showMessage()
-            this.findAll()
+            this.ngOnInit()
           },
           complete: () => {} 
         })
       },
       reject: () => {
-        this.findAll()
+        this.ngOnInit()
       }
     });
   }
