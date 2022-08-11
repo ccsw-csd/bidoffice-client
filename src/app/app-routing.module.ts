@@ -10,6 +10,7 @@ import { OfferListComponent } from './offer/views/offer-list/offer-list.componen
 import { UserListComponent } from "./admin/views/user-list/user-list.component";
 import { MethodologyListComponent } from './admin/views/methodology-list/methodology-list.component';
 import { TechnologyListComponent } from './admin/views/technology-list/technology-list.component';
+import { OfferingListComponent } from './admin/views/offering-list/offering-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'user', component: UserListComponent },
       { path: 'hyperscaler', component: HyperscalerComponent},
       { path: 'technology', component: TechnologyListComponent},
+      { path: 'offering', component: OfferingListComponent},
       { path: '**', redirectTo: 'main', pathMatch: 'full' }
     ]
   },
