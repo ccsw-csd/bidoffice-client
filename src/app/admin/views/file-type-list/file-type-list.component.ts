@@ -65,6 +65,7 @@ export class FileTypeListComponent implements OnInit {
       message: 'Seguro que quiere borrar el item?',
       acceptLabel:"Aceptar" ,
       rejectLabel:"Cancelar",
+      rejectButtonStyleClass:"p-button-secondary",
       accept: () => 
       {
         this.fileTypeService.deleteFileTypeById(fileType.id).subscribe({

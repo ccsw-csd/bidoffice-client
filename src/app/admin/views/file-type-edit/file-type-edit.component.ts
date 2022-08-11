@@ -1,3 +1,4 @@
+import { noUndefined } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileType } from '../../model/FileType';
@@ -32,7 +33,7 @@ export class FileTypeEditComponent implements OnInit {
   }
 
   onSave(fileType: FileType) {
-    if(fileType.name!="" && fileType.priority>0){
+    if( fileType.name!== undefined && fileType.name!="" && fileType.priority>0 ){
       this.fileTypeService.saveFileType(fileType).subscribe({
         next: ()=> {
           this.exceptionFail=false
