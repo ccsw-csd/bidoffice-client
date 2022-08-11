@@ -8,15 +8,15 @@
             <th style="flex: 0 0 150px">Acción</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-technologies>
+    <ng-template pTemplate="body" let-technology>
         <tr>
-            <td>{{technologies.name}}</td>
-            <td style="flex: 0 0 150px">{{technologies.priority}}</td>
+            <td>{{technology.name}}</td>
+            <td style="flex: 0 0 150px">{{technology.priority}}</td>
             <td style="flex: 0 0 150px">
                 <div>
                     <button pButton type="button" icon="pi pi-pencil"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
-                    <button pButton type="button" icon="pi pi-trash" (click)="deleteTechnology(technologies)"
+                    <button pButton type="button" icon="pi pi-trash" (click)="deleteTechnology(technology)"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>
