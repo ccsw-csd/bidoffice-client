@@ -15,7 +15,6 @@ export class MethodologyListComponent implements OnInit {
 
   methodologyItemList: Methodology[];
   display: Boolean = false;
-  methodologyItem: Methodology = new Methodology();
 
   constructor(
     private methodologyService: MethodologyService,
@@ -37,29 +36,26 @@ export class MethodologyListComponent implements OnInit {
     });
   }
   
-  showEditDialog(id: number) {
-    this.methodologyItem = this.methodologyItemList[id - 1];
+  showEditDialog(methodologyItem: Methodology) {
     const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
       header: "Editar metodología",
       width: "40%",
-      data: {methodologyData: this.methodologyItem}
+      data: {methodologyData: methodologyItem}
     });
 
     ref.onClose.subscribe( res => {
-      this.ngOnInit();
+      this.findAll();
     });
   }
 
   showCreateDialog() {
-    this.methodologyItem = new Methodology();
-
     const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
       header: "Crear metodología",
       width: "40%"
     });
 
     ref.onClose.subscribe( res => {
-      this.ngOnInit();
+      this.findAll();
     });
   }
 
@@ -74,17 +70,17 @@ export class MethodologyListComponent implements OnInit {
       accept: () => {
         this.methodologyService.delete(methodologyItem.id).subscribe({
           next:() => {  
-            this.ngOnInit()
+            this.findAll()
           },
           error:() => {
             this.showMessage()
-            this.ngOnInit()
+            this.findAll()
           },
           complete: () => {} 
         })
       },
       reject: () => {
-        this.ngOnInit()
+        this.findAll()
       }
     });
   }
