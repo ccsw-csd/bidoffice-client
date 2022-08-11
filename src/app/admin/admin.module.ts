@@ -10,17 +10,19 @@ import { UserListComponent } from './views/user-list/user-list.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
 import { ToastModule } from 'primeng/toast';
-import { UserEditComponent } from './views/user-edit/user-edit.component';
-import { DynamicDialogModule } from "primeng/dynamicdialog";
-import { DropdownModule } from 'primeng/dropdown';
+import { TechnologyListComponent } from './views/technology-list/technology-list.component';
+import { OfferingListComponent } from './views/offering-list/offering-list.component';
+
 @NgModule({
   declarations: [
     FileTypeListComponent,
     HyperscalerComponent,
     MethodologyListComponent,
     UserListComponent,
-    UserEditComponent
+    TechnologyListComponent,
+    OfferingListComponent
   ],
+ 
   imports: [
     CommonModule,
     TableModule,
@@ -28,9 +30,7 @@ import { DropdownModule } from 'primeng/dropdown';
     ConfirmDialogModule,
     PaginatorModule,
     InputTextModule,
-    ToastModule,
-    DynamicDialogModule,
-    DropdownModule
+    ToastModule
   ]
 })
 export class AdminModule { }
