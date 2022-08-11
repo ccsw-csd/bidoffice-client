@@ -14,6 +14,7 @@ import { HyperscalerEditComponent } from './views/hyperscaler-edit/hyperscaler-e
 import {TooltipModule} from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import { TechnologyListComponent } from './views/technology-list/technology-list.component';
+import { OfferingListComponent } from './views/offering-list/offering-list.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TechnologyListComponent } from './views/technology-list/technology-list
     MethodologyListComponent,
     UserListComponent,
     HyperscalerEditComponent,
-    TechnologyListComponent
+    TechnologyListComponent,
+    OfferingListComponent
   ],
  
   imports: [
