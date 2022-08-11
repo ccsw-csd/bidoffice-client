@@ -10,12 +10,16 @@ import { UserListComponent } from './views/user-list/user-list.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
 import { ToastModule } from 'primeng/toast';
+import { UserEditComponent } from './views/user-edit/user-edit.component';
+import { DynamicDialogModule } from "primeng/dynamicdialog";
+import { DropdownModule } from 'primeng/dropdown';
 @NgModule({
   declarations: [
     FileTypeListComponent,
     HyperscalerComponent,
     MethodologyListComponent,
-    UserListComponent
+    UserListComponent,
+    UserEditComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +28,9 @@ import { ToastModule } from 'primeng/toast';
     ConfirmDialogModule,
     PaginatorModule,
     InputTextModule,
-    ToastModule
+    ToastModule,
+    DynamicDialogModule,
+    DropdownModule
   ]
 })
 export class AdminModule { }
