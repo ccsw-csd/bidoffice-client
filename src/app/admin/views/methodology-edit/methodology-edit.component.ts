@@ -12,7 +12,6 @@ import { MessageService } from 'primeng/api';
 export class MethodologyEditComponent implements OnInit {
 
   data: Methodology;
-  showEditMessage: boolean;
   
   constructor(private methodologyService: MethodologyService,
     public ref: DynamicDialogRef, 
@@ -26,8 +25,6 @@ export class MethodologyEditComponent implements OnInit {
     } else {
       this.data = new Methodology();
     }
-
-    this.showEditMessage = false;
   }
 
   editMethodology(item: Methodology) {
@@ -35,16 +32,13 @@ export class MethodologyEditComponent implements OnInit {
     if (item.name != "" && item.priority > 0) {
       this.methodologyService.saveMethodology(item).subscribe({
         next: () => { 
-          this.showEditMessage = false;
           this.showSuccessMessage();
           this.onClose();
         },
         error: () => { 
-          this.showEditMessage = true;
+          this.showErrorMessage();
         }
       });
-    } else {
-      this.showEditMessage = false;
     }
   }
 
@@ -58,5 +52,13 @@ export class MethodologyEditComponent implements OnInit {
       severity:'success', 
       summary:'Éxito', 
       detail:'La operación se ha llevado a cabo correctamente'});
+  }
+
+  showErrorMessage(){
+    this.messageService.add({
+      key: 'methodologyMessage',
+      severity:'error', 
+      summary:'Error', 
+      detail:'Ya hay un item con el mismo nombre y/o prioridad'});
   }
 }
