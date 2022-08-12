@@ -8,9 +8,8 @@ import { OpportunityTypeService } from '../../services/opportunity-type.service'
   styleUrls: ['./opportunity-type-list.component.scss']
 })
 export class OpportunityTypeListComponent implements OnInit {
-
   opportunityList: OpportunityType[]
-
+  isLoading: boolean = false
   constructor(private opportunityService: OpportunityTypeService) { }
 
   ngOnInit(): void {
@@ -18,9 +17,15 @@ export class OpportunityTypeListComponent implements OnInit {
   }
 
   findAll(){
-    this.opportunityService.findAll().subscribe(
-      results => this.opportunityList = results
-    )   
+    this.isLoading = true
+    this.opportunityService.findAll().subscribe({
+      next: (results) =>{
+        this.opportunityList = results
+      },
+      error: () =>{},
+      complete: () => { this.isLoading = false}
+    }) 
+      
   }
 
 }
