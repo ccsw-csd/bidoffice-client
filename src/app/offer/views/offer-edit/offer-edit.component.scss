@@ -1,10 +1,1 @@
-//framework class overwriting according to this component metadata
-// .p-tabview-nav-content .p-tabview-nav .p-tabview-ink-bar{
-//     background-color: red;
-// }
-// .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link{
-//     color: red;
-// }
-
-::ng-deep .p-tabview-panel{
-}
+@import "./src/assets/scss/master";

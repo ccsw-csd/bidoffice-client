@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
+import { Offer } from 'src/app/offer/model/Offer';
+import { Person } from 'src/app/offer/model/Person';
 import { OfferService } from 'src/app/offer/services/offer.service';
 
 @Component({
@@ -9,80 +12,155 @@ import { OfferService } from 'src/app/offer/services/offer.service';
 })
 export class ChanceComponent implements OnInit {
 
-  filterClient: string = "";
+  isloading = false;
+  message = "No se han encontrado resultados";
   results: string[] = [];
   offerings: BaseClass[];
-  selectedOfferings: BaseClass[];
   technologies: BaseClass[];
-  selectedTechnologies: BaseClass[];
   OfferTypes: BaseClass[];
-  selectedOfferType: BaseClass;
-  cities: City[];
+  sectors: BaseClass[];
+  projectType: BaseClass[];
+  persons: Person[];
+  groupPerson: any[] = [];
+  status: BaseClass[];
+  selectedManagedBy;
+  selectedRequestedBy;
 
-  constructor(private offerService: OfferService) { this.cities = [
-    {name: 'New York', code: 'NY'},
-    {name: 'Rome', code: 'RM'},
-    {name: 'London', code: 'LDN'},
-    {name: 'Istanbul', code: 'IST'},
-    {name: 'Paris', code: 'PRS'}
-]; }
+  @Input() data: Offer;
+  @Input() formValidator: FormGroup;
+
+  constructor(private offerService: OfferService) { }
 
   ngOnInit(): void {
-   // this.getAllOfferings();
-    //this.getAllTechnologies();
-    //this.getAllOfferTypes();
+    this.getAllOfferings();
+    this.getAllTechnologies();
+    this.getAllOfferTypes();
+    this.getAllSectors();
+    this.getAllProjectTypes();
+    this.getAllOfferStatus();
+
+    if(this.data.client != undefined)
+      this.results.push(this.data.client);
+
+    if(this.data.requestedBy != null){
+      this.selectedRequestedBy = this.mappingPerson(this.data.requestedBy)
+      this.groupPerson.push(this.selectedRequestedBy);
+    }
+      
+    if(this.data.managedBy != null){
+      this.selectedManagedBy = this.mappingPerson(this.data.requestedBy)
+      this.groupPerson.push(this.selectedManagedBy);
+    }
   }
 
-  searchClient($event){
-    this.offerService.searchClient(this.filterClient).subscribe({
-      next: (res: string[]) => { 
-        this.results = res;
-      },
-      error: () => {},
-      complete: () => {
-      }     
-    });
+  searchClient($event) {
+    if($event.query != null){
+      this.offerService.searchClient($event.query).subscribe({
+        next: (res: string[]) => {
+          this.results = res;
+        },
+        error: () => { },
+        complete: () => {
+        }
+      });
+    }
   }
 
-  getAllOfferings(){
+  getAllOfferings() {
 
     this.offerService.getAllOffering().subscribe({
-      next: (res: BaseClass[]) => { 
+      next: (res: BaseClass[]) => {
         this.offerings = res;
       },
-      error: () => {},
+      error: () => { },
       complete: () => {
-      }     
+      }
     });
-  }
-
-  getAllTechnologies(){
+  } 
+  getAllTechnologies() {
 
     this.offerService.getAllTechnologies().subscribe({
-      next: (res: BaseClass[]) => { 
+      next: (res: BaseClass[]) => {
         this.technologies = res;
       },
-      error: () => {},
+      error: () => { },
       complete: () => {
-      }     
+      }
     });
   }
 
-  getAllOfferTypes(){
-
+  getAllOfferTypes() {
     this.offerService.getAllOfferTypes().subscribe({
-      next: (res: BaseClass[]) => { 
+      next: (res: BaseClass[]) => {
         this.OfferTypes = res;
       },
-      error: () => {},
+      error: () => { },
       complete: () => {
-      }     
+      }
     });
   }
 
+  getAllSectors() {
+
+    this.offerService.getAllSectors().subscribe({
+      next: (res: BaseClass[]) => {
+        this.sectors = res;
+      },
+      error: () => { },
+      complete: () => {
+      }
+    });
+  }
+
+  getAllProjectTypes() {
+
+    this.offerService.getAllProjectTypes().subscribe({
+      next: (res: BaseClass[]) => {
+        this.projectType = res;
+      },
+      error: () => { },
+      complete: () => {
+      }
+    });
+  }
+
+  getAllOfferStatus() {
+
+    this.offerService.getAllOfferStatus().subscribe({
+      next: (res: BaseClass[]) => {
+        this.status = res;
+      },
+      error: () => { },
+      complete: () => {
+      }
+    })
+  }
+
+  searchPerson($event) {
+
+    if ($event.query != null) {
+      this.offerService.searchPerson($event.query).subscribe({
+        next: (res: Person[]) => {
+          this.groupPerson = res.map(person => this.mappingPerson(person));
+        },
+        error: () => { },
+        complete: () => {
+        }
+      });
+    }
+  }
+
+  checkValidation(control: string): boolean {
+
+    if (this.formValidator.get(control).invalid && this.formValidator.get(control).touched) {
+      this.formValidator.controls[control].markAsDirty();
+      return true;
+    }
+    return false;
+  }
+
+  mappingPerson(person: Person): any{
+    return {field: person.name + " " + person.lastname + " - " + person.username,  value: person};
 }
-interface City {
-  name: string,
-  code: string
 }
 

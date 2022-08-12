@@ -6,6 +6,7 @@ import { OfferItemList } from '../../model/OfferItemList';
 import { OfferPage } from '../../model/OfferPage';
 import { OfferService } from '../../services/offer.service';
 import { OfferEditComponent } from '../offer-edit/offer-edit.component';
+import { Offer } from '../../model/Offer';
 
 @Component({
   selector: 'app-offer-list',
@@ -29,6 +30,7 @@ export class OfferListComponent implements OnInit {
   offerItemList: OfferItemList[];
   totalElements: number;
   isloading: boolean = false;
+  selectedOffer: Offer;
 
   constructor(private offerService: OfferService, private cdRef : ChangeDetectorRef, private dinamicDialogService: DialogService) { }
 
@@ -68,10 +70,26 @@ export class OfferListComponent implements OnInit {
     const ref = this.dinamicDialogService.open(OfferEditComponent, {
       header: 'Nueva oferta',
       width: '70%',
+      data: this.selectedOffer
     });
 
     ref.onClose.subscribe(()=>{
-      
+      this.selectedOffer = null;
     })
+  }
+  onRowSelected(offer: Offer){
+    this.isloading = true
+    this.offerService.getOffer(offer.id).subscribe({
+      next: (res: Offer) => { 
+        this.selectedOffer = res;
+      },
+      error: () => {
+        this.isloading = true
+      },
+      complete: () => {
+        this.isloading = false;
+        this.toOfferEdit();
+      }     
+    });
   }
 }

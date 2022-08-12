@@ -12,13 +12,17 @@ import { DocumentationComponent } from './views/offer-edit/components/documentat
 import { InterestComponent } from './views/offer-edit/components/interest/interest.component';
 import { TracingComponent } from './views/offer-edit/components/tracing/tracing.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {BlockUIModule} from 'primeng/blockui';
+import { DocumentationEditComponent } from './views/offer-edit/components/documentation/documentation-edit/documentation-edit.component';
+import { TracingEditComponent } from './views/offer-edit/components/tracing/tracing-edit/tracing-edit.component';
+import {InputNumberModule} from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     DocumentationComponent,
     InterestComponent,
     TracingComponent,
+    DocumentationEditComponent,
+    TracingEditComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +49,10 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     CalendarModule,
     CheckboxModule,
     MultiSelectModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    BlockUIModule,
+    InputNumberModule,
+    ReactiveFormsModule
   ]
 })
 export class OfferModule { }

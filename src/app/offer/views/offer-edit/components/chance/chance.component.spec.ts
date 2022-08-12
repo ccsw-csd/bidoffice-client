@@ -4,22 +4,9 @@ import { ChanceComponent } from './chance.component';
 
 describe('ChanceComponent', () => {
   let component: ChanceComponent;
-  let fixture: ComponentFixture<ChanceComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ChanceComponent ]
-    })
-    .compileComponents();
-  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChanceComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

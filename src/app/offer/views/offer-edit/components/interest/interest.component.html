@@ -1,53 +1,50 @@
-<div class="flex flex-nowrap  gap-3">
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="capPresentation" name="capPresentation" value="capPresentation"></p-checkbox>
+<div class="ui-fluid formgrid grid">
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="capPresentation" name="capPresentation" [binary]="true" [(ngModel)]="data.dataChapter.presentation"></p-checkbox>
         <label class="ml20" for="capPresentation">Presentación Capgemini</label>
     </div>
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="Capabilities" name="Capabilities" value="Capabilities"></p-checkbox>
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="Capabilities" name="Capabilities" [binary]="true" [(ngModel)]="data.dataChapter.capabilities"></p-checkbox>
         <label class="ml20" for="Capabilities">Capacidades</label>
     </div>
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="approach" name="approach" value="approach"></p-checkbox>
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="approach" name="approach" [binary]="true" [(ngModel)]="data.dataChapter.approach"></p-checkbox>
         <label class="ml20" for="approach">Enfoque de solución</label>
     </div>
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="metodology" name="metodology" value="metodology"></p-checkbox>
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="metodology" name="metodology" [binary]="true" [(ngModel)]="data.dataChapter.methodology"></p-checkbox>
         <label class="ml20" for="metodology">Metodología</label>
     </div>
 </div>
-<div class="flex flex-nowrap  gap-3">
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="workModel" name="workModel" value="workModel"></p-checkbox>
+<div class="ui-fluid formgrid grid">
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="workModel" name="workModel" [binary]="true" [(ngModel)]="data.dataChapter.workModel"></p-checkbox>
         <label class="ml20" for="workModel">Modelo de trabajo</label>
     </div>
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="team" name="team" value="team"></p-checkbox>
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="team" name="team" [binary]="true" [(ngModel)]="data.dataChapter.team"></p-checkbox>
         <label class="ml20" for="team">Equipo</label>
     </div>
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="planning" name="planning" value="planning"></p-checkbox>
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="planning" name="planning" [binary]="true" [(ngModel)]="data.dataChapter.planning"></p-checkbox>
         <label class="ml20" for="planning">Planning</label>
     </div>
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="netWorth" name="netWorth" value="netWorth"></p-checkbox>
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="netWorth" name="netWorth" [binary]="true" [(ngModel)]="data.dataChapter.valueAdded"></p-checkbox>
         <label class="ml20" for="netWorth">Valor añadido</label>
     </div>
 </div>
-<div class="flex flex-nowrap  gap-3">
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="innovation" name="innovation" value="innovation"></p-checkbox>
+<div class="ui-fluid formgrid grid">
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="innovation" name="innovation" [binary]="true" [(ngModel)]="data.dataChapter.innovation"></p-checkbox>
         <label class="ml20" for="innovation">Innovación</label>
     </div>
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="references" name="references" value="references"></p-checkbox>
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="references" name="references" [binary]="true" [(ngModel)]="data.dataChapter.references"></p-checkbox>
         <label class="ml20" for="references">Referencias</label>
     </div>
-    <div class="flex p-float-label flex-1 field mr4rem">
-        <p-checkbox id="keyDocument" name="keyDocument" value="keyDocument"></p-checkbox>
+    <div class="p-fluid field-checkbox col-12 md:col-3">
+        <p-checkbox id="keyDocument" name="keyDocument" [binary]="true" [(ngModel)]="data.dataChapter.keyDocument"></p-checkbox>
         <label class="ml20" for="keyDocument">Documento clave</label>
-    </div>
-    <div class="flex p-float-label flex-1 field mr4rem">
-      
     </div>
 </div>

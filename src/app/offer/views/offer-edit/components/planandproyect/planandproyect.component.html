@@ -1,59 +1,82 @@
-<div class="flex flex-nowrap  gap-3">
-    <div class="flex flex-column p-float-label flex-1 field gap-2">
-        <div class="flex p-float-label field">
-            <div class="flex p-float-label flex-1 field mr4rem">
-                <p-checkbox id="won" name="won" value="won"></p-checkbox>
-                <label class="ml20" for="won">Lidera C&CA</label>
-            </div>
+<form [formGroup]="formValidator">
+    <div class="ui-fluid formgrid grid">
+        <div class="p-fluid col-12 md:col-2">
+            <span class="field-checkbox">
+                <p-checkbox formControlName="cca" [binary]="true" inputId="binary" [(ngModel)]="data.dataTeam.cca">
+                </p-checkbox>
+                <label>Lidera C&CA</label>
+            </span>
         </div>
-        <div class="flex p-float-label field">
-            <div class="flex p-float-label flex-1 field mr4rem">
-                <p-checkbox id="won" name="won" value="won"></p-checkbox>
-                <label class="ml20" for="won">Es Multipower</label>
-            </div>
+        <div class="p-fluid col-12 md:col-2">
+            <span class="field-checkbox ">
+                <p-checkbox formControlName="multitower" [binary]="true" inputId="binary"
+                    [(ngModel)]="data.dataTeam.multitower"></p-checkbox>
+                <label>Es multitower</label>
+            </span>
         </div>
-        <div class="flex p-float-label field">
-            <div class="flex p-float-label flex-1 field">
-                <input class="flex-grow-1" id="client" pInputText />
-                <label for="client">Cliente</label>
-            </div>
+        <div class="p-fluid field col-12 md:col-2">
+            <span class="p-float-label">
+                <input formControlName="practices" pInputText [(ngModel)]="data.dataTeam.practices" />
+                <label>Prácticas implicadas</label>
+            </span>
+        </div>
+        <div class="p-fluid  field col-12 md:col-6">
+            <span class="p-float-label">
+                <p-autoComplete formControlName="teamPerson" [suggestions]="groupPerson" [forceSelection]="true"
+                    [showEmptyMessage]="true" [emptyMessage]="message" (completeMethod)="searchPerson($event)"
+                    (onSelect)="data.teamPerson.push($event.value)" [multiple]="true" field="field" ari>
+                </p-autoComplete>
+                <label>Personas oferta</label>
+            </span>
+            <small id="typeDoc-help" class="block p-error" *ngIf="checkValidation('teamPerson')">Es un campo
+                requerido.</small>
         </div>
     </div>
-    <div class="flex flex-column p-float-label flex-1 field">
-        <p *ngFor="let person of people" class="flex p-float-label flex-1 ml20">
-            {{person.name}}
-        </p>
+    <div class="ui-fluid formgrid grid">
+        <div class="p-fluid field col-12 md:col-6">
+            <span class="p-float-label">
+                <p-dropdown formControlName="dataTechnologyHyperscaler" [(ngModel)]="data.dataTechnology.hyperscaler"
+                    [options]="hyperscalers" optionLabel="name" appendTo="body"></p-dropdown>
+                <label>Cloud</label>
+            </span>
+        </div>
+        <div class="p-fluid field col-12 md:col-6">
+            <span class="p-float-label">
+                <p-dropdown formControlName="dataTechnologyMethodolog" [(ngModel)]="data.dataTechnology.methodology"
+                    [options]="methodologies" optionLabel="name" appendTo="body"></p-dropdown>
+                <label>Metodologías</label>
+            </span>
+        </div>
     </div>
-</div>
-<div class="flex flex-nowrap  gap-3">
-    <div class="flex p-float-label flex-grow-1 field">
-        <p-dropdown class="flex-grow-1" [style]="{'minWidth':'100%'}" id="sector" [options]="people"
-            optionLabel="sector"></p-dropdown>
-        <label for="sector">Sector</label>
+    <div class="ui-fluid formgrid grid">
+        <div class="p-fluid  col-12 md:col-4">
+            <span class="p-float-label field">
+                <p-inputNumber formControlName="dataProjectAmount" [(ngModel)]="data.dataProject.amount">
+                </p-inputNumber>
+                <label>Importe</label>
+            </span>
+        </div>
+        <div class="p-fluid field col-12 md:col-4">
+            <span class="p-float-label">
+                <p-inputNumber formControlName="dataProjectFtes" [(ngModel)]="data.dataProject.ftes"></p-inputNumber>
+                <label>Personas de proyecto</label>
+            </span>
+        </div>
+        <div class="p-fluid field col-12 md:col-4">
+            <span class="p-float-label">
+                <p-inputNumber formControlName="dataProjectMonths" [(ngModel)]="data.dataProject.months">
+                </p-inputNumber>
+                <label>Duración de proyecto</label>
+            </span>
+        </div>
     </div>
-    <div class="flex p-float-label flex-grow-1 field">
-        <p-dropdown class="flex-grow-1" [style]="{'minWidth':'100%'}" id="projectType" [options]="people"
-            optionLabel="projectType"></p-dropdown>
-        <label for="projectType">Tipo de Proyecto</label>
+    <div class="ui-fluid formgrid grid">
+        <div class="p-fluid field col-12 md:col-12">
+            <span class="p-float-label">
+                <textarea formControlName="dataTechnologyObservation" pInputTextarea
+                    [(ngModel)]="data.dataTechnology.observations"></textarea>
+                <label>Observaciones</label>
+            </span>
+        </div>
     </div>
-</div>
-<div class="flex flex-nowrap  gap-3">
-    <div class="flex p-float-label flex-1 field">
-        <input class= "flex-grow-1" id="prize" pInputText />
-        <label for="prize">Importe</label>
-    </div>
-    <div class="flex p-float-label flex-1 field">
-        <input class= "flex-grow-1" id="persons" pInputText />
-        <label for="persons">Personas de proyecto</label>
-    </div>
-    <div class="flex p-float-label flex-1 field">
-        <input class= "flex-grow-1" id="projectDuration" pInputText />
-        <label for="projectDuration">Duración de proyecto</label>
-    </div>
-</div>
-<div class="flex flex-nowrap  gap-3">
-    <div class="flex p-float-label flex-grow-1 field">
-        <textarea class= "flex-grow-1" id="techDetail" pInputTextarea></textarea>
-        <label for="techDetail">Más detalle de tecnologías</label>
-    </div>
-</div>
+</form>

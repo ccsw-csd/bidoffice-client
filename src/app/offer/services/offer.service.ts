@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { Pageable } from 'src/app/core/models/Pageable';
 import { environment } from 'src/environments/environment';
 import { BaseClass } from '../model/BaseClass';
+import { Offer } from '../model/Offer';
 import { OfferPage } from '../model/OfferPage';
+import { Person } from '../model/Person';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +36,47 @@ export class OfferService {
 
   getAllOfferTypes(): Observable<BaseClass[]>{
 
+    return this.http.get<BaseClass[]>(environment.server + "/opportunitytype/findAll")
+  }
+
+  getAllSectors(): Observable<BaseClass[]>{
+
+    return this.http.get<BaseClass[]>(environment.server + "/sector/findAll")
+  }
+
+  getAllProjectTypes(){
+
     return this.http.get<BaseClass[]>(environment.server + "/projecttype/findAll")
   }
 
+  getAllMethodologies(){
+
+    return this.http.get<BaseClass[]>(environment.server + "/methodology/findAll")
+  }
+
+  getAllHyperscalers(){
+
+    return this.http.get<BaseClass[]>(environment.server + "/hyperscaler/findAll")
+  }
+
+  searchPerson(filter: string): Observable<Person[]>{
+
+    return this.http.get<Person[]>(environment.server + "/person/" + filter)
+  }
+
+  getAllFileTypes(): Observable<BaseClass[]>{
+
+    return this.http.get<BaseClass[]>(environment.server + "/filetype/findAll");
+  }
+
+  getAllOfferStatus(): Observable<BaseClass[]>{
+
+    return this.http.get<BaseClass[]>(environment.server + "/opportunityStatus/findAll")
+  }
+
+  getOffer(id: number): Observable<Offer>{
+    return this.http.get<Offer>(environment.server + "/offer/" + id);
+
+  }
+  
 }

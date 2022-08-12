@@ -1,20 +1,20 @@
-<p-tabView [(activeIndex)]="activeItem" (onClose)="handleChange($event)">
-    <p-tabPanel header="Oportunidad">
-        <app-chance></app-chance>
+<p-tabView [(activeIndex)]="activeItem">
+    <p-tabPanel header="Oportunidad" [headerStyle]="{'color': 'green'}">
+        <app-chance [data]="offer" [formValidator]="offerForm.get('chance')"></app-chance>
     </p-tabPanel>
     <p-tabPanel header="Planificación y proyecto">
-        <app-planandproyect></app-planandproyect>
+        <app-planandproyect [data]="offer" [formValidator]="offerForm.get('planandproyect')"></app-planandproyect>
     </p-tabPanel>
     <p-tabPanel header="Documentación">
-        <app-documentation></app-documentation>
+        <app-documentation [data]="offer"></app-documentation>
     </p-tabPanel>
     <p-tabPanel header="Capítulos de interés">
-        <app-interest></app-interest>
+        <app-interest [data]="offer"></app-interest>
     </p-tabPanel>
     <p-tabPanel header="Seguimiento">
-        <app-tracing></app-tracing>
+        <app-tracing [data]="offer"></app-tracing>
     </p-tabPanel>
     <div class="mt-3 flex justify-content-end">
-        <p-button>Guardar</p-button>
+        <p-button (click)="onSave()" label="Guardar" [disabled]="offerForm.invalid"></p-button>
     </div>
 </p-tabView>

@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DialogService } from 'primeng/dynamicdialog';
+import { BaseClass } from 'src/app/offer/model/BaseClass';
+import { Offer } from 'src/app/offer/model/Offer';
+import { OfferDataFile } from 'src/app/offer/model/OfferDataFile';
+import { OfferService } from 'src/app/offer/services/offer.service';
+import { DocumentationEditComponent } from './documentation-edit/documentation-edit.component';
 
 @Component({
   selector: 'app-documentation',
@@ -6,23 +12,48 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./documentation.component.scss']
 })
 export class DocumentationComponent implements OnInit {
-  documentos: Idoc[];
-  constructor() { }
+
+  isEditing = false;
+  fileTypes: BaseClass[];
+  clonedDataFile: OfferDataFile;
+
+  @Input() data: Offer;
+  
+  constructor(private dinamicDialogService: DialogService, private offerService: OfferService) { }
 
   ngOnInit(): void {
-    this.documentos = [
-      {docType: 'New', nameDoc: 'Nombre1',url: 'c/User/name', remarks: 'none'},
-      {docType: 'Old', nameDoc: 'Nombre2',url: 'c/User2/name', remarks: 'none2'},
-      {docType: 'New', nameDoc: 'Nombre3',url: 'c/User3/name', remarks: 'none'},
-      {docType: 'Old', nameDoc: 'Nombre4',url: 'c/User4/name', remarks: 'none4'},
-      {docType: 'New', nameDoc: 'Nombre5',url: 'c/User5/name', remarks: 'none'}
-  ];
   }
 
-}
-interface Idoc {
-  docType: string,
-  nameDoc: string,
-  url: string,
-  remarks:string,
+  createFile(){
+    const ref = this.dinamicDialogService.open(DocumentationEditComponent, {
+      header: 'Crear documento',
+      width: '30%',
+      closable: false
+    });
+
+    ref.onClose.subscribe((dataFile: OfferDataFile)=>{
+      if(dataFile != null)
+        this.data.dataFiles.push(dataFile);
+    })
+  }
+
+  onRowEditInit(dataFile: OfferDataFile){
+    this.isEditing = true;
+    this.offerService.getAllFileTypes().subscribe({
+      next: (res: BaseClass[]) => { 
+        this.fileTypes = res;
+      },
+      error: () => {},
+      complete: () => {
+        this.clonedDataFile = {...dataFile};
+      }      
+    });
+
+  }
+
+  onRowEditCancel(index: number) {
+    this.data.dataFiles[index] = this.clonedDataFile;
+    delete this.clonedDataFile;
+    this.isEditing = false;
+  }
 }
