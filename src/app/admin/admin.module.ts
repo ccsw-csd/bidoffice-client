@@ -11,6 +11,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
 import { ToastModule } from 'primeng/toast';
 import { TechnologyListComponent } from './views/technology-list/technology-list.component';
+import { MethodologyEditComponent } from './views/methodology-edit/methodology-edit.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
     MethodologyListComponent,
     UserListComponent,
     TechnologyListComponent,
+    MethodologyEditComponent,
     OfferingListComponent
   ],
  
