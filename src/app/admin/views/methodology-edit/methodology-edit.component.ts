@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Methodology } from '../../model/Methodology';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MethodologyService } from '../../services/methodology.service';
+import { ElementSchemaRegistry } from '@angular/compiler';
 
 @Component({
   selector: 'app-methodology-edit',
@@ -12,7 +13,6 @@ export class MethodologyEditComponent implements OnInit {
 
   data: Methodology;
   showEditMessage: boolean;
-  showEmptyMessage: boolean;
   
   constructor(private methodologyService: MethodologyService,
     public ref: DynamicDialogRef, 
@@ -20,30 +20,28 @@ export class MethodologyEditComponent implements OnInit {
 
   ngOnInit(): void {
     
-    if (this.config.data != null)
+    if (this.config.data != null) {
       this.data = Object.assign({methodologyData: Methodology}, this.config.data.methodologyData);
-    else
+    } else {
       this.data = new Methodology();
+    }
 
     this.showEditMessage = false;
-    this.showEmptyMessage = false;
   }
 
   editMethodology(item: Methodology) {
+
     if (item.name != "" && item.priority > 0) {
       this.methodologyService.saveMethodology(item).subscribe({
         next: () => { 
           this.showEditMessage = false;
-          this.showEmptyMessage = false;
           this.onClose();
         },
         error: () => { 
           this.showEditMessage = true;
-          this.showEmptyMessage = false;
         }
       });
     } else {
-      this.showEmptyMessage = true;
       this.showEditMessage = false;
     }
   }
