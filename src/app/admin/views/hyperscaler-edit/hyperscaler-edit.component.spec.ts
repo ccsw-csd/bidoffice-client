@@ -7,16 +7,18 @@ import { HyperscalerEditComponent } from './hyperscaler-edit.component';
 
 describe('HyperscalerEditComponent', () => {
   let hyperscalerEdit: HyperscalerEditComponent;
-  let mockHyperscalerService, mockDialogConfig, mockDynamicDialogRef
+  let mockHyperscalerService, mockDialogConfig, mockDynamicDialogRef, mockMessageService
   
   beforeEach( () => {
     mockHyperscalerService = jasmine.createSpyObj(["getDataHyperscaler","deleteHyperscaler","saveHyperscaler"])
     mockDialogConfig = jasmine.createSpyObj([""])
     mockDynamicDialogRef = jasmine.createSpyObj(["close"])
+    mockMessageService = jasmine.createSpyObj(["add"])
     hyperscalerEdit = new HyperscalerEditComponent(
       mockDynamicDialogRef,
       mockDialogConfig,     
-      mockHyperscalerService
+      mockHyperscalerService,
+      mockMessageService
       )
   });
 
@@ -25,8 +27,6 @@ describe('HyperscalerEditComponent', () => {
     mockHyperscalerService.saveHyperscaler.and.returnValue(of(true))
     hyperscalerEdit.saveChanges(elementEdited)
     expect(hyperscalerEdit.saveChanges(elementEdited)).not.toEqual(null)
-    expect(hyperscalerEdit.existsPriority).toEqual(false)
-    expect(hyperscalerEdit.fieldsNull).toEqual(false)  
   })
 
   it('saveShouldNotSaveIfPriorityOrNameAlreadyExists', () =>{
@@ -35,16 +35,6 @@ describe('HyperscalerEditComponent', () => {
     mockHyperscalerService.saveHyperscaler.and.returnValue(throwError(() => errorResponse))
     hyperscalerEdit.saveChanges(elementEdited)
     expect(hyperscalerEdit.saveChanges(elementEdited)).not.toEqual(null)
-    expect(hyperscalerEdit.existsPriority).toEqual(true)
-    expect(hyperscalerEdit.fieldsNull).toEqual(false)  
-  })
-
-  it('saveShouldNotSaveIfFieldsAreEmpty', () =>{
-    let elementEdited = new Hyperscaler({id:1,name:"",priority:0})
-    hyperscalerEdit.saveChanges(elementEdited)
-    expect(hyperscalerEdit.saveChanges(elementEdited)).not.toEqual(null)
-    expect(hyperscalerEdit.existsPriority).toEqual(false)
-    expect(hyperscalerEdit.fieldsNull).toEqual(true)  
   })
 
 

@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { Hyperscaler } from '../../model/Hyperscaler';
-import { HyperscalerComponent } from './hyperscaler-list.component';
+import { HyperscalerListComponent } from './hyperscaler-list.component';
 
 
 
 describe('HyperscalerComponent', () => {
-  let hyperscaler: HyperscalerComponent
+  let hyperscaler: HyperscalerListComponent
   let mockHyperscalerService, mockConfirmationService, mockMessageService, mockDynamicDialogRef, mockDialogService
 
   let HYPERSCALER_ITEM =  [
@@ -21,8 +21,9 @@ describe('HyperscalerComponent', () => {
     mockConfirmationService = jasmine.createSpyObj(["confirm","close"])
     mockDynamicDialogRef = jasmine.createSpyObj([""])
     mockDialogService = jasmine.createSpyObj([""])
+    mockMessageService = jasmine.createSpyObj([""])
     
-    hyperscaler = new HyperscalerComponent(mockHyperscalerService,
+    hyperscaler = new HyperscalerListComponent(mockHyperscalerService,
       mockConfirmationService,
       mockDialogService,
       mockDynamicDialogRef,
@@ -45,7 +46,4 @@ describe('HyperscalerComponent', () => {
     expect(hyperscaler.listOfData).not.toEqual(null);
     expect(hyperscaler.listOfData).toBe(HYPERSCALER_DELETED);
   })
-
-
-
 });
