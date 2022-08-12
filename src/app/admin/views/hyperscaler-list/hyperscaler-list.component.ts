@@ -77,29 +77,38 @@ export class HyperscalerListComponent implements OnInit {
     });
   }
 
-  showErrorMessage(message?: string): void{
+  showSuccesMessage(): void{
+    this.messageService.add({
+      key:'hyperscalerMessage',
+      severity:'success', 
+      summary:'Confirmado', 
+      detail:'El registro se ha borrado con éxito'});
+  }
+
+  showErrorMessage(): void{
     this.messageService.add({
       key:'hyperscalerMessage',
       severity:'error', 
       summary:'Error', 
-      detail:message});
+      detail:'El registro no puede ser eliminado porque se está usando en alguna oferta'});
   }
 
   deleteRow(element: Hyperscaler): void{
-    let message: string
     this.confirmationService.confirm({
       header: 'Confirmación',
       message: '¿Desea eliminar este elemento?',
       acceptLabel: 'Aceptar',
       rejectLabel: 'Cerrar',
+      rejectButtonStyleClass: 'p-button-secondary',
+      
       accept: () => {
         this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
           next:() => {
+            this.showSuccesMessage()
             this.getDataHyperscaler()
           },
           error:() => {
-            message = "El registro no puede ser eliminado porque se está usando en alguna oferta"
-            this.showErrorMessage(message)
+            this.showErrorMessage()
             this.getDataHyperscaler()
           } 
         })
