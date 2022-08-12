@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Methodology } from '../../model/Methodology';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MethodologyService } from '../../services/methodology.service';
-import { ElementSchemaRegistry } from '@angular/compiler';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-methodology-edit',
@@ -16,7 +16,8 @@ export class MethodologyEditComponent implements OnInit {
   
   constructor(private methodologyService: MethodologyService,
     public ref: DynamicDialogRef, 
-    public config: DynamicDialogConfig,) { }
+    public config: DynamicDialogConfig,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
     
@@ -35,6 +36,7 @@ export class MethodologyEditComponent implements OnInit {
       this.methodologyService.saveMethodology(item).subscribe({
         next: () => { 
           this.showEditMessage = false;
+          this.showSuccessMessage();
           this.onClose();
         },
         error: () => { 
@@ -48,5 +50,13 @@ export class MethodologyEditComponent implements OnInit {
 
   onClose() {
     this.ref.close();
+  }
+
+  showSuccessMessage(){
+    this.messageService.add({
+      key: 'methodologyMessage',
+      severity:'success', 
+      summary:'Éxito', 
+      detail:'La operación se ha llevado a cabo correctamente'});
   }
 }

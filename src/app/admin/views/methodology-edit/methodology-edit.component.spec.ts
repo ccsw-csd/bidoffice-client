@@ -10,6 +10,7 @@ describe('MethodologyEditComponent', () => {
   let mockDynamicDialogRef: any;
   let mockDynamicDialogConfig: any;
   let mockMethodologyService: any;
+  let mockMessageService;
 
   beforeEach(() => {
     let METHODOLOGY: Methodology[];
@@ -20,7 +21,7 @@ describe('MethodologyEditComponent', () => {
     mockDynamicDialogRef = jasmine.createSpyObj(['close', 'onClose', 'destroy', 'onDestroy']);
     mockDynamicDialogConfig = jasmine.createSpyObj(['']);
         
-    methodologyEditComponent = new MethodologyEditComponent(mockMethodologyService,mockDynamicDialogRef,mockDynamicDialogConfig);
+    methodologyEditComponent = new MethodologyEditComponent(mockMethodologyService,mockDynamicDialogRef,mockDynamicDialogConfig, mockMessageService);
   });
 
   it("editMethodologyShouldUpdate",()=>{
@@ -30,7 +31,6 @@ describe('MethodologyEditComponent', () => {
     methodologyEditComponent.editMethodology(editedMethodology)
     expect(methodologyEditComponent.editMethodology(editedMethodology)).not.toBeNull()
     expect(methodologyEditComponent.showEditMessage).toEqual(false)
-    expect(methodologyEditComponent.showEmptyMessage).toEqual(false)
   })
   
   it("editMethodologyWithExistsNameShouldThrowError",()=>{
@@ -40,7 +40,6 @@ describe('MethodologyEditComponent', () => {
     methodologyEditComponent.editMethodology(editedMethodology)
     expect(methodologyEditComponent.editMethodology(editedMethodology)).not.toBeNull()
     expect(methodologyEditComponent.showEditMessage).toEqual(true)
-    expect(methodologyEditComponent.showEmptyMessage).toEqual(false)
   })
   
   it("editMethodologyWithExistsPriorityShouldThrowError",()=>{
@@ -50,7 +49,6 @@ describe('MethodologyEditComponent', () => {
     methodologyEditComponent.editMethodology(editedMethodology)
     expect(methodologyEditComponent.editMethodology(editedMethodology)).not.toBeNull()
     expect(methodologyEditComponent.showEditMessage).toEqual(true)
-    expect(methodologyEditComponent.showEmptyMessage).toEqual(false)
   })
 
   it("editMethodologyWithEmptyFieldsShouldThrowError",()=>{
@@ -58,6 +56,5 @@ describe('MethodologyEditComponent', () => {
     methodologyEditComponent.editMethodology(editedMethodology)
     expect(methodologyEditComponent.editMethodology(editedMethodology)).not.toBeNull()
     expect(methodologyEditComponent.showEditMessage).toEqual(false)
-    expect(methodologyEditComponent.showEmptyMessage).toEqual(true)
   })
 });

@@ -77,10 +77,12 @@ export class MethodologyListComponent implements OnInit {
             this.findAll()
           },
           error:() => {
-            this.showMessage()
+            this.showErrorMessage()
             this.findAll()
           },
-          complete: () => {} 
+          complete: () => {
+            this.showSuccessMessage();
+          } 
         })
       },
       reject: () => {
@@ -89,12 +91,19 @@ export class MethodologyListComponent implements OnInit {
     });
   }
 
-  showMessage(){
+  showErrorMessage(){
     this.messageService.add({
       key: 'methodologyMessage',
       severity:'error', 
       summary:'Error', 
       detail:'El registro no puede ser eliminado porque se está usando en alguna oferta'});
   }
-
+  
+  showSuccessMessage(){
+    this.messageService.add({
+      key: 'methodologyMessage',
+      severity:'success', 
+      summary:'Éxito', 
+      detail:'La operación se ha llevado a cabo correctamente'});
+  }
 }
