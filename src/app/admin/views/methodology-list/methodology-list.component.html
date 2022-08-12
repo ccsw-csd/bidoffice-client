@@ -1,6 +1,6 @@
 <p-toast key="methodologyMessage" position="top-center"></p-toast>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
-<p-table [value]="methodologyItemList" [scrollable]="true" scrollHeight="calc(100vh - 200px)" responsiveLayout="scroll">
+<p-table [value]="methodologyItemList" [loading]="isLoading" [scrollable]="true" scrollHeight="calc(100vh - 200px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
     <tr>
         <th pSortableColumn="name"> Nombre <p-sortIcon field="name"></p-sortIcon></th>

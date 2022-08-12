@@ -15,6 +15,7 @@ export class MethodologyListComponent implements OnInit {
 
   methodologyItemList: Methodology[];
   display: Boolean = false;
+  isLoading: boolean = false;
 
   constructor(
     private methodologyService: MethodologyService,
@@ -27,12 +28,15 @@ export class MethodologyListComponent implements OnInit {
   }
 
   findAll() {
+    this.isLoading = true;
     this.methodologyService.findAll().subscribe({
         next: (res: Methodology[]) => { 
           this.methodologyItemList = res;
         },
         error: () => {},
-        complete: () => {}
+        complete: () => {
+          this.isLoading = false;
+        }
     });
   }
   
