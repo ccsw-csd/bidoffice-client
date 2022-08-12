@@ -20,6 +20,7 @@ describe('MethodologyEditComponent', () => {
     mockMethodologyService = jasmine.createSpyObj(['saveMethodology']);
     mockDynamicDialogRef = jasmine.createSpyObj(['close', 'onClose', 'destroy', 'onDestroy']);
     mockDynamicDialogConfig = jasmine.createSpyObj(['']);
+    mockMessageService = jasmine.createSpyObj(["add"]);
         
     methodologyEditComponent = new MethodologyEditComponent(mockMethodologyService,mockDynamicDialogRef,mockDynamicDialogConfig, mockMessageService);
   });
