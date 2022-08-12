@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileTypeListComponent } from './views/file-type-list/file-type-list.component';
-import { HyperscalerComponent } from './views/hyperscaler-list/hyperscaler.component';
+import { HyperscalerListComponent } from './views/hyperscaler-list/hyperscaler-list.component';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
@@ -16,10 +16,11 @@ import { ToastModule } from 'primeng/toast';
 import { TechnologyListComponent } from './views/technology-list/technology-list.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
 
+
 @NgModule({
   declarations: [
     FileTypeListComponent,
-    HyperscalerComponent,
+    HyperscalerListComponent,
     MethodologyListComponent,
     UserListComponent,
     HyperscalerEditComponent,
@@ -36,7 +37,8 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
     InputTextModule,
     DynamicDialogModule,
     TooltipModule,
-    ToastModule
+    ToastModule,
+    
   ]
 })
 export class AdminModule { }

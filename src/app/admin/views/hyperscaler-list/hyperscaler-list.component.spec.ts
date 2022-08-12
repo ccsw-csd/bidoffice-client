@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { Hyperscaler } from '../../model/Hyperscaler';
-import { HyperscalerComponent } from './hyperscaler.component';
+import { HyperscalerComponent } from './hyperscaler-list.component';
 
 
 

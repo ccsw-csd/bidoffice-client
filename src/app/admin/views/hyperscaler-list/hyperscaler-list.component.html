@@ -1,6 +1,6 @@
 <p-toast key="hyperscalerMessage" position="top-center"></p-toast>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
-<p-table [value]="listOfData" [scrollable]="true" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
+<p-table [value]="listOfData" [scrollable]="true" [loading]="isLoading" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="name"> Nombre <p-sortIcon field="name"></p-sortIcon> </th>    
@@ -28,6 +28,7 @@
 <div  class="mt-3 flex justify-content-end">
     <button pButton type="button" class="p-3" (click)="editHyperscaler()" label="Nuevo hyperscaler"></button>  
 </div>
+
 
 
 

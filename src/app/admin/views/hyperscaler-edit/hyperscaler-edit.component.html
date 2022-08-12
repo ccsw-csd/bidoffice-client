@@ -10,19 +10,18 @@
     </span>    
 </div>
 
-<div *ngIf="fieldsNull==true"><small class="p-error block"> Existe al menos un campo vacío</small></div>
-<div *ngIf="outOfRange==true"><small class="p-error block"> El registro contiene una prioridad fuera de rango</small></div>
-<div *ngIf="existsPriority==true"><small class="p-error block"> El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar</small></div>
-
 <br>
 
 <div class = "flex flex-row-reverse w-auto">
     <div>
-        <button type="button" class=" p-button-primary w-6rem" (click)="saveChanges(elementHyperscaler)" pButton label="Guardar"></button>
+        <button type="button" class=" p-button-primary w-6rem" [disabled]="elementHyperscaler.name=='' || elementHyperscaler.name==null || elementHyperscaler.priority==null || elementHyperscaler.priority < 1" (click)="saveChanges(elementHyperscaler)" pButton label="Guardar"></button>
     </div>
     <div class="px-2">
         <button type="button" class="p-button-secondary w-6rem" (click)="close()" pButton label="Cerrar"></button>
     </div>   
 </div>
+
+
+
 
 

@@ -10,13 +10,14 @@ import { HyperscalerEditComponent } from '../hyperscaler-edit/hyperscaler-edit.c
 
 @Component({
   selector: 'app-hyperscaler',
-  templateUrl: './hyperscaler.component.html',
-  styleUrls: ['./hyperscaler.component.scss'],
+  templateUrl: './hyperscaler-list.component.html',
+  styleUrls: ['./hyperscaler-list.component.scss'],
   providers: [ConfirmationService,DialogService,DynamicDialogRef,DynamicDialogConfig]
 })
-export class HyperscalerComponent implements OnInit {
+export class HyperscalerListComponent implements OnInit {
   public listOfData: Hyperscaler[]
   public cols: any[];
+  public isLoading: boolean = false
 
   
   constructor(private hyperscalerService: HyperscalerService, 
@@ -31,9 +32,17 @@ export class HyperscalerComponent implements OnInit {
   }
 
   getDataHyperscaler(): void{
-    this.hyperscalerService.getDataHyperscaler().subscribe(
-      results => this.listOfData = results
-    );
+    this.isLoading = true
+    this.hyperscalerService.getDataHyperscaler().subscribe({
+      next: (results:any) => { 
+        this.listOfData = results     
+      },
+      error: () => {
+      },
+      complete: () =>{
+        this.isLoading = false
+      }
+    });
   }
 
   editHyperscaler(element?: Hyperscaler): void{

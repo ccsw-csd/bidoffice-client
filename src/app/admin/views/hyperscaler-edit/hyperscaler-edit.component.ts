@@ -5,21 +5,20 @@ import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { Hyperscaler } from 'src/app/admin/model/Hyperscaler';
 import { HyperscalerService } from 'src/app/admin/services/hyperscaler.service';
 
+
 @Component({
   selector: 'app-hyperscaler-edit',
   templateUrl: './hyperscaler-edit.component.html',
   styleUrls: ['./hyperscaler-edit.component.scss']
 })
 export class HyperscalerEditComponent implements OnInit {
-  existsPriority: boolean
-  fieldsNull: boolean
-  outOfRange: boolean
+  isLoading: boolean = false
   elementHyperscaler: Hyperscaler
-  elementBeforeChanges: Hyperscaler
 
   constructor( private ref: DynamicDialogRef, 
     private config: DynamicDialogConfig,
     private hyperscalerService: HyperscalerService,
+    private messageService: MessageService
     ) { }
 
 
@@ -28,32 +27,33 @@ export class HyperscalerEditComponent implements OnInit {
   }
 
   saveChanges(element: Hyperscaler){
-    if(element.priority < 1 && element.priority!=null){
-      this.fieldsNull = false
-      this.existsPriority = false
-      this.outOfRange = true
-    }
-    else if(element.name=="" || element.name==null || element.priority==null ){
-      this.fieldsNull = true
-      this.existsPriority = false
-      this.outOfRange = false
-    }
-    else{
       this.hyperscalerService.saveHyperscaler(element).subscribe({
         next: () => { 
-          this.existsPriority = false
-          this.fieldsNull = false
-          this.outOfRange = false
-          this.close()
+          this.showSuccesMessage()    
+          this.close()  
         },
         error: () => {
-          this.existsPriority = true;
-          this.fieldsNull = false;
-          this.outOfRange = false
+          this.showErrorMessage()
         }
-      })
-    }
+      })  
   }
+
+  showErrorMessage(): void{
+    this.messageService.add({
+      key:'hyperscalerMessage',
+      severity:'error', 
+      summary:'Error', 
+      detail:'El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar'});
+  }
+
+  showSuccesMessage(): void{
+    this.messageService.add({
+      key:'hyperscalerMessage',
+      severity:'success', 
+      summary:'Confirmado', 
+      detail:'El registro se ha guardado con éxito'});
+  }
+
 
   close() {
     if(this.ref) {
