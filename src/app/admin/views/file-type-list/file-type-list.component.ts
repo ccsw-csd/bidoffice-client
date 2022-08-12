@@ -10,11 +10,12 @@ import { FileTypeEditComponent } from '../file-type-edit/file-type-edit.componen
   selector: 'app-file-type',
   templateUrl: './file-type-list.component.html',
   styleUrls: ['./file-type-list.component.scss'],
-  providers:[ConfirmationService, MessageService]
+  providers:[ConfirmationService]
 })
 export class FileTypeListComponent implements OnInit {
 
   public dataSource : FileType[]
+  public isloading: boolean = false;
 
   constructor(
     private fileTypeService: FileTypeService,
@@ -28,9 +29,16 @@ export class FileTypeListComponent implements OnInit {
   }
 
   getFileTypes():void {
-    this.fileTypeService.getFileTypes().subscribe(
-      files=>this.dataSource = files
-    )
+    this.isloading = true;
+    this.fileTypeService.getFileTypes().subscribe({
+      next: (files: FileType[]) => { 
+        this.dataSource = files
+      },
+      error: () => {},
+      complete: () => {
+        this.isloading = false;
+      }     
+    })
   }
 
   editFileType(fileType: FileType) {
@@ -46,7 +54,6 @@ export class FileTypeListComponent implements OnInit {
     });
   }
   
-
   saveFileType() {
     const ref = this.dialogService.open(FileTypeEditComponent, {
         header: 'Crear nuevo Item',
@@ -59,7 +66,6 @@ export class FileTypeListComponent implements OnInit {
   }
 
   deleteFileType(fileType: FileType) {    
-    
     this.confirmationService.confirm({
       header: "Confirmación",
       message: 'Seguro que quiere borrar el item?',
@@ -70,6 +76,7 @@ export class FileTypeListComponent implements OnInit {
       {
         this.fileTypeService.deleteFileTypeById(fileType.id).subscribe({
           next: () =>{
+            this.showMessageDeleted()
             this.getFileTypes()
           },
           error:() =>{            
@@ -85,6 +92,9 @@ export class FileTypeListComponent implements OnInit {
   }  
 
   showMessageError(){
-    this.messageService.add({key: 'deleteError', severity:'error', summary: 'ERROR', detail: 'No puedes borrar un item asociado a una oferta'});
+    this.messageService.add({key: 'fileTypeMessage', severity:'error', summary: 'ERROR', detail: 'No puedes borrar un item asociado a una oferta'});
+  }
+  showMessageDeleted(){
+    this.messageService.add({key: 'fileTypeMessage', severity:'success', summary: 'Confirmado', detail: 'El registro ha sido borrado con éxito'});
   }
 }

@@ -1,5 +1,5 @@
-import { noUndefined } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileType } from '../../model/FileType';
 import { FileTypeService } from '../../services/file-type.service';
@@ -14,12 +14,12 @@ export class FileTypeEditComponent implements OnInit {
   fileTypeName: string
   fileType: FileType
   exceptionFail: boolean
-  exceptionMissing: boolean
-
+  
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private fileTypeService: FileTypeService, 
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -33,23 +33,34 @@ export class FileTypeEditComponent implements OnInit {
   }
 
   onSave(fileType: FileType) {
-    if( fileType.name!== undefined && fileType.name!="" && fileType.priority>0 ){
       this.fileTypeService.saveFileType(fileType).subscribe({
         next: ()=> {
-          this.exceptionFail=false
-          this.exceptionMissing=false
+          this.showSuccessMessage();
           this.ref.close();
         }, 
         error: ()=>{
-              this.exceptionMissing=false
-              this.exceptionFail=true
+          this.showErrorMessage();
         }
       })
-    }else{
-      this.exceptionFail=false
-      this.exceptionMissing=true
-    }
-  }  
+  }
+  
+  showErrorMessage(){
+    this.messageService.add({
+      key:'fileTypeMessage',
+      severity:'error',
+      summary:'Error',
+      detail:'El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar'
+    })
+  }
+
+  showSuccessMessage(){
+    this.messageService.add({
+      key:'fileTypeMessage',
+      severity:'success',
+      summary:'Confirmado',
+      detail:'El registro se ha guardado con éxito'
+    })
+  }
 
   onClose() {
     this.ref.close();
