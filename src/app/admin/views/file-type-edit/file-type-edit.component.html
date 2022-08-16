@@ -1,0 +1,20 @@
+<br />
+<span class="p-float-label">
+    <input id="float-input" class="w-full" type="text" pInputText required [(ngModel)]="fileType.name" name="name" > 
+    <label for="float-input">Nombre</label>
+</span>
+<br />
+<span class="p-float-label">
+    <input id="float-input" class="w-full" type="number" min="1" pInputText required [(ngModel)]="fileType.priority" name="priority">
+    <label for="float-input">Prioridad</label>
+</span>
+<br />
+<br>
+<div class="flex flex-row-reverse w-auto">
+    <div>    
+        <button type="button" [disabled]="fileType.name==null || fileType.name=='' || fileType.priority<1 || fileType.priority==null" pButton label="Guardar" class="w-6rem " (click)="onSave(fileType)"></button>
+    </div>
+    <div class="px-2">
+        <button type="button" pButton label="Cerrar" class="p-button-secondary w-6rem " (click)="onClose()"></button>
+    </div>
+</div> 
