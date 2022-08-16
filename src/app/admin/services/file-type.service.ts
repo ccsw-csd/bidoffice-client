@@ -8,6 +8,7 @@ import { FileType } from '../model/FileType';
   providedIn: 'root'
 })
 export class FileTypeService {
+  
 
   constructor(private http: HttpClient) { }
 
@@ -18,5 +19,10 @@ export class FileTypeService {
   deleteFileTypeById(fileTypeId: number): Observable<any> {
     return this.http.delete(environment.server+'/filetype/'+fileTypeId);
   }  
+
+  saveFileType(fileType: FileType): Observable<any> {
+    let url='/filetype'
+    return this.http.put<FileType>(environment.server+url,fileType);
+  }
 
 }

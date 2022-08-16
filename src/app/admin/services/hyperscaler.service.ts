@@ -18,4 +18,9 @@ export class HyperscalerService {
   deleteHyperscaler(elementId: number):Observable<any>{
     return this.http.delete(environment.server + "/hyperscaler/"+elementId)
   }
+
+  saveHyperscaler(element: Hyperscaler):Observable<Hyperscaler>{
+    let url = environment.server+"/hyperscaler"     
+    return this.http.put<Hyperscaler>(url,element)
+  }
 }

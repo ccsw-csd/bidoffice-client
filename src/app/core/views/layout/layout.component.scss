@@ -6,11 +6,13 @@
       box-shadow: none;
       background-color: $primary;
       position: relative;
-      
     }
     .p-sidebar-left {
         top:auto;
         width: auto;
+    }
+    .p-sidebar-content {
+        padding: 0px;
     }
   }
 }
