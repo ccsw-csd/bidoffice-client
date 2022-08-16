@@ -31,7 +31,6 @@ describe('MethodologyEditComponent', () => {
     mockDynamicDialogRef.close.and.returnValue(of(true))
     methodologyEditComponent.editMethodology(editedMethodology)
     expect(methodologyEditComponent.editMethodology(editedMethodology)).not.toBeNull()
-    expect(methodologyEditComponent.showEditMessage).toEqual(false)
   })
   
   it("editMethodologyWithExistsNameShouldThrowError",()=>{
@@ -40,7 +39,6 @@ describe('MethodologyEditComponent', () => {
     mockMethodologyService.saveMethodology.and.returnValue(throwError(() => errorResponse))
     methodologyEditComponent.editMethodology(editedMethodology)
     expect(methodologyEditComponent.editMethodology(editedMethodology)).not.toBeNull()
-    expect(methodologyEditComponent.showEditMessage).toEqual(true)
   })
   
   it("editMethodologyWithExistsPriorityShouldThrowError",()=>{
@@ -49,13 +47,11 @@ describe('MethodologyEditComponent', () => {
     mockMethodologyService.saveMethodology.and.returnValue(throwError(() => errorResponse))
     methodologyEditComponent.editMethodology(editedMethodology)
     expect(methodologyEditComponent.editMethodology(editedMethodology)).not.toBeNull()
-    expect(methodologyEditComponent.showEditMessage).toEqual(true)
   })
 
   it("editMethodologyWithEmptyFieldsShouldThrowError",()=>{
     let editedMethodology = new Methodology({id:4,name:"",priority:null})
     methodologyEditComponent.editMethodology(editedMethodology)
     expect(methodologyEditComponent.editMethodology(editedMethodology)).not.toBeNull()
-    expect(methodologyEditComponent.showEditMessage).toEqual(false)
   })
 });
