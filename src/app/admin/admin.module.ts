@@ -12,8 +12,10 @@ import { InputTextModule } from "primeng/inputtext";
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import { HyperscalerEditComponent } from './views/hyperscaler-edit/hyperscaler-edit.component';
 import {TooltipModule} from 'primeng/tooltip';
+import { FileTypeEditComponent } from './views/file-type-edit/file-type-edit.component';
 import { ToastModule } from 'primeng/toast';
 import { TechnologyListComponent } from './views/technology-list/technology-list.component';
+import { MethodologyEditComponent } from './views/methodology-edit/methodology-edit.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
 
 
@@ -24,10 +26,11 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
     MethodologyListComponent,
     UserListComponent,
     HyperscalerEditComponent,
+    FileTypeEditComponent,
     TechnologyListComponent,
+    MethodologyEditComponent,
     OfferingListComponent
   ],
- 
   imports: [
     CommonModule,
     TableModule,

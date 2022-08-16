@@ -10,6 +10,7 @@ describe('MethodologyListComponent', () => {
   let mockMethodologyService;
   let mockConfirmationService;
   let mockMessageService;
+  let mockDynamicDialogService;
 
   let DATA_LIST = [
     new Methodology({id:1, name: "Name 1", priority:1}),
@@ -18,14 +19,15 @@ describe('MethodologyListComponent', () => {
 
   let DATA_LIST_DELETED = [
     new Methodology({id:1, name: "Name 1", priority:1})
-  ]
+  ]  
 
   beforeEach(() => {
     mockMethodologyService = jasmine.createSpyObj(["findAll","delete"]);
     mockConfirmationService = jasmine.createSpyObj(["confirm"])
     mockMessageService = jasmine.createSpyObj(["add"])
     methodologyListComponent = new MethodologyListComponent(
-      mockMethodologyService, 
+      mockMethodologyService,
+      mockDynamicDialogService,
       mockConfirmationService,
       mockMessageService
       );

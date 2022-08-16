@@ -7,6 +7,8 @@ describe('FileTypeComponent', () => {
   let mockFileTypeService: any;
   let mockConfirmationService: any;
   let mockMessageService: any;
+  let mockDialogService: any;
+
   let FILETYPE_ITEM: FileType[];
   let FILETYPE_ITEM_DELETED: FileType[];
 
@@ -24,7 +26,9 @@ describe('FileTypeComponent', () => {
     mockFileTypeService = jasmine.createSpyObj(['getFileTypes','deleteFileTypeById']);
     mockConfirmationService= jasmine.createSpyObj(["confirm","close"]);
     mockMessageService = jasmine.createSpyObj([""]);
-    fileTypeListComponent = new FileTypeListComponent(mockFileTypeService,mockConfirmationService,mockMessageService);
+    mockDialogService = jasmine.createSpyObj([""]);
+    fileTypeListComponent = new FileTypeListComponent(mockFileTypeService,mockConfirmationService,mockMessageService,mockDialogService);
+    
     });
 
     it("deleteFileTypeShouldDelete",()=>{
