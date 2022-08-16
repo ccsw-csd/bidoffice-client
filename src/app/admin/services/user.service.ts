@@ -5,6 +5,7 @@ import { UserPage } from "../model/UserPage";
 import { Pageable } from "../../core/models/Pageable";
 import {environment} from "../../../environments/environment";
 import {User} from "../model/User";
+import {RoleClass} from "../model/RoleClass";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class UserService {
 
   saveUser(user: User): Observable<User>{
       return this.http.put<User>(environment.server + "/user", user);
+  }
+
+  getRoles(): Observable<RoleClass[]> {
+    return this.http.get<RoleClass[]>(environment.server + "/role/findAll");
   }
 
 }

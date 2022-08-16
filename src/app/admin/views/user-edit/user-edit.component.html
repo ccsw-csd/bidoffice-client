@@ -20,10 +20,9 @@
     <p-dropdown inputId="role-dropdown" [options]="roles" [(ngModel)]="user.role" optionLabel="name" autoWidth="false" [style]="{'width':'100%'}"></p-dropdown>
     <label for="role-dropdown" class="block">Rol</label>
   </span>
-  <small *ngIf="showEmptyMessage" class="p-error">El Email no puede estar vacío</small>
   <div class="flex flex-row-reverse w-auto mt-8">
     <div>
-      <button type="button" pButton label="Guardar" class="w-6rem " (click)="editUser(user)"></button>
+      <button type="button" pButton label="Guardar" class="w-6rem" [disabled]="user.email == '' || user.username == ''" (click)="editUser(user)"></button>
     </div>
     <div class="px-2">
       <button type="button" pButton label="Cerrar" class="p-button-secondary w-6rem " (click)="onClose()"></button>
