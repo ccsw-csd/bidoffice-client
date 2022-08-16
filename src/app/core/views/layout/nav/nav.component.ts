@@ -34,6 +34,7 @@ export class NavComponent implements OnInit {
           {label: 'Hyperscaler', routerLink: '/hyperscaler'},
           {label: "Metodologías", routerLink: '/methodology'},
           {label: "Tecnologías", routerLink: '/technology'},
+          {label: "Tipos de oportunidad", routerLink: '/opportunitytype'},
           {label: "Offering", routerLink: '/offering'}
         ]
       },

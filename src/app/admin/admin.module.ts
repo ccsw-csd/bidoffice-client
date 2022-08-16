@@ -15,6 +15,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import { FileTypeEditComponent } from './views/file-type-edit/file-type-edit.component';
 import { ToastModule } from 'primeng/toast';
 import { TechnologyListComponent } from './views/technology-list/technology-list.component';
+import { OpportunityTypeListComponent } from './views/opportunity-type-list/opportunity-type-list.component';
 import { MethodologyEditComponent } from './views/methodology-edit/methodology-edit.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
 
@@ -28,8 +29,10 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
     HyperscalerEditComponent,
     FileTypeEditComponent,
     TechnologyListComponent,
+    OpportunityTypeListComponent,
     MethodologyEditComponent,
     OfferingListComponent
+
   ],
   imports: [
     CommonModule,
