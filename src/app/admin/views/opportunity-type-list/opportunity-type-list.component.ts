@@ -51,10 +51,8 @@ export class OpportunityTypeListComponent implements OnInit {
       },
       reject: () =>{
         this.findAll()
-      }
-      
-  })
-    
+      }   
+    })   
   }
 
   showSuccesMessage(): void{

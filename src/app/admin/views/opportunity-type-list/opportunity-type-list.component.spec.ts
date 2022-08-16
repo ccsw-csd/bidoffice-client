@@ -8,15 +8,27 @@ import { OpportunityTypeListComponent } from './opportunity-type-list.component'
 describe('OpportunityTypeListComponent', () => {
   let opportunityTypeList: OpportunityTypeListComponent;
   let mockOpportunityTypeService;
+  let mockConfirmationService;
+  let mockMessageService;
 
   let DATA_LIST = [
     new OpportunityType({id:1, name:"Name 1", priority: 1}),
     new OpportunityType({id:2, name:"Name 2", priority: 2})
   ]
 
+  let DATA_DELETED = [
+    new OpportunityType({id:1, name:"Name 1", priority: 1})
+  ]
+
   beforeEach(() => {
-    mockOpportunityTypeService = jasmine.createSpyObj(["findAll"])
-    opportunityTypeList = new OpportunityTypeListComponent(mockOpportunityTypeService);
+    mockOpportunityTypeService = jasmine.createSpyObj(["findAll","delete"])
+    mockConfirmationService = ["confirm"]
+    mockMessageService = [""]
+    opportunityTypeList = new OpportunityTypeListComponent(
+      mockOpportunityTypeService,
+      mockMessageService,
+      mockConfirmationService
+      );
 
   });
 
@@ -26,6 +38,15 @@ describe('OpportunityTypeListComponent', () => {
     expect(opportunityTypeList.opportunityList).not.toEqual(null);
     expect(opportunityTypeList.opportunityList).toEqual(DATA_LIST);
   });
+
+  it('deleteWithoutErrorsShouldDelete', () => {
+    mockOpportunityTypeService.findAll.and.returnValue(of(DATA_DELETED))
+    mockOpportunityTypeService.findAll.and.returnValue(mockOpportunityTypeService.findAll)
+    let opportunity = new OpportunityType()
+    opportunityTypeList.deleteRow(opportunity)
+
+    expect(opportunityTypeList.opportunityList).toEqual(DATA_DELETED)
+  })
 })
   
 
