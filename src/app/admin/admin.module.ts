@@ -9,6 +9,7 @@ import { MethodologyListComponent } from './views/methodology-list/methodology-l
 import { UserListComponent } from './views/user-list/user-list.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
+import { FileTypeEditComponent } from './views/file-type-edit/file-type-edit.component';
 import { ToastModule } from 'primeng/toast';
 import { TechnologyListComponent } from './views/technology-list/technology-list.component';
 import { OpportunityTypeListComponent } from './views/opportunity-type-list/opportunity-type-list.component';
@@ -22,13 +23,13 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
     HyperscalerComponent,
     MethodologyListComponent,
     UserListComponent,
+    FileTypeEditComponent,
     TechnologyListComponent,
     OpportunityTypeListComponent,
     MethodologyEditComponent,
     OfferingListComponent
 
   ],
- 
   imports: [
     CommonModule,
     TableModule,
