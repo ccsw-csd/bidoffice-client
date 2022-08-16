@@ -12,6 +12,9 @@ import { InputTextModule } from "primeng/inputtext";
 import { ToastModule } from 'primeng/toast';
 import { TechnologyListComponent } from './views/technology-list/technology-list.component';
 import { OpportunityTypeListComponent } from './views/opportunity-type-list/opportunity-type-list.component';
+import { MethodologyEditComponent } from './views/methodology-edit/methodology-edit.component';
+import { OfferingListComponent } from './views/offering-list/offering-list.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { OpportunityTypeListComponent } from './views/opportunity-type-list/oppo
     MethodologyListComponent,
     UserListComponent,
     TechnologyListComponent,
-    OpportunityTypeListComponent
+    OpportunityTypeListComponent,
+    MethodologyEditComponent,
+    OfferingListComponent
+
   ],
  
   imports: [

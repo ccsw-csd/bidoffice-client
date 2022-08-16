@@ -11,6 +11,8 @@ import { UserListComponent } from "./admin/views/user-list/user-list.component";
 import { MethodologyListComponent } from './admin/views/methodology-list/methodology-list.component';
 import { TechnologyListComponent } from './admin/views/technology-list/technology-list.component';
 import { OpportunityTypeListComponent } from './admin/views/opportunity-type-list/opportunity-type-list.component';
+import { OfferingListComponent } from './admin/views/offering-list/offering-list.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,6 +29,7 @@ const routes: Routes = [
       { path: 'hyperscaler', component: HyperscalerComponent},
       { path: 'technology', component: TechnologyListComponent},
       { path: 'opportunitytype', component: OpportunityTypeListComponent},
+      { path: 'offering', component: OfferingListComponent},
       { path: '**', redirectTo: 'main', pathMatch: 'full' }
     ]
   },
