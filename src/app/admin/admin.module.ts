@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileTypeListComponent } from './views/file-type-list/file-type-list.component';
-import { HyperscalerComponent } from './views/hyperscaler-list/hyperscaler.component';
+import { HyperscalerListComponent } from './views/hyperscaler-list/hyperscaler-list.component';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
@@ -9,6 +9,9 @@ import { MethodologyListComponent } from './views/methodology-list/methodology-l
 import { UserListComponent } from './views/user-list/user-list.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { HyperscalerEditComponent } from './views/hyperscaler-edit/hyperscaler-edit.component';
+import {TooltipModule} from 'primeng/tooltip';
 import { FileTypeEditComponent } from './views/file-type-edit/file-type-edit.component';
 import { ToastModule } from 'primeng/toast';
 import { TechnologyListComponent } from './views/technology-list/technology-list.component';
@@ -20,9 +23,10 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
 @NgModule({
   declarations: [
     FileTypeListComponent,
-    HyperscalerComponent,
+    HyperscalerListComponent,
     MethodologyListComponent,
     UserListComponent,
+    HyperscalerEditComponent,
     FileTypeEditComponent,
     TechnologyListComponent,
     OpportunityTypeListComponent,
@@ -37,7 +41,10 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
     ConfirmDialogModule,
     PaginatorModule,
     InputTextModule,
-    ToastModule
+    DynamicDialogModule,
+    TooltipModule,
+    ToastModule,
+    
   ]
 })
 export class AdminModule { }
