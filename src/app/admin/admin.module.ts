@@ -19,6 +19,7 @@ import { TechnologyListComponent } from './views/technology-list/technology-list
 import { OpportunityTypeListComponent } from './views/opportunity-type-list/opportunity-type-list.component';
 import { MethodologyEditComponent } from './views/methodology-edit/methodology-edit.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
+import { TechnologyEditComponent } from './views/technology-edit/technology-edit.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
     HyperscalerEditComponent,
     FileTypeEditComponent,
     TechnologyListComponent,
+    TechnologyEditComponent,
     OpportunityTypeListComponent,
     MethodologyEditComponent,
     OfferingListComponent

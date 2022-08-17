@@ -36,4 +36,18 @@ export class TechnologyService {
         return this.http.delete<any>(environment.server + "/technology/" + id);
     }
 
+    /**
+     * Guarda una tecnología nueva o modifica
+     * una ya existente.
+     * 
+     * @param technology Tecnología a guardar.
+     * @returns 
+     */
+    saveTechnology(technology: Technology):Observable<any> {
+
+        let url = environment.server + "/technology";
+        return this.http.put<Technology>(url, technology);
+    }
+
+
 }
