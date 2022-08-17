@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from "../../model/User";
 import { UserService } from '../../services/user.service';
+import { RoleService } from "../../services/role.service";
 import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 import { RoleClass } from "../../model/RoleClass";
 import { MessageService } from "primeng/api";
@@ -18,6 +19,7 @@ export class UserEditComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private roleService: RoleService,
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private messageService: MessageService
@@ -25,7 +27,7 @@ export class UserEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = Object.assign({user: User}, this.config.data.user)
-    this.userService.getRoles().subscribe(rolesArray =>
+    this.roleService.getRoles().subscribe(rolesArray =>
       this.roles = [...this.roles, ...rolesArray]
     );
   }
