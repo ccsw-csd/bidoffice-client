@@ -1,5 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { OpportunityType } from '../../model/OppurtinityType';
 import { OpportunityTypeService } from '../../services/opportunity-type.service';
 
@@ -22,7 +23,7 @@ describe('OpportunityTypeListComponent', () => {
 
   beforeEach(() => {
     mockOpportunityTypeService = jasmine.createSpyObj(["findAll","delete"])
-    mockConfirmationService = ["confirm"]
+    mockConfirmationService = jasmine.createSpyObj(["confirm","close"])
     mockMessageService = [""]
     opportunityTypeList = new OpportunityTypeListComponent(
       mockOpportunityTypeService,
@@ -41,12 +42,18 @@ describe('OpportunityTypeListComponent', () => {
 
   it('deleteWithoutErrorsShouldDelete', () => {
     mockOpportunityTypeService.findAll.and.returnValue(of(DATA_DELETED))
-    mockOpportunityTypeService.findAll.and.returnValue(mockOpportunityTypeService.findAll)
-    let opportunity = new OpportunityType()
+    mockOpportunityTypeService.delete.and.returnValue(of(opportunityTypeList.findAll()))
+    let opportunity = new OpportunityType({id:1,name:"Name",priority:3})
     opportunityTypeList.deleteRow(opportunity)
-
     expect(opportunityTypeList.opportunityList).toEqual(DATA_DELETED)
   })
+
+  it('deleteWithoutErrorShouldThrowsAnError', () => {
+    let opportunity = new OpportunityType({id:1,name:"Name exists in offer",priority:3})
+    mockOpportunityTypeService.delete.and.returnValue(throwError(() => {status: 409}))
+    opportunityTypeList.deleteRow(opportunity)
+    expect(opportunityTypeList.opportunityList).toEqual(undefined)
+  }) 
 })
   
 
