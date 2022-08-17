@@ -4,6 +4,8 @@ import { UserService } from '../../services/user.service';
 import { User } from "../../model/User";
 import { UserPage } from "../../model/UserPage";
 import { LazyLoadEvent } from "primeng/api";
+import { DialogService } from "primeng/dynamicdialog";
+import { UserEditComponent } from "../user-edit/user-edit.component";
 
 @Component({
   selector: 'app-user-list',
@@ -31,7 +33,8 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private cdRef : ChangeDetectorRef
+    private cdRef : ChangeDetectorRef,
+    private dynamicDialogService: DialogService
   ) { }
 
   ngOnInit(): void {
@@ -73,6 +76,18 @@ export class UserListComponent implements OnInit {
       });
     }
 
+  }
+
+  showEditDialog(user: User){
+    const dialogRef = this.dynamicDialogService.open(UserEditComponent,{
+      header: "Editar Usuario",
+      width: "30%",
+      data: {user: user}
+    })
+
+    dialogRef.onClose.subscribe(res =>{
+      this.loadPage(this.lastTableLazyLoadEvent);
+    })
   }
 
 }

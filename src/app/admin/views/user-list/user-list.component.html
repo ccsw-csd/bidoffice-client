@@ -1,5 +1,5 @@
 <div class="flex-column">
-
+  <p-toast key="userMessage" position="top-center"></p-toast>
   <div class="grid p-fluid p-inputtext-sm">
     <div class="col-12 md:col-4">
       <div class="p-float-label field">
@@ -50,7 +50,8 @@
         <td style='flex: 0 0 150px;'>
           <div>
             <button pButton type="button" icon="pi pi-pencil"
-                    class="p-button-rounded p-button-text p-button-plain icon"></button>
+                    class="p-button-rounded p-button-text p-button-plain icon"
+                    (click)="showEditDialog(element)"></button>
           </div>
         </td>
       </tr>

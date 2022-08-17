@@ -7,6 +7,7 @@ import {ButtonModule} from 'primeng/button';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
 import { UserListComponent } from './views/user-list/user-list.component';
+import { UserEditComponent } from "./views/user-edit/user-edit.component";
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
@@ -19,13 +20,13 @@ import { OpportunityTypeListComponent } from './views/opportunity-type-list/oppo
 import { MethodologyEditComponent } from './views/methodology-edit/methodology-edit.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
 
-
 @NgModule({
   declarations: [
     FileTypeListComponent,
     HyperscalerListComponent,
     MethodologyListComponent,
     UserListComponent,
+    UserEditComponent,
     HyperscalerEditComponent,
     FileTypeEditComponent,
     TechnologyListComponent,
@@ -44,7 +45,7 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
     DynamicDialogModule,
     TooltipModule,
     ToastModule,
-    
+
   ]
 })
 export class AdminModule { }
