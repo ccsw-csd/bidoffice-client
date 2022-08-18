@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectTypeListComponent } from './project-type-list.component';
-import { ProjectTypeService } from "../../services/project-type.service";
 import { of } from "rxjs";
 import { ProjectType } from "../../model/ProjectType";
 
