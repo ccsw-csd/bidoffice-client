@@ -12,7 +12,7 @@ describe('TechnologyEditComponent', () => {
 
     beforeEach(() => {
 
-        mockTechnologyService = jasmine.createSpyObj(['saveTechnology']);
+        mockTechnologyService = jasmine.createSpyObj(["saveTechnology", "deleteTechnology", "findAll"]);
         mockMessageService = jasmine.createSpyObj(["add"]);
         mockDynamicDialogConfig = jasmine.createSpyObj(['']);
         mockDynamicDialogRef = jasmine.createSpyObj(['close']);
@@ -31,7 +31,7 @@ describe('TechnologyEditComponent', () => {
      * El test debe modificar la tecnología y 
      * devolver un estado HTTP OK.
      */
-    it("editTechnologyShouldEdit",()=>{
+    it('editTechnologyShouldEdit',()=>{
         let editTechnology = new Technology({id:3, name:"editing tech", priority:1});
         mockTechnologyService.saveTechnology.and.returnValue(of(true));
         technologyEditComponent.saveChanges(editTechnology);

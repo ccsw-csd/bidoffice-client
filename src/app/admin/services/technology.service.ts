@@ -43,11 +43,9 @@ export class TechnologyService {
      * @param technology Tecnología a guardar.
      * @returns 
      */
-    saveTechnology(technology: Technology):Observable<any> {
-
+    saveTechnology(technology: Technology):Observable<Technology> {
+        
         let url = environment.server + "/technology";
         return this.http.put<Technology>(url, technology);
     }
-
-
 }
