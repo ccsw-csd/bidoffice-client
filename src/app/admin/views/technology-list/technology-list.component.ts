@@ -5,6 +5,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { TooltipModule } from 'primeng/tooltip';
 import { TechnologyEditComponent } from '../technology-edit/technology-edit.component';
 
 @Component({

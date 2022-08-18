@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { TagOpenEndVoidToken } from '@angular/compiler/src/ml_parser/tokens';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -43,9 +44,8 @@ export class TechnologyService {
      * @param technology Tecnología a guardar.
      * @returns 
      */
-    saveTechnology(technology: Technology):Observable<Technology> {
-        
+    saveTechnology(technology: Technology):Observable<void> {
         let url = environment.server + "/technology";
-        return this.http.put<Technology>(url, technology);
+        return this.http.put<void>(url, technology);
     }
 }

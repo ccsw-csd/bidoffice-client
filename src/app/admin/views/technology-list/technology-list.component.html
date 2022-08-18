@@ -1,5 +1,5 @@
 <p-toast key="technologyMessage" position="top-center"></p-toast>
-<p-confirmDialog header="Confirmation" defaultFocus="reject" rejectButtonStyleClass="p-button-secondary"  icon="pi pi-exclamation-triangle" key="techDeleteDialog" [transitionOptions]="'0ms'"></p-confirmDialog>
+<p-confirmDialog header="Confirmation" defaultFocus="none" rejectButtonStyleClass="p-button-secondary"  icon="pi pi-exclamation-triangle" key="techDeleteDialog" [transitionOptions]="'0ms'"></p-confirmDialog>
 <p-table [value]="technologies" [scrollable]="true" [loading]="isLoading"   scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
@@ -14,9 +14,9 @@
             <td style="flex: 0 0 150px">{{technology.priority}}</td>
             <td style="flex: 0 0 150px">
                 <div>
-                    <button pButton type="button" icon="pi pi-pencil" (click)="editTechnology(technology)"
+                    <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar tecnología" tooltipPosition="top" (click)="editTechnology(technology)"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
-                    <button pButton type="button" icon="pi pi-trash" (click)="deleteTechnology(technology)"
+                    <button pButton type="button" icon="pi pi-trash" pTooltip="Borrar tecnología" tooltipPosition="top" (click)="deleteTechnology(technology)"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>
