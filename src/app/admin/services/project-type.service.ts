@@ -11,7 +11,7 @@ export class ProjectTypeService {
 
   constructor(private http: HttpClient) { }
 
-  getAll():Observable<ProjectType[]> {
+  findAll() : Observable<ProjectType[]> {
     return this.http.get<ProjectType[]>(environment.server + "/projecttype/findAll");
   }
 

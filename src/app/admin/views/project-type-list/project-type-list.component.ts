@@ -15,12 +15,12 @@ export class ProjectTypeListComponent implements OnInit {
   constructor(private projectTypeService: ProjectTypeService) { }
 
   ngOnInit(): void {
-    this.getAll();
+    this.findAll();
   }
 
-  getAll(){
+  findAll(){
     this.isLoading = true;
-    this.projectTypeService.getAll().subscribe({
+    this.projectTypeService.findAll().subscribe({
       next: (results) => {
         this.listoOfData = results;
       },
