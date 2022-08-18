@@ -10,6 +10,8 @@ describe('TechnologyListComponent', () => {
     let mockTechnologyService;
     let mockConfirmationService;
     let mockMessageService;
+    let mockDialogService;
+    let mockDynamicDialogRef;
 
     let TECHNOLOGY_LIST = [
         new Technology({id:1, name: "Quantum++", priority:1}),
@@ -27,7 +29,9 @@ describe('TechnologyListComponent', () => {
         technologyListComponent = new TechnologyListComponent(
             mockTechnologyService,
             mockConfirmationService,
-            mockMessageService
+            mockMessageService,
+            mockDialogService,
+            mockDynamicDialogRef
             );
     });
 
