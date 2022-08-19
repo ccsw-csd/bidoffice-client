@@ -1,4 +1,5 @@
-<div>  
+<div>
+    <p-toast position="top-center"></p-toast> 
     <p-table [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="isloading" scrollable="true"
     scrollHeight="calc(92vh - 190px)" responsiveLayout="scroll" [paginator]="true" [rows]="10"
     [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"

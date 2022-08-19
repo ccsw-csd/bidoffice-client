@@ -51,19 +51,19 @@ export class OfferListComponent implements OnInit {
       if (event.sortField != null){
         this.pageable.sort = [{property:event.sortField, direction:event.sortOrder == 1 ? 'asc':'desc'}];
       }
-      this.isloading = true;
-      this.offerService.findPage(this.pageable).subscribe({
-        next: (res: OfferPage) => { 
-          this.offerPage = res;
-        },
-        error: () => {},
-        complete: () => {
-          this.offerItemList = this.offerPage.content;
-          this.totalElements = this.offerPage.totalElements;
-          this.isloading = false;
-        }     
-      });
     }
+    this.isloading = true;
+    this.offerService.findPage(this.pageable).subscribe({
+      next: (res: OfferPage) => { 
+        this.offerPage = res;
+      },
+      error: () => {},
+      complete: () => {
+        this.offerItemList = this.offerPage.content;
+        this.totalElements = this.offerPage.totalElements;
+        this.isloading = false;
+      }     
+    });
   }
 
   toOfferEdit(){
@@ -75,6 +75,7 @@ export class OfferListComponent implements OnInit {
 
     ref.onClose.subscribe(()=>{
       this.selectedOffer = null;
+      this.loadPage();
     })
   }
   onRowSelected(offer: Offer){

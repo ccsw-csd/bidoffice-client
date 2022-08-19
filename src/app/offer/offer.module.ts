@@ -23,7 +23,8 @@ import {BlockUIModule} from 'primeng/blockui';
 import { DocumentationEditComponent } from './views/offer-edit/components/documentation/documentation-edit/documentation-edit.component';
 import { TracingEditComponent } from './views/offer-edit/components/tracing/tracing-edit/tracing-edit.component';
 import {InputNumberModule} from 'primeng/inputnumber';
-
+import { ToastModule } from 'primeng/toast';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 @NgModule({
   declarations: [
     OfferListComponent,
@@ -52,7 +53,9 @@ import {InputNumberModule} from 'primeng/inputnumber';
     AutoCompleteModule,
     BlockUIModule,
     InputNumberModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastModule,
+    ConfirmDialogModule
   ]
 })
 export class OfferModule { }

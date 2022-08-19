@@ -1,6 +1,6 @@
 export class OfferDataTeam{
   id: number;
-  cca: number;
-  multitower: number;
+  cca: boolean = false;
+  multitower: boolean = false;
   practices: string;
 }

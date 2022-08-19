@@ -5,6 +5,7 @@ import { OfferTracing } from 'src/app/offer/model/OfferTracing';
 import { Person } from 'src/app/offer/model/Person';
 import { OfferService } from 'src/app/offer/services/offer.service';
 import { TracingEditComponent } from './tracing-edit/tracing-edit.component';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-tracing',
@@ -22,13 +23,15 @@ export class TracingComponent implements OnInit {
 
   @Input() data: Offer;
 
-  constructor(private dinamicDialogService: DialogService, private offerService: OfferService) { 
+  constructor(private dinamicDialogService: DialogService, private offerService: OfferService) {
   }
 
   ngOnInit(): void {
+
+    this.data.tracings.forEach(item => item.uuid = uuidv4());
   }
 
-  createTracing(){
+  createTracing() {
 
     const ref = this.dinamicDialogService.open(TracingEditComponent, {
       header: 'Crear siguimiento',
@@ -36,34 +39,34 @@ export class TracingComponent implements OnInit {
       closable: false
     });
 
-    ref.onClose.subscribe((tracing: OfferTracing)=>{
-      if(tracing != null){
+    ref.onClose.subscribe((tracing: OfferTracing) => {
+      if (tracing != null) {
         this.data.tracings.push(tracing);
       }
     })
   }
 
-  searchPerson($event){
+  searchPerson($event) {
 
-    if($event.query != null){
+    if ($event.query != null) {
       this.offerService.searchPerson($event.query).subscribe({
-        next: (res: Person[]) => { 
+        next: (res: Person[]) => {
           this.groupPerson = res.map(person => this.mappingPerson(person));
         },
-        error: () => {},
+        error: () => { },
         complete: () => {
-        }     
+        }
       });
     }
   }
-  mappingPerson(person: Person): any{
-      return {field: person.name + " " + person.lastname + " - " + person.username,  value: person};
+  mappingPerson(person: Person): any {
+    return { field: person.name + " " + person.lastname + " - " + person.username, value: person };
   }
 
-  onRowEditInit(tracing: OfferTracing){
+  onRowEditInit(tracing: OfferTracing) {
     this.isEditing = true;
     this.selectedPerson = this.mappingPerson(tracing.person);
-    this.clonedOfferTracing = {...tracing};
+    this.clonedOfferTracing = { ...tracing };
   }
 
   onRowEditCancel(index: number) {
@@ -72,9 +75,7 @@ export class TracingComponent implements OnInit {
     this.isEditing = false;
   }
 
-  transformPerson(person: Person){
+  transformPerson(person: Person) {
     return person.name + " " + person.lastname + " - " + person.username;
   }
-
-
 }

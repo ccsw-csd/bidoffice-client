@@ -1,15 +1,15 @@
 export class OfferDataChapter{
 
   id: number;
-  presentation: boolean;
-  capabilities: boolean;
-  approach: boolean;
-  methodology: boolean;
-  workModel: boolean;
-  team: boolean;
-  planning: boolean;
-  valueAdded: boolean;
-  innovation: boolean;
-  references: boolean;
-  keyDocument: boolean;
+  presentation: boolean = false;
+  capabilities: boolean = false;
+  approach: boolean = false;
+  methodology: boolean = false;
+  workModel: boolean = false;
+  team: boolean = false;
+  planning: boolean = false;
+  valueAdded: boolean = false;
+  innovation: boolean = false;
+  references: boolean = false;
+  keyDocument: boolean = false;
 }

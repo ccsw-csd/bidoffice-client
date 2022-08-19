@@ -2,5 +2,5 @@ import { BaseClass } from "./BaseClass";
 
 export class OfferOffering{
   id: number;
-  offering: BaseClass;
+  offering: BaseClass = new BaseClass();
 }

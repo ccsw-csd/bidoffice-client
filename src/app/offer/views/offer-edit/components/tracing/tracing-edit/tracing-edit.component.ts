@@ -4,6 +4,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { OfferTracing } from 'src/app/offer/model/OfferTracing';
 import { Person } from 'src/app/offer/model/Person';
 import { OfferService } from 'src/app/offer/services/offer.service';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-tracing-edit',
@@ -34,8 +35,10 @@ export class TracingEditComponent implements OnInit {
 
   onSave(){
 
-    if(!this.tracingForm.invalid)
+    if(!this.tracingForm.invalid){
+      this.offerTracing.uuid = uuidv4();
       this.ref.close(this.offerTracing);
+    }
     else{
       Object.keys(this.tracingForm.controls).forEach(control => this.tracingForm.controls[control].markAsDirty());
       this.tracingForm.markAllAsTouched();

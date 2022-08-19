@@ -4,6 +4,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
 import { OfferDataFile } from 'src/app/offer/model/OfferDataFile';
 import { OfferService } from 'src/app/offer/services/offer.service';
+import {v4 as uuidv4} from 'uuid';
 
 @Component({
   selector: 'app-documentation-edit',
@@ -43,8 +44,10 @@ export class DocumentationEditComponent implements OnInit {
   }
 
   onSave(){
-    if(!this.dataFileForm.invalid)
+    if(!this.dataFileForm.invalid){
+      this.dataFile.uuid = uuidv4();
       this.ref.close(this.dataFile);
+    }
     else{
       Object.keys(this.dataFileForm.controls).forEach(control => this.dataFileForm.controls[control].markAsDirty());
       this.dataFileForm.markAllAsTouched();

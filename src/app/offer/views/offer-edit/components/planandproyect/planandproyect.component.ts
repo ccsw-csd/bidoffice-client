@@ -23,13 +23,13 @@ export class PlanandproyectComponent implements OnInit {
   selectedMethodology: BaseClass;
   groupPerson: [];
   person: string;
+  selectedPerson;
 
   @Input() data: Offer;
-  @Input() formValidator: FormGroup;
   constructor(private offerService: OfferService) { }
 
   ngOnInit(): void {
-
+    console.log(this.data)
     if(this.data.dataTeam == null)
       this.data.dataTeam = new OfferDataTeam();
     
@@ -40,6 +40,8 @@ export class PlanandproyectComponent implements OnInit {
     if(this.data.dataProject == null){
       this.data.dataProject = new OfferDataProject();
     }
+
+    this.selectedPerson = this.mappingPerson(this.data.teamPerson.map(item => item.person));
 
     this.getAllHyperscalers();
     this.getAllMethodologies();
@@ -90,12 +92,12 @@ export class PlanandproyectComponent implements OnInit {
     });
   }
 
-  checkValidation(control: string): boolean{
-
-    if(this.formValidator.get(control).invalid && this.formValidator.get(control).touched){
-      this.formValidator.controls[control].markAsDirty();
-      return true;
-    }
-    return false;
+  assignTeamPerson(){
+    this.data.teamPerson = this.selectedPerson.map(function(person){
+      return{
+        id: null,
+        person: person.value
+      }
+    })
   }
 }
