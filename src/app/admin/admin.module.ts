@@ -4,15 +4,15 @@ import { FileTypeListComponent } from './views/file-type-list/file-type-list.com
 import { HyperscalerListComponent } from './views/hyperscaler-list/hyperscaler-list.component';
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
 import { UserListComponent } from './views/user-list/user-list.component';
 import { UserEditComponent } from "./views/user-edit/user-edit.component";
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
-import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { HyperscalerEditComponent } from './views/hyperscaler-edit/hyperscaler-edit.component';
-import {TooltipModule} from 'primeng/tooltip';
+import { TooltipModule } from 'primeng/tooltip';
 import { FileTypeEditComponent } from './views/file-type-edit/file-type-edit.component';
 import { ToastModule } from 'primeng/toast';
 import { TechnologyListComponent } from './views/technology-list/technology-list.component';
@@ -20,7 +20,7 @@ import { OpportunityTypeListComponent } from './views/opportunity-type-list/oppo
 import { MethodologyEditComponent } from './views/methodology-edit/methodology-edit.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
 import { TechnologyEditComponent } from './views/technology-edit/technology-edit.component';
-import {ProjectTypeListComponent} from "./views/project-type-list/project-type-list.component";
+import { ProjectTypeListComponent } from "./views/project-type-list/project-type-list.component";
 
 @NgModule({
   declarations: [
