@@ -20,6 +20,7 @@ import { OpportunityTypeListComponent } from './views/opportunity-type-list/oppo
 import { MethodologyEditComponent } from './views/methodology-edit/methodology-edit.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
 import { TechnologyEditComponent } from './views/technology-edit/technology-edit.component';
+import {ProjectTypeListComponent} from "./views/project-type-list/project-type-list.component";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TechnologyEditComponent } from './views/technology-edit/technology-edit
     TechnologyEditComponent,
     OpportunityTypeListComponent,
     MethodologyEditComponent,
-    OfferingListComponent
+    OfferingListComponent,
+    ProjectTypeListComponent
 
   ],
   imports: [
