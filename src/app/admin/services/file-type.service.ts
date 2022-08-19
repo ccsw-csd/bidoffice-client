@@ -8,13 +8,21 @@ import { FileType } from '../model/FileType';
   providedIn: 'root'
 })
 export class FileTypeService {
+  
 
-  constructor(private http: HttpClient) { 
-
-  }
+  constructor(private http: HttpClient) { }
 
   getFileTypes(): Observable<FileType[]> {            
     return this.http.get<FileType[]>(environment.server +'/filetype/findAll');
-}
+  }
+
+  deleteFileTypeById(fileTypeId: number): Observable<any> {
+    return this.http.delete(environment.server+'/filetype/'+fileTypeId);
+  }  
+
+  saveFileType(fileType: FileType): Observable<any> {
+    let url='/filetype'
+    return this.http.put<FileType>(environment.server+url,fileType);
+  }
 
 }
