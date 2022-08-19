@@ -20,6 +20,9 @@ import { OpportunityTypeListComponent } from './views/opportunity-type-list/oppo
 import { MethodologyEditComponent } from './views/methodology-edit/methodology-edit.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
 import { OpportunityTypeEditComponent } from './views/opportunity-type-edit/opportunity-type-edit.component';
+import { TechnologyEditComponent } from './views/technology-edit/technology-edit.component';
+import {ProjectTypeListComponent} from "./views/project-type-list/project-type-list.component";
+
 
 @NgModule({
   declarations: [
@@ -31,11 +34,12 @@ import { OpportunityTypeEditComponent } from './views/opportunity-type-edit/oppo
     HyperscalerEditComponent,
     FileTypeEditComponent,
     TechnologyListComponent,
+    TechnologyEditComponent,
     OpportunityTypeListComponent,
     MethodologyEditComponent,
     OfferingListComponent,
-    OpportunityTypeEditComponent
-
+    OpportunityTypeEditComponent,
+    ProjectTypeListComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +51,6 @@ import { OpportunityTypeEditComponent } from './views/opportunity-type-edit/oppo
     DynamicDialogModule,
     TooltipModule,
     ToastModule,
-
   ]
 })
 export class AdminModule { }
