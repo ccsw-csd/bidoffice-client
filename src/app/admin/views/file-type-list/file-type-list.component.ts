@@ -67,10 +67,12 @@ export class FileTypeListComponent implements OnInit {
 
   deleteFileType(fileType: FileType) {    
     this.confirmationService.confirm({
-      header: "Confirmación",
-      message: 'Seguro que quiere borrar el item?',
+      header: "¡ Atención !",
+      message: 'Si borra el tipo de fichero, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
       acceptLabel:"Aceptar" ,
+      acceptIcon: "ui-icon-blank",
       rejectLabel:"Cancelar",
+      rejectIcon: "ui-icon-blank",
       rejectButtonStyleClass:"p-button-secondary",
       accept: () => 
       {

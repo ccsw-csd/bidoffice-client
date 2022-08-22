@@ -1,5 +1,5 @@
 <p-toast key="hyperscalerMessage" position="top-center"></p-toast>
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
+<p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
 <p-table [value]="listOfData" [scrollable]="true" [loading]="isLoading" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
@@ -14,10 +14,10 @@
                 <td style='flex: 0 0 150px;' >{{element.priority}}</td>  
                 <td style='flex: 0 0 150px;'>
                     <div>
-                        <button pButton type="button" (click)="editHyperscaler(element)" icon="pi pi-pencil"
+                        <button pButton type="button" (click)="editHyperscaler(element)" icon="pi pi-pencil" pTooltip="Editar hyperscaler" tooltipPosition="top"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>        
 
-                        <button pButton type="button"  (click)="deleteRow(element)" icon="pi pi-trash" 
+                        <button pButton type="button"  (click)="deleteRow(element)" icon="pi pi-trash" pTooltip="Borrar hyperscaler" tooltipPosition="top"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>        
                     </div>
                 </td>
@@ -26,7 +26,7 @@
 </p-table>
 
 <div  class="mt-3 flex justify-content-end">
-    <button pButton type="button" class="p-3" (click)="editHyperscaler()" label="Nuevo hyperscaler"></button>  
+    <button pButton type="button" class="p-3" (click)="editHyperscaler()" label="Nuevo Hyperscaler"></button>  
 </div>
 
 

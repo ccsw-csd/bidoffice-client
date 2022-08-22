@@ -95,10 +95,12 @@ export class HyperscalerListComponent implements OnInit {
 
   deleteRow(element: Hyperscaler): void{
     this.confirmationService.confirm({
-      header: 'Confirmación',
-      message: '¿Desea eliminar este elemento?',
+      header: '¡ Atención !',
+      message: 'Si borra el hyperscaler, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
       acceptLabel: 'Aceptar',
+      acceptIcon: 'ui-icon-blank',
       rejectLabel: 'Cerrar',
+      rejectIcon: 'ui-icon-blank',
       rejectButtonStyleClass: 'p-button-secondary',
       
       accept: () => {

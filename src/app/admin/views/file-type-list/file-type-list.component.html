@@ -1,5 +1,5 @@
 <p-toast key="fileTypeMessage" position="top-center"></p-toast>
-<p-confirmDialog header="Confirmation" [transitionOptions]="'0.1ms'" icon="pi pi-exclamation-triangle" ></p-confirmDialog>
+<p-confirmDialog header="Confirmation" [closable]="false" [transitionOptions]="'0.1ms'" icon="pi pi-exclamation-triangle" ></p-confirmDialog>
 <p-table [value]="dataSource" [scrollable]="true" [loading]="isloading" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
@@ -15,10 +15,9 @@
             <td style='flex: 0 0 220px'>
                 <div>
                     <button pButton type="button" icon="pi pi-pencil" (click)="editFileType(element)"
-                    class="p-button-rounded p-button-text p-button-plain icon"></button>
+                        pTooltip="Editar tipo de fichero" tooltipPosition="top" class="p-button-rounded p-button-text p-button-plain icon"></button>
                     <button pButton type="button" icon="pi pi-trash" (click)="deleteFileType(element)"
-                        class="p-button-rounded p-button-text p-button-plain icon">
-                    </button>
+                        pTooltip="Borrar tipo de fichero" tooltipPosition="top" class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>
         </tr>

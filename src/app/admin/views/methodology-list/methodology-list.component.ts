@@ -44,7 +44,8 @@ export class MethodologyListComponent implements OnInit {
     const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
       header: "Editar metodología",
       width: "40%",
-      data: {methodologyData: methodologyItem}
+      data: {methodologyData: methodologyItem},
+      closable: false
     });
 
     ref.onClose.subscribe( res => {
@@ -55,7 +56,8 @@ export class MethodologyListComponent implements OnInit {
   showCreateDialog() {
     const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
       header: "Crear metodología",
-      width: "40%"
+      width: "40%",
+      closable: false
     });
 
     ref.onClose.subscribe( res => {
@@ -65,11 +67,13 @@ export class MethodologyListComponent implements OnInit {
 
   deleteItem(methodologyItem?: Methodology){
     this.confirmationService.confirm({   
-      message: '¿Desea eliminar este elemento?',
-      header: 'Confirmación',
+      message: 'Si borra la metodologia, se eliminarán los datos de la misma.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
+      header: '¡ Atención !',
       icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Aceptar',
-      rejectLabel: 'Cerrar',
+      acceptIcon: 'ui-icon-blank',
+      rejectLabel: 'Cancelar',
+      rejectIcon: 'ui-icon-blank',
       rejectButtonStyleClass: 'p-button-secondary',
       accept: () => {
         this.methodologyService.delete(methodologyItem.id).subscribe({

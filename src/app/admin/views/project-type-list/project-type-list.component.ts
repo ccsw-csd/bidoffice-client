@@ -38,9 +38,11 @@ export class ProjectTypeListComponent implements OnInit {
   delete(element: ProjectType){
     this.confirmationService.confirm({
       header: "¡ Atención !",
-      message: 'Si borra el tipo de proyecto, se eliminarán los datos de la misma.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
+      message: 'Si borra el tipo de proyecto, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
       acceptLabel: 'Aceptar',
+      acceptIcon: 'ui-icon-blank',
       rejectLabel: 'Cancelar',
+      rejectIcon: 'ui-icon-blank',
       key: "projectTypeDeleteDialog",
       accept: () => {
         this.projectTypeService.delete(element.id).subscribe({

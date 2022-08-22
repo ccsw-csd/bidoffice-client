@@ -1,5 +1,5 @@
 <p-toast key="methodologyMessage" position="top-center"></p-toast>
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
+<p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
 <p-table [value]="methodologyItemList" [loading]="isLoading" [scrollable]="true" scrollHeight="calc(100vh - 200px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
     <tr>
@@ -14,10 +14,10 @@
             <td style='flex: 0 0 150px'>{{methodologyItem.priority}}</td>
             <td style='flex: 0 0 150px'>
                 <div>
-                    <button pButton type="button" icon="pi pi-pencil"
+                    <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar metodología" tooltipPosition="top"
                         class="p-button-rounded p-button-text p-button-plain icon"
                         (click)="showEditDialog(methodologyItem)"></button>
-                    <button pButton type="button"  (click)="deleteItem(methodologyItem)" icon="pi pi-trash"
+                    <button pButton type="button"  (click)="deleteItem(methodologyItem)" icon="pi pi-trash" pTooltip="Borrar metodología" tooltipPosition="top"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>
@@ -26,5 +26,5 @@
 </p-table>
 
 <div class="flex justify-content-end">
-    <button pButton type="button" class="p-3 p-button-info" (click)="showCreateDialog()">Crear Metodología</button>
+    <button pButton type="button" class="p-3 " label="Nueva Metodología" (click)="showCreateDialog()"></button>
 </div>

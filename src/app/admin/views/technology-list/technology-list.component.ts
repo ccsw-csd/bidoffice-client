@@ -40,7 +40,7 @@ export class TechnologyListComponent implements OnInit {
 
         if (technology != null) {
             this.ref = this.dialogService.open(TechnologyEditComponent, {
-                header: 'Editar tecnología: ' + technology.name,
+                header: 'Editar ' + technology.name,
                 width: '40%',
                 data: {
                     technologyData: technology
@@ -90,9 +90,11 @@ export class TechnologyListComponent implements OnInit {
 
         this.confirmationService.confirm({
             header: "¡ Atención !",
-            message: 'Si borra la tecnología, no se podrá utilizar en ninguna oferta.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
+            message: 'Si borra la tecnologia, se eliminarán los datos de la misma.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
             acceptLabel: 'Aceptar',
+            acceptIcon: 'ui-icon-blank',
             rejectLabel: 'Cancelar',
+            rejectIcon: 'ui-icon-blank',
             key: "techDeleteDialog",
             accept: () => {
                 this.technologyService.deleteTechnology(technology.id).subscribe({
