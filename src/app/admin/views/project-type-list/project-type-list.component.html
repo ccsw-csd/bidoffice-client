@@ -1,3 +1,5 @@
+<p-toast key="projectTypeMessage" position="top-center"></p-toast>
+<p-confirmDialog header="Confirmation" defaultFocus="none" rejectButtonStyleClass="p-button-secondary"  icon="pi pi-exclamation-triangle" key="projectTypeDeleteDialog" [transitionOptions]="'0ms'"></p-confirmDialog>
 <p-table [value]="listoOfData" [loading]="isLoading" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">
   <ng-template pTemplate="header">
     <tr>
@@ -15,7 +17,7 @@
           <button pButton type="button" icon="pi pi-pencil"
                   class="p-button-rounded p-button-text p-button-plain icon"></button>
           <button pButton type="button" icon="pi pi-trash"
-                  class="p-button-rounded p-button-text p-button-plain icon"></button>
+                  class="p-button-rounded p-button-text p-button-plain icon" (click)="delete(element)"></button>
         </div>
       </td>
     </tr>
