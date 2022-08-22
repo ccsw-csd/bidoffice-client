@@ -7,7 +7,7 @@ import { ConfirmationService, MessageService } from "primeng/api";
   selector: 'app-project-type-list',
   templateUrl: './project-type-list.component.html',
   styleUrls: ['./project-type-list.component.scss'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService, MessageService]
 })
 export class ProjectTypeListComponent implements OnInit {
 
@@ -39,11 +39,9 @@ export class ProjectTypeListComponent implements OnInit {
     this.confirmationService.confirm({
       header: "¡ Atención !",
       message: 'Si borra el tipo de proyecto, se eliminarán los datos de la misma.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
-      icon: 'pi pi-exclamation-triangle',
       acceptLabel: 'Aceptar',
       rejectLabel: 'Cancelar',
       key: "projectTypeDeleteDialog",
-      rejectButtonStyleClass: 'p-button-secondary',
       accept: () => {
         this.projectTypeService.delete(element.id).subscribe({
           next: () => {
