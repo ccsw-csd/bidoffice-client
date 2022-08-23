@@ -4,67 +4,68 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
 import { OfferDataFile } from 'src/app/offer/model/OfferDataFile';
 import { OfferService } from 'src/app/offer/services/offer.service';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-documentation-edit',
   templateUrl: './documentation-edit.component.html',
-  styleUrls: ['./documentation-edit.component.scss']
+  styleUrls: ['./documentation-edit.component.scss'],
 })
 export class DocumentationEditComponent implements OnInit {
-
   fileTypes: BaseClass[];
   dataFile: OfferDataFile = new OfferDataFile();
-  dataFileForm : FormGroup;
+  dataFileForm: FormGroup;
 
   constructor(
     private offerService: OfferService,
     public ref: DynamicDialogRef,
-    private formBuilder : FormBuilder) {}
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.dataFileForm = this.formBuilder.group
-    ({
+    this.dataFileForm = this.formBuilder.group({
       typeDoc: ['', Validators.required],
       nameFile: ['', Validators.required],
       link: ['', Validators.required],
-      observation: ['']
+      observation: [''],
     });
     this.getAllFileTypes();
   }
 
-  getAllFileTypes(){
+  getAllFileTypes() {
     this.offerService.getAllFileTypes().subscribe({
-      next: (res: BaseClass[]) => { 
+      next: (res: BaseClass[]) => {
         this.fileTypes = res;
       },
       error: () => {},
-      complete: () => {}     
+      complete: () => {},
     });
   }
 
-  onSave(){
-    if(!this.dataFileForm.invalid){
+  onSave() {
+    if (!this.dataFileForm.invalid) {
       this.dataFile.uuid = uuidv4();
       this.ref.close(this.dataFile);
-    }
-    else{
-      Object.keys(this.dataFileForm.controls).forEach(control => this.dataFileForm.controls[control].markAsDirty());
+    } else {
+      Object.keys(this.dataFileForm.controls).forEach((control) =>
+        this.dataFileForm.controls[control].markAsDirty()
+      );
       this.dataFileForm.markAllAsTouched();
     }
   }
 
-  onCancel(){
+  onCancel() {
     this.ref.close();
   }
 
-  checkValidation(control: string): boolean{
-
-    if(this.dataFileForm.get(control).invalid && this.dataFileForm.get(control).touched){
+  checkValidation(control: string): boolean {
+    if (
+      this.dataFileForm.get(control).invalid &&
+      this.dataFileForm.get(control).touched
+    ) {
       this.dataFileForm.controls[control].markAsDirty();
       return true;
     }
     return false;
   }
-
 }

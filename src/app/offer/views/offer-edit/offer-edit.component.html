@@ -1,20 +1,27 @@
 <p-tabView [(activeIndex)]="activeItem">
-    <p-tabPanel header="Oportunidad" [headerStyle]="{'color': 'green'}">
-        <app-chance [data]="offer" [formValidator]="offerForm.get('chance')"></app-chance>
-    </p-tabPanel>
-    <p-tabPanel header="Planificación y proyecto">
-        <app-planandproyect [data]="offer"></app-planandproyect>
-    </p-tabPanel>
-    <p-tabPanel header="Documentación">
-        <app-documentation [data]="offer"></app-documentation>
-    </p-tabPanel>
-    <p-tabPanel header="Capítulos de interés">
-        <app-interest [data]="offer"></app-interest>
-    </p-tabPanel>
-    <p-tabPanel header="Seguimiento">
-        <app-tracing [data]="offer"></app-tracing>
-    </p-tabPanel>
-    <div class="mt-3 flex justify-content-end">
-        <p-button (click)="onSave()" label="Guardar" [disabled]="offerForm.invalid"></p-button>
+  <p-tabPanel header="Oportunidad">
+    <app-chance [data]="offer" [formValidator]="offerForm.get('chance')"></app-chance>
+  </p-tabPanel>
+  <p-tabPanel header="Planificación y proyecto">
+    <app-planandproyect [data]="offer"></app-planandproyect>
+  </p-tabPanel>
+  <p-tabPanel header="Documentación">
+    <app-documentation [data]="offer"></app-documentation>
+  </p-tabPanel>
+  <p-tabPanel header="Capítulos de interés">
+    <app-interest [data]="offer"></app-interest>
+  </p-tabPanel>
+  <p-tabPanel header="Seguimiento">
+    <app-tracing [data]="offer"></app-tracing>
+  </p-tabPanel>
+  <div class="mt-3 flex justify-content-end">
+  </div>
+  <div class="ui-fluid formgrid grid justify-content-center">
+    <div class="p-fluid field col-12 md:col-3">
+      <p-button (click)="onClose()" styleClass="p-button-secondary" label="Cancelar"></p-button>
     </div>
+    <div class="p-fluid field col-12 md:col-3">
+      <p-button (click)="onSave()" label="Guardar" [disabled]="offerForm.invalid"></p-button>
+    </div>
+  </div>
 </p-tabView>

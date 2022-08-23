@@ -20,7 +20,7 @@ describe('OfferListComponent', () => {
   beforeEach(() =>{
 
     mockOfferService = jasmine.createSpyObj(["findPage"]);
-    offerListComponent = new OfferListComponent(mockOfferService, jasmine.createSpyObj([""]));
+    offerListComponent = new OfferListComponent(mockOfferService, jasmine.createSpyObj([""]), jasmine.createSpyObj([""]));
 
   })
 

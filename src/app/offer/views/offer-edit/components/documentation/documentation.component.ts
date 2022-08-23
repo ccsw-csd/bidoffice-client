@@ -6,12 +6,13 @@ import { OfferDataFile } from 'src/app/offer/model/OfferDataFile';
 import { OfferService } from 'src/app/offer/services/offer.service';
 import { DocumentationEditComponent } from './documentation-edit/documentation-edit.component';
 import { v4 as uuidv4 } from 'uuid';
-import {ConfirmationService} from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-documentation',
   templateUrl: './documentation.component.html',
   styleUrls: ['./documentation.component.scss'],
+  providers: [ConfirmationService],
 })
 export class DocumentationComponent implements OnInit {
   isEditing = false;
@@ -61,5 +62,22 @@ export class DocumentationComponent implements OnInit {
     this.isEditing = false;
   }
 
-  onDelete(dataFile: OfferDataFile) {}
+  onDeleteRow(dataFile: OfferDataFile) {
+    this.confirmationService.confirm({
+      header: 'Confirmación',
+      message: '¿Esta seguro que desea eliminar este registro?',
+      acceptLabel: 'Eliminar',
+      rejectLabel: 'Cancelar',
+      rejectButtonStyleClass: 'p-button-secondary',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      accept: () => {
+        this.data.dataFiles = this.data.dataFiles.filter(
+          (item) => item.uuid != dataFile.uuid
+        );
+      },
+      reject: () => {},
+    });
+  }
 }

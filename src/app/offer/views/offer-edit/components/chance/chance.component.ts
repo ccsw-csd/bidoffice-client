@@ -17,7 +17,7 @@ export class ChanceComponent implements OnInit {
   results: string[] = [];
   offerings: BaseClass[];
   technologies: BaseClass[];
-  OfferTypes: BaseClass[];
+  offerTypes: BaseClass[];
   sectors: BaseClass[];
   projectType: BaseClass[];
   persons: Person[];
@@ -93,7 +93,7 @@ export class ChanceComponent implements OnInit {
   getAllOfferTypes() {
     this.offerService.getAllOfferTypes().subscribe({
       next: (res: BaseClass[]) => {
-        this.OfferTypes = res;
+        this.offerTypes = res;
       },
       error: () => {},
       complete: () => {},
@@ -132,6 +132,7 @@ export class ChanceComponent implements OnInit {
 
   searchPerson($event) {
     if ($event.query != null) {
+      console.log($event);
       this.offerService.searchPerson($event.query).subscribe({
         next: (res: Person[]) => {
           this.groupPerson = res.map((person) => this.mappingPerson(person));
@@ -161,26 +162,34 @@ export class ChanceComponent implements OnInit {
   }
 
   assignOffering() {
-    this.data.offerings = this.selectedOfferings.map(item => this.createOfferingSelected(item))
+    this.data.offerings = this.selectedOfferings.map((item) =>
+      this.createOfferingSelected(item)
+    );
   }
 
-  createOfferingSelected(offering){
-    return{
+  createOfferingSelected(offering) {
+    return {
       id: this.data.offerings
-      .filter((item) => item.offering.id == offering.id).map(item => item.id).shift(),
+        .filter((item) => item.offering.id == offering.id)
+        .map((item) => item.id)
+        .shift(),
       offering: offering,
-    }
+    };
   }
 
   assignTechnologies() {
-    this.data.technologies = this.selectedTechnologies.map(item => this.createTechnologiesSelected(item));
+    this.data.technologies = this.selectedTechnologies.map((item) =>
+      this.createTechnologiesSelected(item)
+    );
   }
 
-  createTechnologiesSelected(technology: BaseClass){
-    return{
+  createTechnologiesSelected(technology: BaseClass) {
+    return {
       id: this.data.technologies
-      .filter((item) => item.technology.id == technology.id).map(item => item.id).shift(),
+        .filter((item) => item.technology.id == technology.id)
+        .map((item) => item.id)
+        .shift(),
       technology: technology,
-    }
+    };
   }
 }

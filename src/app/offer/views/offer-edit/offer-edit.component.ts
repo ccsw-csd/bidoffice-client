@@ -27,14 +27,13 @@ export class OfferEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.config.data != null){
-      this.offerStatus = "modificada";
+    if (this.config.data != null) {
+      this.offerStatus = 'modificada';
       this.offer = this.config.data;
-    } 
-    else{
-      this.offerStatus = "creada";
+    } else {
+      this.offerStatus = 'creada';
       this.offer = new Offer();
-    } 
+    }
 
     this.offerForm = this.formBuilder.group({
       chance: this.formBuilder.group({
@@ -50,11 +49,11 @@ export class OfferEditComponent implements OnInit {
         technologies: [''],
         opportunityType: ['', Validators.required],
         goNogoDate: [''],
-        deliveryDate: ['', Validators.required],
+        deliveryDate: [''],
         bdcCode: [''],
         opportunityWin: [''],
         observations: [''],
-      })
+      }),
     });
   }
 
@@ -62,28 +61,35 @@ export class OfferEditComponent implements OnInit {
     if (this.offerForm.valid) {
       this.offer.tracings.forEach((item) => delete item.uuid);
       this.offer.dataFiles.forEach((item) => delete item.uuid);
-      console.log(this.offer)
       this.offerService.save(this.offer).subscribe({
         next: (res: Offer) => {
           this.offer = res;
         },
         error: (err: HttpErrorResponse) => {
-          if(err.status == HttpStatusCode.UnprocessableEntity)
-            this.snackbarService.error("Los datos proporcionados no son válidos.")
+          if (err.status == HttpStatusCode.UnprocessableEntity)
+            this.snackbarService.error(
+              'Los datos proporcionados no son válidos.'
+            );
           else
-            this.snackbarService.error("Ha ocurrido un error. Intentelo de nuevo.")
+            this.snackbarService.error(
+              'Ha ocurrido un error. Intentelo de nuevo.'
+            );
         },
         complete: () => {
-          this.snackbarService.showMessage(`La oferta ha sido ${this.offerStatus} correctamente.`)
+          this.snackbarService.showMessage(
+            `La oferta ha sido ${this.offerStatus} correctamente.`
+          );
           this.ref.close();
-        }
-      })
-
+        },
+      });
     } else {
       Object.keys(this.offerForm.controls).forEach((control) =>
         this.offerForm.controls[control].markAsDirty()
       );
       this.offerForm.markAllAsTouched();
     }
+  }
+  onClose() {
+    this.ref.close();
   }
 }
