@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Hyperscaler } from '../../model/Hyperscaler';
 import { HyperscalerService } from '../../services/hyperscaler.service';
-import {ConfirmationService, MessageService} from 'primeng/api';
+import {ConfirmationService} from 'primeng/api';
 import {DialogService} from 'primeng/dynamicdialog';
 import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { HyperscalerEditComponent } from '../hyperscaler-edit/hyperscaler-edit.component';
-
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-hyperscaler',
@@ -24,7 +24,7 @@ export class HyperscalerListComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private dialogService: DialogService,
     private ref: DynamicDialogRef, 
-    private messageService: MessageService
+    private snackbarService: SnackbarService,
     ) { }
 
   ngOnInit(): void {
@@ -77,21 +77,6 @@ export class HyperscalerListComponent implements OnInit {
     });
   }
 
-  showSuccesMessage(): void{
-    this.messageService.add({
-      key:'hyperscalerMessage',
-      severity:'success', 
-      summary:'Confirmado', 
-      detail:'El registro se ha borrado con éxito'});
-  }
-
-  showErrorMessage(): void{
-    this.messageService.add({
-      key:'hyperscalerMessage',
-      severity:'error', 
-      summary:'Error', 
-      detail:'El registro no puede ser eliminado porque se está usando en alguna oferta'});
-  }
 
   deleteRow(element: Hyperscaler): void{
     this.confirmationService.confirm({
@@ -106,11 +91,11 @@ export class HyperscalerListComponent implements OnInit {
       accept: () => {
         this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
           next:() => {
-            this.showSuccesMessage()
+            this.snackbarService.showMessage('El registro se ha borrado con éxito')
             this.getDataHyperscaler()
           },
           error:() => {
-            this.showErrorMessage()
+            this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
             this.getDataHyperscaler()
           } 
         })

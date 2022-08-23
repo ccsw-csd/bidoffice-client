@@ -3,7 +3,8 @@ import { Methodology } from '../../model/Methodology';
 import { MethodologyService } from '../../services/methodology.service';
 import { MethodologyEditComponent } from '../methodology-edit/methodology-edit.component';
 import { DialogService } from 'primeng/dynamicdialog';
-import {ConfirmationService, MessageService} from 'primeng/api';
+import {ConfirmationService} from 'primeng/api';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-methodology-list',
@@ -21,7 +22,7 @@ export class MethodologyListComponent implements OnInit {
     private methodologyService: MethodologyService,
     private dynamicDialogService: DialogService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService) { }
+    private snackbarService: SnackbarService,) { }
 
   ngOnInit(): void {
     this.findAll();
@@ -81,11 +82,11 @@ export class MethodologyListComponent implements OnInit {
             this.findAll()
           },
           error:() => {
-            this.showErrorMessage()
+            this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
             this.findAll()
           },
-          complete: () => {
-            this.showSuccessMessage();
+          complete: () => {     
+            this.snackbarService.showMessage('El registro se ha borrado con éxito')
           } 
         })
       },
@@ -93,21 +94,5 @@ export class MethodologyListComponent implements OnInit {
         this.findAll()
       }
     });
-  }
-
-  showErrorMessage(){
-    this.messageService.add({
-      key: 'methodologyMessage',
-      severity:'error', 
-      summary:'Error', 
-      detail:'El registro no puede ser eliminado porque se está usando en alguna oferta'});
-  }
-  
-  showSuccessMessage(){
-    this.messageService.add({
-      key: 'methodologyMessage',
-      severity:'success', 
-      summary:'Éxito', 
-      detail:'La operación se ha llevado a cabo correctamente'});
   }
 }

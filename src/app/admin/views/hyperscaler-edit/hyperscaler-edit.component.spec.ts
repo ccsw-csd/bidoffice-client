@@ -7,18 +7,18 @@ import { HyperscalerEditComponent } from './hyperscaler-edit.component';
 
 describe('HyperscalerEditComponent', () => {
   let hyperscalerEdit: HyperscalerEditComponent;
-  let mockHyperscalerService, mockDialogConfig, mockDynamicDialogRef, mockMessageService
+  let mockHyperscalerService, mockDialogConfig, mockDynamicDialogRef, mockSnackService;
   
   beforeEach( () => {
     mockHyperscalerService = jasmine.createSpyObj(["getDataHyperscaler","deleteHyperscaler","saveHyperscaler"])
     mockDialogConfig = jasmine.createSpyObj([""])
     mockDynamicDialogRef = jasmine.createSpyObj(["close"])
-    mockMessageService = jasmine.createSpyObj(["add"])
+    
     hyperscalerEdit = new HyperscalerEditComponent(
       mockDynamicDialogRef,
       mockDialogConfig,     
       mockHyperscalerService,
-      mockMessageService
+      mockSnackService = jasmine.createSpyObj(["error","showMessage"])
       )
   });
 

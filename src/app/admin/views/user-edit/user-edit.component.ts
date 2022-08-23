@@ -4,7 +4,7 @@ import { UserService } from '../../services/user.service';
 import { RoleService } from "../../services/role.service";
 import { DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 import { RoleClass } from "../../model/RoleClass";
-import { MessageService } from "primeng/api";
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-user-edit',
@@ -22,7 +22,7 @@ export class UserEditComponent implements OnInit {
     private roleService: RoleService,
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
-    private messageService: MessageService
+    private snackbarService: SnackbarService
   ) { }
 
   ngOnInit(): void {
@@ -36,11 +36,11 @@ export class UserEditComponent implements OnInit {
     if(item.username != "" && item.email != "") {
       this.userService.saveUser(item).subscribe({
         next: () => {
-          this.showSuccessMessage();
+          this.snackbarService.showMessage('El registro se ha guardado con éxito')
           this.onClose();
         },
         error: () => {
-          this.showErrorMessage();
+          this.snackbarService.error('Error'); 
         }
       });
     }
@@ -49,21 +49,4 @@ export class UserEditComponent implements OnInit {
   onClose(){
     this.ref.close();
   }
-
-  showSuccessMessage(){
-    this.messageService.add({
-      key: 'userMessage',
-      severity:'success',
-      summary:'Éxito',
-      detail:'La operación se ha llevado a cabo correctamente'});
-  }
-
-  showErrorMessage(){
-    this.messageService.add({
-      key: 'userMessage',
-      severity:'error',
-      summary:'Error',
-      detail:'Error'});
-  }
-
 }

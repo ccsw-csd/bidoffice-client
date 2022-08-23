@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FileTypeService } from '../../services/file-type.service';
 import { FileType } from '../../model/FileType';
 import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FileTypeEditComponent } from '../file-type-edit/file-type-edit.component';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-file-type',
@@ -20,8 +20,8 @@ export class FileTypeListComponent implements OnInit {
   constructor(
     private fileTypeService: FileTypeService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService,
     public dialogService: DialogService,
+    private snackbarService: SnackbarService
     ) { }
 
   ngOnInit(): void {
@@ -78,11 +78,11 @@ export class FileTypeListComponent implements OnInit {
       {
         this.fileTypeService.deleteFileTypeById(fileType.id).subscribe({
           next: () =>{
-            this.showMessageDeleted()
+            this.snackbarService.showMessage('El registro ha sido borrado con éxito')
             this.getFileTypes()
           },
           error:() =>{            
-            this.showMessageError();
+            this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
             this.getFileTypes()
           }
         })
@@ -92,11 +92,4 @@ export class FileTypeListComponent implements OnInit {
       }
     })
   }  
-
-  showMessageError(){
-    this.messageService.add({key: 'fileTypeMessage', severity:'error', summary: 'ERROR', detail: 'No puedes borrar un item asociado a una oferta'});
-  }
-  showMessageDeleted(){
-    this.messageService.add({key: 'fileTypeMessage', severity:'success', summary: 'Confirmado', detail: 'El registro ha sido borrado con éxito'});
-  }
 }

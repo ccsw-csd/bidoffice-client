@@ -12,15 +12,17 @@ describe('UserEditComponent', () => {
   let ref;
   let dynamicDialogConfig;
   let messageService;
+  let mockSnackService
+  
 
 
   beforeEach(async () => {
     mockUserService = jasmine.createSpyObj(["saveUser"]);
     mockRoleService = jasmine.createSpyObj(["getRoles"]);
-    ref = jasmine.createSpyObj([""]);
+    ref = jasmine.createSpyObj(["close"]);
     dynamicDialogConfig = jasmine.createSpyObj([""]);
-    messageService = jasmine.createSpyObj([""]);
-    userEditComponent = new UserEditComponent(mockUserService, mockRoleService, ref, dynamicDialogConfig, messageService);
+    mockSnackService = jasmine.createSpyObj(["error","showMessage"])
+    userEditComponent = new UserEditComponent(mockUserService, mockRoleService, ref, dynamicDialogConfig, mockSnackService);
   });
 
   it("editUserShouldUpdate", ()=>{

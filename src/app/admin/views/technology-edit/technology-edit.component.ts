@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { Technology } from '../../model/Technology';
 import { TechnologyService } from '../../services/technology.service';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
     selector: 'app-technology-edit',
@@ -18,7 +18,7 @@ export class TechnologyEditComponent implements OnInit {
     constructor(
         private ref: DynamicDialogRef,
         private config: DynamicDialogConfig,
-        private messageService: MessageService,
+        private snackbarService: SnackbarService,
         private technologyService: TechnologyService
     ) { }
 
@@ -38,36 +38,12 @@ export class TechnologyEditComponent implements OnInit {
     saveChanges(technology: Technology) {
         this.technologyService.saveTechnology(technology).subscribe({
             next: () => {
-                this.showSuccessMessage();
+                this.snackbarService.showMessage('El registro se ha guardado con éxito')
                 this.close();
             },
             error: () => {
-                this.showErrorMessage();
+                this.snackbarService.error('El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar');
             }
-        });
-    }
-
-    /**
-     * Muestra un mensaje de error.
-     */
-    showErrorMessage(): void{
-        this.messageService.add({
-            key:'technologyMessage',
-            severity:'error', 
-            summary:'Error', 
-            detail:'El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar.'
-        });
-    }
-
-    /**
-     * Muestra una confirmación al guardar la tecnología.
-     */
-    showSuccessMessage(): void{
-        this.messageService.add({
-            key:'technologyMessage',
-            severity:'success', 
-            summary:'Confirmado', 
-            detail:'El registro se ha guardado con éxito'
         });
     }
 

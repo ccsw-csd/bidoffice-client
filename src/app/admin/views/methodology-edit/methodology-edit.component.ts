@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Methodology } from '../../model/Methodology';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MethodologyService } from '../../services/methodology.service';
-import { MessageService } from 'primeng/api';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-methodology-edit',
@@ -16,7 +16,7 @@ export class MethodologyEditComponent implements OnInit {
   constructor(private methodologyService: MethodologyService,
     public ref: DynamicDialogRef, 
     public config: DynamicDialogConfig,
-    private messageService: MessageService) { }
+    private snackbarService: SnackbarService,) { }
 
   ngOnInit(): void {
     
@@ -32,11 +32,11 @@ export class MethodologyEditComponent implements OnInit {
     if (item.name != "" && item.priority > 0) {
       this.methodologyService.saveMethodology(item).subscribe({
         next: () => { 
-          this.showSuccessMessage();
+          this.snackbarService.showMessage('El registro se ha guardado con éxito')
           this.onClose();
         },
         error: () => { 
-          this.showErrorMessage();
+          this.snackbarService.error('El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar');
         }
       });
     }
@@ -46,19 +46,4 @@ export class MethodologyEditComponent implements OnInit {
     this.ref.close();
   }
 
-  showSuccessMessage(){
-    this.messageService.add({
-      key: 'methodologyMessage',
-      severity:'success', 
-      summary:'Éxito', 
-      detail:'La operación se ha llevado a cabo correctamente'});
-  }
-
-  showErrorMessage(){
-    this.messageService.add({
-      key: 'methodologyMessage',
-      severity:'error', 
-      summary:'Error', 
-      detail:'Ya hay un item con el mismo nombre y/o prioridad'});
-  }
 }

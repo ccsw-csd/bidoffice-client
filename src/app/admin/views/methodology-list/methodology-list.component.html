@@ -1,6 +1,6 @@
-<p-toast key="methodologyMessage" position="top-center"></p-toast>
+<p-toast position="top-center"></p-toast>
 <p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
-<p-table [value]="methodologyItemList" [loading]="isLoading" [scrollable]="true" scrollHeight="calc(100vh - 200px)" responsiveLayout="scroll">
+<p-table [value]="methodologyItemList" [loading]="isLoading" [scrollable]="true" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
     <tr>
         <th pSortableColumn="name"> Nombre <p-sortIcon field="name"></p-sortIcon></th>
@@ -25,6 +25,6 @@
     </ng-template>
 </p-table>
 
-<div class="flex justify-content-end">
+<div class="mt-3 flex justify-content-end">
     <button pButton type="button" class="p-3 " label="Nueva Metodología" (click)="showCreateDialog()"></button>
 </div>
