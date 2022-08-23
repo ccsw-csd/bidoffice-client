@@ -8,16 +8,16 @@ describe('FileTypeEditComponent', () => {
     let mockDynamicDialogRef: any;
     let mockDynamicDialogConfig: any;
     let mockFileTypeService: any;
-    let mockMessageService: any;
+    let mockSnackService;
 
     beforeEach(() => {
       
       mockFileTypeService = jasmine.createSpyObj(['saveFileType','getFileTypes']);
-      mockMessageService = jasmine.createSpyObj(['add']);
+      mockSnackService = jasmine.createSpyObj(["error","showMessage"])
       mockDynamicDialogConfig= jasmine.createSpyObj(['']);
       mockDynamicDialogRef= jasmine.createSpyObj(['close']);
 
-      fileTypeEditComponent = new FileTypeEditComponent(mockDynamicDialogRef,mockDynamicDialogConfig,mockFileTypeService,mockMessageService );
+      fileTypeEditComponent = new FileTypeEditComponent(mockDynamicDialogRef,mockDynamicDialogConfig,mockFileTypeService,mockSnackService);
       });
   
       it("editFileTypeShouldEdit",()=>{

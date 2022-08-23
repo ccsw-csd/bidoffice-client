@@ -82,7 +82,8 @@ export class UserListComponent implements OnInit {
     const dialogRef = this.dynamicDialogService.open(UserEditComponent,{
       header: "Editar Usuario",
       width: "30%",
-      data: {user: user}
+      data: {user: user},
+      closable: false
     })
 
     dialogRef.onClose.subscribe(res =>{

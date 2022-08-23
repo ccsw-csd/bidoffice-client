@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectType } from "../../model/ProjectType";
 import { ProjectTypeService } from "../../services/project-type.service";
-import { ConfirmationService, MessageService } from "primeng/api";
+import { ConfirmationService } from "primeng/api";
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-project-type-list',
   templateUrl: './project-type-list.component.html',
   styleUrls: ['./project-type-list.component.scss'],
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService]
 })
 export class ProjectTypeListComponent implements OnInit {
 
@@ -17,7 +18,7 @@ export class ProjectTypeListComponent implements OnInit {
   constructor(
     private projectTypeService: ProjectTypeService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private snackbarService: SnackbarService,
   ) { }
 
   ngOnInit(): void {
@@ -38,9 +39,11 @@ export class ProjectTypeListComponent implements OnInit {
   delete(element: ProjectType){
     this.confirmationService.confirm({
       header: "¡ Atención !",
-      message: 'Si borra el tipo de proyecto, se eliminarán los datos de la misma.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
+      message: 'Si borra el tipo de proyecto, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
       acceptLabel: 'Aceptar',
+      acceptIcon: 'ui-icon-blank',
       rejectLabel: 'Cancelar',
+      rejectIcon: 'ui-icon-blank',
       key: "projectTypeDeleteDialog",
       accept: () => {
         this.projectTypeService.delete(element.id).subscribe({
@@ -48,11 +51,11 @@ export class ProjectTypeListComponent implements OnInit {
             this.findAll();
           },
           error:() => {
-            this.showErrorMessage();
+            this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
             this.findAll();
           },
           complete: () => {
-            this.showSuccessMessage();
+            this.snackbarService.showMessage('El registro se ha borrado con éxito')
           }
         });
       },
@@ -60,22 +63,6 @@ export class ProjectTypeListComponent implements OnInit {
         this.findAll();
       }
     });
-  }
-
-  showErrorMessage() {
-    this.messageService.add({
-      key: 'methodologyMessage',
-      severity:'error',
-      summary:'Error',
-      detail:'El tipo de prouecto no puede ser eliminado porque se está usando en alguna oferta'});
-  }
-
-  showSuccessMessage(){
-    this.messageService.add({
-      key: 'projectTypeMessage',
-      severity:'success',
-      summary:'Éxito',
-      detail:'La operación se ha llevado a cabo correctamente'});
   }
 
 }

@@ -5,7 +5,7 @@ import { HyperscalerListComponent } from './hyperscaler-list.component';
 
 
 
-describe('HyperscalerComponent', () => {
+describe('HyperscalerListComponent', () => {
   let hyperscaler: HyperscalerListComponent
   let mockHyperscalerService, mockConfirmationService, mockMessageService, mockDynamicDialogRef, mockDialogService
 

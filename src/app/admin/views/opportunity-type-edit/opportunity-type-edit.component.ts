@@ -31,7 +31,7 @@ export class OpportunityTypeEditComponent implements OnInit {
         this.closeWindow()
       },
       error: () =>{
-        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta'); 
+        this.snackbarService.error('El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar'); 
       }
     })
   }

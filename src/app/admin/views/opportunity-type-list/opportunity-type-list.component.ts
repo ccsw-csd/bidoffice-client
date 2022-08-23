@@ -42,10 +42,12 @@ export class OpportunityTypeListComponent implements OnInit {
 
   deleteRow(item: OpportunityType){
     this.confirmationService.confirm({
-      header: 'Confirmación',
-      message: '¿Desea eliminar este elemento?',
+      header: "¡ Atención !",
+      message: 'Si borra el tipo de oportunidad, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
       acceptLabel: 'Aceptar',
-      rejectLabel: 'Cerrar',
+      acceptIcon: 'ui-icon-blank',
+      rejectLabel: 'Cancelar',
+      rejectIcon: 'ui-icon-blank',
       rejectButtonStyleClass: 'p-button-secondary',
       accept: () =>{
         this.opportunityService.delete(item.id).subscribe({

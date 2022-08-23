@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileType } from '../../model/FileType';
 import { FileTypeService } from '../../services/file-type.service';
@@ -19,7 +19,7 @@ export class FileTypeEditComponent implements OnInit {
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
     private fileTypeService: FileTypeService, 
-    private messageService: MessageService
+    private snackbarService: SnackbarService
   ) { }
 
   ngOnInit(): void {
@@ -35,33 +35,15 @@ export class FileTypeEditComponent implements OnInit {
   onSave(fileType: FileType) {
       this.fileTypeService.saveFileType(fileType).subscribe({
         next: ()=> {
-          this.showSuccessMessage();
+          this.snackbarService.showMessage('El registro se ha guardado con éxito')
           this.ref.close();
         }, 
         error: ()=>{
-          this.showErrorMessage();
+          this.snackbarService.error('El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar');
         }
       })
   }
   
-  showErrorMessage(){
-    this.messageService.add({
-      key:'fileTypeMessage',
-      severity:'error',
-      summary:'Error',
-      detail:'El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar'
-    })
-  }
-
-  showSuccessMessage(){
-    this.messageService.add({
-      key:'fileTypeMessage',
-      severity:'success',
-      summary:'Confirmado',
-      detail:'El registro se ha guardado con éxito'
-    })
-  }
-
   onClose() {
     this.ref.close();
   }
