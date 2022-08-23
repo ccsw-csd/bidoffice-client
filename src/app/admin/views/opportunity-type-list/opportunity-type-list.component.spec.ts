@@ -10,7 +10,9 @@ describe('OpportunityTypeListComponent', () => {
   let opportunityTypeList: OpportunityTypeListComponent;
   let mockOpportunityTypeService;
   let mockConfirmationService;
-  let mockMessageService;
+  let mockSnackService;
+  let mockDialogRef;
+  let mockDialogService;
 
   let DATA_LIST = [
     new OpportunityType({id:1, name:"Name 1", priority: 1}),
@@ -22,15 +24,18 @@ describe('OpportunityTypeListComponent', () => {
   ]
 
   beforeEach(() => {
-    mockOpportunityTypeService = jasmine.createSpyObj(["findAll","delete"])
-    mockConfirmationService = jasmine.createSpyObj(["confirm","close"])
-    mockMessageService = [""]
+    mockOpportunityTypeService = jasmine.createSpyObj(["findAll","delete","save"])
+    mockConfirmationService = jasmine.createSpyObj(["confirm","close","onAccept"])
+    mockSnackService = jasmine.createSpyObj(["error","showMessage"])
+    mockDialogRef = jasmine.createSpyObj([""])
+    mockDialogService = jasmine.createSpyObj([""])
     opportunityTypeList = new OpportunityTypeListComponent(
       mockOpportunityTypeService,
-      mockMessageService,
-      mockConfirmationService
+      mockConfirmationService,
+      mockDialogRef,
+      mockDialogService,
+      mockSnackService,
       );
-
   });
 
   it('findAllTypeShouldReturnOpportunityTypeList', () =>{

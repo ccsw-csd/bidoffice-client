@@ -10,19 +10,19 @@ describe('TechnologyEditComponent', () => {
     let mockDynamicDialogRef: any;
     let mockDynamicDialogConfig: any;
     let mockTechnologyService: any;
-    let mockMessageService: any;
+    let mockSnackService;
 
     beforeEach(() => {
 
         mockTechnologyService = jasmine.createSpyObj(["saveTechnology", "deleteTechnology", "findAll"]);
-        mockMessageService = jasmine.createSpyObj(["add"]);
+        mockSnackService = jasmine.createSpyObj(["error","showMessage"])
         mockDynamicDialogConfig = jasmine.createSpyObj(['']);
         mockDynamicDialogRef = jasmine.createSpyObj(['close']);
 
         technologyEditComponent = new TechnologyEditComponent(
             mockDynamicDialogRef,
             mockDynamicDialogConfig,
-            mockMessageService,
+            mockSnackService,
             mockTechnologyService
         )
     });

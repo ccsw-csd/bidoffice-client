@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Technology } from '../../model/Technology';
 import { TechnologyService } from '../../services/technology.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService} from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { TechnologyEditComponent } from '../technology-edit/technology-edit.component';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
     selector: 'app-technology-list',
     templateUrl: './technology-list.component.html',
     styleUrls: ['./technology-list.component.scss'],
-    providers: [ConfirmationService, MessageService, DynamicDialogRef, DynamicDialogConfig, DialogService]
+    providers: [ConfirmationService,  DynamicDialogRef, DynamicDialogConfig, DialogService]
 })
 
 export class TechnologyListComponent implements OnInit {
@@ -23,8 +24,8 @@ export class TechnologyListComponent implements OnInit {
     constructor(
         private technologyService: TechnologyService,
         private confirmationService: ConfirmationService,
-        private messageService: MessageService,
         private dialogService: DialogService,
+        private snackbarService: SnackbarService,
         private ref: DynamicDialogRef
     ) { }
 
@@ -40,7 +41,7 @@ export class TechnologyListComponent implements OnInit {
 
         if (technology != null) {
             this.ref = this.dialogService.open(TechnologyEditComponent, {
-                header: 'Editar tecnología: ' + technology.name,
+                header: 'Editar ' + technology.name,
                 width: '40%',
                 data: {
                     technologyData: technology
@@ -90,28 +91,20 @@ export class TechnologyListComponent implements OnInit {
 
         this.confirmationService.confirm({
             header: "¡ Atención !",
-            message: 'Si borra la tecnología, no se podrá utilizar en ninguna oferta.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
+            message: 'Si borra la tecnologia, se eliminarán los datos de la misma.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
             acceptLabel: 'Aceptar',
+            acceptIcon: 'ui-icon-blank',
             rejectLabel: 'Cancelar',
+            rejectIcon: 'ui-icon-blank',
             key: "techDeleteDialog",
             accept: () => {
                 this.technologyService.deleteTechnology(technology.id).subscribe({
                     next: () => {
-                        this.showMessage(
-                            'technologyMessage',
-                            'success',
-                            'Confirmado',
-                            'El registro se ha borrado con éxito.'
-                        );
+                        this.snackbarService.showMessage('El registro se ha borrado con éxito')
                         this.findAll();
                     },
                     error:() => {
-                        this.showMessage(
-                            'technologyMessage',
-                            'error',
-                            'ERROR',
-                            'No es posible eliminar una tecnología utilizada en al menos una oferta.'
-                        );
+                        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
                         this.findAll();
                     }
                 });
@@ -122,21 +115,4 @@ export class TechnologyListComponent implements OnInit {
         });
     }
 
-    /**
-     * Muestra un mensaje de error o de éxito.
-     * 
-     * @param _key Tipo de error.
-     * @param _severity Severidad del error.
-     * @param _summary 
-     * @param _detail Mensaje de error a mostrar.
-     */
-    showMessage(_key: string, _severity: string, _summary: string, _detail: string) {
-
-        this.messageService.add({
-            key: _key,
-            severity: _severity,
-            summary: _summary,
-            detail: _detail
-        });
-    }
 }

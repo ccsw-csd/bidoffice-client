@@ -12,6 +12,7 @@ describe('UserListComponent', () => {
   let cdRef;
   let mockUserService;
   let dynamicDialogService
+  let mockSnackService
 
   let ROLE = new RoleClass({id: 2, name: "User"})
 
@@ -23,6 +24,7 @@ describe('UserListComponent', () => {
     mockUserService = jasmine.createSpyObj(["findPage"]);
     cdRef = jasmine.createSpyObj([""]);
     dynamicDialogService = jasmine.createSpyObj([""])
+    mockSnackService = jasmine.createSpyObj(["error","showMessage"])
     userListComponent = new UserListComponent(mockUserService, cdRef, dynamicDialogService);
   })
 

@@ -19,4 +19,8 @@ export class OpportunityTypeService {
     return this.http.delete<any>(environment.server + "/opportunitytype/"+ id);
   }
 
+  save(item: OpportunityType): Observable<OpportunityType>{
+    return this.http.put<OpportunityType>(environment.server + "/opportunitytype",item)
+  }
+
 }

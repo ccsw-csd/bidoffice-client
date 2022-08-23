@@ -15,4 +15,8 @@ export class ProjectTypeService {
     return this.http.get<ProjectType[]>(environment.server + "/projecttype/findAll");
   }
 
+  delete(id: number): Observable<any> {
+    return this.http.delete<any>(environment.server + "/projecttype/" + id);
+  }
+
 }

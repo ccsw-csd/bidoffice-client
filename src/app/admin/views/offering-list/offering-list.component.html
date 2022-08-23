@@ -1,4 +1,4 @@
-<p-table [value]="offeringList" [scrollable]="true" scrollHeight="calc(100vh - 160px)" responsiveLayout="scroll">
+<p-table [value]="offeringList" [scrollable]="true" scrollHeight="calc(100vh -184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
     <tr>
         <th pSortableColumn="name">Nombre <p-sortIcon field="name"></p-sortIcon></th>
@@ -12,9 +12,9 @@
             <td style='flex: 0 0 150px'>{{offeringList.priority}}</td>
             <td style='flex: 0 0 150px'>
                 <div>
-                    <button pButton type="button" icon="pi pi-pencil"
+                    <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar offering" tooltipPosition="top"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
-                    <button pButton type="button" icon="pi pi-times"
+                    <button pButton type="button" icon="pi pi-trash" pTooltip="Borrar offering" tooltipPosition="top"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>

@@ -10,7 +10,7 @@ describe('MethodologyEditComponent', () => {
   let mockDynamicDialogRef: any;
   let mockDynamicDialogConfig: any;
   let mockMethodologyService: any;
-  let mockMessageService;
+  let mockSnackService;
 
   beforeEach(() => {
     let METHODOLOGY: Methodology[];
@@ -20,9 +20,9 @@ describe('MethodologyEditComponent', () => {
     mockMethodologyService = jasmine.createSpyObj(['saveMethodology']);
     mockDynamicDialogRef = jasmine.createSpyObj(['close', 'onClose', 'destroy', 'onDestroy']);
     mockDynamicDialogConfig = jasmine.createSpyObj(['']);
-    mockMessageService = jasmine.createSpyObj(["add"]);
+    mockSnackService = jasmine.createSpyObj(["error","showMessage"])
         
-    methodologyEditComponent = new MethodologyEditComponent(mockMethodologyService,mockDynamicDialogRef,mockDynamicDialogConfig, mockMessageService);
+    methodologyEditComponent = new MethodologyEditComponent(mockMethodologyService,mockDynamicDialogRef,mockDynamicDialogConfig, mockSnackService);
   });
 
   it("editMethodologyShouldUpdate",()=>{
