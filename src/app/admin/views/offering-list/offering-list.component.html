@@ -14,9 +14,9 @@
             <td style='flex: 0 0 220px'>{{offeringList.priority}}</td>
             <td style='flex: 0 0 220px'>
                 <div>
-                    <button pButton type="button" icon="pi pi-pencil" (click)="saveOffering(offeringList)"
+                    <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar offering" tooltipPosition="top" (click)="saveOffering(offeringList)"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
-                    <button pButton type="button" icon="pi pi-trash" (click)="deleteOffering(offeringList)"
+                    <button pButton type="button" icon="pi pi-trash" pTooltip="Borrar offering" tooltipPosition="top" (click)="deleteOffering(offeringList)"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>

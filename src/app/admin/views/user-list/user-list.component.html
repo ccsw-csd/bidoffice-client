@@ -1,5 +1,6 @@
+<p-toast position="top-center"></p-toast> 
 <div class="flex-column">
-
+  <p-toast key="userMessage" position="top-center"></p-toast>
   <div class="grid p-fluid p-inputtext-sm">
     <div class="col-12 md:col-4">
       <div class="p-float-label field">
@@ -13,11 +14,11 @@
         <label for="name">Name</label>
       </div>
     </div>
-    <div class="col-12 md:col-1">
-      <button pButton type="button" label="Filtrar" icon="pi pi-filter" (click)="loadPage(lastTableLazyLoadEvent)"></button>
+    <div class=" md:col-1">
+      <button pButton type="button" label="Filtrar" (click)="loadPage(lastTableLazyLoadEvent)"></button>
     </div>
-    <div class="col-12 md:col-1">
-      <button pButton type="button" label="Limpiar" icon="pi pi-times" class="p-button-danger" (click)="onCleanFilter()"></button>
+    <div class=" md:col-1">
+      <button pButton type="button" label="Limpiar" class="p-button-danger" (click)="onCleanFilter()"></button>
     </div>
   </div>
 
@@ -49,8 +50,9 @@
         <td>{{element.role.name}}</td>
         <td style='flex: 0 0 150px;'>
           <div>
-            <button pButton type="button" icon="pi pi-pencil"
-                    class="p-button-rounded p-button-text p-button-plain icon"></button>
+            <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar usuario" tooltipPosition="top"
+                    class="p-button-rounded p-button-text p-button-plain icon"
+                    (click)="showEditDialog(element)"></button>
           </div>
         </td>
       </tr>

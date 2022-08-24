@@ -34,7 +34,9 @@ export class NavComponent implements OnInit {
           {label: 'Hyperscaler', routerLink: '/hyperscaler'},
           {label: "Metodologías", routerLink: '/methodology'},
           {label: "Tecnologías", routerLink: '/technology'},
-          {label: "Offering", routerLink: '/offering'}
+          {label: "Tipos de oportunidad", routerLink: '/opportunitytype'},
+          {label: "Offering", routerLink: '/offering'},
+          {label: "Tipos de proyecto", routerLink: '/projecttype'}
         ]
       },
       {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'},
