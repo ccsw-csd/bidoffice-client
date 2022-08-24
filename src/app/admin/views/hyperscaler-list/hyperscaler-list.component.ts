@@ -7,17 +7,19 @@ import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { HyperscalerEditComponent } from '../hyperscaler-edit/hyperscaler-edit.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-hyperscaler',
   templateUrl: './hyperscaler-list.component.html',
   styleUrls: ['./hyperscaler-list.component.scss'],
-  providers: [ConfirmationService,DialogService,DynamicDialogRef,DynamicDialogConfig]
+  providers: [DialogService,DynamicDialogRef,DynamicDialogConfig]
 })
 export class HyperscalerListComponent implements OnInit {
   public listOfData: Hyperscaler[]
   public cols: any[];
   public isLoading: boolean = false
+  public accept: any
 
   
   constructor(private hyperscalerService: HyperscalerService, 
@@ -77,8 +79,17 @@ export class HyperscalerListComponent implements OnInit {
     });
   }
 
+  showDialog(element: Hyperscaler){  
+    this.snackbarService.showConfirmDialog()
+  }
+
+  cancel(){
+    this.getDataHyperscaler()
+  }
+
 
   deleteRow(element: Hyperscaler): void{
+    /*
     this.confirmationService.confirm({
       header: '¡ Atención !',
       message: 'Si borra el hyperscaler, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
@@ -103,7 +114,17 @@ export class HyperscalerListComponent implements OnInit {
       reject: () => {
         this.getDataHyperscaler()
       }
-    });
+    });*/
+    this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
+      next:() => {
+        this.snackbarService.showMessage('El registro se ha borrado con éxito')
+        this.getDataHyperscaler()
+      },
+      error:() => {
+        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+        this.getDataHyperscaler()
+      } 
+    })
   }
 }
 

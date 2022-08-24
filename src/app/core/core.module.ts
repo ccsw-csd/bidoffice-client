@@ -15,7 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { SlideMenuModule } from 'primeng/slidemenu';
 import {MenuModule} from 'primeng/menu';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { LayoutComponent } from './views/layout/layout.component';
 import { HeaderComponent } from './views/layout/header/header.component';
@@ -50,7 +50,8 @@ import { NavComponent } from './views/layout/nav/nav.component';
     JwtHelperService,
     UserResolverService,
     DialogService,
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
 })
 export class CoreModule { }
