@@ -14,5 +14,12 @@ export class OfferingService {
   getAll():Observable<Offering[]> {
     return this.http.get<Offering[]>(environment.server + "/offering/findAll");
   }
+
+  saveOffering(offering: Offering):Observable<Offering> {
+    return this.http.put<Offering>(environment.server + "/offering", offering);
+  }
   
+  deleteOffering(id: number):Observable<any> {
+    return this.http.delete<Offering[]>(environment.server + "/offering/" + id);
+  }
 }

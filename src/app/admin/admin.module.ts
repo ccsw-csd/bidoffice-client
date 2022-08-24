@@ -12,6 +12,7 @@ import { InputTextModule } from "primeng/inputtext";
 import { ToastModule } from 'primeng/toast';
 import { TechnologyListComponent } from './views/technology-list/technology-list.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
+import { OfferingEditComponent } from './views/offering-edit/offering-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
     MethodologyListComponent,
     UserListComponent,
     TechnologyListComponent,
-    OfferingListComponent
+    OfferingListComponent,
+    OfferingEditComponent
   ],
  
   imports: [
