@@ -54,7 +54,7 @@ export class OfferingListComponent implements OnInit {
       }
       else{
         this.ref = this.dialogService.open(OfferingEditComponent, {
-          header: 'Nuevo elemento',
+          header: 'Nuevo offering',
           width: '40%',
           data: {
           },
