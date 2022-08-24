@@ -4,15 +4,15 @@
     <ng-template pTemplate="header">
     <tr>
         <th pSortableColumn="name">Nombre <p-sortIcon field="name"></p-sortIcon></th>
-        <th pSortableColumn="priority" style='flex: 0 0 220px'>Prioridad <p-sortIcon field="priority"></p-sortIcon></th>
+        <th pSortableColumn="priority" style='flex: 0 0 150px'>Prioridad <p-sortIcon field="priority"></p-sortIcon></th>
         <th style='flex: 0 0 220px'>Acción</th>
     </tr>
     </ng-template>
     <ng-template pTemplate="body" let-offeringList>
         <tr>
             <td>{{offeringList.name}}</td>
-            <td style='flex: 0 0 220px'>{{offeringList.priority}}</td>
-            <td style='flex: 0 0 220px'>
+            <td style='flex: 0 0 150px'>{{offeringList.priority}}</td>
+            <td style='flex: 0 0 150px'>
                 <div>
                     <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar offering" tooltipPosition="top" (click)="saveOffering(offeringList)"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
