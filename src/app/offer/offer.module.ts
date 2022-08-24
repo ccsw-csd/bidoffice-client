@@ -1,30 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OfferListComponent } from './views/offer-list/offer-list.component';
-import { TableModule } from 'primeng/table'
+import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { PaginatorModule } from 'primeng/paginator';
 import { TabViewModule } from 'primeng/tabview';
 import { OfferEditComponent } from './views/offer-edit/offer-edit.component';
-import { ChanceComponent } from './views/offer-edit/components/chance/chance.component';
-import { PlanandproyectComponent } from './views/offer-edit/components/planandproyect/planandproyect.component';
-import { DocumentationComponent } from './views/offer-edit/components/documentation/documentation.component';
-import { InterestComponent } from './views/offer-edit/components/interest/interest.component';
-import { TracingComponent } from './views/offer-edit/components/tracing/tracing.component';
+import { ChanceComponent } from './views/offer-edit/views/chance/chance.component';
+import { PlanandproyectComponent } from './views/offer-edit/views/planandproyect/planandproyect.component';
+import { DocumentationComponent } from './views/offer-edit/views/documentation/documentation.component';
+import { InterestComponent } from './views/offer-edit/views/interest/interest.component';
+import { TracingComponent } from './views/offer-edit/views/tracing/tracing.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { CheckboxModule } from 'primeng/checkbox';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {AutoCompleteModule} from 'primeng/autocomplete';
-import {BlockUIModule} from 'primeng/blockui';
-import { DocumentationEditComponent } from './views/offer-edit/components/documentation/documentation-edit/documentation-edit.component';
-import { TracingEditComponent } from './views/offer-edit/components/tracing/tracing-edit/tracing-edit.component';
-import {InputNumberModule} from 'primeng/inputnumber';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { BlockUIModule } from 'primeng/blockui';
+import { DocumentationEditComponent } from './views/offer-edit/views/documentation/documentation-edit/documentation-edit.component';
+import { TracingEditComponent } from './views/offer-edit/views/tracing/tracing-edit/tracing-edit.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { ToastModule } from 'primeng/toast';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 @NgModule({
   declarations: [
     OfferListComponent,
@@ -55,7 +57,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     InputNumberModule,
     ReactiveFormsModule,
     ToastModule,
-    ConfirmDialogModule
-  ]
+    ConfirmDialogModule,
+    ProgressSpinnerModule
+  ],
 })
-export class OfferModule { }
+export class OfferModule {}

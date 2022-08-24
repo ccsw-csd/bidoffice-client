@@ -1,5 +1,10 @@
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
@@ -18,12 +23,14 @@ export class OfferEditComponent implements OnInit {
   offerForm: FormGroup;
   chanceForm: FormGroup;
   offerStatus: string;
+  isLoading: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
     private offerService: OfferService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -57,10 +64,15 @@ export class OfferEditComponent implements OnInit {
     });
   }
 
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
+  }
+
   onSave() {
     if (this.offerForm.valid) {
       this.offer.tracings.forEach((item) => delete item.uuid);
       this.offer.dataFiles.forEach((item) => delete item.uuid);
+      this.isLoading = true;
       this.offerService.save(this.offer).subscribe({
         next: (res: Offer) => {
           this.offer = res;
@@ -74,11 +86,13 @@ export class OfferEditComponent implements OnInit {
             this.snackbarService.error(
               'Ha ocurrido un error. Intentelo de nuevo.'
             );
+          this.isLoading = true;
         },
         complete: () => {
           this.snackbarService.showMessage(
             `La oferta ha sido ${this.offerStatus} correctamente.`
           );
+          this.isLoading = true;
           this.ref.close();
         },
       });

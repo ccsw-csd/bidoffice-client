@@ -23,6 +23,7 @@ export class PlanandproyectComponent implements OnInit {
   groupPerson: any[] = [];
   person: string;
   selectedPerson;
+  isLoading: boolean = false;
 
   @Input() data: Offer;
   constructor(private offerService: OfferService) {}
@@ -47,9 +48,11 @@ export class PlanandproyectComponent implements OnInit {
   }
 
   getAllHyperscalers() {
+    this.isLoading = false;
     this.offerService.getAllHyperscalers().subscribe({
       next: (res: BaseClass[]) => {
         this.hyperscalers = res;
+        this.isLoading = true;
       },
       error: () => {},
       complete: () => {},
@@ -57,9 +60,11 @@ export class PlanandproyectComponent implements OnInit {
   }
 
   getAllMethodologies() {
+    this.isLoading = true;
     this.offerService.getAllMethodologies().subscribe({
       next: (res: BaseClass[]) => {
         this.methodologies = res;
+        this.isLoading = false;
       },
       error: () => {},
       complete: () => {},

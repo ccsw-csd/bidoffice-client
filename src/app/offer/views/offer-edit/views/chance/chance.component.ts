@@ -27,6 +27,7 @@ export class ChanceComponent implements OnInit {
   selectedRequestedBy;
   selectedOfferings: BaseClass[];
   selectedTechnologies: BaseClass[];
+  isLoading: boolean = false;
 
   @Input() data: Offer;
   @Input() formValidator: FormGroup;
@@ -72,18 +73,22 @@ export class ChanceComponent implements OnInit {
   }
 
   getAllOfferings() {
+    this.isLoading = true;
     this.offerService.getAllOffering().subscribe({
       next: (res: BaseClass[]) => {
         this.offerings = res;
+        this.isLoading = false;
       },
       error: () => {},
       complete: () => {},
     });
   }
   getAllTechnologies() {
+    this.isLoading = true;
     this.offerService.getAllTechnologies().subscribe({
       next: (res: BaseClass[]) => {
         this.technologies = res;
+        this.isLoading = false;
       },
       error: () => {},
       complete: () => {},
@@ -91,9 +96,11 @@ export class ChanceComponent implements OnInit {
   }
 
   getAllOfferTypes() {
+    this.isLoading = true;
     this.offerService.getAllOfferTypes().subscribe({
       next: (res: BaseClass[]) => {
         this.offerTypes = res;
+        this.isLoading = false;
       },
       error: () => {},
       complete: () => {},
@@ -101,9 +108,11 @@ export class ChanceComponent implements OnInit {
   }
 
   getAllSectors() {
+    this.isLoading = false;
     this.offerService.getAllSectors().subscribe({
       next: (res: BaseClass[]) => {
         this.sectors = res;
+        this.isLoading = true;
       },
       error: () => {},
       complete: () => {},
@@ -111,9 +120,11 @@ export class ChanceComponent implements OnInit {
   }
 
   getAllProjectTypes() {
+    this.isLoading = true;
     this.offerService.getAllProjectTypes().subscribe({
       next: (res: BaseClass[]) => {
         this.projectType = res;
+        this.isLoading = false;
       },
       error: () => {},
       complete: () => {},
@@ -121,9 +132,11 @@ export class ChanceComponent implements OnInit {
   }
 
   getAllOfferStatus() {
+    this.isLoading = true;
     this.offerService.getAllOfferStatus().subscribe({
       next: (res: BaseClass[]) => {
         this.status = res;
+        this.isLoading = false;
       },
       error: () => {},
       complete: () => {},
@@ -132,7 +145,6 @@ export class ChanceComponent implements OnInit {
 
   searchPerson($event) {
     if ($event.query != null) {
-      console.log($event);
       this.offerService.searchPerson($event.query).subscribe({
         next: (res: Person[]) => {
           this.groupPerson = res.map((person) => this.mappingPerson(person));
@@ -169,10 +181,7 @@ export class ChanceComponent implements OnInit {
 
   createOfferingSelected(offering) {
     return {
-      id: this.data.offerings
-        .filter((item) => item.offering.id == offering.id)
-        .map((item) => item.id)
-        .shift(),
+      id: null,
       offering: offering,
     };
   }
@@ -185,10 +194,7 @@ export class ChanceComponent implements OnInit {
 
   createTechnologiesSelected(technology: BaseClass) {
     return {
-      id: this.data.technologies
-        .filter((item) => item.technology.id == technology.id)
-        .map((item) => item.id)
-        .shift(),
+      id: null,
       technology: technology,
     };
   }

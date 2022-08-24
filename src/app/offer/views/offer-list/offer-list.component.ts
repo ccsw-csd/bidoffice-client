@@ -1,4 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { LazyLoadEvent } from 'primeng/api';
 import { Pageable } from 'src/app/core/models/Pageable';
@@ -12,19 +17,19 @@ import { Offer } from '../../model/Offer';
   selector: 'app-offer-list',
   templateUrl: './offer-list.component.html',
   styleUrls: ['./offer-list.component.scss'],
-  encapsulation: ViewEncapsulation.None
-
+  encapsulation: ViewEncapsulation.None,
 })
 export class OfferListComponent implements OnInit {
-
   pageable: Pageable = {
     pageNumber: 0,
     pageSize: 10,
-    sort: [{
-      property: 'id',
-      direction: 'asc'
-    }]
-  }
+    sort: [
+      {
+        property: 'id',
+        direction: 'asc',
+      },
+    ],
+  };
 
   offerPage: OfferPage;
   offerItemList: OfferItemList[];
@@ -32,29 +37,37 @@ export class OfferListComponent implements OnInit {
   isloading: boolean = false;
   selectedOffer: Offer;
 
-  constructor(private offerService: OfferService, private cdRef : ChangeDetectorRef, private dinamicDialogService: DialogService) { }
+  constructor(
+    private offerService: OfferService,
+    private cdRef: ChangeDetectorRef,
+    private dinamicDialogService: DialogService
+  ) {}
 
   ngOnInit(): void {
     this.loadPage();
   }
 
   ngAfterViewChecked() {
-    this.cdRef.detectChanges();          
+    this.cdRef.detectChanges();
   }
 
-  loadPage(event?:LazyLoadEvent){
-
-    if(event != null){
+  loadPage(event?: LazyLoadEvent) {
+    if (event != null) {
       this.pageable.pageSize = event.rows;
       this.pageable.pageNumber = event.first / event.rows;
 
-      if (event.sortField != null){
-        this.pageable.sort = [{property:event.sortField, direction:event.sortOrder == 1 ? 'asc':'desc'}];
+      if (event.sortField != null) {
+        this.pageable.sort = [
+          {
+            property: event.sortField,
+            direction: event.sortOrder == 1 ? 'asc' : 'desc',
+          },
+        ];
       }
     }
     this.isloading = true;
     this.offerService.findPage(this.pageable).subscribe({
-      next: (res: OfferPage) => { 
+      next: (res: OfferPage) => {
         this.offerPage = res;
       },
       error: () => {},
@@ -62,36 +75,36 @@ export class OfferListComponent implements OnInit {
         this.offerItemList = this.offerPage.content;
         this.totalElements = this.offerPage.totalElements;
         this.isloading = false;
-      }     
+      },
     });
   }
 
-  toOfferEdit(){
+  toOfferEdit() {
     const ref = this.dinamicDialogService.open(OfferEditComponent, {
       header: 'Nueva oferta',
       width: '70%',
       data: this.selectedOffer,
-      closable: false
+      closable: false,
     });
 
-    ref.onClose.subscribe(()=>{
+    ref.onClose.subscribe(() => {
       this.selectedOffer = null;
       this.loadPage();
-    })
+    });
   }
-  onRowSelected(offer: Offer){
-    this.isloading = true
+  onRowSelected(offer: Offer) {
+    this.isloading = true;
     this.offerService.getOffer(offer.id).subscribe({
-      next: (res: Offer) => { 
+      next: (res: Offer) => {
         this.selectedOffer = res;
       },
       error: () => {
-        this.isloading = true
+        this.isloading = true;
       },
       complete: () => {
         this.isloading = false;
         this.toOfferEdit();
-      }     
+      },
     });
   }
 }

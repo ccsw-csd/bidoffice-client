@@ -10,6 +10,6 @@ export class OfferDataChapter{
   planning: boolean = false;
   valueAdded: boolean = false;
   innovation: boolean = false;
-  references: boolean = false;
+  reference: boolean = false;
   keyDocument: boolean = false;
 }

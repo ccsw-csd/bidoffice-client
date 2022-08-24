@@ -15,6 +15,7 @@ export class DocumentationEditComponent implements OnInit {
   fileTypes: BaseClass[];
   dataFile: OfferDataFile = new OfferDataFile();
   dataFileForm: FormGroup;
+  isLoading: boolean = false;
 
   constructor(
     private offerService: OfferService,
@@ -33,9 +34,11 @@ export class DocumentationEditComponent implements OnInit {
   }
 
   getAllFileTypes() {
+    this.isLoading = true;
     this.offerService.getAllFileTypes().subscribe({
       next: (res: BaseClass[]) => {
         this.fileTypes = res;
+        this.isLoading = false;
       },
       error: () => {},
       complete: () => {},
