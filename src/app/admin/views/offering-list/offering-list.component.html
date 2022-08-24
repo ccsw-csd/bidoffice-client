@@ -5,7 +5,7 @@
     <tr>
         <th pSortableColumn="name">Nombre <p-sortIcon field="name"></p-sortIcon></th>
         <th pSortableColumn="priority" style='flex: 0 0 150px'>Prioridad <p-sortIcon field="priority"></p-sortIcon></th>
-        <th style='flex: 0 0 220px'>Acción</th>
+        <th style='flex: 0 0 150px'>Acción</th>
     </tr>
     </ng-template>
     <ng-template pTemplate="body" let-offeringList>
@@ -25,5 +25,5 @@
 </p-table>
 
 <div  class="mt-3 flex justify-content-end">
-    <button pButton class="p-3 p-button-info" (click)="saveOffering()" label="Crear nuevo"></button>  
+    <button pButton class="p-3" (click)="saveOffering()" label="Crear nuevo"></button>  
 </div>

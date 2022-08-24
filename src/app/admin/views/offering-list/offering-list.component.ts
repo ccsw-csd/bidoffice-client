@@ -66,10 +66,12 @@ export class OfferingListComponent implements OnInit {
 
   deleteOffering(element: Offering): void{
     this.confirmationService.confirm({
-      header: 'Confirmación',
-      message: '¿Desea eliminar este elemento?',
+      header: '¡ Atención !',
+      message: 'Si borra el offering, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
       acceptLabel: 'Aceptar',
+      acceptIcon: 'ui-icon-blank',
       rejectLabel: 'Cerrar',
+      rejectIcon: 'ui-icon-blank',
       rejectButtonStyleClass: 'p-button-secondary',
       
       accept: () => {
@@ -79,7 +81,7 @@ export class OfferingListComponent implements OnInit {
             this.getAll()
           },
           error:() => {
-            this.snackbar.error('El registro no puede ser eliminado porque se está usando')
+            this.snackbar.error('El registro no puede ser eliminado porque se está usando en alguna oferta')
             this.getAll()
           } 
         })
