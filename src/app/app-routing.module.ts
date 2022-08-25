@@ -13,6 +13,7 @@ import { TechnologyListComponent } from './admin/views/technology-list/technolog
 import { OpportunityTypeListComponent } from './admin/views/opportunity-type-list/opportunity-type-list.component';
 import { OfferingListComponent } from './admin/views/offering-list/offering-list.component';
 import { ProjectTypeListComponent } from './admin/views/project-type-list/project-type-list.component';
+import { SectorListComponent } from './admin/views/sector-list/sector-list.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'opportunitytype', component: OpportunityTypeListComponent},
       { path: 'offering', component: OfferingListComponent},
       { path: 'projecttype', component: ProjectTypeListComponent},
+      { path: 'sector', component: SectorListComponent},
       { path: '**', redirectTo: 'main', pathMatch: 'full' }
     ]
   },

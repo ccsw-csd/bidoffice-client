@@ -1,0 +1,38 @@
+<p-table [value]="sectors"
+        rowGroupMode="subheader" 
+        groupRowsBy="endDate" 
+        [scrollable]="true" 
+        [loading]="isLoading" 
+        scrollHeight="calc(100vh - 184px)" 
+        responsiveLayout="scroll">
+        <ng-template pTemplate="groupheader" let-sector>
+            <tr pRowGroupHeader>
+                <td colspan="5">
+                    <span class="font-bold ml-2">Activo</span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="name">Nombre <p-sortIcon field="name"></p-sortIcon>  </th>
+            <th style="flex: 0 0 150px" pSortableColumn="priority" >Prioridad <p-sortIcon field="priority"></p-sortIcon></th>
+            <th style="flex: 0 0 150px" pSortableColumn="startDate" >Fecha inicio <p-sortIcon field="startDate"></p-sortIcon></th>
+            <th style="flex: 0 0 150px" pSortableColumn="endDate" >Fecha final<p-sortIcon field="endDate"></p-sortIcon></th>
+            <th style="flex: 0 0 150px">Acción</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-sector>
+        <tr>
+            <td>{{sector.name}}</td>
+            <td style="flex: 0 0 150px">{{sector.priority}}</td>
+            <td style="flex: 0 0 150px">{{sector.startDate}}</td>
+            <td style="flex: 0 0 150px">{{sector.endDate}}</td>
+            <td style="flex: 0 0 150px">
+                <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar sector" tooltipPosition="top" (click)="editTechnology(technology)"
+                    class="p-button-rounded p-button-text p-button-plain icon"></button>
+                <button pButton type="button" icon="pi pi-trash" pTooltip="Borrar sector" tooltipPosition="top" (click)="deleteTechnology(technology)"
+                    class="p-button-rounded p-button-text p-button-plain icon"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

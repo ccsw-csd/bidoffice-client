@@ -36,7 +36,8 @@ export class NavComponent implements OnInit {
           {label: "Tecnologías", routerLink: '/technology'},
           {label: "Tipos de oportunidad", routerLink: '/opportunitytype'},
           {label: "Offering", routerLink: '/offering'},
-          {label: "Tipos de proyecto", routerLink: '/projecttype'}
+          {label: "Tipos de proyecto", routerLink: '/projecttype'},
+          {label: "Sectores", routerLink: '/sector'}
         ]
       },
       {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'},
