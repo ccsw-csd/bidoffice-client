@@ -43,7 +43,7 @@ export class MethodologyListComponent implements OnInit {
   
   showEditDialog(methodologyItem: Methodology) {
     const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
-      header: "Editar metodología",
+      header: "Editar " + methodologyItem.name,
       width: "40%",
       data: {methodologyData: methodologyItem},
       closable: false
@@ -56,7 +56,7 @@ export class MethodologyListComponent implements OnInit {
 
   showCreateDialog() {
     const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
-      header: "Crear metodología",
+      header: "Nuevo elemento",
       width: "40%",
       closable: false
     });

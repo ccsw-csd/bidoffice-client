@@ -1,5 +1,4 @@
 <p-toast position="top-center"></p-toast>
-
 <p-table [value]="listOfData" [scrollable]="true" [loading]="isLoading" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
@@ -17,27 +16,15 @@
                         <button pButton type="button" (click)="editHyperscaler(element)" icon="pi pi-pencil" pTooltip="Editar hyperscaler" tooltipPosition="top"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>        
 
-                        <button pButton type="button"  (click)="showDialog(element)" icon="pi pi-trash" pTooltip="Borrar hyperscaler" tooltipPosition="top"
+                        <button pButton type="button"  (click)="showDialog()" icon="pi pi-trash" pTooltip="Borrar hyperscaler" tooltipPosition="top"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>        
                     </div>
                 </td>
                 <p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
                     <p-footer>
-                        <button
-                          type="button"
-                          pButton
-                          label="Cerrar"
-                          class="p-button-secondaty"
-                          (click)="cancel()"
-                        ></button>
-                        <button
-                          type="button"
-                          pButton
-                          label="Guardar"
-                          class="p-button-primary"
-                          (click)="deleteRow(element)"
-                        ></button>
-                      </p-footer>
+                        <button type="button" pButton label="Cerrar" class="p-button-secondary" (click)="cancel()"></button>
+                        <button type="button" pButton label="Guardar" class="p-button-primary" (click)="deleteRow(element)"></button>
+                    </p-footer>
                 </p-confirmDialog>
         </tr>
     </ng-template>

@@ -24,8 +24,7 @@ export class SnackbarService {
     this.messageService.add({severity:'success', summary: 'Ok', detail: message});
   }
 
-  showConfirmDialog()/*: Observable<ConfirmationService>*/{
-    let element: number
+  showConfirmDialog(){
     this.confirmationService.confirm({
       header: '¡ Atención !',
       message: 'Si borra el registro, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
@@ -35,13 +34,6 @@ export class SnackbarService {
       rejectIcon: 'ui-icon-blank',
       rejectButtonStyleClass: 'p-button-secondary',
     })
-
-    /*const obsUsingConstructor = new Observable<ConfirmationService>( observer => {
-      observer.next( this.confirmationService ) 
-      observer.complete()
-   })
-
-    return obsUsingConstructor;*/
   }
   
 }

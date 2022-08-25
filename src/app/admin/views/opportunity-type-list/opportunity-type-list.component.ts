@@ -80,7 +80,7 @@ export class OpportunityTypeListComponent implements OnInit {
     }
     else{
       this.ref = this.dialogService.open(OpportunityTypeEditComponent,{
-        header: 'Nuevo item',
+        header: 'Nuevo elemento',
           width: '40%',
           data: {
           },

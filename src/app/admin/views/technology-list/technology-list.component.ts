@@ -51,7 +51,7 @@ export class TechnologyListComponent implements OnInit {
         }
         else {
             this.ref = this.dialogService.open(TechnologyEditComponent, {
-                header: 'Nueva tecnología',
+                header: 'Nuevo elemento',
                 width: '40%',
                 data: {},
                 closable: false
