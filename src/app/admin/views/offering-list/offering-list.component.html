@@ -1,5 +1,4 @@
 <p-toast position="top-center"></p-toast>
-<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'"></p-confirmDialog>
 <p-table [value]="offeringList" [loading]="isLoading" [scrollable]="true" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
     <tr>
@@ -16,10 +15,16 @@
                 <div>
                     <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar offering" tooltipPosition="top" (click)="saveOffering(offeringList)"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
-                    <button pButton type="button" icon="pi pi-trash" pTooltip="Borrar offering" tooltipPosition="top" (click)="deleteOffering(offeringList)"
+                    <button pButton type="button" icon="pi pi-trash" pTooltip="Borrar offering" tooltipPosition="top" (click)="showDialog()"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>
+            <p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
+                <p-footer>
+                    <button type="button" pButton label="Cerrar" class="p-button-secondary" (click)="cancel()"></button>
+                    <button type="button" pButton label="Guardar" class="p-button-primary" (click)="deleteOffering(offeringList)"></button>
+                </p-footer>
+            </p-confirmDialog>
         </tr>
     </ng-template>
 </p-table>

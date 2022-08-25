@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Technology } from '../../model/Technology';
 import { TechnologyService } from '../../services/technology.service';
-import { ConfirmationService} from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
@@ -13,7 +12,7 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
     selector: 'app-technology-list',
     templateUrl: './technology-list.component.html',
     styleUrls: ['./technology-list.component.scss'],
-    providers: [ConfirmationService,  DynamicDialogRef, DynamicDialogConfig, DialogService]
+    providers: [ DynamicDialogRef, DynamicDialogConfig, DialogService]
 })
 
 export class TechnologyListComponent implements OnInit {
@@ -23,7 +22,6 @@ export class TechnologyListComponent implements OnInit {
 
     constructor(
         private technologyService: TechnologyService,
-        private confirmationService: ConfirmationService,
         private dialogService: DialogService,
         private snackbarService: SnackbarService,
         private ref: DynamicDialogRef
@@ -82,6 +80,14 @@ export class TechnologyListComponent implements OnInit {
         });
     }
 
+    showDialog(){  
+        this.snackbarService.showConfirmDialog()
+    }
+    
+    cancel(){
+        this.findAll()
+    }
+
     /**
      * Borra una tecnología de la base de datos.
      * 
@@ -89,30 +95,17 @@ export class TechnologyListComponent implements OnInit {
      */
     deleteTechnology(technology: Technology) {
 
-        this.confirmationService.confirm({
-            header: "¡ Atención !",
-            message: 'Si borra la tecnologia, se eliminarán los datos de la misma.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
-            acceptLabel: 'Aceptar',
-            acceptIcon: 'ui-icon-blank',
-            rejectLabel: 'Cancelar',
-            rejectIcon: 'ui-icon-blank',
-            key: "techDeleteDialog",
-            accept: () => {
-                this.technologyService.deleteTechnology(technology.id).subscribe({
-                    next: () => {
-                        this.snackbarService.showMessage('El registro se ha borrado con éxito')
-                        this.findAll();
-                    },
-                    error:() => {
-                        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-                        this.findAll();
-                    }
-                });
+        this.technologyService.deleteTechnology(technology.id).subscribe({
+            next: () => {
+                this.snackbarService.showMessage('El registro se ha borrado con éxito')
+                this.findAll();
             },
-            reject: () => {
+            error:() => {
+                this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
                 this.findAll();
             }
         });
+
     }
 
 }
