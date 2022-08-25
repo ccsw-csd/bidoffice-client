@@ -1,4 +1,6 @@
+import { NodeWithI18n } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { Sector } from '../../model/Sector';
 import { SectorService } from '../../services/sector.service';
 
@@ -10,16 +12,20 @@ import { SectorService } from '../../services/sector.service';
 export class SectorListComponent implements OnInit {
 
     sectors: Sector[];
+    sectorFilterDate = new Map();
+    toDay = new Date();
+    fechaInicio: Date;
+    fechaFinal: Date;
 
     public isLoading: boolean = false;
 
-    sectorFilterDate = new Map();
-
     constructor(
-        private sectorService: SectorService
-    ) { }
+        private sectorService: SectorService,
+    ) {  }
 
     ngOnInit(): void {
+        this.sectorFilterDate.set("activo", []);
+        this.sectorFilterDate.set("inactivo", []);
         this.findAll();
     }
 
@@ -32,6 +38,21 @@ export class SectorListComponent implements OnInit {
         this.sectorService.findAll().subscribe({
             next: (results:any) => {
                 this.sectors = results;
+                
+                for (let i = 0; i < this.sectors.length; i++) {
+                    this.fechaInicio = this.sectors[i].startDate;
+                    this.fechaFinal = this.sectors[i].endDate;
+
+                    if (this.toDay >= this.fechaInicio && this.toDay <= this.fechaFinal){
+
+                        this.sectorFilterDate.get("activo").push(this.sectors[i]);
+                    }
+                    else {
+
+                        this.sectorFilterDate.get("inactivo").push(this.sectors[i]);
+                    }
+                }
+
             },
             error:() => {},
             complete: () => {

@@ -1,11 +1,11 @@
-<p-table [value]="sectors"
+<p-table [value]="sectorFilterDate.get('activo')"
         rowGroupMode="subheader" 
         groupRowsBy="endDate" 
         [scrollable]="true" 
         [loading]="isLoading" 
         scrollHeight="calc(100vh - 184px)" 
         responsiveLayout="scroll">
-        <ng-template pTemplate="groupheader" let-sector>
+        <ng-template pTemplate="groupheader" let-sectors>
             <tr pRowGroupHeader>
                 <td colspan="5">
                     <span class="font-bold ml-2">Activo</span>
@@ -21,9 +21,9 @@
             <th style="flex: 0 0 150px">Acción</th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-sector>
+    <ng-template pTemplate="body" let-sectors>
         <tr>
-            <td>{{sector.name}}</td>
+            <td>{{sectors.sector.name}}</td>
             <td style="flex: 0 0 150px">{{sector.priority}}</td>
             <td style="flex: 0 0 150px">{{sector.startDate}}</td>
             <td style="flex: 0 0 150px">{{sector.endDate}}</td>
