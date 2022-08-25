@@ -26,6 +26,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { StatusChangeComponent } from './views/offer-list/status-change/status-change.component';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     TracingComponent,
     DocumentationEditComponent,
     TracingEditComponent,
+    StatusChangeComponent,
   ],
   imports: [
     CommonModule,
@@ -58,7 +61,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ReactiveFormsModule,
     ToastModule,
     ConfirmDialogModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    SelectButtonModule
   ],
 })
 export class OfferModule {}

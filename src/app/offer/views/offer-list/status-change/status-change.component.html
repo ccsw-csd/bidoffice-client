@@ -1,0 +1,16 @@
+<div class="p-fluid">
+    <span class="">La oferta se encuentra: {{offerItemList.opportunityStatus.name}}</span>
+</div>
+<div class="p-fluid">
+  <span class="">A que estado desea cambiar la oferta</span>
+  <p-selectButton [options]="optionStatus" optionLabel="name"></p-selectButton>
+</div>
+<div class="ui-fluid formgrid grid justify-content-center">
+  <div class="p-fluid field col-12 md:col-3">
+    <p-button (click)="onClose()" styleClass="p-button-secondary" label="Cancelar"></p-button>
+  </div>
+  <div class="p-fluid field col-12 md:col-3">
+    <p-button (click)="onSave()" label="Guardar"></p-button>
+  </div>
+</div>
+

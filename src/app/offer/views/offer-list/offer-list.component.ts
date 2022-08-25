@@ -12,6 +12,7 @@ import { OfferPage } from '../../model/OfferPage';
 import { OfferService } from '../../services/offer.service';
 import { OfferEditComponent } from '../offer-edit/offer-edit.component';
 import { Offer } from '../../model/Offer';
+import { StatusChangeComponent } from './status-change/status-change.component';
 
 @Component({
   selector: 'app-offer-list',
@@ -105,6 +106,18 @@ export class OfferListComponent implements OnInit {
         this.isloading = false;
         this.toOfferEdit();
       },
+    });
+  }
+
+  onStatusChange(offerItemList: OfferItemList){
+    const ref = this.dinamicDialogService.open(StatusChangeComponent, {
+      header: 'Cambio de estado',
+      width: '50%',
+      data: offerItemList,
+      closable: false,
+    });
+
+    ref.onClose.subscribe(() => {
     });
   }
 }
