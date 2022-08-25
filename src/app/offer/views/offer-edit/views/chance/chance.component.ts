@@ -1,10 +1,11 @@
-import { isNgTemplate } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
 import { Offer } from 'src/app/offer/model/Offer';
 import { Person } from 'src/app/offer/model/Person';
 import { OfferService } from 'src/app/offer/services/offer.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-chance',
@@ -35,12 +36,33 @@ export class ChanceComponent implements OnInit {
   constructor(private offerService: OfferService) {}
 
   ngOnInit(): void {
-    this.getAllOfferings();
-    this.getAllTechnologies();
-    this.getAllOfferTypes();
-    this.getAllSectors();
-    this.getAllProjectTypes();
-    this.getAllOfferStatus();
+    this.isLoading = true;
+    forkJoin({
+      requestOfferings: this.offerService.getAllOffering(),
+      requestTechnologies: this.offerService.getAllTechnologies(),
+      requestOfferTypes: this.offerService.getAllOfferTypes(),
+      requestSectors: this.offerService.getAllSectors(),
+      requestProjectTypes: this.offerService.getAllProjectTypes(),
+      requestOfferStatus: this.offerService.getAllOfferStatus(),
+    }).subscribe(
+      ({
+        requestOfferings,
+        requestTechnologies,
+        requestOfferTypes,
+        requestSectors,
+        requestProjectTypes,
+        requestOfferStatus,
+      }) => {
+        this.offerings = requestOfferings;
+        this.technologies = requestTechnologies;
+        this.offerTypes = requestOfferTypes;
+        this.sectors = requestSectors;
+        this.projectType = requestProjectTypes;
+        this.status = requestOfferStatus;
+
+        this.isLoading = false;
+      }
+    );
 
     if (this.data.client != undefined) this.results.push(this.data.client);
 
@@ -70,77 +92,6 @@ export class ChanceComponent implements OnInit {
         complete: () => {},
       });
     }
-  }
-
-  getAllOfferings() {
-    this.isLoading = true;
-    this.offerService.getAllOffering().subscribe({
-      next: (res: BaseClass[]) => {
-        this.offerings = res;
-        this.isLoading = false;
-      },
-      error: () => {},
-      complete: () => {},
-    });
-  }
-  getAllTechnologies() {
-    this.isLoading = true;
-    this.offerService.getAllTechnologies().subscribe({
-      next: (res: BaseClass[]) => {
-        this.technologies = res;
-        this.isLoading = false;
-      },
-      error: () => {},
-      complete: () => {},
-    });
-  }
-
-  getAllOfferTypes() {
-    this.isLoading = true;
-    this.offerService.getAllOfferTypes().subscribe({
-      next: (res: BaseClass[]) => {
-        this.offerTypes = res;
-        this.isLoading = false;
-      },
-      error: () => {},
-      complete: () => {},
-    });
-  }
-
-  getAllSectors() {
-    this.isLoading = false;
-    this.offerService.getAllSectors().subscribe({
-      next: (res: BaseClass[]) => {
-        this.sectors = res;
-        this.isLoading = true;
-      },
-      error: () => {},
-      complete: () => {},
-    });
-  }
-
-  getAllProjectTypes() {
-    this.isLoading = true;
-    this.offerService.getAllProjectTypes().subscribe({
-      next: (res: BaseClass[]) => {
-        this.projectType = res;
-        this.isLoading = false;
-      },
-      error: () => {},
-      complete: () => {},
-    });
-  }
-
-  getAllOfferStatus() {
-    this.isLoading = true;
-    this.offerService.getAllOfferStatus().subscribe({
-      next: (res: BaseClass[]) => {
-        this.status = res;
-        this.isLoading = false;
-      },
-      error: () => {},
-      complete: () => {},
-    });
   }
 
   searchPerson($event) {

@@ -118,7 +118,7 @@
         <label>Código BDC</label>
       </span>
     </div>
-    <div class="col-12 md:col-1">
+    <div class="col-12 md:col-1 mt-3">
       <span class="p-fluid field-checkbox">
         <p-checkbox [(ngModel)]="data.opportunityWin" [binary]="true" inputId="binary" formControlName="opportunityWin">
         </p-checkbox>
@@ -129,7 +129,8 @@
   <div class="ui-fluid formgrid grid">
     <div class="p-fluid field col-12 md:col-12">
       <span class="p-float-label">
-        <textarea pInputTextarea [(ngModel)]="data.observations" formControlName="observations"></textarea>
+        <textarea pInputTextarea [(ngModel)]="data.observations" formControlName="observations" 
+        rows="5" autoResize="autoResize"></textarea>
         <label>Observaciones</label>
       </span>
     </div>
