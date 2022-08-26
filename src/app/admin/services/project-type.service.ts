@@ -19,4 +19,8 @@ export class ProjectTypeService {
     return this.http.delete<any>(environment.server + "/projecttype/" + id);
   }
 
+  save(item: ProjectType): Observable<ProjectType>{
+    return this.http.put<ProjectType>(environment.server + "/projecttype", item);
+  }
+
 }

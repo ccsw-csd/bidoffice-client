@@ -22,6 +22,7 @@ import { OfferingListComponent } from './views/offering-list/offering-list.compo
 import { OpportunityTypeEditComponent } from './views/opportunity-type-edit/opportunity-type-edit.component';
 import { TechnologyEditComponent } from './views/technology-edit/technology-edit.component';
 import { ProjectTypeListComponent } from "./views/project-type-list/project-type-list.component";
+import { ProjectTypeEditComponent } from './views/project-type-edit/project-type-edit.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ProjectTypeListComponent } from "./views/project-type-list/project-type
     MethodologyEditComponent,
     OfferingListComponent,
     OpportunityTypeEditComponent,
-    ProjectTypeListComponent
+    ProjectTypeListComponent,
+    ProjectTypeEditComponent
   ],
   imports: [
     CommonModule,
