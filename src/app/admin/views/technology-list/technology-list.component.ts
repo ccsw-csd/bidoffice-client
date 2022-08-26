@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Technology } from '../../model/Technology';
 import { TechnologyService } from '../../services/technology.service';
-import { ConfirmationService} from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
@@ -13,17 +12,18 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
     selector: 'app-technology-list',
     templateUrl: './technology-list.component.html',
     styleUrls: ['./technology-list.component.scss'],
-    providers: [ConfirmationService,  DynamicDialogRef, DynamicDialogConfig, DialogService]
+    providers: [ DynamicDialogRef, DynamicDialogConfig, DialogService]
 })
 
 export class TechnologyListComponent implements OnInit {
 
     technologies: Technology[];
     public isLoading: boolean = false;
+    isDeleted: boolean = false;
+    item: Technology;
 
     constructor(
         private technologyService: TechnologyService,
-        private confirmationService: ConfirmationService,
         private dialogService: DialogService,
         private snackbarService: SnackbarService,
         private ref: DynamicDialogRef
@@ -51,7 +51,7 @@ export class TechnologyListComponent implements OnInit {
         }
         else {
             this.ref = this.dialogService.open(TechnologyEditComponent, {
-                header: 'Nueva tecnología',
+                header: 'Nuevo elemento',
                 width: '40%',
                 data: {},
                 closable: false
@@ -82,37 +82,45 @@ export class TechnologyListComponent implements OnInit {
         });
     }
 
+    showDialog(element?: Technology){   
+        this.item=element 
+        this.snackbarService.showConfirmDialog()
+    }
+    
+    changeFlagForDelete(){
+        this.isDeleted = true
+        this.deleteTechnology(this.item)
+    }
+    
+    
+    closeDialog(){
+        this.snackbarService.closeConfirmDialog()
+        if(this.isDeleted==false){
+          this.findAll()
+        }
+    }
+
     /**
      * Borra una tecnología de la base de datos.
      * 
      * @param technology Tecnología a borrar.
      */
-    deleteTechnology(technology: Technology) {
-
-        this.confirmationService.confirm({
-            header: "¡ Atención !",
-            message: 'Si borra la tecnologia, se eliminarán los datos de la misma.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
-            acceptLabel: 'Aceptar',
-            acceptIcon: 'ui-icon-blank',
-            rejectLabel: 'Cancelar',
-            rejectIcon: 'ui-icon-blank',
-            key: "techDeleteDialog",
-            accept: () => {
-                this.technologyService.deleteTechnology(technology.id).subscribe({
-                    next: () => {
-                        this.snackbarService.showMessage('El registro se ha borrado con éxito')
-                        this.findAll();
-                    },
-                    error:() => {
-                        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-                        this.findAll();
-                    }
-                });
-            },
-            reject: () => {
-                this.findAll();
-            }
-        });
+        
+     deleteTechnology(item: Technology) {
+        if(this.isDeleted){
+            this.technologyService.deleteTechnology(item.id).subscribe({
+                next: () => {
+                    this.snackbarService.showMessage('El registro se ha borrado con éxito')    
+                },
+                error:() => {
+                    this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+                    this.closeDialog()
+                },
+                complete:() =>{
+                    this.isDeleted = false
+                    this.closeDialog()
+                }
+            });
+        }
     }
-
 }

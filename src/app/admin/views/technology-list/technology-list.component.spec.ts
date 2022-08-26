@@ -31,7 +31,6 @@ describe('TechnologyListComponent', () => {
             mockConfirmationService,
             mockMessageService,
             mockDialogService,
-            mockDynamicDialogRef
             );
     });
 

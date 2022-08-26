@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FileTypeService } from '../../services/file-type.service';
 import { FileType } from '../../model/FileType';
-import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FileTypeEditComponent } from '../file-type-edit/file-type-edit.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
@@ -10,16 +9,16 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
   selector: 'app-file-type',
   templateUrl: './file-type-list.component.html',
   styleUrls: ['./file-type-list.component.scss'],
-  providers:[ConfirmationService]
 })
 export class FileTypeListComponent implements OnInit {
 
   public dataSource : FileType[]
   public isloading: boolean = false;
+  public isDeleted: boolean = false
+  public item: FileType
 
   constructor(
     private fileTypeService: FileTypeService,
-    private confirmationService: ConfirmationService,
     public dialogService: DialogService,
     private snackbarService: SnackbarService
     ) { }
@@ -44,7 +43,7 @@ export class FileTypeListComponent implements OnInit {
   editFileType(fileType: FileType) {
     const ref = this.dialogService.open(FileTypeEditComponent, {
         data: { fileType: fileType },
-        header: 'Edite el Item',
+        header: 'Editar '+ fileType.name,
         width: '40%',
         closable:false,
         
@@ -56,7 +55,7 @@ export class FileTypeListComponent implements OnInit {
   
   saveFileType() {
     const ref = this.dialogService.open(FileTypeEditComponent, {
-        header: 'Crear nuevo Item',
+        header: 'Nuevo elemento',
         width: '40%',
         closable:false,
     });
@@ -65,31 +64,39 @@ export class FileTypeListComponent implements OnInit {
     });
   }
 
+  showDialog(element: FileType){    
+    this.item = element
+    this.snackbarService.showConfirmDialog()
+  }
+
+  changeFlagForDelete(){
+    this.isDeleted = true
+    this.deleteFileType(this.item)
+  }
+
+  close(){
+    this.snackbarService.closeConfirmDialog()
+    if(this.isDeleted==false){
+      this.getFileTypes()
+    }
+  }
+
   deleteFileType(fileType: FileType) {    
-    this.confirmationService.confirm({
-      header: "¡ Atención !",
-      message: 'Si borra el tipo de fichero, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
-      acceptLabel:"Aceptar" ,
-      acceptIcon: "ui-icon-blank",
-      rejectLabel:"Cancelar",
-      rejectIcon: "ui-icon-blank",
-      rejectButtonStyleClass:"p-button-secondary",
-      accept: () => 
-      {
-        this.fileTypeService.deleteFileTypeById(fileType.id).subscribe({
-          next: () =>{
-            this.snackbarService.showMessage('El registro ha sido borrado con éxito')
-            this.getFileTypes()
-          },
-          error:() =>{            
-            this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-            this.getFileTypes()
-          }
-        })
-      },
-      reject: () =>{
-        this.getFileTypes()
-      }
-    })
+    if(this.isDeleted == true){
+      this.fileTypeService.deleteFileTypeById(fileType.id).subscribe({
+        next: () =>{
+          this.snackbarService.showMessage('El registro ha sido borrado con éxito')
+        },
+        error:() =>{            
+          this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+          this.close()
+        },
+        complete:() =>{
+          this.isDeleted = false
+          this.close()
+        }
+      })
+      
+    } 
   }  
 }

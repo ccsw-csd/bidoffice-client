@@ -80,7 +80,7 @@ export class UserListComponent implements OnInit {
 
   showEditDialog(user: User){
     const dialogRef = this.dynamicDialogService.open(UserEditComponent,{
-      header: "Editar Usuario",
+      header: "Editar " + user.username,
       width: "30%",
       data: {user: user},
       closable: false
