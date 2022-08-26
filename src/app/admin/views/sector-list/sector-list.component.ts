@@ -13,9 +13,9 @@ export class SectorListComponent implements OnInit {
 
     sectors: Sector[];
     sectorFilterDate = new Map();
-    toDay = new Date();
-    fechaInicio: Date;
-    fechaFinal: Date;
+    toDay: number;
+    fechaInicio: number;
+    fechaFinal: number;
 
     public isLoading: boolean = false;
 
@@ -40,10 +40,14 @@ export class SectorListComponent implements OnInit {
                 this.sectors = results;
                 
                 for (let i = 0; i < this.sectors.length; i++) {
-                    this.fechaInicio = this.sectors[i].startDate;
-                    this.fechaFinal = this.sectors[i].endDate;
+                    this.toDay = new Date().getTime();
+                    var fechaInicio = new Date(this.sectors[i].startDate);
+                    var fechaFinal = new Date(this.sectors[i].endDate);
 
-                    if (this.toDay >= this.fechaInicio && this.toDay <= this.fechaFinal){
+                    this.fechaInicio = fechaInicio.getTime();
+                    this.fechaFinal = fechaFinal.getTime();
+
+                    if (this.toDay >= this.fechaInicio && this.toDay <= this.fechaFinal) {
 
                         this.sectorFilterDate.get("activo").push(this.sectors[i]);
                     }
