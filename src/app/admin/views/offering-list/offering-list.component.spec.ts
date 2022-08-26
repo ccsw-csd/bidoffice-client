@@ -24,12 +24,12 @@ describe('OfferingListComponent', () => {
   OFFERING_DELETED = [ new Offering({id:2, name:"Name2", priority: 2}) ]
 
     mockOfferingService = jasmine.createSpyObj(["getAll","deleteOffering"])
-    mockConfirmationService = jasmine.createSpyObj(["confirm","close"])
+   
     mockDynamicDialogRef = jasmine.createSpyObj([""])
     mockDialogService = jasmine.createSpyObj([""])
     mockSnackService = jasmine.createSpyObj(["error", "showMessage"])
 
-    offering = new OfferingListComponent(mockOfferingService, mockConfirmationService, mockSnackService, mockDynamicDialogRef, mockDialogService)
+    offering = new OfferingListComponent(mockOfferingService, mockSnackService, mockDynamicDialogRef, mockDialogService)
   });
 
   it('getAllShouldReturnOfferingList', () => {

@@ -8,6 +8,7 @@ import { HyperscalerEditComponent } from '../hyperscaler-edit/hyperscaler-edit.c
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 
+
 @Component({
   selector: 'app-hyperscaler',
   templateUrl: './hyperscaler-list.component.html',
@@ -18,7 +19,8 @@ export class HyperscalerListComponent implements OnInit {
   public listOfData: Hyperscaler[]
   public cols: any[];
   public isLoading: boolean = false
-  public accept: any
+  public isDeleted: boolean = false
+  public item: Hyperscaler
 
   
   constructor(private hyperscalerService: HyperscalerService, 
@@ -75,25 +77,39 @@ export class HyperscalerListComponent implements OnInit {
     });
   }
 
-  showDialog(){  
+  showDialog(element?: Hyperscaler){   
+    this.item=element 
     this.snackbarService.showConfirmDialog()
   }
 
-  cancel(){
-    this.getDataHyperscaler()
+  changeFlagForDelete(){
+    this.isDeleted = true
+    this.deleteRow(this.item)
   }
 
-  deleteRow(element: Hyperscaler): void{
-    this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
-      next:() => {
-        this.snackbarService.showMessage('El registro se ha borrado con éxito')
-        this.getDataHyperscaler()
-      },
-      error:() => {
-        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-        this.getDataHyperscaler()
-      } 
-    })
+  closeDialog(){
+    this.snackbarService.closeConfirmDialog()
+    if(this.isDeleted==false){
+      this.getDataHyperscaler()
+    }
+  }
+
+  deleteRow(element?: Hyperscaler): void{
+    if(this.isDeleted == true){
+        this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
+          next:() => {
+            this.snackbarService.showMessage('El registro se ha borrado con éxito')
+          },
+          error:() => {
+            this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+            this.closeDialog()
+          },
+          complete:()  =>{  
+            this.isDeleted = false
+            this.closeDialog()
+          }
+        })     
+    }
   }
 
 }

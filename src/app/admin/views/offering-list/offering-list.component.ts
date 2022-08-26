@@ -4,6 +4,7 @@ import { Offering } from '../../model/Offering';
 import { OfferingService } from '../../services/offering.service';
 import { OfferingEditComponent } from '../offering-edit/offering-edit.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { Offer } from 'src/app/offer/model/Offer';
 
 @Component({
   selector: 'app-offering-list',
@@ -15,6 +16,8 @@ export class OfferingListComponent implements OnInit {
 
   offeringList: Offering[];
   isLoading: boolean = false;
+  item: Offering;
+  isDeleted: boolean;
 
   constructor(private offeringService: OfferingService,
     private dialogService: DialogService,
@@ -62,25 +65,39 @@ export class OfferingListComponent implements OnInit {
     this.onClose(message)
   }
 
-  showDialog(){  
+  showDialog(element?: Offering){   
+    this.item=element 
     this.snackbarService.showConfirmDialog()
   }
 
-  cancel(){
-    this.getAll()
+  changeFlagForDelete(){
+    this.isDeleted = true
+    this.deleteOffering(this.item)
+  }
+
+  closeDialog(){
+    this.snackbarService.closeConfirmDialog()
+    if(this.isDeleted==false){
+      this.getAll()
+    }
   }
 
   deleteOffering(element: Offering): void{
-    this.offeringService.deleteOffering(element.id).subscribe({
-      next:() => {
-        this.snackbarService.showMessage('El registro se ha borrado con éxito')
-        this.getAll()
-      },
-      error:() => {
-        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta')
-        this.getAll()
-      } 
-    })
+    if(this.isDeleted){
+      this.offeringService.deleteOffering(element.id).subscribe({
+        next:() => {
+          this.snackbarService.showMessage('El registro se ha borrado con éxito')     
+        },
+        error:() => {
+          this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta')
+          this.closeDialog()
+        },
+        complete:() =>{
+          this.isDeleted = false
+          this.closeDialog()
+        }
+      })
+    } 
   }
   
   onClose(message?: string): void{

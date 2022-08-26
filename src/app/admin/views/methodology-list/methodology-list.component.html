@@ -1,4 +1,10 @@
 <p-toast position="top-center"></p-toast>
+<p-confirmDialog  header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
+    <p-footer>
+        <button type="button" pButton label="Cerrar" class="p-button-secondary" (click)="close()"></button>
+        <button type="button" pButton label="Borrar" class="p-button-primary" (click)="changeFlagForDelete()"></button>
+    </p-footer>
+</p-confirmDialog>
 <p-table [value]="methodologyItemList" [loading]="isLoading" [scrollable]="true" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
     <tr>
@@ -16,16 +22,10 @@
                     <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar metodología" tooltipPosition="top"
                         class="p-button-rounded p-button-text p-button-plain icon"
                         (click)="showEditDialog(methodologyItem)"></button>
-                    <button pButton type="button"  (click)="showDialog()" icon="pi pi-trash" pTooltip="Borrar metodología" tooltipPosition="top"
+                    <button pButton type="button"  (click)="showDialog(methodologyItem)" icon="pi pi-trash" pTooltip="Borrar metodología" tooltipPosition="top"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
                 </div>
             </td>
-            <p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
-                <p-footer>
-                    <button type="button" pButton label="Cerrar" class="p-button-secondary" (click)="cancel()"></button>
-                    <button type="button" pButton label="Guardar" class="p-button-primary" (click)="deleteItem(methodologyItem)"></button>
-                </p-footer>
-            </p-confirmDialog>
         </tr>
     </ng-template>
 </p-table>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { OpportunityType } from '../../model/OppurtinityType';
 import { OpportunityTypeService } from '../../services/opportunity-type.service';
 import {DialogService} from 'primeng/dynamicdialog';
@@ -17,6 +16,8 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
 export class OpportunityTypeListComponent implements OnInit {
   opportunityList: OpportunityType[]
   isLoading: boolean = false
+  item: OpportunityType;
+  isDeleted: boolean;
   constructor(private opportunityService: OpportunityTypeService,
     private ref: DynamicDialogRef,
     private dialogService: DialogService,
@@ -39,22 +40,35 @@ export class OpportunityTypeListComponent implements OnInit {
     
   }
 
-  showDialog(){  
+  showDialog(element?: OpportunityType){   
+    this.item=element 
     this.snackbarService.showConfirmDialog()
   }
 
-  cancel(){
-    this.findAll()
+  changeFlagForDelete(){
+    this.isDeleted = true
+    this.deleteRow(this.item)
+  }
+
+  closeDialog(){
+    this.snackbarService.closeConfirmDialog()
+    if(this.isDeleted==false){
+      this.findAll()
+    }
   }
 
   deleteRow(item: OpportunityType){
     this.opportunityService.delete(item.id).subscribe({
       next: (results) =>{
-        this.findAll()
         this.snackbarService.showMessage('El registro se ha borrado con éxito')
       },
       error: () => {
-        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');      
+        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');  
+        this.closeDialog()    
+      },
+      complete: () =>{
+        this.isDeleted = false
+        this.closeDialog()
       }
     });
   }

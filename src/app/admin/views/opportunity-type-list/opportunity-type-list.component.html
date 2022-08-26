@@ -1,4 +1,10 @@
 <p-toast position="top-center"></p-toast> 
+<p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
+    <p-footer>
+        <button type="button" pButton label="Cerrar" class="p-button-secondary" (click)="closeDialog()"></button>
+        <button type="button" pButton label="Borrar" class="p-button-primary" (click)="changeFlagForDelete()"></button>
+    </p-footer>
+</p-confirmDialog>
 <p-table [value]="opportunityList"  [scrollable]="true" [loading]="isLoading" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
@@ -16,14 +22,8 @@
                 class="p-button-rounded p-button-text p-button-plain icon"></button>
 
                 <button pButton type="button" icon="pi pi-trash" pTooltip="Borrar tipo de oportunidad" tooltipPosition="top"
-                class="p-button-rounded p-button-text p-button-plain icon" (click)="showDialog()"></button>
+                class="p-button-rounded p-button-text p-button-plain icon" (click)="showDialog(element)"></button>
             </td>
-            <p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
-                <p-footer>
-                    <button type="button" pButton label="Cerrar" class="p-button-secondary" (click)="cancel()"></button>
-                    <button type="button" pButton label="Guardar" class="p-button-primary" (click)="deleteRow(element)"></button>
-                </p-footer>
-            </p-confirmDialog>
         </tr>
     </ng-template>   
 </p-table>

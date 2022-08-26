@@ -13,6 +13,8 @@ export class ProjectTypeListComponent implements OnInit {
 
   listoOfData: ProjectType[];
   isLoading: boolean = false;
+  item: ProjectType;
+  isDeleted: boolean = false;
 
   constructor(
     private projectTypeService: ProjectTypeService,
@@ -34,25 +36,34 @@ export class ProjectTypeListComponent implements OnInit {
       });
   }
 
-  showDialog(){  
+  showDialog(element?: ProjectType){   
+    this.item=element 
     this.snackbarService.showConfirmDialog()
   }
 
-  cancel(){
-    this.findAll()
+  changeFlagForDelete(){
+    this.isDeleted = true
+    this.delete(this.item)
   }
 
+  closeDialog(){
+    this.snackbarService.closeConfirmDialog()
+    if(this.isDeleted==false){
+      this.findAll()
+    }
+  }
   delete(element: ProjectType){
     this.projectTypeService.delete(element.id).subscribe({
       next: () => {
-        this.findAll();
+        this.snackbarService.showMessage('El registro se ha borrado con éxito')
       },
       error:() => {
         this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-        this.findAll();
+        this.closeDialog()
       },
       complete: () => {
-        this.snackbarService.showMessage('El registro se ha borrado con éxito')
+        this.isDeleted = false
+        this.closeDialog()
       }
     });
   }

@@ -15,6 +15,8 @@ export class MethodologyListComponent implements OnInit {
   methodologyItemList: Methodology[];
   display: Boolean = false;
   isLoading: boolean = false;
+  isDeleted: boolean = false;
+  item: Methodology
 
   constructor(
     private methodologyService: MethodologyService,
@@ -63,27 +65,38 @@ export class MethodologyListComponent implements OnInit {
     });
   }
 
-  showDialog(){  
-    console.log("showDialog")
+  showDialog(element?: Methodology){   
+    this.item=element 
     this.snackbarService.showConfirmDialog()
   }
 
-  cancel(){
-    this.findAll()
+  changeFlagForDelete(){
+    this.isDeleted = true
+    this.deleteItem(this.item)
+  }
+
+  close(){
+    this.snackbarService.closeConfirmDialog()
+    if(this.isDeleted==false){
+      this.findAll()
+    }
   }
 
   deleteItem(methodologyItem?: Methodology){
-    this.methodologyService.delete(methodologyItem.id).subscribe({
-      next:() => {  
-        this.findAll()
-      },
-      error:() => {
-        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-        this.findAll()
-      },
-      complete: () => {     
-        this.snackbarService.showMessage('El registro se ha borrado con éxito')
-      } 
-    })
+    if(this.isDeleted){
+      this.methodologyService.delete(methodologyItem.id).subscribe({
+        next:() => {  
+          this.snackbarService.showMessage('El registro se ha borrado con éxito')
+        },
+        error:() => {
+          this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+          this.close()
+        },
+        complete: () => {   
+          this.isDeleted = false 
+          this.close()        
+        } 
+      }) 
+    }
   }
 }

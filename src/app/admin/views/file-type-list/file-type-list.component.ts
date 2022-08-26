@@ -14,6 +14,8 @@ export class FileTypeListComponent implements OnInit {
 
   public dataSource : FileType[]
   public isloading: boolean = false;
+  public isDeleted: boolean = false
+  public item: FileType
 
   constructor(
     private fileTypeService: FileTypeService,
@@ -62,24 +64,39 @@ export class FileTypeListComponent implements OnInit {
     });
   }
 
-  showDialog(){  
+  showDialog(element: FileType){    
+    this.item = element
     this.snackbarService.showConfirmDialog()
   }
 
-  cancel(){
-    this.getFileTypes()
+  changeFlagForDelete(){
+    this.isDeleted = true
+    this.deleteFileType(this.item)
+  }
+
+  close(){
+    this.snackbarService.closeConfirmDialog()
+    if(this.isDeleted==false){
+      this.getFileTypes()
+    }
   }
 
   deleteFileType(fileType: FileType) {    
-    this.fileTypeService.deleteFileTypeById(fileType.id).subscribe({
-      next: () =>{
-        this.snackbarService.showMessage('El registro ha sido borrado con éxito')
-        this.getFileTypes()
-      },
-      error:() =>{            
-        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-        this.getFileTypes()
-      }
-    })
+    if(this.isDeleted == true){
+      this.fileTypeService.deleteFileTypeById(fileType.id).subscribe({
+        next: () =>{
+          this.snackbarService.showMessage('El registro ha sido borrado con éxito')
+        },
+        error:() =>{            
+          this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+          this.close()
+        },
+        complete:() =>{
+          this.isDeleted = false
+          this.close()
+        }
+      })
+      
+    } 
   }  
 }

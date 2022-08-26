@@ -19,6 +19,8 @@ export class TechnologyListComponent implements OnInit {
 
     technologies: Technology[];
     public isLoading: boolean = false;
+    isDeleted: boolean = false;
+    item: Technology;
 
     constructor(
         private technologyService: TechnologyService,
@@ -80,12 +82,22 @@ export class TechnologyListComponent implements OnInit {
         });
     }
 
-    showDialog(){  
+    showDialog(element?: Technology){   
+        this.item=element 
         this.snackbarService.showConfirmDialog()
     }
     
-    cancel(){
-        this.findAll()
+    changeFlagForDelete(){
+        this.isDeleted = true
+        this.deleteTechnology(this.item)
+    }
+    
+    
+    closeDialog(){
+        this.snackbarService.closeConfirmDialog()
+        if(this.isDeleted==false){
+          this.findAll()
+        }
     }
 
     /**
@@ -93,19 +105,22 @@ export class TechnologyListComponent implements OnInit {
      * 
      * @param technology Tecnología a borrar.
      */
-    deleteTechnology(technology: Technology) {
-
-        this.technologyService.deleteTechnology(technology.id).subscribe({
-            next: () => {
-                this.snackbarService.showMessage('El registro se ha borrado con éxito')
-                this.findAll();
-            },
-            error:() => {
-                this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-                this.findAll();
-            }
-        });
-
+        
+     deleteTechnology(item: Technology) {
+        if(this.isDeleted){
+            this.technologyService.deleteTechnology(item.id).subscribe({
+                next: () => {
+                    this.snackbarService.showMessage('El registro se ha borrado con éxito')    
+                },
+                error:() => {
+                    this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+                    this.closeDialog()
+                },
+                complete:() =>{
+                    this.isDeleted = false
+                    this.closeDialog()
+                }
+            });
+        }
     }
-
 }
