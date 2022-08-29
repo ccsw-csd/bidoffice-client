@@ -1,27 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Offering } from '../../model/Offering';
 import { OfferingService } from '../../services/offering.service';
 import { OfferingEditComponent } from '../offering-edit/offering-edit.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { Offer } from 'src/app/offer/model/Offer';
 
 @Component({
   selector: 'app-offering-list',
   templateUrl: './offering-list.component.html',
   styleUrls: ['./offering-list.component.scss'],
-  providers: [ConfirmationService, DialogService, DynamicDialogRef, DynamicDialogConfig]
+  providers: [DialogService, DynamicDialogRef, DynamicDialogConfig]
 })
 export class OfferingListComponent implements OnInit {
 
   offeringList: Offering[];
   isLoading: boolean = false;
+  item: Offering;
+  isDeleted: boolean;
 
   constructor(private offeringService: OfferingService,
-    private confirmationService: ConfirmationService,
     private dialogService: DialogService,
     private ref: DynamicDialogRef, 
-    private snackbar: SnackbarService) { }
+    private snackbarService: SnackbarService) { }
 
   ngOnInit(): void {
     this.getAll();
@@ -54,7 +55,7 @@ export class OfferingListComponent implements OnInit {
       }
       else{
         this.ref = this.dialogService.open(OfferingEditComponent, {
-          header: 'Nuevo offering',
+          header: 'Nuevo elemento',
           width: '40%',
           data: {
           },
@@ -64,32 +65,39 @@ export class OfferingListComponent implements OnInit {
     this.onClose(message)
   }
 
+  showDialog(element?: Offering){   
+    this.item=element 
+    this.snackbarService.showConfirmDialog()
+  }
+
+  changeFlagForDelete(){
+    this.isDeleted = true
+    this.deleteOffering(this.item)
+  }
+
+  closeDialog(){
+    this.snackbarService.closeConfirmDialog()
+    if(this.isDeleted==false){
+      this.getAll()
+    }
+  }
+
   deleteOffering(element: Offering): void{
-    this.confirmationService.confirm({
-      header: '¡ Atención !',
-      message: 'Si borra el offering, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
-      acceptLabel: 'Aceptar',
-      acceptIcon: 'ui-icon-blank',
-      rejectLabel: 'Cerrar',
-      rejectIcon: 'ui-icon-blank',
-      rejectButtonStyleClass: 'p-button-secondary',
-      
-      accept: () => {
-        this.offeringService.deleteOffering(element.id).subscribe({
-          next:() => {
-            this.snackbar.showMessage('El registro se ha borrado con éxito')
-            this.getAll()
-          },
-          error:() => {
-            this.snackbar.error('El registro no puede ser eliminado porque se está usando en alguna oferta')
-            this.getAll()
-          } 
-        })
-      },
-      reject: () => {
-        this.getAll()
-      }
-    });
+    if(this.isDeleted){
+      this.offeringService.deleteOffering(element.id).subscribe({
+        next:() => {
+          this.snackbarService.showMessage('El registro se ha borrado con éxito')     
+        },
+        error:() => {
+          this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta')
+          this.closeDialog()
+        },
+        complete:() =>{
+          this.isDeleted = false
+          this.closeDialog()
+        }
+      })
+    } 
   }
   
   onClose(message?: string): void{
