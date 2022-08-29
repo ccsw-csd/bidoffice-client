@@ -2,15 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectTypeListComponent } from './project-type-list.component';
 import { of } from "rxjs";
 import { ProjectType } from "../../model/ProjectType";
-import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 
 describe('ProjectTypeListComponent', () => {
   let projectTypeListComponent: ProjectTypeListComponent;
   let mockProjectTypeService;
-  let confirmationService;
-  let messageService;
-  let ref;
-  let dialogService;
+  let mockSnackService;
 
   let DATA_LIST = [
     new ProjectType({id:1, name:"Name 1", priority: 1}),
@@ -23,11 +19,8 @@ describe('ProjectTypeListComponent', () => {
 
   beforeEach(() => {
     mockProjectTypeService = jasmine.createSpyObj(["findAll", "delete"]);
-    confirmationService = jasmine.createSpyObj(["confirm"]);
-    messageService = jasmine.createSpyObj(["add"]);
-    ref = jasmine.createSpyObj([""]);
-    dialogService = jasmine.createSpyObj([""]);
-    projectTypeListComponent = new ProjectTypeListComponent(mockProjectTypeService, confirmationService, ref, dialogService, messageService);
+    mockSnackService = jasmine.createSpyObj(["error","showMessage","showConfirmDialog","closeConfirmDialog"])
+    projectTypeListComponent = new ProjectTypeListComponent(mockProjectTypeService,  mockSnackService);
   });
 
   it('findAllShouldReturnProjectTypeList', () =>{

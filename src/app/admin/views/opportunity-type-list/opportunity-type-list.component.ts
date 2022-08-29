@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService } from 'primeng/api';
 import { OpportunityType } from '../../model/OppurtinityType';
 import { OpportunityTypeService } from '../../services/opportunity-type.service';
 import {DialogService} from 'primeng/dynamicdialog';
@@ -12,13 +11,14 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
   selector: 'app-opportunity-type-list',
   templateUrl: './opportunity-type-list.component.html',
   styleUrls: ['./opportunity-type-list.component.scss'],
-  providers: [ConfirmationService,DialogService,DynamicDialogRef,DynamicDialogConfig]
+  providers: [DialogService,DynamicDialogRef,DynamicDialogConfig]
 })
 export class OpportunityTypeListComponent implements OnInit {
   opportunityList: OpportunityType[]
   isLoading: boolean = false
+  item: OpportunityType;
+  isDeleted: boolean;
   constructor(private opportunityService: OpportunityTypeService,
-    private confirmationService: ConfirmationService,
     private ref: DynamicDialogRef,
     private dialogService: DialogService,
     private snackbarService: SnackbarService,
@@ -40,30 +40,37 @@ export class OpportunityTypeListComponent implements OnInit {
     
   }
 
+  showDialog(element?: OpportunityType){   
+    this.item=element 
+    this.snackbarService.showConfirmDialog()
+  }
+
+  changeFlagForDelete(){
+    this.isDeleted = true
+    this.deleteRow(this.item)
+  }
+
+  closeDialog(){
+    this.snackbarService.closeConfirmDialog()
+    if(this.isDeleted==false){
+      this.findAll()
+    }
+  }
+
   deleteRow(item: OpportunityType){
-    this.confirmationService.confirm({
-      header: "¡ Atención !",
-      message: 'Si borra el tipo de oportunidad, se eliminarán los datos del mismo.<br>Esta acción no se puede deshacer.<br><br>¿Está de acuerdo?',
-      acceptLabel: 'Aceptar',
-      acceptIcon: 'ui-icon-blank',
-      rejectLabel: 'Cancelar',
-      rejectIcon: 'ui-icon-blank',
-      rejectButtonStyleClass: 'p-button-secondary',
-      accept: () =>{
-        this.opportunityService.delete(item.id).subscribe({
-          next: (results) =>{
-            this.findAll()
-            this.snackbarService.showMessage('El registro se ha borrado con éxito')
-          },
-          error: () => {
-            this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');      
-          }
-        });
+    this.opportunityService.delete(item.id).subscribe({
+      next: (results) =>{
+        this.snackbarService.showMessage('El registro se ha borrado con éxito')
       },
-      reject: () =>{
-        this.findAll()
-      }   
-    })   
+      error: () => {
+        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');  
+        this.closeDialog()    
+      },
+      complete: () =>{
+        this.isDeleted = false
+        this.closeDialog()
+      }
+    });
   }
 
   editItem(item?: OpportunityType){
@@ -80,7 +87,7 @@ export class OpportunityTypeListComponent implements OnInit {
     }
     else{
       this.ref = this.dialogService.open(OpportunityTypeEditComponent,{
-        header: 'Nuevo item',
+        header: 'Nuevo elemento',
           width: '40%',
           data: {
           },
