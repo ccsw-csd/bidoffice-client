@@ -75,7 +75,7 @@ export class ProjectTypeListComponent implements OnInit {
   editItem(item?: ProjectType){
     if(item!=null){
       this.ref = this.dialogService.open(ProjectTypeEditComponent, {
-        header: 'Editar' + item.name,
+        header: 'Editar ' + item.name,
         width: '40%',
         data: {
           projectTypeData:item
