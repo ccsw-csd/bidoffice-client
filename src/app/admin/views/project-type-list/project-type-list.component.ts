@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectType } from "../../model/ProjectType";
 import { ProjectTypeService } from "../../services/project-type.service";
-import { ConfirmationService } from "primeng/api";
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
+import { ProjectTypeEditComponent } from "../project-type-edit/project-type-edit.component";
 
 @Component({
   selector: 'app-project-type-list',
   templateUrl: './project-type-list.component.html',
   styleUrls: ['./project-type-list.component.scss'],
+  providers: [DialogService, DynamicDialogRef, DynamicDialogConfig]
 })
 export class ProjectTypeListComponent implements OnInit {
 
@@ -18,6 +20,8 @@ export class ProjectTypeListComponent implements OnInit {
 
   constructor(
     private projectTypeService: ProjectTypeService,
+    private ref: DynamicDialogRef,
+    private dialogService: DialogService,
     private snackbarService: SnackbarService,
   ) { }
 
@@ -36,8 +40,8 @@ export class ProjectTypeListComponent implements OnInit {
       });
   }
 
-  showDialog(element?: ProjectType){   
-    this.item=element 
+  showDialog(element?: ProjectType){
+    this.item=element
     this.snackbarService.showConfirmDialog()
   }
 
@@ -66,6 +70,36 @@ export class ProjectTypeListComponent implements OnInit {
         this.closeDialog()
       }
     });
+  }
+
+  editItem(item?: ProjectType){
+    if(item!=null){
+      this.ref = this.dialogService.open(ProjectTypeEditComponent, {
+        header: 'Editar' + item.name,
+        width: '40%',
+        data: {
+          projectTypeData:item
+        },
+        closable: false
+      });
+    }
+    else{
+      this.ref = this.dialogService.open(ProjectTypeEditComponent, {
+        header: 'Nuevo elemento',
+        width: '40%',
+        data:{},
+        closable: false
+      });
+    }
+    this.onClose();
+  }
+
+  onClose(): void{
+    this.ref.onClose.subscribe(
+      (results:any) => {
+        this.findAll();
+      }
+    )
   }
 
 }
