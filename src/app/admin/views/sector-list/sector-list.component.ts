@@ -12,7 +12,10 @@ import { SectorService } from '../../services/sector.service';
 export class SectorListComponent implements OnInit {
 
     sectors: Sector[];
-    sectorFilterDate = new Map();
+    sectorFilteredByDate: Array<Array<Sector>>;
+    activeSectors: Array<Sector>;
+    inactiveSectors: Array<Sector>;
+
     toDay: number;
     fechaInicio: number;
     fechaFinal: number;
@@ -24,8 +27,6 @@ export class SectorListComponent implements OnInit {
     ) {  }
 
     ngOnInit(): void {
-        this.sectorFilterDate.set("activo", []);
-        this.sectorFilterDate.set("inactivo", []);
         this.findAll();
     }
 
@@ -49,17 +50,21 @@ export class SectorListComponent implements OnInit {
 
                     if (this.toDay >= this.fechaInicio && this.toDay <= this.fechaFinal) {
 
-                        this.sectorFilterDate.get("activo").push(this.sectors[i]);
+                        this.activeSectors.push(this.sectors[i]);
+//                        this.sectorFilterDate.get("activo").push(this.sectors[i]);
                     }
                     else {
 
-                        this.sectorFilterDate.get("inactivo").push(this.sectors[i]);
+                        this.inactiveSectors.push(this.sectors[i]);
+//                        this.sectorFilterDate.get("inactivo").push(this.sectors[i]);
                     }
                 }
 
             },
             error:() => {},
             complete: () => {
+                this.sectorFilteredByDate.push(this.activeSectors);
+                this.sectorFilteredByDate.push(this.inactiveSectors);
                 this.isLoading = false;
             }
         })
