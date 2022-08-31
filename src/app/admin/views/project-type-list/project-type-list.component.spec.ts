@@ -6,8 +6,9 @@ import { ProjectType } from "../../model/ProjectType";
 describe('ProjectTypeListComponent', () => {
   let projectTypeListComponent: ProjectTypeListComponent;
   let mockProjectTypeService;
-  let confirmationService;
-  let messageService;
+  let mockSnackService;
+  let mockDialogRef;
+  let mockDialogConfig;
 
   let DATA_LIST = [
     new ProjectType({id:1, name:"Name 1", priority: 1}),
@@ -20,9 +21,10 @@ describe('ProjectTypeListComponent', () => {
 
   beforeEach(() => {
     mockProjectTypeService = jasmine.createSpyObj(["findAll", "delete"]);
-    confirmationService = jasmine.createSpyObj(["confirm"]);
-    messageService = jasmine.createSpyObj(["add"]);
-    projectTypeListComponent = new ProjectTypeListComponent(mockProjectTypeService, confirmationService, messageService);
+    mockSnackService = jasmine.createSpyObj(["error","showMessage","showConfirmDialog","closeConfirmDialog"])
+    mockDialogRef = jasmine.createSpyObj(["close"])
+    mockDialogConfig = jasmine.createSpyObj([""])
+    projectTypeListComponent = new ProjectTypeListComponent(mockProjectTypeService, mockDialogRef, mockDialogConfig, mockSnackService);
   });
 
   it('findAllShouldReturnProjectTypeList', () =>{

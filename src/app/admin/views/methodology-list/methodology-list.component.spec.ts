@@ -29,7 +29,6 @@ describe('MethodologyListComponent', () => {
       mockMethodologyService,
       mockDynamicDialogService,
       mockConfirmationService,
-      mockMessageService
       );
   });
 
