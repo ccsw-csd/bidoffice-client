@@ -6,6 +6,7 @@ import { AuthGuard } from './core/services/auth.guard';
 import { UserResolverService } from './core/services/user-resolver.service';
 import { LayoutComponent } from './core/views/layout/layout.component';
 import { LoginComponent } from './login/views/login/login.component';
+import { OfferEditComponent } from './offer/views/offer-edit/offer-edit.component';
 import { OfferListComponent } from './offer/views/offer-list/offer-list.component';
 import { UserListComponent } from "./admin/views/user-list/user-list.component";
 import { MethodologyListComponent } from './admin/views/methodology-list/methodology-list.component';

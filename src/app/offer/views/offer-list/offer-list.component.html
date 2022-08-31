@@ -1,4 +1,5 @@
-<div>  
+<div>
+    <p-toast position="top-center"></p-toast> 
     <p-table [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="isloading" scrollable="true"
     scrollHeight="calc(92vh - 190px)" responsiveLayout="scroll" [paginator]="true" [rows]="10"
     [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
@@ -33,7 +34,7 @@
                 <td>{{offerItemList.opportunityStatus.name}}</td>
                 <td style='flex: 0 0 150px;'>
                     <div>
-                        <button pButton type="button" icon="pi pi-pencil"
+                        <button pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>
                     </div>
                 </td>
@@ -41,6 +42,6 @@
         </ng-template>
     </p-table>
     <div class="mt-3 flex justify-content-end">
-        <button pButton id="create-offer" class="p-3">Nueva oferta</button>
+        <button pButton id="create-offer" (click)="toOfferEdit()" class="p-3">Nueva oferta</button>
     </div>
 </div> 

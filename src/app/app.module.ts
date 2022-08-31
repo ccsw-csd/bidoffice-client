@@ -8,18 +8,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { OfferModule } from './offer/offer.module';
-import { AdminModule } from "./admin/admin.module";
+import { AdminModule } from './admin/admin.module';
 
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
 
+registerLocaleData(localeEs, 'es');
 
-registerLocaleData(localeEs,'es');
-
+export function HttpLoeaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/calendar/', '.json');
+}
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,9 +30,16 @@ registerLocaleData(localeEs,'es');
     CoreModule,
     LoginModule,
     OfferModule,
-    AdminModule
+    AdminModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoeaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

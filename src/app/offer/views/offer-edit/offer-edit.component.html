@@ -1,0 +1,28 @@
+<p-tabView [(activeIndex)]="activeItem">
+  <p-tabPanel header="Oportunidad">
+    <app-chance [data]="offer" [formValidator]="offerForm.get('chance')"></app-chance>
+  </p-tabPanel>
+  <p-tabPanel header="Planificación y proyecto">
+    <app-planandproyect [data]="offer"></app-planandproyect>
+  </p-tabPanel>
+  <p-tabPanel header="Documentación">
+    <app-documentation [data]="offer"></app-documentation>
+  </p-tabPanel>
+  <p-tabPanel header="Capítulos de interés">
+    <app-interest [data]="offer"></app-interest>
+  </p-tabPanel>
+  <p-tabPanel header="Seguimiento">
+    <app-tracing [data]="offer"></app-tracing>
+  </p-tabPanel>
+</p-tabView>
+<div class="ui-fluid formgrid grid absolute right-0 left-0 bottom-0 justify-content-center mb-1">
+  <div class="p-fluid field col-12 md:col-4">
+    <p-button (click)="onClose()" styleClass="p-button-secondary" label="Cancelar"></p-button>
+  </div>
+  <div class="p-fluid field col-12 md:col-4">
+    <p-button (click)="onSave()" label="Guardar" [disabled]="offerForm.invalid"></p-button>
+  </div>
+</div>
+<div class="loadWrapper flex align-items-center flex-column justify-content-center" *ngIf="isLoading">
+  <p-progressSpinner></p-progressSpinner>
+</div>
