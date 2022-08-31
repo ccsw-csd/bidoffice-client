@@ -11,7 +11,7 @@ import { SectorService } from '../../services/sector.service';
 })
 export class SectorListComponent implements OnInit {
 
-    sectors: Sector[];
+    sectors: Array<Sector>;
     sectorFilteredByDate: Array<Array<Sector>>;
     activeSectors: Array<Sector>;
     inactiveSectors: Array<Sector>;
@@ -24,7 +24,11 @@ export class SectorListComponent implements OnInit {
 
     constructor(
         private sectorService: SectorService,
-    ) {  }
+    ) {  
+        this.sectorFilteredByDate = new Array<Array<Sector>>();
+        this.activeSectors = new Array<Sector>();
+        this.inactiveSectors = new Array<Sector>();
+    }
 
     ngOnInit(): void {
         this.findAll();
@@ -48,7 +52,7 @@ export class SectorListComponent implements OnInit {
                     this.fechaInicio = fechaInicio.getTime();
                     this.fechaFinal = fechaFinal.getTime();
 
-                    if (this.toDay >= this.fechaInicio && this.toDay <= this.fechaFinal) {
+                    if (this.fechaInicio <= this.toDay && this.toDay <= this.fechaFinal + 8640000) {
 
                         this.activeSectors.push(this.sectors[i]);
 //                        this.sectorFilterDate.get("activo").push(this.sectors[i]);
@@ -60,11 +64,11 @@ export class SectorListComponent implements OnInit {
                     }
                 }
 
+                this.sectorFilteredByDate.push(this.activeSectors);
+                this.sectorFilteredByDate.push(this.inactiveSectors);
             },
             error:() => {},
             complete: () => {
-                this.sectorFilteredByDate.push(this.activeSectors);
-                this.sectorFilteredByDate.push(this.inactiveSectors);
                 this.isLoading = false;
             }
         })

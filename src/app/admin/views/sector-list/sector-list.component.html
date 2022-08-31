@@ -1,13 +1,14 @@
 <p-table [value]="sectorFilteredByDate"
         rowGroupMode="subheader"
-        [scrollable]="true" 
-        [loading]="isLoading" 
-        scrollHeight="calc(100vh - 184px)" 
+        [scrollable]="true"
+        groupRowsBy="{{sectorFilteredByDate}}"
+        [loading]="isLoading"
+        scrollHeight="calc(100vh - 184px)"
         responsiveLayout="scroll">
-        <ng-template pTemplate="groupheader">
+        <ng-template pTemplate="groupheader" let-sector>
             <tr pRowGroupHeader>
                 <td colspan="5">
-                    -<span class="font-bold ml-2">{{sectorFilteredByDate}}</span>
+                   <span class="font-bold ml-2">Lo que sea</span>
                 </td>
             </tr>
         </ng-template>
@@ -20,9 +21,9 @@
             <th style="flex: 0 0 150px">Acción</th>
         </tr>
     </ng-template>
-<ng-template pTemplate="body" let-values>
-        <tr>
-            <td>{{values().name}}</td>
+    <ng-template pTemplate="body" let-array>
+        <tr *ngFor="let sector of array">
+            <td>{{sector.name}}</td>
             <td style="flex: 0 0 150px">{{sector.priority}}</td>
             <td style="flex: 0 0 150px">{{sector.startDate}}</td>
             <td style="flex: 0 0 150px">{{sector.endDate}}</td>
