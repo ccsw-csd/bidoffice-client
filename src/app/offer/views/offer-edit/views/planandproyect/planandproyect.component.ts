@@ -23,8 +23,8 @@ export class PlanandproyectComponent implements OnInit {
   groupPerson: any[] = [];
   person: string;
   selectedPerson;
+  selectedPersonList = [];
   isLoading: boolean = false;
-
   @Input() data: Offer;
   constructor(private offerService: OfferService) {}
 
@@ -39,7 +39,7 @@ export class PlanandproyectComponent implements OnInit {
       this.data.dataProject = new OfferDataProject();
     }
 
-    this.selectedPerson = this.mappingPerson(
+    this.selectedPersonList = this.mappingPerson(
       this.data.teamPerson.map((item) => item.person)
     );
 
@@ -93,11 +93,30 @@ export class PlanandproyectComponent implements OnInit {
   }
 
   assignTeamPerson() {
-    this.data.teamPerson = this.selectedPerson.map(function (person) {
-      return {
+    if (
+      !this.selectedPersonList.some(
+        (item) => item.value.id == this.selectedPerson.value.id
+      )
+    ) {
+      this.data.teamPerson.push({
         id: null,
-        person: person.value,
-      };
-    });
+        person: this.selectedPerson.value,
+      });
+      this.selectedPersonList = [
+        ...this.selectedPersonList,
+        this.selectedPerson,
+      ];
+    }
+    this.selectedPerson = '';
+    console.log(this.selectedPersonList);
+  }
+
+  onDeletePerson(person: Person) {
+    this.data.teamPerson = this.data.teamPerson.filter(
+      (item) => item.person.id != person.id
+    );
+    this.selectedPersonList = this.selectedPersonList.filter(
+      (item) => item.value.id != person.id
+    );
   }
 }

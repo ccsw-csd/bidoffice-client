@@ -28,7 +28,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { StatusChangeComponent } from './views/offer-list/status-change/status-change.component';
 import {SelectButtonModule} from 'primeng/selectbutton';
-
+import {ListboxModule} from 'primeng/listbox';
 @NgModule({
   declarations: [
     OfferListComponent,
@@ -62,7 +62,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     ToastModule,
     ConfirmDialogModule,
     ProgressSpinnerModule,
-    SelectButtonModule
+    SelectButtonModule,
+    ListboxModule
   ],
 })
 export class OfferModule {}

@@ -22,7 +22,7 @@
     <small id="link-help" class="block p-error" *ngIf="checkValidation('link')">Es un campo requerido.</small>
   </div>
   <div class="p-fluid p-float-label field col-12 md:col-12">
-    <textarea [(ngModel)]="dataFile.observations" formControlName="observation" pInputTextarea></textarea>
+    <textarea [(ngModel)]="dataFile.observations" formControlName="observation" pInputTextarea autoResize="autoResize"></textarea>
     <label>Observaciones</label>
   </div>
   <div class="p-fluid p-float-label field col-12 md:col-6">

@@ -43,11 +43,10 @@
       <td>
         <p-cellEditor>
           <ng-template pTemplate="input">
-            <p-calendar [showIcon]="true" styleClass="w-full" appendTo="body" [(ngModel)]="tracings.date"
-              dateFormat="yy-mm-dd" required></p-calendar>
+            <p-calendar [showIcon]="true" styleClass="w-full" appendTo="body" [(ngModel)]="tracings.date" required></p-calendar>
           </ng-template>
           <ng-template pTemplate="output">
-            {{tracings.date | date: "yyyy-mm-dd"}}
+            {{tracings.date | date: 'dd/MM/yyyy'}}
           </ng-template>
         </p-cellEditor>
       </td>
