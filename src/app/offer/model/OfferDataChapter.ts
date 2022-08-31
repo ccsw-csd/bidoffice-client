@@ -1,3 +1,5 @@
+import { Offer } from "./Offer";
+
 export class OfferDataChapter{
 
   id: number;
@@ -12,4 +14,5 @@ export class OfferDataChapter{
   innovation: boolean = false;
   reference: boolean = false;
   keyDocument: boolean = false;
+  offer: Offer;
 }

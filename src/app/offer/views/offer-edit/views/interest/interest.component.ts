@@ -18,5 +18,4 @@ export class InterestComponent implements OnInit {
       this.data.dataChapter = new OfferDataChapter();
     }
   }
-
 }

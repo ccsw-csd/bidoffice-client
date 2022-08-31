@@ -29,7 +29,6 @@ export class ChanceComponent implements OnInit {
   selectedOfferings: BaseClass[];
   selectedTechnologies: BaseClass[];
   isLoading: boolean = false;
-
   @Input() data: Offer;
   @Input() formValidator: FormGroup;
 

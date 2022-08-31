@@ -20,7 +20,7 @@
   <div class="p-fluid field col-12 md:col-12 mt-2">
     <span class="p-float-label">
       <p-calendar formControlName="date" [showIcon]="true" appendTo="body" date-describedby="date-help"
-        [(ngModel)]="offerTracing.date" dateFormat="yy-mm-dd" required></p-calendar>
+        [(ngModel)]="offerTracing.date" required></p-calendar>
       <label>Fecha</label>
     </span>
     <small id="date-help" class="block p-error" *ngIf="checkValidation('date')">Es un campo requerido.</small>
