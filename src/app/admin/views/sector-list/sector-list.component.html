@@ -32,8 +32,8 @@
                 <tr>
                     <td>{{sector.name}}</td>
                     <td style="flex: 0 0 150px">{{sector.priority}}</td>
-                    <td style="flex: 0 0 150px">{{sector.startDate}}</td>
-                    <td style="flex: 0 0 150px">{{sector.endDate}}</td>
+                    <td style="flex: 0 0 150px">{{sector.startDate | date:'dd/MM/yyyy'}}</td>
+                    <td style="flex: 0 0 150px">{{sector.endDate | date:'dd/MM/yyyy'}}</td>
                     <td style="flex: 0 0 150px">
                         <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar sector" tooltipPosition="top"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>
