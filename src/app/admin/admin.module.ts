@@ -23,6 +23,7 @@ import { OfferingEditComponent } from './views/offering-edit/offering-edit.compo
 import { OpportunityTypeEditComponent } from './views/opportunity-type-edit/opportunity-type-edit.component';
 import { TechnologyEditComponent } from './views/technology-edit/technology-edit.component';
 import { ProjectTypeListComponent } from "./views/project-type-list/project-type-list.component";
+import { SectorListComponent } from './views/sector-list/sector-list.component';
 import { ProjectTypeEditComponent } from './views/project-type-edit/project-type-edit.component';
 
 
@@ -43,7 +44,9 @@ import { ProjectTypeEditComponent } from './views/project-type-edit/project-type
     OfferingEditComponent,
     OpportunityTypeEditComponent,
     ProjectTypeListComponent,
+    SectorListComponent,
     ProjectTypeEditComponent
+
   ],
   imports: [
     CommonModule,
