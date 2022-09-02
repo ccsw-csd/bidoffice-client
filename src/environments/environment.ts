@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  server: 'http://localhost:8080'
-  // server: ' http://frparccsw:8003'
+  appCode: 'bidOffice',
+  server: 'http://localhost:8080',
+  sso: 'http://frparccsw/dev/sso'
 };
 
 /*

@@ -29,7 +29,6 @@ export class NavComponent implements OnInit {
       {label: "Referencias"},
       {label: "Administración",
         items: [
-          {label: "Usuarios", routerLink: '/user'},
           {label: "Tipos de ficheros",  routerLink: "/filetype"},
           {label: 'Hyperscaler', routerLink: '/hyperscaler'},
           {label: "Metodologías", routerLink: '/methodology'},
@@ -39,8 +38,7 @@ export class NavComponent implements OnInit {
           {label: "Tipos de proyecto", routerLink: '/projecttype'},
           {label: "Sectores", routerLink: '/sector'}
         ]
-      },
-      {label: "Feedback", url: 'mailto:ccsw.support@capgemini.com?subject=[BidOffice] Consulta / Feedback'},
+      }
     ];
 
     this.utilsService.getAppVersion().subscribe((result: any) => {

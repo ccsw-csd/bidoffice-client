@@ -6,8 +6,6 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
-import { UserListComponent } from './views/user-list/user-list.component';
-import { UserEditComponent } from "./views/user-edit/user-edit.component";
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -32,8 +30,6 @@ import { ProjectTypeEditComponent } from './views/project-type-edit/project-type
     FileTypeListComponent,
     HyperscalerListComponent,
     MethodologyListComponent,
-    UserListComponent,
-    UserEditComponent,
     HyperscalerEditComponent,
     FileTypeEditComponent,
     TechnologyListComponent,
