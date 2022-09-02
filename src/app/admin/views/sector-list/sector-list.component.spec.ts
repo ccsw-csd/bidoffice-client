@@ -1,25 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { of } from 'rxjs';
+import { Sector } from '../../model/Sector';
+import { SectorService } from '../../services/sector.service';
 import { SectorListComponent } from './sector-list.component';
 
+
 describe('SectorListComponent', () => {
-  let component: SectorListComponent;
-  let fixture: ComponentFixture<SectorListComponent>;
+  
+    let sectorListComponent: SectorListComponent;
+    let mockSectorService;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ SectorListComponent ]
-    })
-    .compileComponents();
-  });
+     beforeEach(() => {
+        mockSectorService = jasmine.createSpyObj(["findAll"]);
+        sectorListComponent = new SectorListComponent (
+            mockSectorService
+        );
+        
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SectorListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    it('findAllShouldReturnSectors', () => {
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        let sectorList: Sector[];
+
+        mockSectorService.findAll.and.returnValue(of(sectorList));
+        sectorListComponent.findAll();
+
+        expect(sectorListComponent.sectors).toEqual(sectorList);
+
+    });
 });
