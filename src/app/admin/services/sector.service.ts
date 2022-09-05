@@ -21,4 +21,15 @@ export class SectorService {
         return this.http.get<Sector[]>(
             environment.server + "/sector/findAll");
     }
+
+    /**
+     * Borra un sector.
+     * 
+     * @param id Identificador del sector a borrar.
+     * @returns Devuelve si ha conseguido borrar el sector o
+     *          un indicador de error.
+     */
+    deleteSector(id: number): Observable<any> {
+        return this.http.delete<any>(environment.server + "/sector/" + id);
+    }
 }
