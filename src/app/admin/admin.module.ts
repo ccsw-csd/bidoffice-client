@@ -6,8 +6,6 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MethodologyListComponent } from './views/methodology-list/methodology-list.component';
-import { UserListComponent } from './views/user-list/user-list.component';
-import { UserEditComponent } from "./views/user-edit/user-edit.component";
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from "primeng/inputtext";
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
@@ -19,9 +17,12 @@ import { TechnologyListComponent } from './views/technology-list/technology-list
 import { OpportunityTypeListComponent } from './views/opportunity-type-list/opportunity-type-list.component';
 import { MethodologyEditComponent } from './views/methodology-edit/methodology-edit.component';
 import { OfferingListComponent } from './views/offering-list/offering-list.component';
+import { OfferingEditComponent } from './views/offering-edit/offering-edit.component';
 import { OpportunityTypeEditComponent } from './views/opportunity-type-edit/opportunity-type-edit.component';
 import { TechnologyEditComponent } from './views/technology-edit/technology-edit.component';
 import { ProjectTypeListComponent } from "./views/project-type-list/project-type-list.component";
+import { SectorListComponent } from './views/sector-list/sector-list.component';
+import { ProjectTypeEditComponent } from './views/project-type-edit/project-type-edit.component';
 
 
 @NgModule({
@@ -29,8 +30,6 @@ import { ProjectTypeListComponent } from "./views/project-type-list/project-type
     FileTypeListComponent,
     HyperscalerListComponent,
     MethodologyListComponent,
-    UserListComponent,
-    UserEditComponent,
     HyperscalerEditComponent,
     FileTypeEditComponent,
     TechnologyListComponent,
@@ -38,8 +37,12 @@ import { ProjectTypeListComponent } from "./views/project-type-list/project-type
     OpportunityTypeListComponent,
     MethodologyEditComponent,
     OfferingListComponent,
+    OfferingEditComponent,
     OpportunityTypeEditComponent,
-    ProjectTypeListComponent
+    ProjectTypeListComponent,
+    SectorListComponent,
+    ProjectTypeEditComponent
+
   ],
   imports: [
     CommonModule,

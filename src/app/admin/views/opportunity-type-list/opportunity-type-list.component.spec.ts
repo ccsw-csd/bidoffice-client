@@ -25,16 +25,14 @@ describe('OpportunityTypeListComponent', () => {
 
   beforeEach(() => {
     mockOpportunityTypeService = jasmine.createSpyObj(["findAll","delete","save"])
-    mockConfirmationService = jasmine.createSpyObj(["confirm","close","onAccept"])
-    mockSnackService = jasmine.createSpyObj(["error","showMessage"])
+    mockSnackService = jasmine.createSpyObj(["error","showMessage","showConfirmDialog","closeConfirmDialog"])
     mockDialogRef = jasmine.createSpyObj([""])
     mockDialogService = jasmine.createSpyObj([""])
     opportunityTypeList = new OpportunityTypeListComponent(
       mockOpportunityTypeService,
-      mockConfirmationService,
       mockDialogRef,
       mockDialogService,
-      mockSnackService,
+      mockSnackService
       );
   });
 
