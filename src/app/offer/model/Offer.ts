@@ -1,4 +1,5 @@
 import { BaseClass } from "./BaseClass";
+import { OfferChangeStatus } from "./OfferChangeStatus";
 import { OfferDataChapter } from "./OfferDataChapter";
 import { OfferDataFile } from "./OfferDataFile";
 import { OfferDataProject } from "./OfferDataProject";
@@ -34,4 +35,5 @@ export class Offer{
   teamPerson: OfferTeamPerson[] = new Array();
   technologies: OfferTechnology[] = new Array();
   tracings: OfferTracing[] = new Array();
+  changeStatus: OfferChangeStatus[] = new Array();
 }

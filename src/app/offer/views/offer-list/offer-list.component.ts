@@ -21,6 +21,7 @@ import { StatusChangeComponent } from './status-change/status-change.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class OfferListComponent implements OnInit {
+  readonly labelInFinish: string = 'Finalizada';
   pageable: Pageable = {
     pageNumber: 0,
     pageSize: 10,
@@ -120,5 +121,9 @@ export class OfferListComponent implements OnInit {
 
     ref.onClose.subscribe(() => {
     });
+  }
+
+  isNotStatushFinish(optionStatus: string): boolean{
+    return optionStatus != this.labelInFinish
   }
 }

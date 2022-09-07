@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { User } from 'src/app/core/models/User';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { OfferTracing } from 'src/app/offer/model/OfferTracing';
 import { Person } from 'src/app/offer/model/Person';
 import { OfferService } from 'src/app/offer/services/offer.service';
@@ -16,19 +18,26 @@ export class TracingEditComponent implements OnInit {
   offerTracing: OfferTracing = new OfferTracing();
   groupPerson: any[];
   tracingForm: FormGroup;
-
+  personCourrent: string = '';
+  user: User;
   constructor(
     private offerService: OfferService,
     public ref: DynamicDialogRef,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public auth: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.offerTracing.date = new Date();
+    this.user = this.auth.getUserInfo();
+
     this.tracingForm = this.formBuilder.group({
-      person: ['', Validators.required],
+      person: [''],
       comment: ['', Validators.required],
       date: ['', Validators.required],
     });
+
+    this.searchPerson(this.user.username);
   }
 
   onSave() {
@@ -47,25 +56,24 @@ export class TracingEditComponent implements OnInit {
     this.ref.close();
   }
 
-  searchPerson($event) {
-    if ($event.query != null) {
-      this.offerService.searchPerson($event.query).subscribe({
-        next: (res: Person[]) => {
-          this.groupPerson = this.mappingPerson(res);
-        },
-        error: () => {},
-        complete: () => {},
-      });
-    }
+  searchPerson(searchPeron: string) {
+    this.offerService.searchPerson(searchPeron).subscribe({
+      next: (res: Person[]) => {
+        this.personCourrent = this.mappingPerson(
+          res.filter((item) => item.username == this.user.username)[0]
+        ).field;
+      },
+      error: () => {},
+      complete: () => {},
+    });
   }
 
-  mappingPerson(persons: Person[]): any {
-    return persons.map(function (person) {
-      return {
-        field: person.name + ' ' + person.lastname + ' - ' + person.username,
-        value: person,
-      };
-    });
+  mappingPerson(person: Person): any {
+    this.offerTracing.person = person;
+    return {
+      field: person.name + ' ' + person.lastname + ' - ' + person.username,
+      value: person,
+    };
   }
 
   checkValidation(control: string): boolean {
@@ -78,4 +86,5 @@ export class TracingEditComponent implements OnInit {
     }
     return false;
   }
+
 }

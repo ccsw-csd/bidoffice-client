@@ -7,6 +7,7 @@ import { OfferService } from 'src/app/offer/services/offer.service';
 import { TracingEditComponent } from './tracing-edit/tracing-edit.component';
 import { v4 as uuidv4 } from 'uuid';
 import { ConfirmationService } from 'primeng/api';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-tracing',
@@ -21,16 +22,19 @@ export class TracingComponent implements OnInit {
   clonedOfferTracing: OfferTracing;
   selectedPerson;
   tracingEdit: OfferTracing[];
+  usernameCurrentPerson: string;
 
   @Input() data: Offer;
 
   constructor(
     private dinamicDialogService: DialogService,
     private offerService: OfferService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    public auth: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.usernameCurrentPerson = this.auth.getUsername();
     this.data.tracings.forEach((item) => (item.uuid = uuidv4()));
   }
 
@@ -98,5 +102,9 @@ export class TracingComponent implements OnInit {
       },
       reject: () => {},
     });
+  }
+
+  commentFromCurrentPerson(person: Person): boolean{
+    return this.usernameCurrentPerson == person.username;
   }
 }

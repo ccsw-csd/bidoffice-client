@@ -1,0 +1,73 @@
+<form>
+  <div *ngIf="isEqual(offer.opportunityStatus.name, labelInProgress)">
+    <div *ngIf="
+        isEqual(selectedOptionStatus.name, labelInReject) ||
+        isEqual(selectedOptionStatus.name, labelInStandBy)
+      ">
+      <span>Añade un comentario del motivo:</span>
+      <div class="ui-fluid formgrid grid justify-content-center mt-3">
+        <span class="p-float-label p-fluid field col-12 md:col-6">
+          <input pInputText required />
+          <label>Comentario</label>
+        </span>
+      </div>
+    </div>
+    <div *ngIf="isEqual(selectedOptionStatus.name, labelInDelivered)">
+      <span>Añade la fecha de entrega:</span>
+      <div class="ui-fluid formgrid grid justify-content-center mt-3">
+        <span class="p-float-label p-fluid field col-12 md:col-6">
+          <p-calendar [showIcon]="true" appendTo="body" date-describedby="date-help" >
+          </p-calendar>
+          <label>Fecha</label>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isEqual(offer.opportunityStatus.name, labelInGoNoGo)">
+    <div *ngIf="isEqual(selectedOptionStatus.name, labelInProgress)">
+      <span>Añade la fecha de Go/NoGo:</span>
+      <div class="ui-fluid formgrid grid justify-content-center mt-3">
+        <span class="p-float-label p-fluid field col-12 md:col-6">
+          <p-calendar [showIcon]="true" appendTo="body" date-describedby="date-help" >
+          </p-calendar>
+          <label>Fecha</label>
+        </span>
+      </div>
+    </div>
+    <div *ngIf="isEqual(selectedOptionStatus.name, labelInReject)">
+      <span>Añade un comentario del motivo:</span>
+      <div class="ui-fluid formgrid grid justify-content-center mt-3">
+        <span class="p-float-label p-fluid field col-12 md:col-6">
+          <input pInputText required />
+          <label>Comentario</label>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isEqual(offer.opportunityStatus.name, labelInReject)">
+    <span>Añade un comentario del motivo:</span>
+    <div class="ui-fluid formgrid grid justify-content-center mt-3">
+      <span class="p-float-label p-fluid field col-12 md:col-6">
+        <input pInputText required />
+        <label>Comentario</label>
+      </span>
+    </div>
+  </div>
+  <div *ngIf="isEqual(offer.opportunityStatus.name, labelInStandBy)">
+    <span>Añade un comentario del motivo:</span>
+    <div class="ui-fluid formgrid grid justify-content-center mt-3">
+      <span class="p-float-label p-fluid field col-12 md:col-6">
+        <input pInputText required />
+        <label>Comentario</label>
+      </span>
+    </div>
+  </div>
+  <div *ngIf="isEqual(offer.opportunityStatus.name, labelInDelivered)">
+    <span>¿La oferta ha sido ganada o perdida?</span>
+    <div class="ui-fluid formgrid grid justify-content-center mt-3">
+      <span class="p-fluid field col-12 md:col-6">
+        <p-selectButton [options]="win"></p-selectButton>
+      </span>
+    </div>
+  </div>
+</form>

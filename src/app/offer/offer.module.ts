@@ -29,6 +29,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { StatusChangeComponent } from './views/offer-list/status-change/status-change.component';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {ListboxModule} from 'primeng/listbox';
+import { OptionStatusComponent } from './views/offer-list/option-status/option-status.component';
 @NgModule({
   declarations: [
     OfferListComponent,
@@ -41,6 +42,7 @@ import {ListboxModule} from 'primeng/listbox';
     DocumentationEditComponent,
     TracingEditComponent,
     StatusChangeComponent,
+    OptionStatusComponent,
   ],
   imports: [
     CommonModule,

@@ -37,7 +37,7 @@
             <button pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)"
               class="p-button-rounded p-button-text p-button-plain icon"></button>
           </div>
-          <div>
+          <div *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)">
             <button pButton type="button" icon="pi pi-sitemap" (click)="onStatusChange(offerItemList)"
               class="p-button-rounded p-button-text p-button-plain icon"></button>
           </div>

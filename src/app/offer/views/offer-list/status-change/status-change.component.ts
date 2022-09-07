@@ -5,6 +5,9 @@ import { OfferItemList } from 'src/app/offer/model/OfferItemList';
 import { OfferService } from 'src/app/offer/services/offer.service';
 import { Offer } from 'src/app/offer/model/Offer';
 import { forkJoin } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { OfferChangeStatus } from 'src/app/offer/model/OfferChangeStatus';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-status-change',
@@ -15,6 +18,7 @@ export class StatusChangeComponent implements OnInit {
   offerItemList: OfferItemList;
   offerStatus: BaseClass[];
   optionStatus: BaseClass[] = [];
+  selectedOptionStatus: BaseClass;
   readonly labelInProgress: string = 'En curso';
   readonly labelInGoNoGo: string = 'Pendiente Go/NoGo';
   readonly labelInReject: string = 'Desestimada';
@@ -23,16 +27,29 @@ export class StatusChangeComponent implements OnInit {
   readonly labelInFinish: string = 'Finalizada';
   offer: Offer = new Offer();
   isLoading: boolean = false;
-
+  newChangeStatus: OfferChangeStatus;
+  statusForm: FormGroup;
   constructor(
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
-    private offerService: OfferService
+    private offerService: OfferService,
+    private auth: AuthService,
+    private formBuilder: FormBuilder,
   ) {}
 
   ngOnInit(): void {
     this.offerItemList = this.config.data;
     this.getDataOffer();
+
+    this.statusForm = this.formBuilder.group({
+      progressComment: ['', Validators.required],
+      progressDate: ['', Validators.required],
+      goNoGoComment: ['', Validators.required],
+      goNoGoDate: ['', Validators.required],
+      rejectComment: ['', Validators.required],
+      standByComment: ['', Validators.required],
+      deliveredOption: ['', Validators.required]
+    })
   }
 
   getDataOffer(){
@@ -47,12 +64,12 @@ export class StatusChangeComponent implements OnInit {
       }) => {
         this.offer = requestOffer;
         this.offerStatus = requestOfferStatus;
-        this.selectedOptionsStatus();
+        this.selectedOptionsStatusValues();
         this.isLoading = false;
       }
     );
   }
-  selectedOptionsStatus() {
+  selectedOptionsStatusValues() {
     this.optionStatus = this.offerStatus.filter((item) =>
       this.filterOptionStatus(item.name)
     );
@@ -88,9 +105,27 @@ export class StatusChangeComponent implements OnInit {
     return this.offerItemList.opportunityStatus.name == this.labelInGoNoGo;
   }
 
-  onSave() {}
+  onSave() {
+    if(this.selectedOptionStatus != null){
+      this.offer.opportunityStatus = this.selectedOptionStatus;
+      this.setChangeStatusData();
+    }
+    else
+      this.ref.close();
+  }
 
   onClose() {
     this.ref.close();
+  }
+
+  isEqual(selectedStatus: string, optionStatus): boolean{
+    return selectedStatus == optionStatus;
+  }
+
+  setChangeStatusData(){
+    //this.newChangeStatus.username = this.auth.getUsername();
+    //this.newChangeStatus.date = new Date();
+    //this.newChangeStatus.opportunityStatus = this.selectedOptionStatus;
+    //this.offer.changeStatus.push(this.newChangeStatus);
   }
 }
