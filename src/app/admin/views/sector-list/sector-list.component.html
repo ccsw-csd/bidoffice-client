@@ -42,7 +42,7 @@
                     <td style="flex: 0 0 150px">{{sector.startDate | date:'dd/MM/yyyy'}}</td>
                     <td style="flex: 0 0 150px">{{sector.endDate | date:'dd/MM/yyyy'}}</td>
                     <td style="flex: 0 0 150px">
-                        <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar sector" tooltipPosition="top"
+                        <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar sector" tooltipPosition="top" (click)="editSector(sector)"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>
                         <button pButton type="button" icon="pi pi-trash" pTooltip="Borrar sector" tooltipPosition="top" (click)="showDeleteDialog(sector)"
                             class="p-button-rounded p-button-text p-button-plain icon"></button>

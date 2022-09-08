@@ -1,28 +1,31 @@
 import { NodeWithI18n, ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { lastValueFrom } from 'rxjs';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { Sector } from '../../model/Sector';
 import { SectorService } from '../../services/sector.service';
+import { SectorEditComponent } from '../sector-edit/sector-edit.component';
 
 @Component({
   selector: 'app-sector-list',
   templateUrl: './sector-list.component.html',
-  styleUrls: ['./sector-list.component.scss']
+  styleUrls: ['./sector-list.component.scss'],
+  providers: [ DynamicDialogRef, DialogService]
 })
 export class SectorListComponent implements OnInit {
 
     sectors: Array<Sector>;
     sector: Sector;
-
     public isLoading: boolean = false;
     isDeleted: boolean = false;
     
     constructor(
         private sectorService: SectorService,
-        private snackBarService: SnackbarService
-    ) {
-    }
+        private snackBarService: SnackbarService,
+        private ref: DynamicDialogRef,
+        private dialogService: DialogService
+    ) { }
 
     ngOnInit(): void {
         this.findAll();
@@ -91,5 +94,39 @@ export class SectorListComponent implements OnInit {
                 this.findAll();
             }
         });
+    }
+
+    /**
+     * Guarda los datos de un nuevo sector o
+     * modifica los de un sector ya existente.
+     * 
+     * @param sector Sector a editar o modificar.
+     */
+    editSector(sector?: Sector): void {
+
+        if (sector != null) {
+            this.ref = this.dialogService.open(SectorEditComponent, {
+                header: 'Editar ' + sector.name,
+                width: '40%',
+                data: {
+                    sectorData: sector
+                },
+                closable: false
+            });
+        }
+        else {
+            this.ref = this.dialogService.open(SectorEditComponent, {
+                header: 'Nuevo sector',
+                width: '40%',
+                data: {},
+                closable: false
+            });
+        }
+
+        this.ref.onClose.subscribe (
+            res => {
+                this.findAll();
+            }
+        );
     }
 }

@@ -23,6 +23,7 @@ import { TechnologyEditComponent } from './views/technology-edit/technology-edit
 import { ProjectTypeListComponent } from "./views/project-type-list/project-type-list.component";
 import { SectorListComponent } from './views/sector-list/sector-list.component';
 import { ProjectTypeEditComponent } from './views/project-type-edit/project-type-edit.component';
+import { SectorEditComponent } from './views/sector-edit/sector-edit.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ProjectTypeEditComponent } from './views/project-type-edit/project-type
     OpportunityTypeEditComponent,
     ProjectTypeListComponent,
     SectorListComponent,
-    ProjectTypeEditComponent
+    ProjectTypeEditComponent,
+    SectorEditComponent
 
   ],
   imports: [
