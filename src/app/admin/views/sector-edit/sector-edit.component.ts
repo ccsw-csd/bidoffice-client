@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { Sector } from '../../model/Sector';
@@ -9,6 +9,7 @@ import { SectorService } from '../../services/sector.service';
   templateUrl: './sector-edit.component.html',
   styleUrls: ['./sector-edit.component.scss']
 })
+
 export class SectorEditComponent implements OnInit {
 
     sector: Sector;
@@ -35,5 +36,4 @@ export class SectorEditComponent implements OnInit {
             this.ref.close();
         }
     }
-
 }

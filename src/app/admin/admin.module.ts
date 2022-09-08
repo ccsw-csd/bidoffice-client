@@ -24,6 +24,9 @@ import { ProjectTypeListComponent } from "./views/project-type-list/project-type
 import { SectorListComponent } from './views/sector-list/sector-list.component';
 import { ProjectTypeEditComponent } from './views/project-type-edit/project-type-edit.component';
 import { SectorEditComponent } from './views/sector-edit/sector-edit.component';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -56,6 +59,9 @@ import { SectorEditComponent } from './views/sector-edit/sector-edit.component';
     DynamicDialogModule,
     TooltipModule,
     ToastModule,
+    CalendarModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }
