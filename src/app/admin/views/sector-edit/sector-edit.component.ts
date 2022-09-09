@@ -26,8 +26,27 @@ export class SectorEditComponent implements OnInit {
             {sectorData: Sector},
             this.config.data.sectorData
         );
+
+        console.log(this.sector)
     }
 
+    /**
+     * Guarda los datos de una nuevo sector o los
+     * cambios de sector ya existente ya existente.
+     * 
+     * @param sector Tecnología a guardar o modificar.
+     */
+     saveChanges(sector: Sector) {
+        this.sectorService.saveSector(sector).subscribe({
+            next: () => {
+                this.snackbarService.showMessage('El registro se ha guardado con éxito')
+                this.close();
+            },
+            error: () => {
+                this.snackbarService.error('El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar');
+            }
+        });
+    }
     /**
      * Cierra el cuadro de diálogo.
      */

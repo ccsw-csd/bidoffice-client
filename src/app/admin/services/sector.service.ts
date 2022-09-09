@@ -32,4 +32,16 @@ export class SectorService {
     deleteSector(id: number): Observable<any> {
         return this.http.delete<any>(environment.server + "/sector/" + id);
     }
+
+    /**
+     * Guarda un sector nuevo o modifica
+     * uno ya existente.
+     * 
+     * @param sector Tecnología a guardar.
+     * @returns 
+     */
+    saveSector(sector: Sector):Observable<void> {
+        let url = environment.server + "/sector";
+        return this.http.put<void>(url, sector);
+    }
 }

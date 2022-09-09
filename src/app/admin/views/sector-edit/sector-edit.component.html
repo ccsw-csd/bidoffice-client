@@ -10,13 +10,13 @@
     </span>
 </div>
 <br>
-<div class="flex flex-row">
-    <div class="p-float-label">
-        <p-calendar [showIcon]="true" [(ngModel)]="sector.startDate" formControlName="startDate" appendTo="body" required></p-calendar>
+<div class="flex flex-row" style="margin-bottom: 20px">
+    <div class="p-float-label field">
+        <p-calendar [showIcon]="true" [(ngModel)]="sector.startDate" dateFormat="dd/mm/yy" required></p-calendar>
         <label>Fecha de inicio</label>
     </div>
-    <div class="p-float-label">
-        <p-calendar [showIcon]="true" [(ngModel)]="sector.endDate" formControlName="startDate" appendTo="body" required></p-calendar>
+    <div class="p-float-label field">
+        <p-calendar [showIcon]="true" [(ngModel)]="sector.endDate" dateFormat="dd/mm/yy" required></p-calendar>
         <label>Fecha final</label>
     </div>  
 </div>
@@ -25,6 +25,7 @@
         <button type="button" class="p-button-primary w-6rem" [disabled]="
             sector.name == '' || sector.name == null || sector.priority == null || sector.priority < 1"
             pButton label="Guardar"
+            (click)="saveChanges(sector)"
             >
         </button>
     </div>
