@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { User } from 'src/app/core/models/User';
+import { UserInfoDetailed } from 'src/app/core/models/UserInfoDetailed';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { OfferTracing } from 'src/app/offer/model/OfferTracing';
 import { Person } from 'src/app/offer/model/Person';
@@ -19,7 +20,7 @@ export class TracingEditComponent implements OnInit {
   groupPerson: any[];
   tracingForm: FormGroup;
   personCourrent: string = '';
-  user: User;
+  user: UserInfoDetailed;
   constructor(
     private offerService: OfferService,
     public ref: DynamicDialogRef,
@@ -29,7 +30,7 @@ export class TracingEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.offerTracing.date = new Date();
-    this.user = this.auth.getUserInfo();
+    this.user = this.auth.getUserInfoDetailed();
 
     this.tracingForm = this.formBuilder.group({
       person: [''],
@@ -60,7 +61,7 @@ export class TracingEditComponent implements OnInit {
     this.offerService.searchPerson(searchPeron).subscribe({
       next: (res: Person[]) => {
         this.personCourrent = this.mappingPerson(
-          res.filter((item) => item.username == this.user.username)[0]
+          res.find((item) => item.username == this.user.username)
         ).field;
       },
       error: () => {},

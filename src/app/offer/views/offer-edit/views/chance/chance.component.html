@@ -1,3 +1,9 @@
+<p-confirmDialog [closable]="false" icon="pi pi pi-sitemap" [transitionOptions]="'0ms'">
+  <p-footer>
+      <button type="button" pButton label="No" class="p-button-secondary" (click)="closeDialog()"></button>
+      <button type="button" pButton label="Sí" class="p-button-primary" (click)="changeFlagForDelete()"></button>
+  </p-footer>
+</p-confirmDialog>
 <form [formGroup]="formValidator">
   <div class="ui-fluid formgrid grid mt-3">
     <div class="p-fluid field col-12 md:col-4">

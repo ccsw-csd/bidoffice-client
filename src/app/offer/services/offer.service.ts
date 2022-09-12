@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { Pageable } from 'src/app/core/models/Pageable';
 import { environment } from 'src/environments/environment';
 import { BaseClass } from '../model/BaseClass';
+import { ModifyStatus } from '../model/ModifyStatus';
 import { Offer } from '../model/Offer';
+import { OfferItemList } from '../model/OfferItemList';
 import { OfferPage } from '../model/OfferPage';
 import { Person } from '../model/Person';
 
@@ -82,5 +84,8 @@ export class OfferService {
 
     return this.http.put<Offer>(environment.server + "/offer/", offer);
   }
+  modifyStatus(modifyStatus: ModifyStatus): Observable<OfferItemList> {
 
+    return this.http.put<OfferItemList>(environment.server + "/offer/status", modifyStatus);
+  }
 }

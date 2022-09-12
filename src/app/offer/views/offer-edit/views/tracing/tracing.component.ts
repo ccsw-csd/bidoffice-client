@@ -29,12 +29,11 @@ export class TracingComponent implements OnInit {
   constructor(
     private dinamicDialogService: DialogService,
     private offerService: OfferService,
-    private confirmationService: ConfirmationService,
     public auth: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.usernameCurrentPerson = this.auth.getUsername();
+    this.usernameCurrentPerson = this.auth.getUserInfo().username
     this.data.tracings.forEach((item) => (item.uuid = uuidv4()));
   }
 
@@ -85,24 +84,7 @@ export class TracingComponent implements OnInit {
   transformPerson(person: Person) {
     return person.name + ' ' + person.lastname + ' - ' + person.username;
   }
-  onDeleteRow(tracing: OfferTracing) {
-    this.confirmationService.confirm({
-      header: 'Confirmación',
-      message: '¿Esta seguro que desea eliminar este registro?',
-      acceptLabel: 'Eliminar',
-      rejectLabel: 'Cancelar',
-      rejectButtonStyleClass: 'p-button-secondary',
-      icon: 'pi pi-exclamation-triangle',
-      acceptIcon: 'none',
-      rejectIcon: 'none',
-      accept: () => {
-        this.data.tracings = this.data.tracings.filter(
-          (item) => item.uuid != tracing.uuid
-        );
-      },
-      reject: () => {},
-    });
-  }
+ 
 
   commentFromCurrentPerson(person: Person): boolean{
     return this.usernameCurrentPerson == person.username;
