@@ -26,7 +26,7 @@ export class OptionStatusComponent implements OnInit {
   @Input() dateDelivered: Date;
   @Input() win: boolean;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.offer = new Offer();

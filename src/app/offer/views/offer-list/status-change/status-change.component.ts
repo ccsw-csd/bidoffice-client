@@ -96,13 +96,15 @@ export class StatusChangeComponent implements OnInit {
       return status == this.labelInReject || status == this.labelInProgress;
 
     if (
-      this.offerItemList.opportunityStatus.name == this.labelInReject ||
-      this.offerItemList.opportunityStatus.name == this.labelInStandBy
+      this.offerItemList.opportunityStatus.name == this.labelInReject
     )
       return status == this.labelInGoNoGo || status == this.labelInProgress;
 
     if (this.offerItemList.opportunityStatus.name == this.labelInDelivered)
       return status == this.labelInFinish;
+
+    if(this.offerItemList.opportunityStatus.name == this.labelInStandBy)
+      return status == this.labelInProgress || status == this.labelInReject;
 
     return false;
   }
