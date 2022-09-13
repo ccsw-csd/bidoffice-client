@@ -6,6 +6,7 @@ import { Offer } from 'src/app/offer/model/Offer';
 import { Person } from 'src/app/offer/model/Person';
 import { OfferService } from 'src/app/offer/services/offer.service';
 import { forkJoin } from 'rxjs';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-chance',
@@ -13,6 +14,8 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./chance.component.scss'],
 })
 export class ChanceComponent implements OnInit {
+  readonly labelInProgress: string = 'En curso';
+  readonly labelInGoNoGo: string = 'Pendiente Go/NoGo';
   isloading = false;
   message = 'No se han encontrado resultados';
   results: string[] = [];
@@ -32,9 +35,33 @@ export class ChanceComponent implements OnInit {
   @Input() data: Offer;
   @Input() formValidator: FormGroup;
 
-  constructor(private offerService: OfferService) {}
+  constructor(
+    private offerService: OfferService,
+    private snackbarService: SnackbarService
+  ) {}
 
   ngOnInit(): void {
+    this.allRequest();
+
+    if (this.data.client != undefined) this.results.push(this.data.client);
+
+    if (this.data.requestedBy != null) {
+      this.selectedRequestedBy = this.mappingPerson(this.data.requestedBy);
+      this.groupPerson.push(this.selectedRequestedBy);
+    }
+
+    if (this.data.managedBy != null) {
+      this.selectedManagedBy = this.mappingPerson(this.data.requestedBy);
+      this.groupPerson.push(this.selectedManagedBy);
+    }
+
+    this.selectedOfferings = this.data.offerings.map((item) => item.offering);
+    this.selectedTechnologies = this.data.technologies.map(
+      (item) => item.technology
+    );
+  }
+
+  allRequest() {
     this.isLoading = true;
     forkJoin({
       requestOfferings: this.offerService.getAllOffering(),
@@ -60,24 +87,15 @@ export class ChanceComponent implements OnInit {
         this.status = requestOfferStatus;
 
         this.isLoading = false;
+
+        if(this.data.id == null){
+          this.snackbarService.showMessageConfirm(
+            'Estado',
+            '¿La oferta requiere Go/NoGo?'
+          );
+        }
+
       }
-    );
-
-    if (this.data.client != undefined) this.results.push(this.data.client);
-
-    if (this.data.requestedBy != null) {
-      this.selectedRequestedBy = this.mappingPerson(this.data.requestedBy);
-      this.groupPerson.push(this.selectedRequestedBy);
-    }
-
-    if (this.data.managedBy != null) {
-      this.selectedManagedBy = this.mappingPerson(this.data.requestedBy);
-      this.groupPerson.push(this.selectedManagedBy);
-    }
-
-    this.selectedOfferings = this.data.offerings.map((item) => item.offering);
-    this.selectedTechnologies = this.data.technologies.map(
-      (item) => item.technology
     );
   }
 
@@ -147,5 +165,14 @@ export class ChanceComponent implements OnInit {
       id: null,
       technology: technology,
     };
+  }
+
+  closeDialog() {
+    this.data.opportunityStatus = this.status.find(item => item.name == this.labelInProgress)
+    this.snackbarService.closeConfirmDialog();
+  }
+  changeFlagForDelete() {
+    this.data.opportunityStatus = this.status.find(item => item.name == this.labelInGoNoGo)
+    this.snackbarService.closeConfirmDialog();
   }
 }

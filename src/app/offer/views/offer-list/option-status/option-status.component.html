@@ -1,0 +1,43 @@
+<form [formGroup]="form">
+  <div *ngIf="requiredComent('comment')">
+    <span>Añade un comentario del motivo:</span>
+    <div class="ui-fluid formgrid grid justify-content-center mt-3">
+      <span class="p-float-label p-fluid field col-12 md:col-6">
+        <input [(ngModel)]="tracing.comment" pInputText formControlName="comment" />
+        <label>Comentario</label>
+      </span>
+    </div>
+  </div>
+  <div *ngIf="isEqual(offer.opportunityStatus.name, labelInGoNoGo, null)">
+    <div *ngIf="isEqual(selectedOptionStatus.name, labelInProgress, 'goNoGoDate')">
+      <span>Añade la fecha de Go/NoGo:</span>
+      <div class="ui-fluid formgrid grid justify-content-center mt-3">
+        <span class="p-float-label p-fluid field col-12 md:col-6">
+          <p-calendar [(ngModel)]="dateGoNoGo" [showIcon]="true" appendTo="body" date-describedby="date-help"
+            formControlName="goNoGoDate">
+          </p-calendar>
+          <label>Fecha</label>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isEqual(selectedOptionStatus.name, labelInDelivered, 'progressDate')">
+    <span>Añade la fecha de entrega:</span>
+    <div class="ui-fluid formgrid grid justify-content-center mt-3">
+      <span class="p-float-label p-fluid field col-12 md:col-6">
+        <p-calendar [(ngModel)]="dateDelivered" [showIcon]="true" appendTo="body" date-describedby="date-help"
+          formControlName="progressDate">
+        </p-calendar>
+        <label>Fecha</label>
+      </span>
+    </div>
+  </div>
+  <div *ngIf="isEqual(offer.opportunityStatus.name, labelInDelivered, 'deliveredOption')">
+    <span>¿La oferta ha sido ganada o perdida?</span>
+    <div class="ui-fluid formgrid grid justify-content-center mt-3">
+      <span class="p-fluid field col-12 md:col-6">
+        <p-selectButton [(ngModel)]="win" [options]="winOpion" formControlName="deliveredOption"></p-selectButton>
+      </span>
+    </div>
+  </div>
+</form>

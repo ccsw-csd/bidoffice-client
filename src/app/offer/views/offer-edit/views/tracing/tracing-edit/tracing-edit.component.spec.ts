@@ -7,6 +7,7 @@ import { TracingEditComponent } from './tracing-edit.component';
 describe('TracingEditComponent', () => {
   let component: TracingEditComponent;
   let mockOfferService;
+  let emptyMock;
   let persons: Person[];
   const EXIST_USERNAME = 'aelmouss';
   beforeEach(() => {
@@ -36,12 +37,9 @@ describe('TracingEditComponent', () => {
         active: true,
       },
     ];
+    emptyMock = jasmine.createSpyObj(['']);
     mockOfferService = jasmine.createSpyObj(['searchPerson']);
-    component = new TracingEditComponent(
-      mockOfferService,
-      jasmine.createSpyObj(['']),
-      jasmine.createSpyObj([''])
-    );
+    component = new TracingEditComponent(mockOfferService, emptyMock, emptyMock, emptyMock);
   });
 
   it('shouldReturnListSearchPerson', () => {

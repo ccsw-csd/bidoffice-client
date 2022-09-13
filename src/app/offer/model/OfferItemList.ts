@@ -6,8 +6,8 @@ export class OfferItemList{
   name: string;
   sector: BaseClass;
   requestDate: Date;
-  opportunityType: BaseClass;
-  opportunityStatus: BaseClass;
+  opportunityType: BaseClass = new BaseClass();
+  opportunityStatus: BaseClass = new BaseClass();
 
   public constructor(init?:Partial<OfferItemList>) {
     Object.assign(this, init);

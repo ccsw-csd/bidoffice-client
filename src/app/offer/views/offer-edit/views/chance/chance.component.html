@@ -1,9 +1,15 @@
+<p-confirmDialog [closable]="false" icon="pi pi pi-sitemap" [transitionOptions]="'0ms'">
+  <p-footer>
+      <button type="button" pButton label="No" class="p-button-secondary" (click)="closeDialog()"></button>
+      <button type="button" pButton label="Sí" class="p-button-primary" (click)="changeFlagForDelete()"></button>
+  </p-footer>
+</p-confirmDialog>
 <form [formGroup]="formValidator">
   <div class="ui-fluid formgrid grid mt-3">
     <div class="p-fluid field col-12 md:col-4">
       <span class="p-float-label">
         <input pInputText formControlName="nameOpportunity" [(ngModel)]="data.name"
-          aria-describedby="nameOpportunity-help" pInputText />
+          aria-describedby="nameOpportunity-help" />
         <label>Nombre Oportunidad</label>
       </span>
       <small id="nameOpportunity-help" class="block p-error" *ngIf="checkValidation('nameOpportunity')">Es un campo
@@ -20,8 +26,7 @@
     </div>
     <div class="p-fluid field col-12 md:col-4">
       <span class="p-float-label">
-        <p-dropdown [(ngModel)]="data.opportunityStatus" formControlName="state" [options]="status" optionLabel="name"
-          appendTo="body" aria-describedby="state-help"></p-dropdown>
+        <input formControlName="state" [(ngModel)]="data.opportunityStatus.name" pInputText readonly [disabled]="true"/>
         <label>Estado</label>
       </span>
     </div>
@@ -118,7 +123,7 @@
     </div>
     <div class="col-12 md:col-1 mt-3">
       <span class="p-fluid field-checkbox">
-        <p-checkbox [(ngModel)]="data.opportunityWin" [binary]="true" inputId="binary" formControlName="opportunityWin">
+        <p-checkbox [(ngModel)]="data.opportunityWin" [binary]="true" inputId="binary" formControlName="opportunityWin" [disabled]="true">
         </p-checkbox>
         <label>Ganada</label>
       </span>

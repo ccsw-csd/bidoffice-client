@@ -31,6 +31,13 @@ export class SnackbarService {
     })
   }
 
+  showMessageConfirm(headear: string, message: string){
+    this.confirmationService.confirm({
+      header: headear,
+      message: message,
+    })
+  }
+
   closeConfirmDialog(){
     this.confirmationService.close()
   }

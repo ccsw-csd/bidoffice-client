@@ -49,7 +49,7 @@ describe('ChanceComponent', () => {
       'searchPerson',
     ]);
 
-    component = new ChanceComponent(mockOfferService);
+    component = new ChanceComponent(mockOfferService, jasmine.createSpyObj([]));
   });
 
   it('shouldReturnListSearchPerson', () => {
