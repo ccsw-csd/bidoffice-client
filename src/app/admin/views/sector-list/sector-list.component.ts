@@ -24,8 +24,9 @@ export class SectorListComponent implements OnInit {
         private sectorService: SectorService,
         private snackBarService: SnackbarService,
         private ref: DynamicDialogRef,
-        private dialogService: DialogService
-    ) { }
+        private dialogService: DialogService,
+    ) {
+     }
 
     ngOnInit(): void {
         this.findAll();
@@ -118,7 +119,7 @@ export class SectorListComponent implements OnInit {
             this.ref = this.dialogService.open(SectorEditComponent, {
                 header: 'Nuevo sector',
                 width: '40%',
-                data: {},
+                data: { },
                 closable: false
             });
         }

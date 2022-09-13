@@ -9,7 +9,9 @@ describe('SectorListComponent', () => {
   
     let sectorListComponent: SectorListComponent;
     let mockSectorService;
-    let mockSnackBarService;
+    let mockConfirmationService;
+    let mockMessageService;
+    let mockDialogService;
 
     let SECTOR_LIST = [
         new Sector({id:1, name: "Insurance", priority:1}),
@@ -22,11 +24,15 @@ describe('SectorListComponent', () => {
 
 
     beforeEach(() => {
-        mockSectorService = jasmine.createSpyObj(["findAll", "deleteSector"]);
-        mockSnackBarService = jasmine.createSpyObj(["showMessage"]);
+        mockSectorService = jasmine.createSpyObj(["findAll", "deleteSector", "saveSector"]);
+        mockConfirmationService = jasmine.createSpyObj(["showMessage", "close"]);
+        mockMessageService = jasmine.createSpyObj([""]);
+        mockDialogService = jasmine.createSpyObj([""]);
         sectorListComponent = new SectorListComponent (
             mockSectorService,
-            mockSnackBarService
+            mockConfirmationService,
+            mockMessageService,
+            mockDialogService
         );
         
     });

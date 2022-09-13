@@ -12,11 +12,11 @@
 <br>
 <div class="flex flex-row" style="margin-bottom: 20px">
     <div class="p-float-label field">
-        <p-calendar [showIcon]="true" [(ngModel)]="sector.startDate" dateFormat="dd/mm/yy" required></p-calendar>
+        <p-calendar [showIcon]="true" [(ngModel)]="sector.startDate" dateFormat="dd/mm/yy" appendTo="body" required></p-calendar>
         <label>Fecha de inicio</label>
     </div>
     <div class="p-float-label field">
-        <p-calendar [showIcon]="true" [(ngModel)]="sector.endDate" dateFormat="dd/mm/yy" required></p-calendar>
+        <p-calendar [showIcon]="true" [(ngModel)]="sector.endDate" dateFormat="dd/mm/yy" appendTo="body" required></p-calendar>
         <label>Fecha final</label>
     </div>  
 </div>
