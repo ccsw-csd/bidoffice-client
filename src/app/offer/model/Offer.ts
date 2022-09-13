@@ -16,12 +16,12 @@ export class Offer{
   client: string;
   name: string;
   requestedBy: Person;
-  requestedDate: Date;
+  requestedDate: Date = new Date();
   managedBy: Person;
   bdcCode: string;
   sector: BaseClass = new BaseClass();
-  goNogoDate: Date;
-  deliveryDate: Date;
+  goNogoDate: Date = new Date();
+  deliveryDate: Date = new Date();
   opportunityType: BaseClass = new BaseClass();;
   opportunityStatus: BaseClass = new BaseClass();;
   opportunityWin: boolean;

@@ -15,11 +15,11 @@
     <app-tracing [data]="offer"></app-tracing>
   </p-tabPanel>
 </p-tabView>
-<div class="ui-fluid formgrid grid absolute right-0 left-0 bottom-0 justify-content-center mb-1">
-  <div class="p-fluid field col-12 md:col-4">
+<div class="ui-fluid formgrid grid absolute right-0 left-0 bottom-0 justify-content-end mb-1 mr-4">
+  <div class="p-fluid field col-12 md:col-1">
     <p-button (click)="onClose()" styleClass="p-button-secondary" label="Cancelar"></p-button>
   </div>
-  <div class="p-fluid field col-12 md:col-4">
+  <div class="p-fluid field col-12 md:col-1">
     <p-button (click)="onSave()" label="Guardar" [disabled]="offerForm.invalid"></p-button>
   </div>
 </div>

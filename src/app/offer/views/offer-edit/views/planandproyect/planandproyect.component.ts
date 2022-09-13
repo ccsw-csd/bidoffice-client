@@ -108,7 +108,6 @@ export class PlanandproyectComponent implements OnInit {
       ];
     }
     this.selectedPerson = '';
-    console.log(this.selectedPersonList);
   }
 
   onDeletePerson(person: Person) {

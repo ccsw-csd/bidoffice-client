@@ -1,12 +1,12 @@
 <p-confirmDialog [closable]="false" icon="pi pi pi-sitemap" [transitionOptions]="'0ms'">
   <p-footer>
-      <button type="button" pButton label="No" class="p-button-secondary" (click)="closeDialog()"></button>
-      <button type="button" pButton label="Sí" class="p-button-primary" (click)="changeFlagForDelete()"></button>
+    <button type="button" pButton label="No" class="p-button-secondary" (click)="closeDialog()"></button>
+    <button type="button" pButton label="Sí" class="p-button-primary" (click)="changeFlagForDelete()"></button>
   </p-footer>
 </p-confirmDialog>
 <form [formGroup]="formValidator">
   <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-4">
+    <div class="p-fluid field col-12 md:col-6">
       <span class="p-float-label">
         <input pInputText formControlName="nameOpportunity" [(ngModel)]="data.name"
           aria-describedby="nameOpportunity-help" />
@@ -15,7 +15,7 @@
       <small id="nameOpportunity-help" class="block p-error" *ngIf="checkValidation('nameOpportunity')">Es un campo
         requerido</small>
     </div>
-    <div class="p-fluid field col-12 md:col-4">
+    <div class="p-fluid field col-12 md:col-5">
       <span class="p-float-label">
         <p-autoComplete [suggestions]="results" [(ngModel)]="data.client" [forceSelection]="true"
           [showEmptyMessage]="true" [emptyMessage]="message" formControlName="client"
@@ -24,15 +24,17 @@
       </span>
       <small id="client-help" class="block p-error" *ngIf="checkValidation('client')">Es un campo requerido</small>
     </div>
-    <div class="p-fluid field col-12 md:col-4">
-      <span class="p-float-label">
-        <input formControlName="state" [(ngModel)]="data.opportunityStatus.name" pInputText readonly [disabled]="true"/>
-        <label>Estado</label>
+    <div class="col-12 md:col-1 mt-3">
+      <span class="p-fluid field-checkbox">
+        <p-checkbox [(ngModel)]="data.opportunityWin" [binary]="true" inputId="binary" formControlName="opportunityWin"
+          [disabled]="true">
+        </p-checkbox>
+        <label>Ganada</label>
       </span>
     </div>
   </div>
   <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-3">
+    <div class="p-fluid field col-12 md:col-4">
       <span class="p-float-label">
         <p-autoComplete [(ngModel)]="selectedRequestedBy" formControlName="requestedBy" [suggestions]="groupPerson"
           [forceSelection]="true" [showEmptyMessage]="true" [emptyMessage]="message"
@@ -41,7 +43,7 @@
         <label>Quien solicita</label>
       </span>
     </div>
-    <div class="p-fluid field col-12 md:col-3">
+    <div class="p-fluid field col-12 md:col-4">
       <span class="p-float-label">
         <p-autoComplete [(ngModel)]="selectedManagedBy" formControlName="managedBy" [suggestions]="groupPerson"
           [forceSelection]="true" [showEmptyMessage]="true" [emptyMessage]="message"
@@ -61,6 +63,28 @@
     </div>
     <div class="p-fluid field col-12 md:col-2">
       <span class="p-float-label">
+        <input formControlName="state" [(ngModel)]="data.opportunityStatus.name" pInputText readonly [disabled]="true"/>
+        <label>Estado</label>
+      </span>
+    </div>
+  </div>
+  <div class="ui-fluid formgrid grid mt-3">
+    <div class="p-fluid field col-12 md:col-4">
+      <span class="p-float-label">
+        <p-multiSelect [options]="offerings" (onChange)="assignOffering()" [(ngModel)]="selectedOfferings"
+          formControlName="offerings" optionLabel="name" appendTo="body"></p-multiSelect>
+        <label>Offering</label>
+      </span>
+    </div>
+    <div class="p-fluid field col-12 md:col-4">
+      <span class="p-float-label">
+        <p-multiSelect [options]="technologies" (onChange)="assignTechnologies()" [(ngModel)]="selectedTechnologies"
+          formControlName="technologies" optionLabel="name" appendTo="body"></p-multiSelect>
+        <label>Tecnologías</label>
+      </span>
+    </div>
+    <div class="p-fluid field col-12 md:col-2">
+      <span class="p-float-label">
         <p-dropdown [(ngModel)]="data.sector" [options]="sectors" formControlName="sector" optionLabel="name"
           appendTo="body" aria-describedby="sector-help"></p-dropdown>
         <label>Sector</label>
@@ -76,21 +100,15 @@
     </div>
   </div>
   <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-6">
+    <div class="p-fluid field col-12 md:col-12">
       <span class="p-float-label">
-        <p-multiSelect [options]="offerings" (onChange)="assignOffering()" [(ngModel)]="selectedOfferings"
-          formControlName="offerings" optionLabel="name" appendTo="body"></p-multiSelect>
-        <label>Offering</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-6">
-      <span class="p-float-label">
-        <p-multiSelect [options]="technologies" (onChange)="assignTechnologies()" [(ngModel)]="selectedTechnologies"
-          formControlName="technologies" optionLabel="name" appendTo="body"></p-multiSelect>
-        <label>Tecnologías</label>
+        <textarea pInputTextarea [(ngModel)]="data.observations" formControlName="observations" [rows]="12"
+          [ngStyle]="{'resize': 'none'}"></textarea>
+        <label>Observaciones</label>
       </span>
     </div>
   </div>
+  <!--
   <div class="ui-fluid formgrid grid mt-3">
     <div class="p-fluid field col-12 md:col-3">
       <span class="p-float-label">
@@ -101,43 +119,15 @@
       <small id="opportunityType-help" class="block p-error" *ngIf="checkValidation('opportunityType')">Es un campo
         requerido</small>
     </div>
-    <div class="p-fluid field col-12 md:col-3">
-      <span class="p-float-label">
-        <p-calendar [showIcon]="true" [(ngModel)]="data.goNogoDate" formControlName="goNogoDate" appendTo="body">
-        </p-calendar>
-        <label>Fecha Go/No Go</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-3">
-      <span class="p-float-label">
-        <p-calendar [showIcon]="true" [(ngModel)]="data.deliveryDate" formControlName="deliveryDate" appendTo="body">
-        </p-calendar>
-        <label>Fecha de Entrega</label>
-      </span>
-    </div>
     <div class="p-fluid field col-12 md:col-2">
       <span class="p-float-label">
         <input pInputText [(ngModel)]="data.bdcCode" formControlName="bdcCode" />
         <label>Código BDC</label>
       </span>
     </div>
-    <div class="col-12 md:col-1 mt-3">
-      <span class="p-fluid field-checkbox">
-        <p-checkbox [(ngModel)]="data.opportunityWin" [binary]="true" inputId="binary" formControlName="opportunityWin" [disabled]="true">
-        </p-checkbox>
-        <label>Ganada</label>
-      </span>
-    </div>
   </div>
-  <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-12">
-      <span class="p-float-label">
-        <textarea pInputTextarea [(ngModel)]="data.observations" formControlName="observations" [rows]="5"
-          [ngStyle]="{'resize': 'none'}"></textarea>
-        <label>Observaciones</label>
-      </span>
-    </div>
-  </div>
+
+  -->
 </form>
 <div class="loadWrapper flex align-items-center flex-column justify-content-center" *ngIf="isLoading">
   <p-progressSpinner></p-progressSpinner>
