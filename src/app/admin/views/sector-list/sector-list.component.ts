@@ -119,7 +119,7 @@ export class SectorListComponent implements OnInit {
             this.ref = this.dialogService.open(SectorEditComponent, {
                 header: 'Nuevo sector',
                 width: '40%',
-                data: { },
+                data: { sectorData: new Sector()},
                 closable: false
             });
         }

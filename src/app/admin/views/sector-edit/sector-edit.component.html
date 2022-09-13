@@ -1,7 +1,7 @@
 <div class="flex flex-column">
     <br>
     <span class="p-float-label field">
-        <input id="name" type="text" class="w-full" pInputText [(ngModel)]="sector.name" required>
+        <input id="name" type="text" class="w-full"  pInputText [(ngModel)]="sector.name" required>
         <label for="name">Nombre</label>
     </span>
     <span class="p-float-label field">
@@ -12,11 +12,11 @@
 <br>
 <div class="flex flex-row" style="margin-bottom: 20px">
     <div class="p-float-label field">
-        <p-calendar [showIcon]="true" [(ngModel)]="sector.startDate" dateFormat="dd/mm/yy" appendTo="body" required></p-calendar>
+        <p-calendar [showIcon]="true"  [(ngModel)]="sector.startDate" appendTo="body" required></p-calendar>
         <label>Fecha de inicio</label>
     </div>
     <div class="p-float-label field">
-        <p-calendar [showIcon]="true" [(ngModel)]="sector.endDate" dateFormat="dd/mm/yy" appendTo="body" required></p-calendar>
+        <p-calendar [showIcon]="true" [(ngModel)]="sector.endDate" appendTo="body" required></p-calendar>
         <label>Fecha final</label>
     </div>  
 </div>

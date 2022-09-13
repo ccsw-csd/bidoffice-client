@@ -9,8 +9,12 @@ export class Sector {
     public constructor(init?:Partial<Sector>) {
         Object.assign(this, init);
 
-        this.startDate = new Date(this.startDate.toLocaleString());
-        this.endDate = new Date(this.endDate.toLocaleString());
+        if (this.startDate != null) { 
+
+            this.startDate = new Date(this.startDate.toLocaleString());
+            this.endDate = new Date(this.endDate.toLocaleString());
+        }
+       
     }
 
 }

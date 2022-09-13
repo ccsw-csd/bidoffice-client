@@ -42,6 +42,13 @@ export class SectorService {
      */
     saveSector(sector: Sector):Observable<void> {
         let url = environment.server + "/sector";
+
+        if (sector.id == undefined) {
+
+            sector.startDate.setSeconds(86400);
+            sector.endDate.setSeconds(86400);
+        }
+        
         return this.http.put<void>(url, sector);
     }
 }
