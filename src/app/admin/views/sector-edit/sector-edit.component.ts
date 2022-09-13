@@ -1,4 +1,4 @@
-import { HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
@@ -38,8 +38,8 @@ export class SectorEditComponent implements OnInit {
                 this.snackbarService.showMessage('El registro se ha guardado con éxito')
                 this.close();
             },
-            error: async (respuest:Response) => {
-                this.snackbarService.error((await respuest.text()).toString());
+            error: (returnResponse: HttpErrorResponse) => {
+                this.snackbarService.error(returnResponse.message);
             }
         });
     }

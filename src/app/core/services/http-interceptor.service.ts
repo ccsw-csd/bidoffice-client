@@ -33,6 +33,9 @@ export class HttpInterceptorService implements HttpInterceptor {
               this.router.navigateByUrl('/main');
               errorMessage = 'Resource not found';
               break;
+            case 409:
+              errorMessage = error.error.message;
+              break;
             case 500:
               this.router.navigateByUrl('/main');
               errorMessage = 'Server-side error: ' + error.error.message;
