@@ -111,7 +111,6 @@ export class HyperscalerListComponent implements OnInit {
         })     
     }
   }
-
 }
 
 

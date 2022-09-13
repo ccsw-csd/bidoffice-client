@@ -1,10 +1,7 @@
 <form [formGroup]="tracingForm" class="ui-fluid formgrid grid mt-2">
   <div class="p-fluid field col-12 md:col-12">
     <span class="p-float-label">
-      <p-autoComplete formControlName="person" [suggestions]="groupPerson" [forceSelection]="true"
-        [showEmptyMessage]="true" [emptyMessage]="message" (completeMethod)="searchPerson($event)"
-        (onSelect)="offerTracing.person=$event.value" field="field" aria-describedby="person-help"
-        (onClear)="offerTracing.person=null" required></p-autoComplete>
+      <input pInputText formControlName="person" readonly [value]="personCourrent" [disabled]="true"/>
       <label>Persona</label>
     </span>
     <small id="person-help" class="block p-error" *ngIf="checkValidation('person')">Es un campo requerido.</small>
@@ -20,7 +17,7 @@
   <div class="p-fluid field col-12 md:col-12 mt-2">
     <span class="p-float-label">
       <p-calendar formControlName="date" [showIcon]="true" appendTo="body" date-describedby="date-help"
-        [(ngModel)]="offerTracing.date" required></p-calendar>
+        [(ngModel)]="offerTracing.date" [disabled]="true"></p-calendar>
       <label>Fecha</label>
     </span>
     <small id="date-help" class="block p-error" *ngIf="checkValidation('date')">Es un campo requerido.</small>

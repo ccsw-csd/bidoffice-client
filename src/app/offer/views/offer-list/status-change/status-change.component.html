@@ -1,0 +1,26 @@
+<div class="p-fluid">
+  <span class="">La oferta se encuentra en estado: <b>{{offerItemList.opportunityStatus.name}}</b></span>
+</div>
+<div class="mt-3">
+  <span class="">A que estado desea cambiar la oferta:</span>
+</div>
+<div class="ui-fluid formgrid grid justify-content-center mt-3">
+  <div class="p-fluid field col-12 md:col-6">
+    <p-selectButton [options]="optionStatus" optionLabel="name" [(ngModel)]="selectedOptionStatus"></p-selectButton>
+  </div>
+</div>
+<div class="mt-3">
+  <app-option-status [form]="statusForm" [offer]="offer" [tracing]="newTracing" [dateGoNoGo]="newDateGoNoGo"
+    [dateDelivered]="newDateDelivered" [win]="newWin" [selectedOptionStatus]="selectedOptionStatus"></app-option-status>
+</div>
+<div class="ui-fluid formgrid grid justify-content-end mt-4">
+  <div class="p-fluid field col-12 md:col-2">
+    <p-button (click)="onClose()" styleClass="p-button-secondary" label="Cancelar"></p-button>
+  </div>
+  <div class="p-fluid field col-12 md:col-2">
+    <p-button (click)="onSave()" [disabled]="statusForm.invalid" label="Guardar"></p-button>
+  </div>
+</div>
+<div class="loadWrapper flex align-items-center flex-column justify-content-center" *ngIf="isLoading">
+  <p-progressSpinner></p-progressSpinner>
+</div>

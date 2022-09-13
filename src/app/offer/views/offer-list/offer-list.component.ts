@@ -12,6 +12,8 @@ import { OfferPage } from '../../model/OfferPage';
 import { OfferService } from '../../services/offer.service';
 import { OfferEditComponent } from '../offer-edit/offer-edit.component';
 import { Offer } from '../../model/Offer';
+import { StatusChangeComponent } from './status-change/status-change.component';
+import { BaseClass } from '../../model/BaseClass';
 
 @Component({
   selector: 'app-offer-list',
@@ -20,6 +22,7 @@ import { Offer } from '../../model/Offer';
   encapsulation: ViewEncapsulation.None,
 })
 export class OfferListComponent implements OnInit {
+  readonly labelInFinish: string = 'Finalizada';
   pageable: Pageable = {
     pageNumber: 0,
     pageSize: 10,
@@ -30,20 +33,22 @@ export class OfferListComponent implements OnInit {
       },
     ],
   };
-
+  readonly labelInProgress: string = 'En curso';
+  readonly labelInGoNoGo: string = 'Pendiente Go/NoGo';
   offerPage: OfferPage;
   offerItemList: OfferItemList[];
   totalElements: number;
   isloading: boolean = false;
-  selectedOffer: Offer;
-
+  selectedOffer: Offer = new Offer();
+  opportunityStatusOption: BaseClass[];
   constructor(
     private offerService: OfferService,
     private cdRef: ChangeDetectorRef,
-    private dinamicDialogService: DialogService
+    private dinamicDialogService: DialogService,
   ) {}
 
   ngOnInit(): void {
+
     this.loadPage();
   }
 
@@ -107,5 +112,22 @@ export class OfferListComponent implements OnInit {
         this.toOfferEdit();
       },
     });
+  }
+
+  onStatusChange(offerItemList: OfferItemList) {
+    const ref = this.dinamicDialogService.open(StatusChangeComponent, {
+      header: 'Cambio de estado',
+      width: '40%',
+      data: offerItemList,
+      closable: false,
+    });
+
+    ref.onClose.subscribe(() => {
+      this.loadPage();
+    });
+  }
+
+  isNotStatushFinish(optionStatus: string): boolean {
+    return optionStatus != this.labelInFinish;
   }
 }
