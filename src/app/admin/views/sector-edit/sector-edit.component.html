@@ -12,18 +12,18 @@
 <br>
 <div class="flex flex-row" style="margin-bottom: 20px">
     <div class="p-float-label field">
-        <p-calendar [showIcon]="true"  [(ngModel)]="sector.startDate" appendTo="body" required></p-calendar>
+        <p-calendar [showIcon]="true"  [(ngModel)]="sector.startDate" appendTo="body"></p-calendar>
         <label>Fecha de inicio</label>
     </div>
     <div class="p-float-label field">
-        <p-calendar [showIcon]="true" [(ngModel)]="sector.endDate" appendTo="body" required></p-calendar>
+        <p-calendar [showIcon]="true" [(ngModel)]="sector.endDate" appendTo="body"></p-calendar>
         <label>Fecha final</label>
     </div>  
 </div>
 <div class = "flex flex-row-reverse w-auto">
     <div>
         <button type="button" class="p-button-primary w-6rem" [disabled]="
-            sector.name == '' || sector.name == null || sector.priority == null || sector.priority < 1 || sector.startDate == null || sector.endDate == null"
+            sector.name == '' || sector.name == null || sector.priority == null || sector.priority < 1"
             pButton label="Guardar"
             (click)="saveChanges(sector)"
             >

@@ -45,8 +45,15 @@ export class SectorService {
 
         if (sector.id == undefined) {
 
-            sector.startDate.setSeconds(86400);
-            sector.endDate.setSeconds(86400);
+            if (sector.startDate != null) {
+
+                sector.startDate.setSeconds(86400);
+            }
+
+            if (sector.endDate != null) {
+                
+                sector.endDate.setSeconds(86400);
+            }
         }
         
         return this.http.put<void>(url, sector);

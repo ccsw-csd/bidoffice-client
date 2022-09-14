@@ -25,10 +25,6 @@ export class SectorEditComponent implements OnInit {
     ngOnInit(): void {
         this.sector = new Sector(this.config.data.sectorData);
 
-        if (this.sector == null) {
-
-            this.sector = new Sector();
-        }
     }
 
     /**

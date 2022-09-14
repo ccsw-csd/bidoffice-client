@@ -12,9 +12,11 @@ export class Sector {
         if (this.startDate != null) { 
 
             this.startDate = new Date(this.startDate.toLocaleString());
-            this.endDate = new Date(this.endDate.toLocaleString());
         }
-       
-    }
 
+        if (this.endDate != null) {
+
+            this.endDate = new Date(this.endDate.toLocaleString());
+        }  
+    }
 }
