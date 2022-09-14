@@ -38,6 +38,7 @@ export class SectorEditComponent implements OnInit {
      * @param sector Tecnología a guardar o modificar.
      */
      saveChanges(sector: Sector) {
+
         this.sectorService.saveSector(sector).subscribe({
             next: () => {
                 this.snackbarService.showMessage('El registro se ha guardado con éxito')
@@ -47,7 +48,9 @@ export class SectorEditComponent implements OnInit {
                 this.snackbarService.error(returnResponse.message);
             }
         });
+
     }
+
     /**
      * Cierra el cuadro de diálogo.
      */

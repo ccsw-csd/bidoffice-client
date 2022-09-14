@@ -1,4 +1,4 @@
-<div class="flex flex-column">
+<div class="flex flex-column" >
     <br>
     <span class="p-float-label field">
         <input id="name" type="text" class="w-full"  pInputText [(ngModel)]="sector.name" required>
@@ -23,7 +23,7 @@
 <div class = "flex flex-row-reverse w-auto">
     <div>
         <button type="button" class="p-button-primary w-6rem" [disabled]="
-            sector.name == '' || sector.name == null || sector.priority == null || sector.priority < 1"
+            sector.name == '' || sector.name == null || sector.priority == null || sector.priority < 1 || sector.startDate == null || sector.endDate == null"
             pButton label="Guardar"
             (click)="saveChanges(sector)"
             >

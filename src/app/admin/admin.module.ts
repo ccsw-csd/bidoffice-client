@@ -27,6 +27,7 @@ import { SectorEditComponent } from './views/sector-edit/sector-edit.component';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToastModule,
     CalendarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProgressSpinnerModule
   ]
 })
 export class AdminModule { }
