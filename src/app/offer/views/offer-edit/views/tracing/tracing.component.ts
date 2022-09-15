@@ -22,7 +22,6 @@ export class TracingComponent implements OnInit {
   clonedOfferTracing: OfferTracing;
   selectedPerson;
   tracingEdit: OfferTracing[];
-  usernameCurrentPerson: string;
 
   @Input() data: Offer;
 
@@ -33,20 +32,31 @@ export class TracingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.usernameCurrentPerson = this.auth.getUserInfo().username
-    this.data.tracings.forEach((item) => (item.uuid = uuidv4()));
   }
 
   createTracing() {
     const ref = this.dinamicDialogService.open(TracingEditComponent, {
       header: 'Crear siguimiento',
       width: '30%',
+      data: this.clonedOfferTracing,
       closable: false,
     });
 
     ref.onClose.subscribe((tracing: OfferTracing) => {
       if (tracing != null) {
-        this.data.tracings.push(tracing);
+        if(tracing.id != null){
+          this.data.tracings[
+            this.data.tracings.findIndex((item) => item.id == tracing.id)
+          ] = tracing;
+        }
+        else{
+          let index = this.data.tracings.findIndex((item) => item.uuid == tracing.uuid);
+          if(index != -1)
+            this.data.tracings[index] = tracing
+          else
+            this.data.tracings.push(tracing);
+        }
+        delete this.clonedOfferTracing;
       }
     });
   }
@@ -70,23 +80,15 @@ export class TracingComponent implements OnInit {
   }
 
   onRowEditInit(tracing: OfferTracing) {
-    this.isEditing = true;
-    this.selectedPerson = this.mappingPerson(tracing.person);
     this.clonedOfferTracing = { ...tracing };
-  }
-
-  onRowEditCancel(index: number) {
-    this.data.tracings[index] = this.clonedOfferTracing;
-    delete this.clonedOfferTracing;
-    this.isEditing = false;
+    this.createTracing();
   }
 
   transformPerson(person: Person) {
     return person.name + ' ' + person.lastname + ' - ' + person.username;
   }
  
-
   commentFromCurrentPerson(person: Person): boolean{
-    return this.usernameCurrentPerson == person.username;
+    return this.auth.getUserInfo().username == person.username;
   }
 }

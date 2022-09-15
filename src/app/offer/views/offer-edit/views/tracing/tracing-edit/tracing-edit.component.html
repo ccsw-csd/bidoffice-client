@@ -1,31 +1,33 @@
-<form [formGroup]="tracingForm" class="ui-fluid formgrid grid mt-2">
+<div [formGroup]="tracingForm" class="ui-fluid formgrid grid mt-2">
   <div class="p-fluid field col-12 md:col-12">
     <span class="p-float-label">
-      <input pInputText formControlName="person" readonly [value]="personCourrent" [disabled]="true"/>
+      <input pInputText formControlName="person" readonly [value]="personCourrent"/>
       <label>Persona</label>
     </span>
     <small id="person-help" class="block p-error" *ngIf="checkValidation('person')">Es un campo requerido.</small>
   </div>
   <div class="p-fluid field col-12 md:col-12 mt-2">
     <span class="p-float-label">
-      <input formControlName="comment" [(ngModel)]="offerTracing.comment" aria-describedby="comment-help" pInputText
-        required />
-      <label>Comentario</label>
-    </span>
-    <small id="comment-help" class="block p-error" *ngIf="checkValidation('comment')">Es un campo requerido.</small>
-  </div>
-  <div class="p-fluid field col-12 md:col-12 mt-2">
-    <span class="p-float-label">
       <p-calendar formControlName="date" [showIcon]="true" appendTo="body" date-describedby="date-help"
-        [(ngModel)]="offerTracing.date" [disabled]="true"></p-calendar>
+        [(ngModel)]="offerTracing.date"></p-calendar>
       <label>Fecha</label>
     </span>
     <small id="date-help" class="block p-error" *ngIf="checkValidation('date')">Es un campo requerido.</small>
   </div>
-  <div class="p-fluid p-float-label field col-12 md:col-6 mt-2">
+  <div class="p-fluid field col-12 md:col-12 mt-2">
+    <span class="p-float-label">
+      <textarea formControlName="comment" [(ngModel)]="offerTracing.comment" aria-describedby="comment-help" pInputText
+        [rows]="7" [ngStyle]="{'resize': 'none'}"></textarea>
+      <label>Comentario</label>
+    </span>
+    <small id="comment-help" class="block p-error" *ngIf="checkValidation('comment')">Es un campo requerido.</small>
+  </div>
+</div>
+<div class="ui-fluid formgrid grid mt-2 flex justify-content-end">
+  <div class="p-fluid p-float-label field col-12 md:col-3">
     <p-button label="Cancelar" styleClass="p-button-secondary" (click)="onCancel()"></p-button>
   </div>
-  <div class="p-fluid p-float-label field col-12 md:col-6 mt-2">
+  <div class="p-fluid p-float-label field col-12 md:col-3">
     <p-button label="Guardar" (click)="onSave()" [disabled]="tracingForm.invalid"></p-button>
   </div>
-</form>
+</div>

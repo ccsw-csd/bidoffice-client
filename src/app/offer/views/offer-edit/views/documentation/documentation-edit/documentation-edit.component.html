@@ -1,4 +1,4 @@
-<form [formGroup]="dataFileForm" class="ui-fluid formgrid grid mt-2">
+<div [formGroup]="dataFileForm" class="ui-fluid formgrid grid mt-2">
   <div class="p-fluid field col-12 md:col-12">
     <span class="p-float-label">
       <p-dropdown [options]="fileTypes" formControlName="typeDoc" aria-describedby="typeDoc-help"
@@ -22,16 +22,18 @@
     <small id="link-help" class="block p-error" *ngIf="checkValidation('link')">Es un campo requerido.</small>
   </div>
   <div class="p-fluid p-float-label field col-12 md:col-12">
-    <textarea [(ngModel)]="dataFile.observations" formControlName="observation" pInputTextarea autoResize="autoResize"></textarea>
+    <textarea [(ngModel)]="dataFile.observations" formControlName="observation" pInputTextarea [ngStyle]="{'resize': 'none'}" [rows]="7"></textarea>
     <label>Observaciones</label>
   </div>
-  <div class="p-fluid p-float-label field col-12 md:col-6">
+</div>
+<div class="ui-fluid formgrid grid mt-2 flex justify-content-end">
+  <div class="p-fluid p-float-label field col-12 md:col-3">
     <p-button label="Cancelar" styleClass="p-button-secondary" (click)="onCancel()"></p-button>
   </div>
-  <div class="p-fluid p-float-label field col-12 md:col-6">
+  <div class="p-fluid p-float-label field col-12 md:col-3">
     <p-button label="Guardar" (click)="onSave()" [disabled]="dataFileForm.invalid"></p-button>
   </div>
-</form>
+</div>
 <div class="loadWrapper flex align-items-center flex-column justify-content-center" *ngIf="isLoading">
   <p-progressSpinner></p-progressSpinner>
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
 import { OfferDataFile } from 'src/app/offer/model/OfferDataFile';
 import { OfferService } from 'src/app/offer/services/offer.service';
@@ -20,7 +20,8 @@ export class DocumentationEditComponent implements OnInit {
   constructor(
     private offerService: OfferService,
     public ref: DynamicDialogRef,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public config: DynamicDialogConfig
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +31,11 @@ export class DocumentationEditComponent implements OnInit {
       link: ['', Validators.required],
       observation: [''],
     });
+    if(this.config.data != null)
+      this.dataFile = this.config.data;
+    else
+      this.dataFile.uuid = uuidv4();
+
     this.getAllFileTypes();
   }
 
@@ -47,7 +53,6 @@ export class DocumentationEditComponent implements OnInit {
 
   onSave() {
     if (!this.dataFileForm.invalid) {
-      this.dataFile.uuid = uuidv4();
       this.ref.close(this.dataFile);
     } else {
       Object.keys(this.dataFileForm.controls).forEach((control) =>

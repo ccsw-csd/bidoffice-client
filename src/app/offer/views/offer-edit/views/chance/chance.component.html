@@ -6,7 +6,7 @@
 </p-confirmDialog>
 <form [formGroup]="formValidator">
   <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-6">
+    <div class="p-fluid field col-12 md:col-5">
       <span class="p-float-label">
         <input pInputText formControlName="nameOpportunity" [(ngModel)]="data.name"
           aria-describedby="nameOpportunity-help" />
@@ -15,7 +15,7 @@
       <small id="nameOpportunity-help" class="block p-error" *ngIf="checkValidation('nameOpportunity')">Es un campo
         requerido</small>
     </div>
-    <div class="p-fluid field col-12 md:col-5">
+    <div class="p-fluid field col-12 md:col-2">
       <span class="p-float-label">
         <p-autoComplete [suggestions]="results" [(ngModel)]="data.client" [forceSelection]="true"
           [showEmptyMessage]="true" [emptyMessage]="message" formControlName="client"
@@ -23,6 +23,21 @@
         <label>Cliente</label>
       </span>
       <small id="client-help" class="block p-error" *ngIf="checkValidation('client')">Es un campo requerido</small>
+    </div>
+    <div class="p-fluid field col-12 md:col-2">
+      <span class="p-float-label">
+        <input pInputText [(ngModel)]="data.bdcCode" formControlName="bdcCode" />
+        <label>Código BDC</label>
+      </span>
+    </div>
+    <div class="p-fluid field col-12 md:col-2">
+      <span class="p-float-label">
+        <p-dropdown [options]="offerTypes" [(ngModel)]="data.opportunityType" formControlName="opportunityType"
+          optionLabel="name" appendTo="body" aria-describedby="opportunityType-help"></p-dropdown>
+        <label>Tipo de Oferta</label>
+      </span>
+      <small id="opportunityType-help" class="block p-error" *ngIf="checkValidation('opportunityType')">Es un campo
+        requerido</small>
     </div>
     <div class="col-12 md:col-1 mt-3">
       <span class="p-fluid field-checkbox">
@@ -34,7 +49,7 @@
     </div>
   </div>
   <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-4">
+    <div class="p-fluid field col-12 md:col-3">
       <span class="p-float-label">
         <p-autoComplete [(ngModel)]="selectedRequestedBy" formControlName="requestedBy" [suggestions]="groupPerson"
           [forceSelection]="true" [showEmptyMessage]="true" [emptyMessage]="message"
@@ -43,13 +58,20 @@
         <label>Quien solicita</label>
       </span>
     </div>
-    <div class="p-fluid field col-12 md:col-4">
+    <div class="p-fluid field col-12 md:col-3">
       <span class="p-float-label">
         <p-autoComplete [(ngModel)]="selectedManagedBy" formControlName="managedBy" [suggestions]="groupPerson"
           [forceSelection]="true" [showEmptyMessage]="true" [emptyMessage]="message"
           (completeMethod)="searchPerson($event)" (onSelect)="data.managedBy = $event.value" field="field"
           appendTo="body"></p-autoComplete>
         <label>Responsable CCA</label>
+      </span>
+    </div>
+    <div class="p-fluid field col-12 md:col-2">
+      <span class="p-float-label">
+        <p-calendar [showIcon]="true" [(ngModel)]="data.goNogoDate" formControlName="goNogoDate" appendTo="body">
+        </p-calendar>
+        <label>Fecha Go/No Go</label>
       </span>
     </div>
     <div class="p-fluid field col-12 md:col-2">
@@ -63,7 +85,7 @@
     </div>
     <div class="p-fluid field col-12 md:col-2">
       <span class="p-float-label">
-        <input formControlName="state" [(ngModel)]="data.opportunityStatus.name" pInputText readonly [disabled]="true"/>
+        <input formControlName="state" [(ngModel)]="data.opportunityStatus.name" pInputText />
         <label>Estado</label>
       </span>
     </div>
@@ -108,26 +130,6 @@
       </span>
     </div>
   </div>
-  <!--
-  <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-3">
-      <span class="p-float-label">
-        <p-dropdown [options]="offerTypes" [(ngModel)]="data.opportunityType" formControlName="opportunityType"
-          optionLabel="name" appendTo="body" aria-describedby="opportunityType-help"></p-dropdown>
-        <label>Tipo de Oferta</label>
-      </span>
-      <small id="opportunityType-help" class="block p-error" *ngIf="checkValidation('opportunityType')">Es un campo
-        requerido</small>
-    </div>
-    <div class="p-fluid field col-12 md:col-2">
-      <span class="p-float-label">
-        <input pInputText [(ngModel)]="data.bdcCode" formControlName="bdcCode" />
-        <label>Código BDC</label>
-      </span>
-    </div>
-  </div>
-
-  -->
 </form>
 <div class="loadWrapper flex align-items-center flex-column justify-content-center" *ngIf="isLoading">
   <p-progressSpinner></p-progressSpinner>

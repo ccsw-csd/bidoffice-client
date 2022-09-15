@@ -44,7 +44,7 @@
       </div>
       <div class="p-fluid col-12 md:col-4">
         <span class="p-float-label field">
-          <p-inputNumber [(ngModel)]="data.dataProject.amount" [min]="0" inputId="minmaxfraction" mode="decimal"
+          <p-inputNumber locale="es-ES" [(ngModel)]="data.dataProject.amount" [min]="0" inputId="minmaxfraction" mode="decimal"
             [minFractionDigits]="2" [maxFractionDigits]="5">
           </p-inputNumber>
           <label>Importe</label>
@@ -52,13 +52,13 @@
       </div>
       <div class="p-fluid field col-12 md:col-4">
         <span class="p-float-label">
-          <p-inputNumber [(ngModel)]="data.dataProject.ftes" [min]="0"></p-inputNumber>
+          <p-inputNumber locale="es-ES" [(ngModel)]="data.dataProject.ftes" [min]="0"></p-inputNumber>
           <label>Personas de proyecto</label>
         </span>
       </div>
       <div class="p-fluid field col-12 md:col-4">
         <span class="p-float-label">
-          <p-inputNumber [(ngModel)]="data.dataProject.months" [min]="0" inputId="minmaxfraction" mode="decimal"
+          <p-inputNumber locale="es-ES" [(ngModel)]="data.dataProject.months" [min]="0" inputId="minmaxfraction" mode="decimal"
             [minFractionDigits]="2" [maxFractionDigits]="5">
           </p-inputNumber>
           <label>Duración de proyecto</label>

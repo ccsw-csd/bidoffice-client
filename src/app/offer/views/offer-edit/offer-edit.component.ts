@@ -24,6 +24,7 @@ export class OfferEditComponent implements OnInit {
   chanceForm: FormGroup;
   offerStatus: string;
   isLoading: boolean = false;
+  clonedOffer: Offer;
   constructor(
     private formBuilder: FormBuilder,
     public config: DynamicDialogConfig,
@@ -37,6 +38,7 @@ export class OfferEditComponent implements OnInit {
     if (this.config.data != null) {
       this.offerStatus = 'modificada';
       this.offer = this.config.data;
+      this.clonedOffer = Object.assign(new Offer(), this.offer);
     } else {
       this.offerStatus = 'creada';
       this.offer = new Offer();
@@ -46,7 +48,7 @@ export class OfferEditComponent implements OnInit {
       chance: this.formBuilder.group({
         nameOpportunity: ['', Validators.required],
         client: ['', Validators.required],
-        state: ['', Validators.required],
+        state: [{value: '', disabled: true}, Validators.required],
         requestedBy: [''],
         managedBy: [''],
         requestedDate: ['', Validators.required],
@@ -58,7 +60,7 @@ export class OfferEditComponent implements OnInit {
         goNogoDate: [''],
         deliveryDate: [''],
         bdcCode: [''],
-        opportunityWin: [''],
+        opportunityWin: [{value: '', disabled: true}],
         observations: [''],
       }),
     });
@@ -69,7 +71,7 @@ export class OfferEditComponent implements OnInit {
   }
 
   onSave() {
-    if (this.offerForm.valid) {
+    if (this.offerForm.valid && JSON.stringify(this.offer) != JSON.stringify(this.clonedOffer)) {
       this.offer.tracings.forEach((item) => delete item.uuid);
       this.offer.dataFiles.forEach((item) => delete item.uuid);
       this.isLoading = true;
@@ -93,7 +95,7 @@ export class OfferEditComponent implements OnInit {
             `La oferta ha sido ${this.offerStatus} correctamente.`
           );
           this.isLoading = true;
-          this.ref.close();
+          this.onClose();
         },
       });
     } else {
@@ -102,6 +104,8 @@ export class OfferEditComponent implements OnInit {
       );
       this.offerForm.markAllAsTouched();
     }
+    if(JSON.stringify(this.offer) == JSON.stringify(this.clonedOffer))
+      this.onClose();
   }
   onClose() {
     this.ref.close();

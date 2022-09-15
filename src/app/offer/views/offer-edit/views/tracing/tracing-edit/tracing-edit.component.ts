@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { User } from 'src/app/core/models/User';
 import { UserInfoDetailed } from 'src/app/core/models/UserInfoDetailed';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -25,25 +25,28 @@ export class TracingEditComponent implements OnInit {
     private offerService: OfferService,
     public ref: DynamicDialogRef,
     private formBuilder: FormBuilder,
-    public auth: AuthService
+    public auth: AuthService,
+    public config: DynamicDialogConfig
   ) {}
 
   ngOnInit(): void {
     this.offerTracing.date = new Date();
-    this.user = this.auth.getUserInfoDetailed();
-
+    if(this.config.data != null)
+      this.offerTracing = this.config.data;
+    else
+      this.offerTracing.uuid = uuidv4();
+      
     this.tracingForm = this.formBuilder.group({
-      person: [''],
+      person: [{value: '', disabled: true}, Validators.required],
       comment: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [{value: '', disabled: true}, Validators.required],
     });
 
-    this.searchPerson(this.user.username);
+    this.searchPerson(this.auth.getUserInfo().username);
   }
 
   onSave() {
     if (!this.tracingForm.invalid) {
-      this.offerTracing.uuid = uuidv4();
       this.ref.close(this.offerTracing);
     } else {
       Object.keys(this.tracingForm.controls).forEach((control) =>
@@ -61,7 +64,7 @@ export class TracingEditComponent implements OnInit {
     this.offerService.searchPerson(searchPeron).subscribe({
       next: (res: Person[]) => {
         this.personCourrent = this.mappingPerson(
-          res.find((item) => item.username == this.user.username)
+          res.find((item) => item.username == this.auth.getUserInfo().username)
         ).field;
       },
       error: () => {},

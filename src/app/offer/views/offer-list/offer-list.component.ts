@@ -102,7 +102,8 @@ export class OfferListComponent implements OnInit {
     this.isloading = true;
     this.offerService.getOffer(offer.id).subscribe({
       next: (res: Offer) => {
-        this.selectedOffer = res;
+        this.selectedOffer = Object.assign(new Offer(), res);
+        this.selectedOffer.parseStringToDate();
       },
       error: () => {
         this.isloading = true;

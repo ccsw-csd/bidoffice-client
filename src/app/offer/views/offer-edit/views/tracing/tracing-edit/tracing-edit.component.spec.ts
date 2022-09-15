@@ -39,7 +39,7 @@ describe('TracingEditComponent', () => {
     ];
     emptyMock = jasmine.createSpyObj(['']);
     mockOfferService = jasmine.createSpyObj(['searchPerson']);
-    component = new TracingEditComponent(mockOfferService, emptyMock, emptyMock, emptyMock);
+    component = new TracingEditComponent(mockOfferService, emptyMock, emptyMock, emptyMock, emptyMock);
   });
 
   it('shouldReturnListSearchPerson', () => {

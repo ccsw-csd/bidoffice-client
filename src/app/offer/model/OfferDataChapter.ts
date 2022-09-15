@@ -14,5 +14,4 @@ export class OfferDataChapter{
   innovation: boolean = false;
   reference: boolean = false;
   keyDocument: boolean = false;
-  offer: Offer;
 }

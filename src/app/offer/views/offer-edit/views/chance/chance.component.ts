@@ -42,7 +42,6 @@ export class ChanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.allRequest();
-
     if (this.data.client != undefined) this.results.push(this.data.client);
 
     if (this.data.requestedBy != null) {
@@ -94,7 +93,6 @@ export class ChanceComponent implements OnInit {
             '¿La oferta requiere Go/NoGo?'
           );
         }
-
       }
     );
   }
