@@ -20,7 +20,7 @@
   </div>
 </div>
 <div class="grid">
-  <div class="col-6">
+  <div class="col-6 mt-1">
     <div class="grid">
       <div class="p-fluid field col-12 md:col-12">
         <span class="p-float-label">
@@ -67,7 +67,7 @@
     </div>
   </div>
   <div class="p-fluid field col-6">
-    <p-listbox listStyleClass="max-h-12rem h-12rem" emptyMessage="No hay personas seleccionadas"
+    <p-listbox styleClass="h-full" emptyMessage="No hay personas seleccionadas"
       [options]="selectedPersonList" optionLabel="field">
       <ng-template let-person pTemplate="item">
         <div class="flex flex-row justify-content-center align-items-center">
@@ -79,11 +79,11 @@
     </p-listbox>
   </div>
 </div>
-<div class="ui-fluid formgrid grid mt-1">
+<div class="ui-fluid formgrid grid">
   <div class="p-fluid field col-12 md:col-12">
     <span class="p-float-label">
       <textarea [ngStyle]="{ resize: 'none' }" pInputTextarea [(ngModel)]="data.dataTechnology.observations"
-        [rows]="10"></textarea>
+        [rows]="11"></textarea>
       <label>Observaciones</label>
     </span>
   </div>

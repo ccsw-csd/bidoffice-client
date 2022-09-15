@@ -99,8 +99,9 @@ export class OfferEditComponent implements OnInit {
         },
       });
     } else {
-      Object.keys(this.offerForm.controls).forEach((control) =>
-        this.offerForm.controls[control].markAsDirty()
+      this.chanceForm = this.offerForm.get('chance') as FormGroup;
+      Object.keys(this.chanceForm.controls).forEach((control) =>
+        this.chanceForm.controls[control].markAsDirty()
       );
       this.offerForm.markAllAsTouched();
     }

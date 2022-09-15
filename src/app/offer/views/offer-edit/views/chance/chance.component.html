@@ -10,19 +10,16 @@
       <span class="p-float-label">
         <input pInputText formControlName="nameOpportunity" [(ngModel)]="data.name"
           aria-describedby="nameOpportunity-help" />
-        <label>Nombre Oportunidad</label>
+        <label>Nombre Oportunidad*</label>
       </span>
-      <small id="nameOpportunity-help" class="block p-error" *ngIf="checkValidation('nameOpportunity')">Es un campo
-        requerido</small>
     </div>
     <div class="p-fluid field col-12 md:col-2">
       <span class="p-float-label">
         <p-autoComplete [suggestions]="results" [(ngModel)]="data.client" [forceSelection]="true"
           [showEmptyMessage]="true" [emptyMessage]="message" formControlName="client"
           (completeMethod)="searchClient($event)" appendTo="body" aria-describedby="client-help"></p-autoComplete>
-        <label>Cliente</label>
+        <label>Cliente*</label>
       </span>
-      <small id="client-help" class="block p-error" *ngIf="checkValidation('client')">Es un campo requerido</small>
     </div>
     <div class="p-fluid field col-12 md:col-2">
       <span class="p-float-label">
@@ -36,8 +33,6 @@
           optionLabel="name" appendTo="body" aria-describedby="opportunityType-help"></p-dropdown>
         <label>Tipo de Oferta</label>
       </span>
-      <small id="opportunityType-help" class="block p-error" *ngIf="checkValidation('opportunityType')">Es un campo
-        requerido</small>
     </div>
     <div class="col-12 md:col-1 mt-3">
       <span class="p-fluid field-checkbox">
@@ -78,10 +73,8 @@
       <div class="p-float-label">
         <p-calendar [showIcon]="true" [(ngModel)]="data.requestedDate" formControlName="requestedDate" appendTo="body"
           aria-describedby="requestedDate-help"></p-calendar>
-        <label>Fecha Solicitud</label>
+        <label>Fecha Solicitud*</label>
       </div>
-      <small id="requestedDate-help" class="block p-error" *ngIf="checkValidation('requestedDate')">Es un campo
-        requerido</small>
     </div>
     <div class="p-fluid field col-12 md:col-2">
       <span class="p-float-label">
@@ -109,9 +102,8 @@
       <span class="p-float-label">
         <p-dropdown [(ngModel)]="data.sector" [options]="sectors" formControlName="sector" optionLabel="name"
           appendTo="body" aria-describedby="sector-help"></p-dropdown>
-        <label>Sector</label>
+        <label>Sector*</label>
       </span>
-      <small id="sector-help" class="block p-error" *ngIf="checkValidation('sector')">Es un campo requerido</small>
     </div>
     <div class="p-fluid field col-12 md:col-2">
       <span class="p-float-label">
@@ -124,7 +116,7 @@
   <div class="ui-fluid formgrid grid mt-3">
     <div class="p-fluid field col-12 md:col-12">
       <span class="p-float-label">
-        <textarea pInputTextarea [(ngModel)]="data.observations" formControlName="observations" [rows]="12"
+        <textarea pInputTextarea [(ngModel)]="data.observations" formControlName="observations" [rows]="14"
           [ngStyle]="{'resize': 'none'}"></textarea>
         <label>Observaciones</label>
       </span>

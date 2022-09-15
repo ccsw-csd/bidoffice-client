@@ -18,9 +18,8 @@
     <span class="p-float-label">
       <textarea formControlName="comment" [(ngModel)]="offerTracing.comment" aria-describedby="comment-help" pInputText
         [rows]="7" [ngStyle]="{'resize': 'none'}"></textarea>
-      <label>Comentario</label>
+      <label>Comentario*</label>
     </span>
-    <small id="comment-help" class="block p-error" *ngIf="checkValidation('comment')">Es un campo requerido.</small>
   </div>
 </div>
 <div class="ui-fluid formgrid grid mt-2 flex justify-content-end">

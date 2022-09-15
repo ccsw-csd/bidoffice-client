@@ -5,21 +5,18 @@
         [(ngModel)]="dataFile.fileType" optionLabel="name" appendTo="body"></p-dropdown>
       <label>Tipo documento</label>
     </span>
-    <small id="typeDoc-help" class="block p-error" *ngIf="checkValidation('typeDoc')">Es un campo requerido.</small>
   </div>
   <div class="p-fluid field col-12 md:col-12">
     <span class="p-float-label">
       <input [(ngModel)]="dataFile.name" formControlName="nameFile" aria-describedby="nameFile-help" pInputText />
-      <label>Nombre documento</label>
+      <label>Nombre documento*</label>
     </span>
-    <small id="nameFile-help" class="block p-error" *ngIf="checkValidation('nameFile')">Es un campo requerido.</small>
   </div>
   <div class="p-fluid field col-12 md:col-12">
     <span class="p-float-label">
       <input [(ngModel)]="dataFile.link" aria-describedby="link-help" formControlName="link" pInputText />
-      <label>URL del documento</label>
+      <label>URL del documento*</label>
     </span>
-    <small id="link-help" class="block p-error" *ngIf="checkValidation('link')">Es un campo requerido.</small>
   </div>
   <div class="p-fluid p-float-label field col-12 md:col-12">
     <textarea [(ngModel)]="dataFile.observations" formControlName="observation" pInputTextarea [ngStyle]="{'resize': 'none'}" [rows]="7"></textarea>
