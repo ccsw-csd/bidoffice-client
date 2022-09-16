@@ -71,7 +71,7 @@ export class OfferEditComponent implements OnInit {
   }
 
   onSave() {
-    if (this.offerForm.valid && JSON.stringify(this.offer) != JSON.stringify(this.clonedOffer)) {
+    if (this.offerForm.valid) {
       this.offer.tracings.forEach((item) => delete item.uuid);
       this.offer.dataFiles.forEach((item) => delete item.uuid);
       this.isLoading = true;
@@ -105,8 +105,6 @@ export class OfferEditComponent implements OnInit {
       );
       this.offerForm.markAllAsTouched();
     }
-    if(JSON.stringify(this.offer) == JSON.stringify(this.clonedOffer))
-      this.onClose();
   }
   onClose() {
     this.ref.close();

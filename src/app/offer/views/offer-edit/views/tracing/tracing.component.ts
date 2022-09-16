@@ -8,6 +8,7 @@ import { TracingEditComponent } from './tracing-edit/tracing-edit.component';
 import { v4 as uuidv4 } from 'uuid';
 import { ConfirmationService } from 'primeng/api';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-tracing',
@@ -21,14 +22,13 @@ export class TracingComponent implements OnInit {
   groupPerson: any[];
   clonedOfferTracing: OfferTracing;
   selectedPerson;
-  tracingEdit: OfferTracing[];
-
   @Input() data: Offer;
 
   constructor(
     private dinamicDialogService: DialogService,
     private offerService: OfferService,
-    public auth: AuthService
+    public auth: AuthService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -90,5 +90,23 @@ export class TracingComponent implements OnInit {
  
   commentFromCurrentPerson(person: Person): boolean{
     return this.auth.getUserInfo().username == person.username;
+  }
+
+  onDeleteRow(tracing: OfferTracing) {
+    this.confirmationService.confirm({
+      header: 'Confirmación',
+      message: '¿Esta seguro que desea eliminar este registro?',
+      acceptLabel: 'Eliminar',
+      rejectLabel: 'Cancelar',
+      rejectButtonStyleClass: 'p-button-secondary',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      accept: () => {
+        if(tracing.uuid != null)
+          this.data.tracings = this.data.tracings.filter(item => item.uuid != tracing.uuid)
+      },
+      reject: () => {},
+    });
   }
 }

@@ -24,9 +24,9 @@
 </div>
 <div class="ui-fluid formgrid grid mt-2 flex justify-content-end">
   <div class="p-fluid p-float-label field col-12 md:col-3">
-    <p-button label="Cancelar" styleClass="p-button-secondary" (click)="onCancel()"></p-button>
+    <button class="p-3 p-button-secondary" pButton label="Cancelar" styleClass="p-button-secondary" (click)="onCancel()"></button>
   </div>
   <div class="p-fluid p-float-label field col-12 md:col-3">
-    <p-button label="Guardar" (click)="onSave()" [disabled]="tracingForm.invalid"></p-button>
+    <button class="p-3" pButton label="Guardar" (click)="onSave()" [disabled]="tracingForm.invalid"></button>
   </div>
 </div>
