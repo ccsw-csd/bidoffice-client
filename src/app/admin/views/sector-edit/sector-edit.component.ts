@@ -38,7 +38,7 @@ export class SectorEditComponent implements OnInit {
         this.sectorService.saveSector(sector).subscribe({
             next: () => {
                 this.snackbarService.showMessage('El registro se ha guardado con éxito')
-                this.close();
+                this.close(true);
             },
             error: (returnResponse: HttpErrorResponse) => {
                 this.snackbarService.error(returnResponse.message);
@@ -50,9 +50,9 @@ export class SectorEditComponent implements OnInit {
     /**
      * Cierra el cuadro de diálogo.
      */
-     close() {
+     close(result: boolean) {
         if (this.ref) {
-            this.ref.close();
+            this.ref.close(result);
         }
     }
 }

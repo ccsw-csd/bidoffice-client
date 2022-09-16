@@ -105,29 +105,32 @@ export class SectorListComponent implements OnInit {
      */
     editSector(sector?: Sector): void {
 
+        let headerChoice;
+        let dataChoice;
+
         if (sector != null) {
-            this.ref = this.dialogService.open(SectorEditComponent, {
-                header: 'Editar ' + sector.name,
-                width: '40%',
-                data: {
-                    sectorData: sector
-                },
-                closable: false
-            });
+            headerChoice = 'Editar ' + sector.name;
+            dataChoice = sector;
         }
         else {
-            this.ref = this.dialogService.open(SectorEditComponent, {
-                header: 'Nuevo sector',
-                width: '40%',
-                data: { sectorData: new Sector()},
-                closable: false
-            });
+            headerChoice = 'Nuevo sector';
+            dataChoice = new Sector();
         }
+        
+        this.ref = this.dialogService.open(SectorEditComponent, {
+            header: headerChoice,
+            width: '40%',
+            data: {
+                sectorData: dataChoice,
+            },
+            closable: false
+        });
 
-        this.ref.onClose.subscribe (
-            res => {
+        this.ref.onClose.subscribe ((result: boolean) => {
+           
+            if (result) {
                 this.findAll();
             }
-        );
+        });
     }
 }
