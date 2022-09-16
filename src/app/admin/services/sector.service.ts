@@ -43,19 +43,20 @@ export class SectorService {
     saveSector(sector: Sector):Observable<void> {
         let url = environment.server + "/sector";
 
-        if (sector.id == undefined) {
+        if (sector.startDate != null){
 
-            if (sector.startDate != null) {
-
-                sector.startDate.setSeconds(86400);
-            }
-
-            if (sector.endDate != null) {
-                
-                sector.endDate.setSeconds(86400);
-            }
+            sector.startDate = new Date(Date.UTC(sector.startDate.getFullYear(),
+                                             sector.startDate.getMonth(),
+                                             sector.startDate.getDate()));
         }
+
+        if (sector.endDate != null) {
         
+            sector.endDate = new Date(Date.UTC(sector.endDate.getFullYear(),
+                                             sector.endDate.getMonth(),
+                                             sector.endDate.getDate()));
+        }
+
         return this.http.put<void>(url, sector);
     }
 }
