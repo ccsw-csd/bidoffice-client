@@ -105,7 +105,7 @@ export class TechnologyListComponent implements OnInit {
      * 
      * @param technology Tecnología a borrar.
      */
-        
+
      deleteTechnology(item: Technology) {
         if(this.isDeleted){
             this.technologyService.deleteTechnology(item.id).subscribe({

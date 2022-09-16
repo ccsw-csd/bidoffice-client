@@ -23,6 +23,11 @@ import { TechnologyEditComponent } from './views/technology-edit/technology-edit
 import { ProjectTypeListComponent } from "./views/project-type-list/project-type-list.component";
 import { SectorListComponent } from './views/sector-list/sector-list.component';
 import { ProjectTypeEditComponent } from './views/project-type-edit/project-type-edit.component';
+import { SectorEditComponent } from './views/sector-edit/sector-edit.component';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -41,7 +46,8 @@ import { ProjectTypeEditComponent } from './views/project-type-edit/project-type
     OpportunityTypeEditComponent,
     ProjectTypeListComponent,
     SectorListComponent,
-    ProjectTypeEditComponent
+    ProjectTypeEditComponent,
+    SectorEditComponent
 
   ],
   imports: [
@@ -54,6 +60,10 @@ import { ProjectTypeEditComponent } from './views/project-type-edit/project-type
     DynamicDialogModule,
     TooltipModule,
     ToastModule,
+    CalendarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ProgressSpinnerModule
   ]
 })
 export class AdminModule { }
