@@ -88,7 +88,7 @@ export class OfferListComponent implements OnInit {
     const ref = this.dinamicDialogService.open(OfferEditComponent, {
       header: 'Nueva oferta',
       width: '70%',
-      height: '80%',
+      height: '750px',
       data: this.selectedOffer,
       closable: false,
     });
