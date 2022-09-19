@@ -32,4 +32,31 @@ export class SectorService {
     deleteSector(id: number): Observable<any> {
         return this.http.delete<any>(environment.server + "/sector/" + id);
     }
+
+    /**
+     * Guarda un sector nuevo o modifica
+     * uno ya existente.
+     * 
+     * @param sector Tecnología a guardar.
+     * @returns 
+     */
+    saveSector(sector: Sector):Observable<void> {
+        let url = environment.server + "/sector";
+
+        if (sector.startDate != null){
+
+            sector.startDate = new Date(Date.UTC(sector.startDate.getFullYear(),
+                                             sector.startDate.getMonth(),
+                                             sector.startDate.getDate()));
+        }
+
+        if (sector.endDate != null) {
+        
+            sector.endDate = new Date(Date.UTC(sector.endDate.getFullYear(),
+                                             sector.endDate.getMonth(),
+                                             sector.endDate.getDate()));
+        }
+
+        return this.http.put<void>(url, sector);
+    }
 }
