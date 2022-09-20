@@ -29,9 +29,8 @@ export class ChanceComponent implements OnInit {
   status: BaseClass[];
   selectedManagedBy;
   selectedRequestedBy;
-  selectedOfferings: BaseClass[];
-  selectedTechnologies: BaseClass[];
   isLoading: boolean = false;
+
   @Input() data: Offer;
   @Input() formValidator: FormGroup;
 
@@ -53,11 +52,6 @@ export class ChanceComponent implements OnInit {
       this.selectedManagedBy = this.mappingPerson(this.data.requestedBy);
       this.groupPerson.push(this.selectedManagedBy);
     }
-
-    this.selectedOfferings = this.data.offerings.map((item) => item.offering);
-    this.selectedTechnologies = this.data.technologies.map(
-      (item) => item.technology
-    );
   }
 
   allRequest() {
@@ -125,32 +119,6 @@ export class ChanceComponent implements OnInit {
     return {
       field: person.name + ' ' + person.lastname + ' - ' + person.username,
       value: person,
-    };
-  }
-
-  assignOffering() {
-    this.data.offerings = this.selectedOfferings.map((item) =>
-      this.createOfferingSelected(item)
-    );
-  }
-
-  createOfferingSelected(offering) {
-    return {
-      id: null,
-      offering: offering,
-    };
-  }
-
-  assignTechnologies() {
-    this.data.technologies = this.selectedTechnologies.map((item) =>
-      this.createTechnologiesSelected(item)
-    );
-  }
-
-  createTechnologiesSelected(technology: BaseClass) {
-    return {
-      id: null,
-      technology: technology,
     };
   }
 
