@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
 import { Offer } from 'src/app/offer/model/Offer';
 import { OfferDataProject } from 'src/app/offer/model/OfferDataProject';
@@ -40,7 +39,7 @@ export class PlanandproyectComponent implements OnInit {
     }
 
     this.selectedPersonList = this.mappingPerson(
-      this.data.teamPerson.map((item) => item.person)
+      this.data.teamPerson.map((item) => item)
     );
 
     this.getAllHyperscalers();
@@ -98,10 +97,7 @@ export class PlanandproyectComponent implements OnInit {
         (item) => item.value.id == this.selectedPerson.value.id
       )
     ) {
-      this.data.teamPerson.push({
-        id: null,
-        person: this.selectedPerson.value,
-      });
+      this.data.teamPerson.push(this.selectedPerson.value);
       this.selectedPersonList = [
         ...this.selectedPersonList,
         this.selectedPerson,
@@ -112,7 +108,7 @@ export class PlanandproyectComponent implements OnInit {
 
   onDeletePerson(person: Person) {
     this.data.teamPerson = this.data.teamPerson.filter(
-      (item) => item.person.id != person.id
+      (item) => item.id != person.id
     );
     this.selectedPersonList = this.selectedPersonList.filter(
       (item) => item.value.id != person.id

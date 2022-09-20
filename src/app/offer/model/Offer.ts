@@ -5,9 +5,6 @@ import { OfferDataFile } from './OfferDataFile';
 import { OfferDataProject } from './OfferDataProject';
 import { OfferDataTeam } from './OfferDataTeam';
 import { OfferDataTechnology } from './OfferDataTechnology';
-import { OfferOffering } from './OfferOffering';
-import { OfferTeamPerson } from './OfferTeamPerson';
-import { OfferTechnology } from './OfferTechnology';
 import { OfferTracing } from './OfferTracing';
 import { Person } from './Person';
 export class Offer {
@@ -30,9 +27,9 @@ export class Offer {
   dataProject: OfferDataProject = new OfferDataProject();
   dataTeam: OfferDataTeam = new OfferDataTeam();
   dataTechnology: OfferDataTechnology = new OfferDataTechnology();
-  offerings: OfferOffering[] = new Array();
-  teamPerson: OfferTeamPerson[] = new Array();
-  technologies: OfferTechnology[] = new Array();
+  offerings: BaseClass[] = new Array();
+  teamPerson: Person[] = new Array();
+  technologies: BaseClass[] = new Array();
   tracings: OfferTracing[] = new Array();
   changeStatus: OfferChangeStatus[] = new Array();
 
