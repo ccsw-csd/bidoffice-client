@@ -8,6 +8,7 @@ import { TracingEditComponent } from './tracing-edit/tracing-edit.component';
 import { v4 as uuidv4 } from 'uuid';
 import { ConfirmationService } from 'primeng/api';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-tracing',
@@ -21,32 +22,41 @@ export class TracingComponent implements OnInit {
   groupPerson: any[];
   clonedOfferTracing: OfferTracing;
   selectedPerson;
-  tracingEdit: OfferTracing[];
-  usernameCurrentPerson: string;
-
   @Input() data: Offer;
 
   constructor(
     private dinamicDialogService: DialogService,
     private offerService: OfferService,
-    public auth: AuthService
+    public auth: AuthService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
-    this.usernameCurrentPerson = this.auth.getUserInfo().username
-    this.data.tracings.forEach((item) => (item.uuid = uuidv4()));
   }
 
   createTracing() {
     const ref = this.dinamicDialogService.open(TracingEditComponent, {
       header: 'Crear siguimiento',
       width: '30%',
+      data: this.clonedOfferTracing,
       closable: false,
     });
 
     ref.onClose.subscribe((tracing: OfferTracing) => {
       if (tracing != null) {
-        this.data.tracings.push(tracing);
+        if(tracing.id != null){
+          this.data.tracings[
+            this.data.tracings.findIndex((item) => item.id == tracing.id)
+          ] = tracing;
+        }
+        else{
+          let index = this.data.tracings.findIndex((item) => item.uuid == tracing.uuid);
+          if(index != -1)
+            this.data.tracings[index] = tracing
+          else
+            this.data.tracings.push(tracing);
+        }
+        delete this.clonedOfferTracing;
       }
     });
   }
@@ -70,23 +80,33 @@ export class TracingComponent implements OnInit {
   }
 
   onRowEditInit(tracing: OfferTracing) {
-    this.isEditing = true;
-    this.selectedPerson = this.mappingPerson(tracing.person);
     this.clonedOfferTracing = { ...tracing };
-  }
-
-  onRowEditCancel(index: number) {
-    this.data.tracings[index] = this.clonedOfferTracing;
-    delete this.clonedOfferTracing;
-    this.isEditing = false;
+    this.createTracing();
   }
 
   transformPerson(person: Person) {
     return person.name + ' ' + person.lastname + ' - ' + person.username;
   }
  
-
   commentFromCurrentPerson(person: Person): boolean{
-    return this.usernameCurrentPerson == person.username;
+    return this.auth.getUserInfo().username == person.username;
+  }
+
+  onDeleteRow(tracing: OfferTracing) {
+    this.confirmationService.confirm({
+      header: 'Confirmación',
+      message: '¿Esta seguro que desea eliminar este registro?',
+      acceptLabel: 'Eliminar',
+      rejectLabel: 'Cancelar',
+      rejectButtonStyleClass: 'p-button-secondary',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      accept: () => {
+        if(tracing.uuid != null)
+          this.data.tracings = this.data.tracings.filter(item => item.uuid != tracing.uuid)
+      },
+      reject: () => {},
+    });
   }
 }

@@ -42,7 +42,6 @@ export class ChanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.allRequest();
-
     if (this.data.client != undefined) this.results.push(this.data.client);
 
     if (this.data.requestedBy != null) {
@@ -94,7 +93,6 @@ export class ChanceComponent implements OnInit {
             '¿La oferta requiere Go/NoGo?'
           );
         }
-
       }
     );
   }
@@ -122,18 +120,7 @@ export class ChanceComponent implements OnInit {
       });
     }
   }
-
-  checkValidation(control: string): boolean {
-    if (
-      this.formValidator.get(control).invalid &&
-      this.formValidator.get(control).touched
-    ) {
-      this.formValidator.controls[control].markAsDirty();
-      return true;
-    }
-    return false;
-  }
-
+  
   mappingPerson(person: Person): any {
     return {
       field: person.name + ' ' + person.lastname + ' - ' + person.username,

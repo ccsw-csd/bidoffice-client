@@ -28,38 +28,38 @@ export class DocumentationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.data.dataFiles.forEach((item) => (item.uuid = uuidv4()));
   }
 
   createFile() {
     const ref = this.dinamicDialogService.open(DocumentationEditComponent, {
       header: 'Crear documento',
       width: '30%',
+      data: this.clonedDataFile,
       closable: false,
     });
 
     ref.onClose.subscribe((dataFile: OfferDataFile) => {
-      if (dataFile != null) this.data.dataFiles.push(dataFile);
+      if (dataFile != null) {
+        if (dataFile.id != null) {
+          this.data.dataFiles[
+            this.data.dataFiles.findIndex((item) => item.id == dataFile.id)
+          ] = dataFile;
+          
+        } else{
+          let index = this.data.dataFiles.findIndex((item) => item.uuid == dataFile.uuid);
+          if(index != -1)
+            this.data.dataFiles[index] = dataFile
+          else
+            this.data.dataFiles.push(dataFile);
+        } 
+        delete this.clonedDataFile;
+      }
     });
   }
 
   onRowEditInit(dataFile: OfferDataFile) {
-    this.offerService.getAllFileTypes().subscribe({
-      next: (res: BaseClass[]) => {
-        this.fileTypes = res;
-      },
-      error: () => {},
-      complete: () => {
-        this.isEditing = true;
-        this.clonedDataFile = { ...dataFile };
-      },
-    });
-  }
-
-  onRowEditCancel(index: number) {
-    this.data.dataFiles[index] = this.clonedDataFile;
-    delete this.clonedDataFile;
-    this.isEditing = false;
+    this.clonedDataFile = { ...dataFile };
+    this.createFile();
   }
 
   onDeleteRow(dataFile: OfferDataFile) {
@@ -73,9 +73,14 @@ export class DocumentationComponent implements OnInit {
       acceptIcon: 'none',
       rejectIcon: 'none',
       accept: () => {
-        this.data.dataFiles = this.data.dataFiles.filter(
-          (item) => item.uuid != dataFile.uuid
-        );
+        if(dataFile.id != null)
+          this.data.dataFiles = this.data.dataFiles.filter(
+            (item) => item.id != dataFile.id
+          );
+        else
+          this.data.dataFiles = this.data.dataFiles.filter(
+            (item) => item.uuid != dataFile.uuid
+          );
       },
       reject: () => {},
     });

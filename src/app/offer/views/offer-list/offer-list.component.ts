@@ -88,7 +88,7 @@ export class OfferListComponent implements OnInit {
     const ref = this.dinamicDialogService.open(OfferEditComponent, {
       header: 'Nueva oferta',
       width: '70%',
-      height: '100%',
+      height: '750px',
       data: this.selectedOffer,
       closable: false,
     });
@@ -102,7 +102,8 @@ export class OfferListComponent implements OnInit {
     this.isloading = true;
     this.offerService.getOffer(offer.id).subscribe({
       next: (res: Offer) => {
-        this.selectedOffer = res;
+        this.selectedOffer = Object.assign(new Offer(), res);
+        this.selectedOffer.parseStringToDate();
       },
       error: () => {
         this.isloading = true;
