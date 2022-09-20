@@ -15,13 +15,13 @@
         scrollHeight="calc(100vh - 184px)"
         responsiveLayout="scroll">
             <ng-template pTemplate="groupheader" let-sector>
-                <tr pRowGroupHeader>
+                <tr pRowGroupHeader style="background: rgb(234, 234, 234);">
                     <td colspan="5">
                         <ng-container *ngIf="sector.active == true; else inactive">
-                            <span class="font-bold ml-2">Activo</span>
+                            <span class="font-bold ml-2">Sectores activos:</span>
                           </ng-container>
                           <ng-template #inactive>
-                            <span class="font-bold ml-2">Inactivo</span>
+                            <span class="font-bold ml-2">Sectores inactivos:</span>
                           </ng-template>
                     </td>
                 </tr>
