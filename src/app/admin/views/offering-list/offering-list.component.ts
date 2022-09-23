@@ -43,25 +43,27 @@ export class OfferingListComponent implements OnInit {
 
   saveOffering(offering?: Offering): void{
     let message: string
-      if(offering!=null){
-        this.ref = this.dialogService.open(OfferingEditComponent, {
-          header: 'Editar '+ offering.name,
-          width: '40%',
-          data: {
-            offering: offering
-          },
-          closable: false
-        }); 
-      }
-      else{
-        this.ref = this.dialogService.open(OfferingEditComponent, {
-          header: 'Nuevo elemento',
-          width: '40%',
-          data: {
-          },
-          closable: false
-        });     
+    let headerChoice;
+    let dataChoice;
+
+    if (offering != null) {
+        headerChoice = 'Editar ' + offering.name;
+        dataChoice = offering;
     }
+    else {
+        headerChoice = 'Nuevo offering';
+        dataChoice = new Offering();
+    }
+    
+    this.ref = this.dialogService.open(OfferingEditComponent, {
+        header: headerChoice,
+        width: '40%',
+        data: {
+            offering: dataChoice,
+        },
+        closable: false
+    }); 
+    
     this.onClose(message)
   }
 
@@ -103,8 +105,8 @@ export class OfferingListComponent implements OnInit {
   onClose(message?: string): void{
     let opt: number
     this.ref.onClose.subscribe( 
-      (results) => {
-        this.getAll()   
+      (results: boolean) => {
+        if (results) this.getAll();
     });
   }
 }

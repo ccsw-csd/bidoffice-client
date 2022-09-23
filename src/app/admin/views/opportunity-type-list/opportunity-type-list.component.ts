@@ -74,34 +74,35 @@ export class OpportunityTypeListComponent implements OnInit {
   }
 
   editItem(item?: OpportunityType){
-    if(item!=null){
-      this.ref = this.dialogService.open(OpportunityTypeEditComponent,{
-        header: 'Editar '+ item.name,
-          width: '40%',
-          data: {
-            opportunityData: item
-          },
-          closable: false
-      });
-     
+
+    let headerChoice;
+    let dataChoice;
+
+    if (item != null) {
+        headerChoice = 'Editar ' + item.name;
+        dataChoice = item
     }
-    else{
-      this.ref = this.dialogService.open(OpportunityTypeEditComponent,{
-        header: 'Nuevo elemento',
-          width: '40%',
-          data: {
-          },
-          closable: false
-      });
-    } 
+    else {
+        headerChoice = 'Nuevo tipo de oportunidad';
+        dataChoice = new OpportunityType();
+    }
+
+    this.ref = this.dialogService.open(OpportunityTypeEditComponent,{
+    header: headerChoice,
+        width: '40%',
+        data: {
+            opportunityData: dataChoice
+        },
+        closable: false
+    });
+     
     this.onClose()
   }
 
   onClose(): void{
     this.ref.onClose.subscribe( 
-      (results:any) => {
-        this.findAll()  
+      (results:boolean) => {
+        if (results) this.findAll();
     });
   }
-
 }
