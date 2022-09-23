@@ -78,27 +78,34 @@ export class ProjectTypeListComponent implements OnInit {
         });
     }
 
+    /**
+     * Guarda los datos de un nuevo ProjectType o
+     * modifica los de un ProjectType existente.
+     * @param item 
+     */
     editItem(item?: ProjectType){
 
-        if(item!=null){
-            this.ref = this.dialogService.open(ProjectTypeEditComponent, {
-            header: 'Editar ' + item.name,
+        let headerChoice;
+        let dataChoice;
+
+        if (item != null) {
+            headerChoice = 'Editar ' + item.name;
+            dataChoice = item;
+        }
+        else {
+            headerChoice = 'Nuevo tipo de proyecto';
+            dataChoice = new ProjectType();
+        }
+
+        this.ref = this.dialogService.open(ProjectTypeEditComponent, {
+            header: headerChoice,
             width: '40%',
             data: {
-                projectTypeData:item
+                projectTypeData: dataChoice,
             },
             closable: false
-            });
-        }
-        else{
-            this.ref = this.dialogService.open(ProjectTypeEditComponent, {
-                header: 'Nuevo elemento',
-                width: '40%',
-                data:{},
-                closable: false
-            });
-        }
-        
+        });
+
         this.onClose();
     }
 
