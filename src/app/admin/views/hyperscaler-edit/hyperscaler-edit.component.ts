@@ -30,7 +30,7 @@ export class HyperscalerEditComponent implements OnInit {
       this.hyperscalerService.saveHyperscaler(element).subscribe({
         next: () => { 
           this.snackbarService.showMessage('El registro se ha guardado con éxito')
-          this.close()  
+          this.close(true);  
         },
         error: () => {
           this.snackbarService.error('El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar'); 
@@ -38,9 +38,9 @@ export class HyperscalerEditComponent implements OnInit {
       })  
   }
 
-  close() {
+  close(result:boolean) {
     if(this.ref) {
-        this.ref.close();
+        this.ref.close(result);
     }
   }
 

@@ -34,7 +34,7 @@ export class OfferingEditComponent implements OnInit {
     this.offeringService.saveOffering(offering).subscribe({
       next: (res: Offering)=> {
         this.snackbar.showMessage('El registro se ha guardado con éxito')
-        this.ref.close()
+        this.ref.close(true);
         this.offering = res;
       }, 
       error: ()=>{
@@ -43,7 +43,7 @@ export class OfferingEditComponent implements OnInit {
     });
   }  
 
-  onClose() {
-    this.ref.close();
+  onClose(result: boolean) {
+    this.ref.close(result);
   }
 }

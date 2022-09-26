@@ -2,7 +2,7 @@
 <p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
     <ng-template pTemplate="footer">
         <button type="button" pButton label="Cerrar" class="p-button-secondary" (click)="closeDialog()"></button>
-        <button type="button" pButton label="Borrar" class="p-button-primary" (click)="changeFlagForDelete()"></button>
+        <button type="button" pButton label="Borrar" class="p-button-primary" (click)="confirmDeletion()"></button>
     </ng-template>
 </p-confirmDialog>
 <p-table [value]="technologies" [scrollable]="true" [loading]="isLoading"  scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">

@@ -6,100 +6,122 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from "primeng/dy
 import { ProjectTypeEditComponent } from "../project-type-edit/project-type-edit.component";
 
 @Component({
-  selector: 'app-project-type-list',
-  templateUrl: './project-type-list.component.html',
-  styleUrls: ['./project-type-list.component.scss'],
-  providers: [DialogService, DynamicDialogRef, DynamicDialogConfig]
+    selector: 'app-project-type-list',
+    templateUrl: './project-type-list.component.html',
+    styleUrls: ['./project-type-list.component.scss'],
+    providers: [DialogService, DynamicDialogRef, DynamicDialogConfig]
 })
+
 export class ProjectTypeListComponent implements OnInit {
 
-  listoOfData: ProjectType[];
-  isLoading: boolean = false;
-  item: ProjectType;
-  isDeleted: boolean = false;
+    listoOfData: ProjectType[];
+    isLoading: boolean = false;
+    item: ProjectType;
 
-  constructor(
-    private projectTypeService: ProjectTypeService,
-    private ref: DynamicDialogRef,
-    private dialogService: DialogService,
-    private snackbarService: SnackbarService,
-  ) { }
+    constructor(
+        private projectTypeService: ProjectTypeService,
+        private ref: DynamicDialogRef,
+        private dialogService: DialogService,
+        private snackbarService: SnackbarService,
+    ) { }
 
-  ngOnInit(): void {
-    this.findAll();
-  }
-
-  findAll(){
-    this.isLoading = true;
-    this.projectTypeService.findAll().subscribe({
-      next: (results) => {
-        this.listoOfData = results;
-      },
-      error: ()=>{},
-      complete: () => { this.isLoading = false; }
-      });
-  }
-
-  showDialog(element?: ProjectType){
-    this.item=element
-    this.snackbarService.showConfirmDialog()
-  }
-
-  changeFlagForDelete(){
-    this.isDeleted = true
-    this.delete(this.item)
-  }
-
-  closeDialog(){
-    this.snackbarService.closeConfirmDialog()
-    if(this.isDeleted==false){
-      this.findAll()
-    }
-  }
-  delete(element: ProjectType){
-    this.projectTypeService.delete(element.id).subscribe({
-      next: () => {
-        this.snackbarService.showMessage('El registro se ha borrado con éxito')
-      },
-      error:() => {
-        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-        this.closeDialog()
-      },
-      complete: () => {
-        this.isDeleted = false
-        this.closeDialog()
-      }
-    });
-  }
-
-  editItem(item?: ProjectType){
-    if(item!=null){
-      this.ref = this.dialogService.open(ProjectTypeEditComponent, {
-        header: 'Editar ' + item.name,
-        width: '40%',
-        data: {
-          projectTypeData:item
-        },
-        closable: false
-      });
-    }
-    else{
-      this.ref = this.dialogService.open(ProjectTypeEditComponent, {
-        header: 'Nuevo elemento',
-        width: '40%',
-        data:{},
-        closable: false
-      });
-    }
-    this.onClose();
-  }
-
-  onClose(): void{
-    this.ref.onClose.subscribe(
-      (results:any) => {
+    ngOnInit(): void {
         this.findAll();
-      }
-    )
-  }
+    }
+
+    findAll(){
+        this.isLoading = true;
+
+        this.projectTypeService.findAll().subscribe({
+            next: (results) => {
+                this.listoOfData = results;
+            },
+            error: ()=>{},
+                complete: () => { this.isLoading = false; }
+        });
+    }
+
+    showDialog(element?: ProjectType){
+        this.item=element
+        this.snackbarService.showConfirmDialog()
+    }
+
+    /**
+     * Cierra el cuadro de confirmación sin realizar
+     * ninguna acción.
+     */
+    closeDialog() {
+        this.snackbarService.closeConfirmDialog();
+    }
+
+    /**
+     * Cierra el cuadro de confirmación, intentando
+     * borrar posteriormente el sector implicado.
+     */
+    confirmDeletion() {
+        this.snackbarService.closeConfirmDialog();
+        this.delete(this.item);  
+    }
+
+    delete(element: ProjectType){
+        this.projectTypeService.delete(element.id).subscribe({
+            next: () => {
+                this.snackbarService.showMessage('El registro se ha borrado con éxito')
+            },
+            error:() => {
+                this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+                this.closeDialog()
+            },
+            complete: () => {
+                this.findAll();
+            }
+        });
+    }
+
+    /**
+     * Guarda los datos de un nuevo ProjectType o
+     * modifica los de un ProjectType existente.
+     * @param item 
+     */
+    editItem(item?: ProjectType){
+
+        let headerChoice;
+        let dataChoice;
+
+        if (item != null) {
+            headerChoice = 'Editar ' + item.name;
+            dataChoice = item;
+        }
+        else {
+            headerChoice = 'Nuevo tipo de proyecto';
+            dataChoice = new ProjectType();
+        }
+
+        this.ref = this.dialogService.open(ProjectTypeEditComponent, {
+            header: headerChoice,
+            width: '40%',
+            data: {
+                projectTypeData: dataChoice,
+            },
+            closable: false
+        });
+
+        this.onClose();
+    }
+
+    /**
+     * onClose se activa cuando se cierra el cuadro de diálogo
+     * de edición. Recoge como respuesta si se ha actualizado/
+     * creado un nuevo registro. En caso afirmativo, actualiza
+     * la tabla.
+     */
+    onClose(): void{
+
+        this.ref.onClose.subscribe(
+            (results: boolean) => {
+                if (results) { this.findAll(); }
+            }
+        );
+    }
 
 }

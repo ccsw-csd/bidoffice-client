@@ -3,7 +3,8 @@
     <span>Añade un comentario del motivo:</span>
     <div class="ui-fluid formgrid grid justify-content-center mt-3">
       <span class="p-float-label p-fluid field col-12 md:col-6">
-        <input [(ngModel)]="tracing.comment" pInputText formControlName="comment" />
+        <textarea pInputTextarea [(ngModel)]="tracing.comment" formControlName="comment" [rows]="6"
+        [ngStyle]="{'resize': 'none'}"></textarea>
         <label>Comentario</label>
       </span>
     </div>

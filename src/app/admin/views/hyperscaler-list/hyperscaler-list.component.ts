@@ -7,110 +7,110 @@ import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { HyperscalerEditComponent } from '../hyperscaler-edit/hyperscaler-edit.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
-
-
 @Component({
-  selector: 'app-hyperscaler',
-  templateUrl: './hyperscaler-list.component.html',
-  styleUrls: ['./hyperscaler-list.component.scss'],
-  providers: [DialogService,DynamicDialogRef,DynamicDialogConfig]
+    selector: 'app-hyperscaler',
+    templateUrl: './hyperscaler-list.component.html',
+    styleUrls: ['./hyperscaler-list.component.scss'],
+    providers: [DialogService,DynamicDialogRef,DynamicDialogConfig]
 })
+
 export class HyperscalerListComponent implements OnInit {
-  public listOfData: Hyperscaler[]
-  public cols: any[];
-  public isLoading: boolean = false
-  public isDeleted: boolean = false
-  public item: Hyperscaler
-
+    public listOfData: Hyperscaler[]
+    public cols: any[];
+    public isLoading: boolean = false
+    public item: Hyperscaler
   
-  constructor(private hyperscalerService: HyperscalerService, 
-    private dialogService: DialogService,
-    private ref: DynamicDialogRef, 
-    private snackbarService: SnackbarService,
-    ) { }
+    constructor(private hyperscalerService: HyperscalerService, 
+        private dialogService: DialogService,
+        private ref: DynamicDialogRef, 
+        private snackbarService: SnackbarService,
+        ) { }
 
-  ngOnInit(): void {
-    this.getDataHyperscaler()  
-  }
+    ngOnInit(): void {
+        this.getDataHyperscaler()  
+    }
 
-  getDataHyperscaler(): void{
-    this.isLoading = true
-    this.hyperscalerService.getDataHyperscaler().subscribe({
-      next: (results:any) => { 
-        this.listOfData = results     
-      },
-      error: () => {
-      },
-      complete: () =>{
-        this.isLoading = false
-      }
-    });
-  }
+    getDataHyperscaler(): void{
+        this.isLoading = true
+        this.hyperscalerService.getDataHyperscaler().subscribe({
+            next: (results:any) => { 
+                this.listOfData = results     
+            },
+            error: () => {
+            },
+            complete: () =>{
+                this.isLoading = false
+            }
+        });
+    }
 
-  editHyperscaler(element?: Hyperscaler): void{
-      if(element!=null){
+    editHyperscaler(element?: Hyperscaler): void{
+
+        let headerChoice;
+        let dataChoice;
+
+        if (element != null) {
+            headerChoice = 'Editar ' + element.name;
+            dataChoice = element;
+        }
+        else {
+            headerChoice = 'Nuevo hyperscaler';
+            dataChoice = new Hyperscaler();
+        }
+
         this.ref = this.dialogService.open(HyperscalerEditComponent, {
-          header: 'Editar '+element.name,
-          width: '40%',
-          data: {
-            hyperscalerData: element
-          },
-          closable: false
+            header: headerChoice,
+            width: '40%',
+            data: {
+                hyperscalerData: dataChoice
+            },
+            closable: false
         }); 
-      }
-      else{
-        this.ref = this.dialogService.open(HyperscalerEditComponent, {
-          header: 'Nuevo elemento',
-          width: '40%',
-          data: {
-          },
-          closable: false
-        });     
+
+        this.onClose()
     }
-    this.onClose()
-  }
 
-  onClose(): void{
-    this.ref.onClose.subscribe( 
-      (results:any) => {
-        this.getDataHyperscaler()   
-    });
-  }
-
-  showDialog(element?: Hyperscaler){   
-    this.item=element 
-    this.snackbarService.showConfirmDialog()
-  }
-
-  changeFlagForDelete(){
-    this.isDeleted = true
-    this.deleteRow(this.item)
-  }
-
-  closeDialog(){
-    this.snackbarService.closeConfirmDialog()
-    if(this.isDeleted==false){
-      this.getDataHyperscaler()
+    onClose(): void{
+        this.ref.onClose.subscribe( 
+        (results:boolean) => {
+            if (results) this.getDataHyperscaler();
+        });
     }
-  }
 
-  deleteRow(element?: Hyperscaler): void{
-    if(this.isDeleted == true){
+    showDialog(element?: Hyperscaler){   
+        this.item=element 
+        this.snackbarService.showConfirmDialog()
+    }
+
+    /**
+     * Cierra el cuadro de confirmación sin realizar
+     * ninguna acción.
+     */
+    closeDialog() {
+        this.snackbarService.closeConfirmDialog();
+    }
+
+    /**
+     * Cierra el cuadro de confirmación, intentando
+     * borrar posteriormente el sector implicado.
+     */
+    confirmDeletion() {
+        this.snackbarService.closeConfirmDialog();
+        this.deleteRow(this.item);  
+    }
+
+    deleteRow(element?: Hyperscaler): void{
         this.hyperscalerService.deleteHyperscaler(element.id).subscribe({
-          next:() => {
-            this.snackbarService.showMessage('El registro se ha borrado con éxito')
-          },
-          error:() => {
-            this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-            this.closeDialog()
-          },
-          complete:()  =>{  
-            this.isDeleted = false
-            this.closeDialog()
-          }
+            next:() => {
+                this.snackbarService.showMessage('El registro se ha borrado con éxito')
+            },
+            error:() => {
+                this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+                this.closeDialog()
+            },
+            complete:()  =>{  
+                this.getDataHyperscaler();
+            }
         })     
     }
-  }
 }
-
-

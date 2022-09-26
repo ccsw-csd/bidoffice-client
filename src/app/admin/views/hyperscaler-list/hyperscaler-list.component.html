@@ -2,7 +2,7 @@
 <p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
     <p-footer>
         <button type="button" pButton label="Cerrar" class="p-button-secondary" (click)="closeDialog()"></button>
-        <button type="button" pButton label="Borrar" class="p-button-primary" (click)="changeFlagForDelete()"></button>
+        <button type="button" pButton label="Borrar" class="p-button-primary" (click)="confirmDeletion()"></button>
     </p-footer>
 </p-confirmDialog>
 <p-table [value]="listOfData" [scrollable]="true" [loading]="isLoading" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
@@ -33,9 +33,3 @@
 <div  class="mt-3 flex justify-content-end">
     <button pButton type="button" class="p-3" (click)="editHyperscaler()" label="Nuevo Hyperscaler"></button>  
 </div>
-
-
-
-
-
-

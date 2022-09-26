@@ -33,7 +33,7 @@ export class MethodologyEditComponent implements OnInit {
       this.methodologyService.saveMethodology(item).subscribe({
         next: () => { 
           this.snackbarService.showMessage('El registro se ha guardado con éxito')
-          this.onClose();
+          this.onClose(true);
         },
         error: () => { 
           this.snackbarService.error('El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar');
@@ -42,8 +42,8 @@ export class MethodologyEditComponent implements OnInit {
     }
   }
 
-  onClose() {
-    this.ref.close();
+  onClose(result: boolean) {
+    this.ref.close(result);
   }
 
 }

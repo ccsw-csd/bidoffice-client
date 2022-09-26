@@ -17,6 +17,6 @@
         <button type="button" class=" p-button-primary w-6rem" [disabled]="offering.name==null || offering.priority==null || offering.priority < 1" (click)="onSave(offering)" pButton label="Guardar"></button>
     </div>
     <div class="px-2">
-        <button type="button" class="p-button-secondary w-6rem" (click)="onClose()" pButton label="Cerrar"></button>
+        <button type="button" class="p-button-secondary w-6rem" (click)="onClose(false)" pButton label="Cerrar"></button>
     </div>   
 </div>

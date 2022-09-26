@@ -8,100 +8,106 @@ import { OpportunityTypeEditComponent } from '../opportunity-type-edit/opportuni
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
-  selector: 'app-opportunity-type-list',
-  templateUrl: './opportunity-type-list.component.html',
-  styleUrls: ['./opportunity-type-list.component.scss'],
-  providers: [DialogService,DynamicDialogRef,DynamicDialogConfig]
+    selector: 'app-opportunity-type-list',
+    templateUrl: './opportunity-type-list.component.html',
+    styleUrls: ['./opportunity-type-list.component.scss'],
+    providers: [DialogService,DynamicDialogRef,DynamicDialogConfig]
 })
+
 export class OpportunityTypeListComponent implements OnInit {
-  opportunityList: OpportunityType[]
-  isLoading: boolean = false
-  item: OpportunityType;
-  isDeleted: boolean;
-  constructor(private opportunityService: OpportunityTypeService,
-    private ref: DynamicDialogRef,
-    private dialogService: DialogService,
-    private snackbarService: SnackbarService,
+    opportunityList: OpportunityType[]
+    isLoading: boolean = false
+    item: OpportunityType;
+
+    constructor(private opportunityService: OpportunityTypeService,
+        private ref: DynamicDialogRef,
+        private dialogService: DialogService,
+        private snackbarService: SnackbarService,
     ) { }
 
-  ngOnInit(): void {
-    this.findAll()
-  }
+    ngOnInit(): void {
+        this.findAll()
+    }
 
-  findAll(){
-    this.isLoading = true
-    this.opportunityService.findAll().subscribe({
-      next: (results) =>{
-        this.opportunityList = results
-      },
-      error: () =>{},
-      complete: () => { this.isLoading = false}
-    })    
-    
-  }
+    findAll(){
+        this.isLoading = true
+        this.opportunityService.findAll().subscribe({
+        next: (results) =>{
+            this.opportunityList = results
+        },
+        error: () =>{},
+        complete: () => { this.isLoading = false}
+        })    
+        
+    }
 
   showDialog(element?: OpportunityType){   
     this.item=element 
     this.snackbarService.showConfirmDialog()
   }
 
-  changeFlagForDelete(){
-    this.isDeleted = true
-    this.deleteRow(this.item)
-  }
-
-  closeDialog(){
-    this.snackbarService.closeConfirmDialog()
-    if(this.isDeleted==false){
-      this.findAll()
+     /**
+     * Cierra el cuadro de confirmación sin realizar
+     * ninguna acción.
+     */
+    closeDialog() {
+        this.snackbarService.closeConfirmDialog();
     }
-  }
 
-  deleteRow(item: OpportunityType){
-    this.opportunityService.delete(item.id).subscribe({
-      next: (results) =>{
-        this.snackbarService.showMessage('El registro se ha borrado con éxito')
-      },
-      error: () => {
-        this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');  
-        this.closeDialog()    
-      },
-      complete: () =>{
-        this.isDeleted = false
-        this.closeDialog()
-      }
-    });
-  }
+    /**
+     * Cierra el cuadro de confirmación, intentando
+     * borrar posteriormente el sector implicado.
+     */
+    confirmDeletion() {
+        this.snackbarService.closeConfirmDialog();
+        this.deleteRow(this.item);  
+    }
+
+    deleteRow(item: OpportunityType){
+        this.opportunityService.delete(item.id).subscribe({
+            next: (results) =>{
+                this.snackbarService.showMessage('El registro se ha borrado con éxito')
+            },
+            error: () => {
+                this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');  
+                this.closeDialog()    
+            },
+            complete: () =>{
+                this.findAll();
+            }
+        });
+    }
 
   editItem(item?: OpportunityType){
-    if(item!=null){
-      this.ref = this.dialogService.open(OpportunityTypeEditComponent,{
-        header: 'Editar '+ item.name,
-          width: '40%',
-          data: {
-            opportunityData: item
-          },
-          closable: false
-      });
-     
+
+    let headerChoice;
+    let dataChoice;
+
+    if (item != null) {
+        headerChoice = 'Editar ' + item.name;
+        dataChoice = item
     }
-    else{
-      this.ref = this.dialogService.open(OpportunityTypeEditComponent,{
-        header: 'Nuevo elemento',
-          width: '40%',
-          data: {
-          },
-          closable: false
-      });
-    } 
+    else {
+        headerChoice = 'Nuevo tipo de oportunidad';
+        dataChoice = new OpportunityType();
+    }
+
+    this.ref = this.dialogService.open(OpportunityTypeEditComponent,{
+    header: headerChoice,
+        width: '40%',
+        data: {
+            opportunityData: dataChoice
+        },
+        closable: false
+    });
+     
     this.onClose()
   }
 
   onClose(): void{
     this.ref.onClose.subscribe( 
-      (results:any) => {
-        this.findAll()  
+      (results:boolean) => {
+        if (results) this.findAll();
     });
   }
-
 }
