@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
 import { Offer } from 'src/app/offer/model/Offer';
+import { OfferItemList } from 'src/app/offer/model/OfferItemList';
 import { OfferTracing } from 'src/app/offer/model/OfferTracing';
 
 @Component({
@@ -19,7 +20,7 @@ export class OptionStatusComponent implements OnInit {
   winOpion: string[] = ['Ganada', 'Perdida'];
 
   @Input() form: FormGroup;
-  @Input() offer: Offer;
+  @Input() offer: OfferItemList;
   @Input() selectedOptionStatus: BaseClass;
   @Input() tracing: OfferTracing;
   @Input() dateGoNoGo: Date;
@@ -29,7 +30,6 @@ export class OptionStatusComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.offer = new Offer();
     this.selectedOptionStatus = new BaseClass();
   }
 
@@ -58,7 +58,9 @@ export class OptionStatusComponent implements OnInit {
     if (this.offer.opportunityStatus.name == this.labelInDelivered) {
       return false;
     }
+    
     this.disabledValidation(formControlName);
+    
     return true;
   }
 
