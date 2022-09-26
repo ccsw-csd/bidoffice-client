@@ -39,7 +39,7 @@ export class TechnologyEditComponent implements OnInit {
         this.technologyService.saveTechnology(technology).subscribe({
             next: () => {
                 this.snackbarService.showMessage('El registro se ha guardado con éxito')
-                this.close();
+                this.close(true);
             },
             error: () => {
                 this.snackbarService.error('El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar');
@@ -50,9 +50,9 @@ export class TechnologyEditComponent implements OnInit {
     /**
      * Cierra el cuadro de diálogo.
      */
-    close() {
+    close(result: boolean) {
         if (this.ref) {
-            this.ref.close();
+            this.ref.close(result);
         }
     }
 }

@@ -39,28 +39,30 @@ export class TechnologyListComponent implements OnInit {
      */
     editTechnology(technology?: Technology): void {
 
+        let headerChoice;
+        let dataChoice;
+
         if (technology != null) {
-            this.ref = this.dialogService.open(TechnologyEditComponent, {
-                header: 'Editar ' + technology.name,
-                width: '40%',
-                data: {
-                    technologyData: technology
-                },
-                closable: false
-            });
+            headerChoice = 'Editar ' + technology.name;
+            dataChoice = technology;
         }
         else {
-            this.ref = this.dialogService.open(TechnologyEditComponent, {
-                header: 'Nuevo elemento',
-                width: '40%',
-                data: {},
-                closable: false
-            });
+            headerChoice = 'Nuevo tipo de proyecto';
+            dataChoice = new Technology();
         }
+
+        this.ref = this.dialogService.open(TechnologyEditComponent, {
+            header: headerChoice,
+            width: '40%',
+            data: {
+                technologyData: dataChoice
+            },
+            closable: false
+        });
         
         this.ref.onClose.subscribe (
             (results: boolean) => {
-                this.findAll();
+                if (results) this.findAll();
             }
         );
     }
@@ -87,17 +89,21 @@ export class TechnologyListComponent implements OnInit {
         this.snackbarService.showConfirmDialog()
     }
     
-    changeFlagForDelete(){
-        this.isDeleted = true
-        this.deleteTechnology(this.item)
+    /**
+     * Cierra el cuadro de confirmación sin realizar
+     * ninguna acción.
+     */
+     closeDialog() {
+        this.snackbarService.closeConfirmDialog();
     }
-    
-    
-    closeDialog(){
-        this.snackbarService.closeConfirmDialog()
-        if(this.isDeleted==false){
-          this.findAll()
-        }
+
+    /**
+     * Cierra el cuadro de confirmación, intentando
+     * borrar posteriormente el sector implicado.
+     */
+    confirmDeletion() {
+        this.snackbarService.closeConfirmDialog();
+        this.deleteTechnology(this.item);  
     }
 
     /**
@@ -107,7 +113,6 @@ export class TechnologyListComponent implements OnInit {
      */
 
     deleteTechnology(item: Technology) {
-        if(this.isDeleted){
             this.technologyService.deleteTechnology(item.id).subscribe({
                 next: () => {
                     this.snackbarService.showMessage('El registro se ha borrado con éxito')    
@@ -117,10 +122,8 @@ export class TechnologyListComponent implements OnInit {
                     this.closeDialog()
                 },
                 complete:() =>{
-                    this.isDeleted = false
-                    this.closeDialog()
+                    this.findAll();
                 }
             });
-        }
     }
 }
