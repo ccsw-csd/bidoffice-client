@@ -19,7 +19,6 @@ export class TechnologyListComponent implements OnInit {
 
     technologies: Technology[];
     public isLoading: boolean = false;
-    isDeleted: boolean = false;
     item: Technology;
 
     constructor(
@@ -109,21 +108,21 @@ export class TechnologyListComponent implements OnInit {
     /**
      * Borra una tecnología de la base de datos.
      * 
-     * @param technology Tecnología a borrar.
+     * @param item Tecnología a borrar.
      */
 
     deleteTechnology(item: Technology) {
-            this.technologyService.deleteTechnology(item.id).subscribe({
-                next: () => {
-                    this.snackbarService.showMessage('El registro se ha borrado con éxito')    
-                },
-                error:() => {
-                    this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-                    this.closeDialog()
-                },
-                complete:() =>{
-                    this.findAll();
-                }
-            });
+        this.technologyService.deleteTechnology(item.id).subscribe({
+            next: () => {
+                this.snackbarService.showMessage('El registro se ha borrado con éxito')    
+            },
+            error:() => {
+                this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+                this.closeDialog()
+            },
+            complete:() =>{
+                this.findAll();
+            }
+        });
     }
 }

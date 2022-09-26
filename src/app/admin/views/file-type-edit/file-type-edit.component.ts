@@ -36,7 +36,7 @@ export class FileTypeEditComponent implements OnInit {
       this.fileTypeService.saveFileType(fileType).subscribe({
         next: ()=> {
           this.snackbarService.showMessage('El registro se ha guardado con éxito')
-          this.ref.close();
+          this.ref.close(true);
         }, 
         error: ()=>{
           this.snackbarService.error('El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar');
@@ -44,8 +44,8 @@ export class FileTypeEditComponent implements OnInit {
       })
   }
   
-  onClose() {
-    this.ref.close();
+  onClose(result: boolean) {
+    this.ref.close(result);
   }
   
 }

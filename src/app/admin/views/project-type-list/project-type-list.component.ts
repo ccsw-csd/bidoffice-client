@@ -6,23 +6,23 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from "primeng/dy
 import { ProjectTypeEditComponent } from "../project-type-edit/project-type-edit.component";
 
 @Component({
-  selector: 'app-project-type-list',
-  templateUrl: './project-type-list.component.html',
-  styleUrls: ['./project-type-list.component.scss'],
-  providers: [DialogService, DynamicDialogRef, DynamicDialogConfig]
+    selector: 'app-project-type-list',
+    templateUrl: './project-type-list.component.html',
+    styleUrls: ['./project-type-list.component.scss'],
+    providers: [DialogService, DynamicDialogRef, DynamicDialogConfig]
 })
+
 export class ProjectTypeListComponent implements OnInit {
 
     listoOfData: ProjectType[];
     isLoading: boolean = false;
     item: ProjectType;
-    isDeleted: boolean = false;
 
     constructor(
-    private projectTypeService: ProjectTypeService,
-    private ref: DynamicDialogRef,
-    private dialogService: DialogService,
-    private snackbarService: SnackbarService,
+        private projectTypeService: ProjectTypeService,
+        private ref: DynamicDialogRef,
+        private dialogService: DialogService,
+        private snackbarService: SnackbarService,
     ) { }
 
     ngOnInit(): void {

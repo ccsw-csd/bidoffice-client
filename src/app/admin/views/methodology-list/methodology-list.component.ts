@@ -6,51 +6,52 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
-  selector: 'app-methodology-list',
-  templateUrl: './methodology-list.component.html',
-  styleUrls: ['./methodology-list.component.scss'],
+    selector: 'app-methodology-list',
+    templateUrl: './methodology-list.component.html',
+    styleUrls: ['./methodology-list.component.scss'],
 })
+
 export class MethodologyListComponent implements OnInit {
 
-  methodologyItemList: Methodology[];
-  display: Boolean = false;
-  isLoading: boolean = false;
-  isDeleted: boolean = false;
-  item: Methodology
+    methodologyItemList: Methodology[];
+    display: Boolean = false;
+    isLoading: boolean = false;
+    item: Methodology
 
-  constructor(
-    private methodologyService: MethodologyService,
-    private dynamicDialogService: DialogService,
-    private snackbarService: SnackbarService) { }
+    constructor(
+        private methodologyService: MethodologyService,
+        private dynamicDialogService: DialogService,
+        private snackbarService: SnackbarService
+    ) { }
 
-  ngOnInit(): void {
-    this.findAll();
-  }
+    ngOnInit(): void {
+        this.findAll();
+    }
 
-  findAll() {
-    this.isLoading = true;
-    this.methodologyService.findAll().subscribe({
-        next: (res: Methodology[]) => { 
-          this.methodologyItemList = res;
-        },
-        error: () => {},
-        complete: () => {
-          this.isLoading = false;
-        }
-    });
-  }
+    findAll() {
+        this.isLoading = true;
+        this.methodologyService.findAll().subscribe({
+            next: (res: Methodology[]) => { 
+                this.methodologyItemList = res;
+            },
+            error: () => {},
+            complete: () => {
+                this.isLoading = false;
+            }
+        });
+    }
   
-  showEditDialog(methodologyItem: Methodology) {
-    const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
-      header: "Editar " + methodologyItem.name,
-      width: "40%",
-      data: {methodologyData: methodologyItem},
-      closable: false
-    });
+    showEditDialog(methodologyItem: Methodology) {
+        const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
+            header: "Editar " + methodologyItem.name,
+            width: "40%",
+            data: {methodologyData: methodologyItem},
+            closable: false
+        });
 
-    ref.onClose.subscribe( (result: boolean) => {
-      if (result) this.findAll();
-    });
+        ref.onClose.subscribe( (result: boolean) => {
+            if (result) this.findAll();
+        });
   }
 
     showCreateDialog() {

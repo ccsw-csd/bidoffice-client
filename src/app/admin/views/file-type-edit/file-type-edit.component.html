@@ -15,6 +15,6 @@
         <button type="button" [disabled]="fileType.name==null || fileType.name=='' || fileType.priority<1 || fileType.priority==null" pButton label="Guardar" class="w-6rem " (click)="onSave(fileType)"></button>
     </div>
     <div class="px-2">
-        <button type="button" pButton label="Cerrar" class="p-button-secondary w-6rem " (click)="onClose()"></button>
+        <button type="button" pButton label="Cerrar" class="p-button-secondary w-6rem " (click)="onClose(false)"></button>
     </div>
-</div> 
+</div>
