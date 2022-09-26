@@ -48,55 +48,57 @@ export class MethodologyListComponent implements OnInit {
       closable: false
     });
 
-    ref.onClose.subscribe( res => {
-      this.findAll();
+    ref.onClose.subscribe( (result: boolean) => {
+      if (result) this.findAll();
     });
   }
 
-  showCreateDialog() {
-    const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
-      header: "Nuevo elemento",
-      width: "40%",
-      closable: false
-    });
+    showCreateDialog() {
+        const ref = this.dynamicDialogService.open(MethodologyEditComponent, {
+            header: "Nuevo elemento",
+            width: "40%",
+            closable: false
+        });
 
-    ref.onClose.subscribe( res => {
-      this.findAll();
-    });
-  }
-
-  showDialog(element?: Methodology){   
-    this.item=element 
-    this.snackbarService.showConfirmDialog()
-  }
-
-  changeFlagForDelete(){
-    this.isDeleted = true
-    this.deleteItem(this.item)
-  }
-
-  close(){
-    this.snackbarService.closeConfirmDialog()
-    if(this.isDeleted==false){
-      this.findAll()
+        ref.onClose.subscribe( (result: boolean) => {
+            if (result) this.findAll();
+        });
     }
-  }
 
-  deleteItem(methodologyItem?: Methodology){
-    if(this.isDeleted){
-      this.methodologyService.delete(methodologyItem.id).subscribe({
-        next:() => {  
-          this.snackbarService.showMessage('El registro se ha borrado con éxito')
-        },
-        error:() => {
-          this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-          this.close()
-        },
-        complete: () => {   
-          this.isDeleted = false 
-          this.close()        
-        } 
-      }) 
+    showDialog(element?: Methodology){   
+        this.item=element 
+        this.snackbarService.showConfirmDialog()
     }
-  }
+
+    /**
+     * Cierra el cuadro de confirmación sin realizar
+     * ninguna acción.
+     */
+    closeDialog() {
+        this.snackbarService.closeConfirmDialog();
+    }
+
+    /**
+     * Cierra el cuadro de confirmación, intentando
+     * borrar posteriormente el sector implicado.
+     */
+    confirmDeletion() {
+        this.snackbarService.closeConfirmDialog();
+        this.deleteItem(this.item);  
+    }
+
+    deleteItem(methodologyItem?: Methodology){
+        this.methodologyService.delete(methodologyItem.id).subscribe({
+            next:() => {  
+                this.snackbarService.showMessage('El registro se ha borrado con éxito')
+            },
+            error:() => {
+                this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+                this.closeDialog()
+            },
+            complete: () => {   
+                this.findAll();
+            } 
+        }) 
+    }
 }

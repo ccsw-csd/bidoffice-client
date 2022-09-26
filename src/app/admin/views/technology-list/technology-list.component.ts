@@ -47,7 +47,7 @@ export class TechnologyListComponent implements OnInit {
             dataChoice = technology;
         }
         else {
-            headerChoice = 'Nuevo tipo de proyecto';
+            headerChoice = 'Nueva tecnología';
             dataChoice = new Technology();
         }
 
