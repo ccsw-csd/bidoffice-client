@@ -27,19 +27,11 @@
         <label>Código BDC</label>
       </span>
     </div>
-    <div class="p-fluid field col-12 md:col-2">
+    <div class="p-fluid field col-12 md:col-3">
       <span class="p-float-label">
         <p-dropdown [options]="offerTypes" [(ngModel)]="data.opportunityType" formControlName="opportunityType"
           optionLabel="name" appendTo="body" aria-describedby="opportunityType-help"></p-dropdown>
         <label>Tipo de Oferta</label>
-      </span>
-    </div>
-    <div class="col-12 md:col-1 mt-3">
-      <span class="p-fluid field-checkbox">
-        <p-checkbox [(ngModel)]="data.opportunityWin" [binary]="true" inputId="binary" formControlName="opportunityWin"
-          [disabled]="true">
-        </p-checkbox>
-        <label>Ganada</label>
       </span>
     </div>
   </div>

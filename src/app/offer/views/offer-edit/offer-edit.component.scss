@@ -1,4 +1,10 @@
 @import "./src/assets/scss/master";
+
+#offerWin {
+    align-items:flex-end;
+    font-size: larger;
+}
+
 .container{
     grid-area: footer;
 }
