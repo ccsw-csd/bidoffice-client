@@ -36,7 +36,7 @@ export class TracingComponent implements OnInit {
 
   createTracing() {
     const ref = this.dinamicDialogService.open(TracingEditComponent, {
-      header: 'Crear siguimiento',
+      header: 'Crear nuevo mensaje',
       width: '30%',
       data: this.clonedOfferTracing,
       closable: false,

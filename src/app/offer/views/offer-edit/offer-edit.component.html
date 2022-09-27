@@ -1,3 +1,13 @@
+<form>
+<div class="col-12 md:col-1 mt-3">
+    <span class="p-fluid field-checkbox">
+      <p-checkbox [(ngModel)]="offer.opportunityWin" [binary]="true" inputId="binary" formControlName="opportunityWin"
+        [disabled]="true">
+      </p-checkbox>
+      <label>Ganada</label>
+    </span>
+  </div>
+</form>
 <p-tabView [(activeIndex)]="activeItem">
   <p-tabPanel header="Oportunidad">
     <app-chance [data]="offer" [formValidator]="offerForm.get('chance')"></app-chance>
@@ -11,7 +21,7 @@
   <p-tabPanel header="Capítulos de interés">
     <app-interest [data]="offer"></app-interest>
   </p-tabPanel>
-  <p-tabPanel header="Seguimiento">
+  <p-tabPanel header="Mensajes">
     <app-tracing [data]="offer"></app-tracing>
   </p-tabPanel>
 </p-tabView>
