@@ -76,14 +76,20 @@ export class AuthService {
     let token = this.getSSOToken();
     if (token == null) return false;
   
-    let expired = this.jwtHelper.isTokenExpired(token);
-    if (expired) return false;
+    try {
 
-    let roles = this.getRoles();
-    if (roles == null || roles.length == 0) return false;
-
-
-    return true;
+      let expired = this.jwtHelper.isTokenExpired(token);
+      if (expired) return false;
+      
+      let roles = this.getRoles();
+      if (roles == null || roles.length == 0) return false;
+      
+      
+      return true;
+    }
+    catch {
+      return false;
+    }
   }
   
 
