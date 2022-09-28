@@ -30,6 +30,7 @@ import { StatusChangeComponent } from './views/offer-list/status-change/status-c
 import {SelectButtonModule} from 'primeng/selectbutton';
 import {ListboxModule} from 'primeng/listbox';
 import { OptionStatusComponent } from './views/offer-list/option-status/option-status.component';
+import { TradetrackComponent } from './views/offer-edit/views/tradetrack/tradetrack.component';
 @NgModule({
   declarations: [
     OfferListComponent,
@@ -43,6 +44,7 @@ import { OptionStatusComponent } from './views/offer-list/option-status/option-s
     TracingEditComponent,
     StatusChangeComponent,
     OptionStatusComponent,
+    TradetrackComponent,
   ],
   imports: [
     CommonModule,
