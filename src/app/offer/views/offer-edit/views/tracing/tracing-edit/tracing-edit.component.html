@@ -26,7 +26,7 @@
   <div class="p-fluid p-float-label field col-12 md:col-3">
     <button class="p-3 p-button-secondary" pButton label="Cancelar" styleClass="p-button-secondary" (click)="onCancel()"></button>
   </div>
-  <div class="p-fluid p-float-label field col-12 md:col-3">
+  <div *ngIf="availableEditing == true" class="p-fluid p-float-label field col-12 md:col-3">
     <button class="p-3" pButton label="Guardar" (click)="onSave()" [disabled]="tracingForm.invalid"></button>
   </div>
 </div>

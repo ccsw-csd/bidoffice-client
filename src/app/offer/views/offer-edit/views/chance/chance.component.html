@@ -6,14 +6,14 @@
 </p-confirmDialog>
 <form [formGroup]="formValidator">
   <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-5">
+    <div class="p-fluid field col-12 md:col-4">
       <span class="p-float-label">
         <input pInputText formControlName="nameOpportunity" [(ngModel)]="data.name"
           aria-describedby="nameOpportunity-help"/>
         <label>Nombre Oportunidad*</label>
       </span>
     </div>
-    <div class="p-fluid field col-12 md:col-2">
+    <div class="p-fluid field col-12 md:col-4">
       <span class="p-float-label">
         <p-autoComplete [suggestions]="results" [(ngModel)]="data.client" [forceSelection]="true"
           [showEmptyMessage]="true" [emptyMessage]="message" formControlName="client"
@@ -27,7 +27,7 @@
         <label>Código BDC</label>
       </span>
     </div>
-    <div class="p-fluid field col-12 md:col-3">
+    <div class="p-fluid field col-12 md:col-2">
       <span class="p-float-label">
         <p-dropdown [options]="offerTypes" [(ngModel)]="data.opportunityType" formControlName="opportunityType"
           optionLabel="name" appendTo="body" aria-describedby="opportunityType-help"></p-dropdown>

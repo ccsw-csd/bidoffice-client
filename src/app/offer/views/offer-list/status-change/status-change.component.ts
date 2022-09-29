@@ -172,6 +172,10 @@ export class StatusChangeComponent implements OnInit {
     this.modifyStatus.changeStatus = this.newChangeStatus;
   }
 
+  /**
+   * Esta función crea un nuevo comentario en el tab
+   * de "mensajes".
+   */
   private setTracing() {
     let message = "Cambio de estado a [" + 
     this.modifyStatus.opportunityStatus.name +

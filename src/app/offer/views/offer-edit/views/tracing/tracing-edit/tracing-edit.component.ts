@@ -21,6 +21,8 @@ export class TracingEditComponent implements OnInit {
   tracingForm: FormGroup;
   personCourrent: string = '';
   user: UserInfoDetailed;
+  availableEditing: boolean = true;
+
   constructor(
     private offerService: OfferService,
     public ref: DynamicDialogRef,
@@ -31,10 +33,13 @@ export class TracingEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.offerTracing.date = new Date();
-    if(this.config.data != null)
+    if(this.config.data != null) {
       this.offerTracing = this.config.data;
-    else
+      this.availableEditing = false;
+    }
+    else {
       this.offerTracing.uuid = uuidv4();
+    }
       
     this.tracingForm = this.formBuilder.group({
       person: [{value: '', disabled: true}, Validators.required],

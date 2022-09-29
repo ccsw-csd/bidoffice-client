@@ -1,13 +1,16 @@
-<div id="offerWin" class="field-checkbox">
-      <p-checkbox [(ngModel)]="offer.opportunityWin" [binary]="true" [disabled]="true">
-      </p-checkbox>
-      <label>Ganada</label>
+<div class="ui-fluid formgrid grid absolute right-0 top-0 justify-content-end mb-1 mr-4">
+    <div id="offerWin" class="field-checkbox">
+        <p-checkbox [(ngModel)]="offer.opportunityWin" [binary]="true" [disabled]="true">
+        </p-checkbox>
+        <label>Ganada</label>
+    </div>      
 </div>
+
 <p-tabView [(activeIndex)]="activeItem">
-  <p-tabPanel header="Oportunidad">
+  <p-tabPanel header="Cabecera">
     <app-chance [data]="offer" [formValidator]="offerForm.get('chance')"></app-chance>
   </p-tabPanel>
-  <p-tabPanel header="Planificación y proyecto">
+  <p-tabPanel header="Detalle">
     <app-planandproyect [data]="offer"></app-planandproyect>
   </p-tabPanel>
   <p-tabPanel header="Documentación">

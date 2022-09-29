@@ -84,9 +84,17 @@ export class OfferListComponent implements OnInit {
     });
   }
 
-  toOfferEdit() {
+  toOfferEdit(offerType: string) {
+
+    let headerChoice: string;
+
+    if (offerType == "newOffer") 
+        headerChoice = "Nueva Oportunidad";
+    else
+        headerChoice = "Editar Oportunidad: " + this.selectedOffer.name;
+
     const ref = this.dinamicDialogService.open(OfferEditComponent, {
-      header: 'Nueva oferta',
+      header: headerChoice,
       width: '70%',
       height: '750px',
       data: this.selectedOffer,
@@ -110,7 +118,7 @@ export class OfferListComponent implements OnInit {
       },
       complete: () => {
         this.isloading = false;
-        this.toOfferEdit();
+        this.toOfferEdit('editOffer');
       },
     });
   }
