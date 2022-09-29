@@ -173,8 +173,12 @@ export class StatusChangeComponent implements OnInit {
   }
 
   private setTracing() {
+    let message = "Cambio de estado a [" + 
+    this.modifyStatus.opportunityStatus.name +
+    "]: " + this.newTracing.comment;
     this.newTracing.date = new Date();
     this.newTracing.person = this.person;
+    this.newTracing.comment = message;
     this.modifyStatus.tracing = this.newTracing;
   }
 }
