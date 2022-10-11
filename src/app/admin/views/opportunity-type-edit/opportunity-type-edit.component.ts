@@ -28,7 +28,7 @@ export class OpportunityTypeEditComponent implements OnInit {
     this.opportunityService.save(item).subscribe({
       next: () =>{
         this.snackbarService.showMessage('El registro se ha guardado con éxito')
-        this.closeWindow()
+        this.closeWindow(true)
       },
       error: () =>{
         this.snackbarService.error('El registro tiene la misma prioridad o nombre que otro registro y no se puede guardar'); 
@@ -36,9 +36,9 @@ export class OpportunityTypeEditComponent implements OnInit {
     })
   }
 
-  closeWindow() {
+  closeWindow(result: boolean) {
     if(this.ref) {
-        this.ref.close();
+        this.ref.close(result);
     }
   }
 }

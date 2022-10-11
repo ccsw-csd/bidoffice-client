@@ -8,25 +8,24 @@ import { SectorService } from '../../services/sector.service';
 import { SectorEditComponent } from '../sector-edit/sector-edit.component';
 
 @Component({
-  selector: 'app-sector-list',
-  templateUrl: './sector-list.component.html',
-  styleUrls: ['./sector-list.component.scss'],
-  providers: [ DynamicDialogRef, DialogService]
+    selector: 'app-sector-list',
+    templateUrl: './sector-list.component.html',
+    styleUrls: ['./sector-list.component.scss'],
+    providers: [ DynamicDialogRef, DialogService]
 })
+
 export class SectorListComponent implements OnInit {
 
     sectors: Array<Sector>;
     sector: Sector;
     public isLoading: boolean = false;
-    isDeleted: boolean = false;
     
     constructor(
         private sectorService: SectorService,
         private snackBarService: SnackbarService,
         private ref: DynamicDialogRef,
         private dialogService: DialogService,
-    ) {
-     }
+    ) {}
 
     ngOnInit(): void {
         this.findAll();

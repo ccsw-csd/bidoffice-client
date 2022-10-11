@@ -19,7 +19,6 @@ export class TechnologyListComponent implements OnInit {
 
     technologies: Technology[];
     public isLoading: boolean = false;
-    isDeleted: boolean = false;
     item: Technology;
 
     constructor(
@@ -39,28 +38,30 @@ export class TechnologyListComponent implements OnInit {
      */
     editTechnology(technology?: Technology): void {
 
+        let headerChoice;
+        let dataChoice;
+
         if (technology != null) {
-            this.ref = this.dialogService.open(TechnologyEditComponent, {
-                header: 'Editar ' + technology.name,
-                width: '40%',
-                data: {
-                    technologyData: technology
-                },
-                closable: false
-            });
+            headerChoice = 'Editar ' + technology.name;
+            dataChoice = technology;
         }
         else {
-            this.ref = this.dialogService.open(TechnologyEditComponent, {
-                header: 'Nuevo elemento',
-                width: '40%',
-                data: {},
-                closable: false
-            });
+            headerChoice = 'Nueva tecnología';
+            dataChoice = new Technology();
         }
+
+        this.ref = this.dialogService.open(TechnologyEditComponent, {
+            header: headerChoice,
+            width: '40%',
+            data: {
+                technologyData: dataChoice
+            },
+            closable: false
+        });
         
         this.ref.onClose.subscribe (
-            res => {
-                this.findAll();
+            (results: boolean) => {
+                if (results) this.findAll();
             }
         );
     }
@@ -87,40 +88,41 @@ export class TechnologyListComponent implements OnInit {
         this.snackbarService.showConfirmDialog()
     }
     
-    changeFlagForDelete(){
-        this.isDeleted = true
-        this.deleteTechnology(this.item)
+    /**
+     * Cierra el cuadro de confirmación sin realizar
+     * ninguna acción.
+     */
+     closeDialog() {
+        this.snackbarService.closeConfirmDialog();
     }
-    
-    
-    closeDialog(){
-        this.snackbarService.closeConfirmDialog()
-        if(this.isDeleted==false){
-          this.findAll()
-        }
+
+    /**
+     * Cierra el cuadro de confirmación, intentando
+     * borrar posteriormente el sector implicado.
+     */
+    confirmDeletion() {
+        this.snackbarService.closeConfirmDialog();
+        this.deleteTechnology(this.item);  
     }
 
     /**
      * Borra una tecnología de la base de datos.
      * 
-     * @param technology Tecnología a borrar.
+     * @param item Tecnología a borrar.
      */
 
-     deleteTechnology(item: Technology) {
-        if(this.isDeleted){
-            this.technologyService.deleteTechnology(item.id).subscribe({
-                next: () => {
-                    this.snackbarService.showMessage('El registro se ha borrado con éxito')    
-                },
-                error:() => {
-                    this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
-                    this.closeDialog()
-                },
-                complete:() =>{
-                    this.isDeleted = false
-                    this.closeDialog()
-                }
-            });
-        }
+    deleteTechnology(item: Technology) {
+        this.technologyService.deleteTechnology(item.id).subscribe({
+            next: () => {
+                this.snackbarService.showMessage('El registro se ha borrado con éxito')    
+            },
+            error:() => {
+                this.snackbarService.error('El registro no puede ser eliminado porque se está usando en alguna oferta');
+                this.closeDialog()
+            },
+            complete:() =>{
+                this.findAll();
+            }
+        });
     }
 }
