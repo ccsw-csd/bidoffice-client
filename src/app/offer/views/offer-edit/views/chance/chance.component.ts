@@ -49,7 +49,7 @@ export class ChanceComponent implements OnInit {
     }
 
     if (this.data.managedBy != null) {
-      this.selectedManagedBy = this.mappingPerson(this.data.requestedBy);
+      this.selectedManagedBy = this.mappingPerson(this.data.managedBy);
       this.groupPerson.push(this.selectedManagedBy);
     }
   }

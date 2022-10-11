@@ -17,8 +17,9 @@ export class OfferService {
 
   constructor(private http: HttpClient) { }
 
-  findPage(pageable: Pageable): Observable<OfferPage> {
-    return this.http.post<OfferPage>(environment.server + "/offer/findPage", { pageable: pageable });
+  findPage(pageable: Pageable, status: BaseClass, type: BaseClass, sector: BaseClass, requestedBy: Person, managedBy: Person, involved: Person, startDateModification: Date, endDateModification: Date): Observable<OfferPage> {
+ 
+    return this.http.post<OfferPage>(environment.server + "/offer/findPage", { pageable: pageable, status: status, type: type, sector: sector, requestedBy: requestedBy, managedBy: managedBy, involved: involved, startDateModification: startDateModification, endDateModification: endDateModification});
   }
 
   searchClient(filter: string): Observable<string[]> {

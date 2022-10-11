@@ -14,6 +14,11 @@ import { OfferEditComponent } from '../offer-edit/offer-edit.component';
 import { Offer } from '../../model/Offer';
 import { StatusChangeComponent } from './status-change/status-change.component';
 import { BaseClass } from '../../model/BaseClass';
+import { OfferSearch } from '../../model/OfferSearch';
+import { Person } from '../../model/Person';
+import { forkJoin } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { verfierFilterDate } from './validator/ValidatorDate';
 
 @Component({
   selector: 'app-offer-list',
@@ -28,8 +33,8 @@ export class OfferListComponent implements OnInit {
     pageSize: 10,
     sort: [
       {
-        property: 'id',
-        direction: 'asc',
+        property: 'lastModification',
+        direction: 'desc',
       },
     ],
   };
@@ -41,13 +46,51 @@ export class OfferListComponent implements OnInit {
   isloading: boolean = false;
   selectedOffer: Offer = new Offer();
   opportunityStatusOption: BaseClass[];
+  offerSearch: OfferSearch = new OfferSearch();
+  readonly message = 'No se han encontrado resultados';
+  groupPerson: any[] = [];
+  status: BaseClass[];
+  types: BaseClass[];
+  sectors: BaseClass[];
+  filterForm: FormGroup;
+  filterOptions: OfferSearch = new OfferSearch();
+
   constructor(
     private offerService: OfferService,
     private cdRef: ChangeDetectorRef,
     private dinamicDialogService: DialogService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.filterForm = this.formBuilder.group(
+      {
+        status: [''],
+        type: [''],
+        sector: [''],
+        requestedBy: [''],
+        managedBy: [''],
+        involved: [''],
+        startDateModification: [''],
+        endDateModification: [''],
+      },
+      {
+        validators: [verfierFilterDate],
+      }
+    );
+    this.filterForm.get;
+
+    forkJoin({
+      requestOfferTypes: this.offerService.getAllOfferTypes(),
+      requestSectors: this.offerService.getAllSectors(),
+      requestOfferStatus: this.offerService.getAllOfferStatus(),
+    }).subscribe(
+      ({ requestSectors, requestOfferStatus, requestOfferTypes }) => {
+        this.types = requestOfferTypes;
+        this.sectors = requestSectors;
+        this.status = requestOfferStatus;
+      }
+    );
 
     this.loadPage();
   }
@@ -70,8 +113,9 @@ export class OfferListComponent implements OnInit {
         ];
       }
     }
+    
     this.isloading = true;
-    this.offerService.findPage(this.pageable).subscribe({
+    this.offerService.findPage(this.pageable, this.offerSearch.status, this.offerSearch.type, this.offerSearch.sector, this.offerSearch.requestedBy, this.offerSearch.managedBy, this.offerSearch.involved, this.offerSearch.startDateModification, this.offerSearch.endDateModification).subscribe({
       next: (res: OfferPage) => {
         this.offerPage = res;
       },
@@ -130,5 +174,53 @@ export class OfferListComponent implements OnInit {
 
   isNotStatushFinish(optionStatus: string): boolean {
     return optionStatus != this.labelInFinish;
+  }
+
+  searchPerson($event) {
+    if ($event.query != null) {
+      this.offerService.searchPerson($event.query).subscribe({
+        next: (res: Person[]) => {
+          this.groupPerson = res.map((person) => this.mappingPerson(person));
+        },
+        error: () => {},
+        complete: () => {},
+      });
+    }
+  }
+  getAllOfferStatus() {
+    this.offerService.getAllOfferStatus().subscribe({
+      next: (res: BaseClass[]) => {
+        this.status = res;
+      },
+      error: () => {},
+      complete: () => {},
+    });
+  }
+  mappingPerson(person: Person): any {
+    return {
+      field: person.name + ' ' + person.lastname + ' - ' + person.username,
+      value: person,
+    };
+  }
+
+  transformPerson(person: Person): any {
+    if (person != null) return this.mappingPerson(person).field;
+  }
+
+  isAssignValuesFilter(): boolean {
+    return Object.keys(this.filterForm.value).some(
+      (item) => this.filterForm.value[item]
+    );
+  }
+  resetValueForm(formControlName: string){
+    if(formControlName == 'requestedBy') this.offerSearch.requestedBy = null;
+    if(formControlName == 'involved') this.offerSearch.involved = null;
+    if(formControlName == 'managedBy') this.offerSearch.managedBy = null;
+    this.filterForm.get(formControlName).setValue(null);
+  }
+
+  resetForm(){
+    this.filterForm.reset();
+    this.offerSearch = new OfferSearch();
   }
 }
