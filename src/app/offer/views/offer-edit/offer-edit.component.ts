@@ -38,7 +38,6 @@ export class OfferEditComponent implements OnInit {
     if (this.config.data != null) {
       this.offerStatus = 'modificada';
       this.offer = this.config.data;
-      console.log(this.offer)
       this.clonedOffer = Object.assign(new Offer(), this.offer);
     } else {
       this.offerStatus = 'creada';
