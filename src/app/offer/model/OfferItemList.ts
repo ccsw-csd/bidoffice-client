@@ -1,4 +1,5 @@
 import { BaseClass } from "./BaseClass";
+import { Person } from "./Person";
 
 export class OfferItemList{
   id: number;
@@ -8,7 +9,9 @@ export class OfferItemList{
   requestDate: Date;
   opportunityType: BaseClass = new BaseClass();
   opportunityStatus: BaseClass = new BaseClass();
-
+  lastModification: Date;
+  managedBy: Person;
+  
   public constructor(init?:Partial<OfferItemList>) {
     Object.assign(this, init);
   }
