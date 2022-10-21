@@ -9,5 +9,5 @@ export class ModifyStatus{
     changeStatus: OfferChangeStatus = new OfferChangeStatus();
     tracing: OfferTracing = new OfferTracing();
     opportunityStatus: BaseClass = new BaseClass();
-    win: boolean;
+    win: Boolean;
 }

@@ -3,7 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   OnInit,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -24,7 +24,8 @@ export class OfferEditComponent implements OnInit {
   chanceForm: FormGroup;
   offerStatus: string;
   isLoading: boolean = false;
-  clonedOffer: Offer;
+  title: string;
+
   constructor(
     private formBuilder: FormBuilder,
     public config: DynamicDialogConfig,
@@ -35,15 +36,14 @@ export class OfferEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.title = this.config.header.split(':')[0];
     if (this.config.data != null) {
       this.offerStatus = 'modificada';
       this.offer = this.config.data;
-      this.clonedOffer = Object.assign(new Offer(), this.offer);
     } else {
       this.offerStatus = 'creada';
       this.offer = new Offer();
     }
-
     this.offerForm = this.formBuilder.group({
       chance: this.formBuilder.group({
         nameOpportunity: ['', Validators.required],
@@ -64,10 +64,18 @@ export class OfferEditComponent implements OnInit {
         observations: [''],
       }),
     });
+    this.chanceForm = this.offerForm.get('chance') as FormGroup;
+    this.onChange();
   }
 
-  ngAfterViewChecked() {
+  ngAfterContentChecked() {
     this.cdRef.detectChanges();
+  }
+
+  onChange(){
+    this.chanceForm.get('nameOpportunity').valueChanges.subscribe(value =>{
+      if(value != null) this.titleHeader(value);
+    })
   }
 
   onSave() {
@@ -99,7 +107,6 @@ export class OfferEditComponent implements OnInit {
         },
       });
     } else {
-      this.chanceForm = this.offerForm.get('chance') as FormGroup;
       Object.keys(this.chanceForm.controls).forEach((control) =>
         this.chanceForm.controls[control].markAsDirty()
       );
@@ -108,5 +115,9 @@ export class OfferEditComponent implements OnInit {
   }
   onClose() {
     this.ref.close();
+  }
+
+  titleHeader(value: string){
+    this.config.header = `${this.title}: ${value ? value : ""}`;
   }
 }

@@ -1,4 +1,4 @@
-import {FormGroup} from "@angular/forms";
+import {AbstractControl, FormGroup} from "@angular/forms";
 
 export function verfierFilterDate(formGroup: FormGroup){
 

@@ -44,7 +44,7 @@ export class OfferListComponent implements OnInit {
   offerItemList: OfferItemList[];
   totalElements: number;
   isloading: boolean = false;
-  selectedOffer: Offer = new Offer();
+  selectedOffer: Offer;
   opportunityStatusOption: BaseClass[];
   offerSearch: OfferSearch = new OfferSearch();
   readonly message = 'No se han encontrado resultados';
@@ -54,7 +54,7 @@ export class OfferListComponent implements OnInit {
   sectors: BaseClass[];
   filterForm: FormGroup;
   filterOptions: OfferSearch = new OfferSearch();
-
+  headerChoice = 'Nueva Oportunidad';
   constructor(
     private offerService: OfferService,
     private cdRef: ChangeDetectorRef,
@@ -129,10 +129,11 @@ export class OfferListComponent implements OnInit {
   }
 
   toOfferEdit() {
+
     const ref = this.dinamicDialogService.open(OfferEditComponent, {
-      header: 'Nueva oferta',
-      width: '70%',
-      height: '750px',
+      header: this.headerChoice,
+      width: '75%',
+      height: '800px',
       data: this.selectedOffer,
       closable: false,
     });
@@ -154,6 +155,7 @@ export class OfferListComponent implements OnInit {
       },
       complete: () => {
         this.isloading = false;
+        this.headerChoice = 'Editar Oportunidad: ' + this.selectedOffer.name;
         this.toOfferEdit();
       },
     });

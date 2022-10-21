@@ -29,19 +29,12 @@ export class PlanandproyectComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.dataTeam == null) this.data.dataTeam = new OfferDataTeam();
-
-    if (this.data.dataTechnology == null) {
-      this.data.dataTechnology = new OfferDataTechnology();
-    }
-
-    if (this.data.dataProject == null) {
-      this.data.dataProject = new OfferDataProject();
-    }
+    if (this.data.dataTechnology == null) this.data.dataTechnology = new OfferDataTechnology();
+    if (this.data.dataProject == null) this.data.dataProject = new OfferDataProject();
 
     this.selectedPersonList = this.mappingPerson(
       this.data.teamPerson.map((item) => item)
     );
-
     this.getAllHyperscalers();
     this.getAllMethodologies();
   }

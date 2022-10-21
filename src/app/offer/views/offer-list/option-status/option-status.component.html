@@ -3,8 +3,8 @@
     <span>Añade un comentario del motivo:</span>
     <div class="ui-fluid formgrid grid justify-content-center mt-3">
       <span class="p-float-label p-fluid field col-12 md:col-6">
-        <textarea pInputTextarea [(ngModel)]="tracing.comment" formControlName="comment" [rows]="6"
-        [ngStyle]="{'resize': 'none'}"></textarea>
+        <textarea pInputTextarea [(ngModel)]="modifyStatus.tracing.comment" formControlName="comment" [rows]="6"
+          [ngStyle]="{'resize': 'none'}"></textarea>
         <label>Comentario</label>
       </span>
     </div>
@@ -14,8 +14,8 @@
       <span>Añade la fecha de Go/NoGo:</span>
       <div class="ui-fluid formgrid grid justify-content-center mt-3">
         <span class="p-float-label p-fluid field col-12 md:col-6">
-          <p-calendar [(ngModel)]="dateGoNoGo" [showIcon]="true" appendTo="body" date-describedby="date-help"
-            formControlName="goNoGoDate">
+          <p-calendar [(ngModel)]="modifyStatus.goNogoDate" [showIcon]="true" appendTo="body"
+            date-describedby="date-help" formControlName="goNoGoDate">
           </p-calendar>
           <label>Fecha</label>
         </span>
@@ -26,8 +26,8 @@
     <span>Añade la fecha de entrega:</span>
     <div class="ui-fluid formgrid grid justify-content-center mt-3">
       <span class="p-float-label p-fluid field col-12 md:col-6">
-        <p-calendar [(ngModel)]="dateDelivered" [showIcon]="true" appendTo="body" date-describedby="date-help"
-          formControlName="progressDate">
+        <p-calendar [(ngModel)]="modifyStatus.deliveryDate" [showIcon]="true" appendTo="body"
+          date-describedby="date-help" formControlName="progressDate">
         </p-calendar>
         <label>Fecha</label>
       </span>
@@ -37,7 +37,8 @@
     <span>¿La oferta ha sido ganada o perdida?</span>
     <div class="ui-fluid formgrid grid justify-content-center mt-3">
       <span class="p-fluid field col-12 md:col-6">
-        <p-selectButton [(ngModel)]="win" [options]="winOpion" formControlName="deliveredOption"></p-selectButton>
+        <p-selectButton [(ngModel)]="modifyStatus.win" [options]="winOpion" optionLabel="label" optionValue="value"
+          formControlName="deliveredOption"></p-selectButton>
       </span>
     </div>
   </div>
