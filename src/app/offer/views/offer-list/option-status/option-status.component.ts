@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
+import { ModifyStatus } from 'src/app/offer/model/ModifyStatus';
 import { Offer } from 'src/app/offer/model/Offer';
 import { OfferItemList } from 'src/app/offer/model/OfferItemList';
 import { OfferTracing } from 'src/app/offer/model/OfferTracing';
@@ -17,15 +18,12 @@ export class OptionStatusComponent implements OnInit {
   readonly labelInStandBy: string = 'Stand by';
   readonly labelInDelivered: string = 'Entregada';
   readonly labelInFinish: string = 'Finalizada';
-  winOpion: string[] = ['Ganada', 'Perdida'];
+  winOpion = [{ label: 'Ganada', value: true }, { label: 'No ganada', value: false }];
 
   @Input() form: FormGroup;
   @Input() offer: OfferItemList;
   @Input() selectedOptionStatus: BaseClass;
-  @Input() tracing: OfferTracing;
-  @Input() dateGoNoGo: Date;
-  @Input() dateDelivered: Date;
-  @Input() win: boolean;
+  @Input() modifyStatus: ModifyStatus;
 
   constructor() { }
 
@@ -58,9 +56,9 @@ export class OptionStatusComponent implements OnInit {
     if (this.offer.opportunityStatus.name == this.labelInDelivered) {
       return false;
     }
-    
+
     this.disabledValidation(formControlName);
-    
+
     return true;
   }
 

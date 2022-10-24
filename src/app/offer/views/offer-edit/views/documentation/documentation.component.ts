@@ -85,4 +85,8 @@ export class DocumentationComponent implements OnInit {
       reject: () => {},
     });
   }
+
+  clipText(url: string): string{
+    return url.substring(0, 25).concat('...');
+  }
 }

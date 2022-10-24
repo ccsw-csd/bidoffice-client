@@ -1,14 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Offer } from 'src/app/offer/model/Offer';
 import { OfferTracing } from 'src/app/offer/model/OfferTracing';
 import { Person } from 'src/app/offer/model/Person';
 import { OfferService } from 'src/app/offer/services/offer.service';
 import { TracingEditComponent } from './tracing-edit/tracing-edit.component';
-import { v4 as uuidv4 } from 'uuid';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, SortEvent } from 'primeng/api';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-tracing',
@@ -23,6 +22,7 @@ export class TracingComponent implements OnInit {
   clonedOfferTracing: OfferTracing;
   selectedPerson;
   @Input() data: Offer;
+  @ViewChild('table') table: Table;
 
   constructor(
     private dinamicDialogService: DialogService,
@@ -36,31 +36,30 @@ export class TracingComponent implements OnInit {
 
   createTracing() {
     const ref = this.dinamicDialogService.open(TracingEditComponent, {
-      header: 'Crear siguimiento',
+      header: 'Crear nuevo mensaje',
       width: '30%',
       data: this.clonedOfferTracing,
       closable: false,
     });
 
     ref.onClose.subscribe((tracing: OfferTracing) => {
-      if (tracing != null) {
-        if(tracing.id != null){
-          this.data.tracings[
-            this.data.tracings.findIndex((item) => item.id == tracing.id)
-          ] = tracing;
-        }
+      if (tracing != null && tracing.uuid != null) {
+        let index = this.data.tracings.findIndex((item) => item.uuid == tracing.uuid);
+        if(index != -1)
+          this.data.tracings[index] = tracing;
         else{
-          let index = this.data.tracings.findIndex((item) => item.uuid == tracing.uuid);
-          if(index != -1)
-            this.data.tracings[index] = tracing
+
+          this.data.tracings.push(tracing);
+          if(this.isAscendig(this.table.value))
+            this.table.value.push(tracing);
           else
-            this.data.tracings.push(tracing);
+            this.table.value.unshift(tracing);
         }
+          
         delete this.clonedOfferTracing;
       }
     });
   }
-
   searchPerson($event) {
     if ($event.query != null) {
       this.offerService.searchPerson($event.query).subscribe({
@@ -108,5 +107,9 @@ export class TracingComponent implements OnInit {
       },
       reject: () => {},
     });
+  }
+
+  isAscendig(arry: OfferTracing[]): boolean {
+    return  arry.every((b, i, { [i - 1]: a }) => !i || a.date <= b.date);
   }
 }

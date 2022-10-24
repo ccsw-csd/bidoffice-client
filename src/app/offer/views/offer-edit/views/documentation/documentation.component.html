@@ -6,11 +6,12 @@
   responsiveLayout="scroll">
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="docType">Tipo de documento<p-sortIcon field="docType"></p-sortIcon>
+      <th pSortableColumn="docType">Tipo<p-sortIcon field="docType"></p-sortIcon>
       </th>
-      <th pSortableColumn="name">Nombre del Documento<p-sortIcon field="name"></p-sortIcon>
+      <th pSortableColumn="name">Nombre<p-sortIcon field="name"></p-sortIcon>
       </th>
-      <th pSortableColumn="link">URL de documento<p-sortIcon field="link"></p-sortIcon>
+      <th>Formato</th>
+      <th pSortableColumn="link">URL<p-sortIcon field="link"></p-sortIcon>
       </th>
       <th pSortableColumn="observations">Observaciones<p-sortIcon field="observations"></p-sortIcon>
       </th>
@@ -21,7 +22,8 @@
     <tr>
       <td>{{dataFiles.fileType.name}}</td>
       <td>{{dataFiles.name}}</td>
-      <td>{{dataFiles.link}}</td>
+      <td></td>
+      <td><a [href]="dataFiles.link" target="_blank">{{clipText(dataFiles.link)}}</a></td>
       <td>{{dataFiles.observations}}</td>
       <td style='flex: 0 0 150px;'>
         <button pButton icon="pi pi-pencil"

@@ -1,8 +1,12 @@
+<div class="flex justify-content-end">
+  <p-tag *ngIf="offer.opportunityWin" styleClass="text-white text-base mr-2" severity="success" value="Ganada" [rounded]="true"></p-tag>
+  <p-tag *ngIf="!offer.opportunityWin" styleClass="text-white text-base mr-2" severity="warning" value="No ganada" [rounded]="true"></p-tag>
+</div>
 <p-tabView [(activeIndex)]="activeItem">
-  <p-tabPanel header="Oportunidad">
+  <p-tabPanel header="Cabecera">
     <app-chance [data]="offer" [formValidator]="offerForm.get('chance')"></app-chance>
   </p-tabPanel>
-  <p-tabPanel header="Planificación y proyecto">
+  <p-tabPanel header="Detalle">
     <app-planandproyect [data]="offer"></app-planandproyect>
   </p-tabPanel>
   <p-tabPanel header="Documentación">
@@ -11,8 +15,11 @@
   <p-tabPanel header="Capítulos de interés">
     <app-interest [data]="offer"></app-interest>
   </p-tabPanel>
-  <p-tabPanel header="Seguimiento">
+  <p-tabPanel header="Mensajes">
     <app-tracing [data]="offer"></app-tracing>
+  </p-tabPanel>
+  <p-tabPanel header="Seguimiento comercial">
+    <app-tradetrack></app-tradetrack>
   </p-tabPanel>
 </p-tabView>
 <div class="ui-fluid formgrid grid absolute right-0 left-0 bottom-0 justify-content-end mb-1 mr-4">

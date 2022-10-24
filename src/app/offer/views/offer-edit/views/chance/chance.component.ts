@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
 import { Offer } from 'src/app/offer/model/Offer';
 import { Person } from 'src/app/offer/model/Person';
@@ -81,7 +80,7 @@ export class ChanceComponent implements OnInit {
 
         this.isLoading = false;
 
-        if(this.data.id == null){
+        if (this.data.id == null) {
           this.snackbarService.showMessageConfirm(
             'Estado',
             '¿La oferta requiere Go/NoGo?'
@@ -114,7 +113,7 @@ export class ChanceComponent implements OnInit {
       });
     }
   }
-  
+
   mappingPerson(person: Person): any {
     return {
       field: person.name + ' ' + person.lastname + ' - ' + person.username,
@@ -123,11 +122,15 @@ export class ChanceComponent implements OnInit {
   }
 
   closeDialog() {
-    this.data.opportunityStatus = this.status.find(item => item.name == this.labelInProgress)
+    this.data.opportunityStatus = this.status.find(
+      (item) => item.name == this.labelInProgress
+    );
     this.snackbarService.closeConfirmDialog();
   }
   changeFlagForDelete() {
-    this.data.opportunityStatus = this.status.find(item => item.name == this.labelInGoNoGo)
+    this.data.opportunityStatus = this.status.find(
+      (item) => item.name == this.labelInGoNoGo
+    );
     this.snackbarService.closeConfirmDialog();
   }
 }

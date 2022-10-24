@@ -6,20 +6,27 @@
       <label>Tipo documento</label>
     </span>
   </div>
-  <div class="p-fluid field col-12 md:col-12">
+  <div class="p-fluid field col-12 md:col-12 mt-1">
     <span class="p-float-label">
       <input [(ngModel)]="dataFile.name" formControlName="nameFile" aria-describedby="nameFile-help" pInputText />
       <label>Nombre documento*</label>
     </span>
   </div>
-  <div class="p-fluid field col-12 md:col-12">
+  <div class="p-fluid field col-12 md:col-12 mt-1">
+    <span class="p-float-label">
+      <p-dropdown formControlName="formatFile"></p-dropdown>
+      <label>Formato documento</label>
+    </span>
+  </div>
+  <div class="p-fluid field col-12 md:col-12 mt-1">
     <span class="p-float-label">
       <input [(ngModel)]="dataFile.link" aria-describedby="link-help" formControlName="link" pInputText />
       <label>URL del documento*</label>
     </span>
   </div>
-  <div class="p-fluid p-float-label field col-12 md:col-12">
-    <textarea [(ngModel)]="dataFile.observations" formControlName="observation" pInputTextarea [ngStyle]="{'resize': 'none'}" [rows]="7"></textarea>
+  <div class="p-fluid p-float-label field col-12 md:col-12 mt-1">
+    <textarea [(ngModel)]="dataFile.observations" formControlName="observation" pInputTextarea
+      [ngStyle]="{'resize': 'none'}" [rows]="7"></textarea>
     <label>Observaciones</label>
   </div>
 </div>

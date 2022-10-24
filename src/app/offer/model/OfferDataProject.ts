@@ -6,4 +6,5 @@ export class OfferDataProject{
   amount: number;
   ftes: number;
   months: number;
+  contributionMargin: number;
 }

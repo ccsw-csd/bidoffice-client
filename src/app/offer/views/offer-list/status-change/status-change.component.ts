@@ -17,26 +17,23 @@ import { ModifyStatus } from 'src/app/offer/model/ModifyStatus';
   styleUrls: ['./status-change.component.scss'],
 })
 export class StatusChangeComponent implements OnInit {
-  offerItemList: OfferItemList;
-  offerStatus: BaseClass[];
-  optionStatus: BaseClass[] = [];
-  selectedOptionStatus: BaseClass;
   readonly labelInProgress: string = 'En curso';
   readonly labelInGoNoGo: string = 'Pendiente Go/NoGo';
   readonly labelInReject: string = 'Desestimada';
   readonly labelInStandBy: string = 'Stand by';
   readonly labelInDelivered: string = 'Entregada';
   readonly labelInFinish: string = 'Finalizada';
-  offer: Offer = new Offer();
+  offerItemList: OfferItemList;
+  offerStatus: BaseClass[];
+  optionStatus: BaseClass[] = [];
+  selectedOptionStatus: BaseClass;
   isLoading: boolean = false;
-  newChangeStatus: OfferChangeStatus = new OfferChangeStatus();
   statusForm: FormGroup;
-  newTracing: OfferTracing = new OfferTracing();
-  newDateGoNoGo: Date;
-  newDateDelivered: Date;
   person: Person;
-  newWin: boolean = false;
+  offer: Offer = new Offer();
+  newChangeStatus: OfferChangeStatus = new OfferChangeStatus();
   modifyStatus: ModifyStatus = new ModifyStatus();
+  modifyStatusClone: ModifyStatus = new ModifyStatus();
 
   constructor(
     private offerService: OfferService,
@@ -45,7 +42,7 @@ export class StatusChangeComponent implements OnInit {
     private auth: AuthService,
     private formBuilder: FormBuilder,
     private cdRef: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.offerItemList = this.config.data;
@@ -67,7 +64,7 @@ export class StatusChangeComponent implements OnInit {
       next: (res: BaseClass[]) => {
         this.offerStatus = res;
       },
-      error: () => {},
+      error: () => { },
       complete: () => {
         this.selectedOptionsStatusValues();
         this.isLoading = false;
@@ -103,14 +100,10 @@ export class StatusChangeComponent implements OnInit {
     if (this.offerItemList.opportunityStatus.name == this.labelInDelivered)
       return status == this.labelInFinish;
 
-    if(this.offerItemList.opportunityStatus.name == this.labelInStandBy)
+    if (this.offerItemList.opportunityStatus.name == this.labelInStandBy)
       return status == this.labelInProgress || status == this.labelInReject;
 
     return false;
-  }
-
-  isGoNoGo(): boolean {
-    return this.offerItemList.opportunityStatus.name == this.labelInGoNoGo;
   }
 
   onSave() {
@@ -121,7 +114,7 @@ export class StatusChangeComponent implements OnInit {
         next: (res: OfferItemList) => {
           this.offerItemList;
         },
-        error: () => {},
+        error: () => { },
         complete: () => {
           this.isLoading = false;
           this.onClose();
@@ -143,25 +136,10 @@ export class StatusChangeComponent implements OnInit {
     return selectedStatus == optionStatus;
   }
 
-  setData() {
+  private setData() {
     this.modifyStatus.opportunityStatus = this.selectedOptionStatus;
     this.modifyStatus.id = this.offerItemList.id;
     this.setChangeStatus();
-    if (
-      this.offer.opportunityStatus.name == this.labelInGoNoGo &&
-      this.selectedOptionStatus.name == this.labelInProgress
-    ) {
-      this.modifyStatus.goNogoDate = this.newDateGoNoGo;
-      return;
-    }
-    if (this.selectedOptionStatus.name == this.labelInDelivered) {
-      this.modifyStatus.deliveryDate = this.newDateDelivered;
-      return;
-    }
-    if (this.offer.opportunityStatus.name == this.labelInDelivered) {
-      this.modifyStatus.win = this.newWin;
-      return;
-    }
     this.setTracing();
   }
 
@@ -173,8 +151,11 @@ export class StatusChangeComponent implements OnInit {
   }
 
   private setTracing() {
-    this.newTracing.date = new Date();
-    this.newTracing.person = this.person;
-    this.modifyStatus.tracing = this.newTracing;
+    let message = `Cambio de estado [${this.modifyStatus.opportunityStatus.name}]`;
+    if (this.modifyStatus.tracing.comment != null)
+      message = `${message}: ${this.modifyStatus.tracing.comment}`;
+    this.modifyStatus.tracing.date = new Date();
+    this.modifyStatus.tracing.person = this.person;
+    this.modifyStatus.tracing.comment = message;
   }
 }

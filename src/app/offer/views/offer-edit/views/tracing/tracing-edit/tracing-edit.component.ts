@@ -21,6 +21,8 @@ export class TracingEditComponent implements OnInit {
   tracingForm: FormGroup;
   personCourrent: string = '';
   user: UserInfoDetailed;
+  availableEditing: boolean = true;
+  currentDateTime;
   constructor(
     private offerService: OfferService,
     public ref: DynamicDialogRef,
@@ -30,19 +32,27 @@ export class TracingEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.offerTracing.date = new Date();
-    if(this.config.data != null)
+    this.currentDateTime = setInterval(() => {
+      this.offerTracing.date = new Date();
+    }, 1000);
+
+    if (this.config.data != null) {
       this.offerTracing = this.config.data;
-    else
+    } else {
       this.offerTracing.uuid = uuidv4();
-      
+    }
+
     this.tracingForm = this.formBuilder.group({
-      person: [{value: '', disabled: true}, Validators.required],
+      person: [{ value: '', disabled: true }, Validators.required],
       comment: ['', Validators.required],
-      date: [{value: '', disabled: true}, Validators.required],
+      date: [{ value: '', disabled: true }, Validators.required],
     });
 
     this.searchPerson(this.auth.getUserInfo().username);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.currentDateTime);
   }
 
   onSave() {
@@ -66,6 +76,7 @@ export class TracingEditComponent implements OnInit {
         this.personCourrent = this.mappingPerson(
           res.find((item) => item.username == this.auth.getUserInfo().username)
         ).field;
+        this.offerTracing.date = new Date();
       },
       error: () => {},
       complete: () => {},
@@ -90,5 +101,4 @@ export class TracingEditComponent implements OnInit {
     }
     return false;
   }
-
 }

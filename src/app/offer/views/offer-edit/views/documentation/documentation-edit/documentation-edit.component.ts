@@ -4,8 +4,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
 import { OfferDataFile } from 'src/app/offer/model/OfferDataFile';
 import { OfferService } from 'src/app/offer/services/offer.service';
+import { ValidateURL } from 'src/app/offer/views/offer-list/validator/ValidatorURL';
 import { v4 as uuidv4 } from 'uuid';
-
 @Component({
   selector: 'app-documentation-edit',
   templateUrl: './documentation-edit.component.html',
@@ -28,13 +28,12 @@ export class DocumentationEditComponent implements OnInit {
     this.dataFileForm = this.formBuilder.group({
       typeDoc: ['', Validators.required],
       nameFile: ['', Validators.required],
-      link: ['', Validators.required],
+      formatFile: [''],
+      link: ['', [Validators.required, ValidateURL]],
       observation: [''],
     });
-    if(this.config.data != null)
-      this.dataFile = this.config.data;
-    else
-      this.dataFile.uuid = uuidv4();
+    if (this.config.data != null) this.dataFile = this.config.data;
+    else this.dataFile.uuid = uuidv4();
 
     this.getAllFileTypes();
   }
