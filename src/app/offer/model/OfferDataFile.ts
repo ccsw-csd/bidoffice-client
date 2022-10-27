@@ -1,3 +1,4 @@
+import { FormatDocument } from "src/app/admin/model/FormatDocument";
 import { BaseClass } from "./BaseClass";
 
 export class OfferDataFile{
@@ -7,4 +8,5 @@ export class OfferDataFile{
   link: string;
   observations: string
   fileType: BaseClass = new BaseClass();
+  formatDocument: FormatDocument = new FormatDocument();
 }

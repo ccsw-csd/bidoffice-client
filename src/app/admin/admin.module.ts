@@ -28,7 +28,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
+import { FormatDocumentListComponent } from './views/format-document-list/format-document-list.component';
+import { FormatDocumentEditComponent } from './views/format-document-edit/format-document-edit.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +48,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ProjectTypeListComponent,
     SectorListComponent,
     ProjectTypeEditComponent,
-    SectorEditComponent
-
+    SectorEditComponent,
+    FormatDocumentListComponent,
+    FormatDocumentEditComponent
   ],
   imports: [
     CommonModule,

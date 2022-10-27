@@ -1,0 +1,23 @@
+<div [formGroup]="formatForm" class="ui-fluid formgrid grid mt-2">
+  <div class="p-fluid field col-12 md:col-12">
+    <span class="p-float-label">
+      <input pInputText formControlName="name" [(ngModel)]="formatDocument.name">
+      <label>Nombre</label>
+    </span>
+  </div>
+  <div class="p-fluid field col-12 md:col-12 mt-2">
+    <span class="p-float-label">
+      <input type="number" min="1" pInputText formControlName="priority" [(ngModel)]="formatDocument.priority">
+      <label>Prioridad</label>
+    </span>
+  </div>
+</div>
+<div class="ui-fluid formgrid grid mt-2 flex justify-content-end">
+  <div class="p-fluid p-float-label field col-12 md:col-3">
+    <button class="p-3 p-button-secondary" pButton label="Cancelar" styleClass="p-button-secondary"
+      (click)="onClose(false)"></button>
+  </div>
+  <div class="p-fluid p-float-label field col-12 md:col-3">
+    <button class="p-3" pButton label="Guardar" [disabled]="formatForm.invalid" (click)="onSave()"></button>
+  </div>
+</div>

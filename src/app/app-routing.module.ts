@@ -12,6 +12,7 @@ import { OpportunityTypeListComponent } from './admin/views/opportunity-type-lis
 import { OfferingListComponent } from './admin/views/offering-list/offering-list.component';
 import { ProjectTypeListComponent } from './admin/views/project-type-list/project-type-list.component';
 import { SectorListComponent } from './admin/views/sector-list/sector-list.component';
+import { FormatDocumentListComponent } from './admin/views/format-document-list/format-document-list.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
       { path: 'offering', component: OfferingListComponent},
       { path: 'projecttype', component: ProjectTypeListComponent},
       { path: 'sector', component: SectorListComponent},
+      {path: 'formatdocument', component: FormatDocumentListComponent},
       { path: '**', redirectTo: 'main', pathMatch: 'full' }
     ]
   },

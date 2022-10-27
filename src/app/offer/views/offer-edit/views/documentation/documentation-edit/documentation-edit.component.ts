@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FormatDocument } from 'src/app/admin/model/FormatDocument';
 import { BaseClass } from 'src/app/offer/model/BaseClass';
 import { OfferDataFile } from 'src/app/offer/model/OfferDataFile';
 import { OfferService } from 'src/app/offer/services/offer.service';
 import { ValidateURL } from 'src/app/offer/views/offer-list/validator/ValidatorURL';
 import { v4 as uuidv4 } from 'uuid';
+import { forkJoin } from 'rxjs';
+import { FormatDocumentService } from 'src/app/admin/services/format-document.service';
 @Component({
   selector: 'app-documentation-edit',
   templateUrl: './documentation-edit.component.html',
@@ -13,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class DocumentationEditComponent implements OnInit {
   fileTypes: BaseClass[];
+  formatDocuments: FormatDocument[];
   dataFile: OfferDataFile = new OfferDataFile();
   dataFileForm: FormGroup;
   isLoading: boolean = false;
@@ -21,23 +25,40 @@ export class DocumentationEditComponent implements OnInit {
     private offerService: OfferService,
     public ref: DynamicDialogRef,
     private formBuilder: FormBuilder,
-    public config: DynamicDialogConfig
+    public config: DynamicDialogConfig,
+    private formatDocumentService: FormatDocumentService
   ) {}
 
   ngOnInit(): void {
     this.dataFileForm = this.formBuilder.group({
       typeDoc: ['', Validators.required],
       nameFile: ['', Validators.required],
-      formatFile: [''],
+      formatFile: ['', Validators.required],
       link: ['', [Validators.required, ValidateURL]],
       observation: [''],
     });
     if (this.config.data != null) this.dataFile = this.config.data;
     else this.dataFile.uuid = uuidv4();
 
-    this.getAllFileTypes();
+    this.getAllData();
   }
 
+  getAllData(){
+    this.isLoading = true;
+    forkJoin({
+      requestFileType: this.offerService.getAllFileTypes(),
+      requestFormatDocument: this.formatDocumentService.getAllFormatDocument()
+    }).subscribe(
+      ({
+        requestFileType,
+        requestFormatDocument,
+      }) => {
+        this.fileTypes = requestFileType;
+        this.formatDocuments = requestFormatDocument;
+        this.isLoading = false;
+      }
+    );
+  }
   getAllFileTypes() {
     this.isLoading = true;
     this.offerService.getAllFileTypes().subscribe({
