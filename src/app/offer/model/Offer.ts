@@ -6,6 +6,7 @@ import { OfferDataProject } from './OfferDataProject';
 import { OfferDataTeam } from './OfferDataTeam';
 import { OfferDataTechnology } from './OfferDataTechnology';
 import { OfferTracing } from './OfferTracing';
+import { OfferTradeTracking } from './OfferTradeTracking';
 import { Person } from './Person';
 export class Offer {
   id: number;
@@ -34,6 +35,7 @@ export class Offer {
   technologies: BaseClass[] = new Array();
   tracings: OfferTracing[] = new Array();
   changeStatus: OfferChangeStatus[] = new Array();
+  tradeTrackings: OfferTradeTracking[] = new Array();
 
   parseStringToDate() {
     if (this.goNogoDate != null)
@@ -52,5 +54,6 @@ export class Offer {
       this.creationDate = new Date(this.creationDate.toLocaleString())
 
     this.tracings.forEach(item => item.date = new Date(item.date.toLocaleString()))
+    this.tradeTrackings.forEach(item => item.date = new Date(item.date.toLocaleString()))
   }
 }

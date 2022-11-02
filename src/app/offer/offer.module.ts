@@ -32,6 +32,7 @@ import {ListboxModule} from 'primeng/listbox';
 import { OptionStatusComponent } from './views/offer-list/option-status/option-status.component';
 import { TradetrackComponent } from './views/offer-edit/views/tradetrack/tradetrack.component';
 import { TagModule } from 'primeng/tag';
+import { TradetrackEditComponent } from './views/offer-edit/views/tradetrack/tradetrack-edit/tradetrack-edit.component';
 @NgModule({
   declarations: [
     OfferListComponent,
@@ -45,7 +46,8 @@ import { TagModule } from 'primeng/tag';
     TracingEditComponent,
     StatusChangeComponent,
     OptionStatusComponent,
-    TradetrackComponent
+    TradetrackComponent,
+    TradetrackEditComponent
   ],
   imports: [
     CommonModule,

@@ -1,27 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { UserInfoDetailed } from 'src/app/core/models/UserInfoDetailed';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { OfferTracing } from 'src/app/offer/model/OfferTracing';
+import { OfferTradeTracking } from 'src/app/offer/model/OfferTradeTracking';
 import { Person } from 'src/app/offer/model/Person';
 import { OfferService } from 'src/app/offer/services/offer.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
-  selector: 'app-tracing-edit',
-  templateUrl: './tracing-edit.component.html',
-  styleUrls: ['./tracing-edit.component.scss'],
+  selector: 'app-tradetrack-edit',
+  templateUrl: './tradetrack-edit.component.html',
+  styleUrls: ['./tradetrack-edit.component.scss'],
 })
-export class TracingEditComponent implements OnInit {
-  message = 'No se han encontrado resultados';
-  offerTracing: OfferTracing = new OfferTracing();
-  groupPerson: any[];
-  tracingForm: FormGroup;
-  personCourrent: string = '';
-  user: UserInfoDetailed;
-  availableEditing: boolean = true;
+export class TradetrackEditComponent implements OnInit {
+  tradeForm: FormGroup;
   currentDateTime;
+  personCourrent: string = '';
+  offerTradeTracking: OfferTradeTracking = new OfferTradeTracking();
+
   constructor(
     private offerService: OfferService,
     public ref: DynamicDialogRef,
@@ -32,17 +28,17 @@ export class TracingEditComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.config.data != null) {
-      this.offerTracing = this.config.data;
-      this.mappingPerson(this.offerTracing.person);
+      this.offerTradeTracking = this.config.data;
+      this.mappingPerson(this.offerTradeTracking.person);
     } else {
-      this.offerTracing.uuid = uuidv4();
+      this.offerTradeTracking.uuid = uuidv4();
       this.currentDateTime = setInterval(() => {
-        this.offerTracing.date = new Date();
+        this.offerTradeTracking.date = new Date();
       }, 1000);
       this.searchPerson(this.auth.getUserInfo().username);
     }
 
-    this.tracingForm = this.formBuilder.group({
+    this.tradeForm = this.formBuilder.group({
       person: [{ value: '', disabled: true }, Validators.required],
       comment: ['', Validators.required],
       date: [{ value: '', disabled: true }, Validators.required],
@@ -54,13 +50,13 @@ export class TracingEditComponent implements OnInit {
   }
 
   onSave() {
-    if (!this.tracingForm.invalid) {
-      this.ref.close(this.offerTracing);
+    if (!this.tradeForm.invalid) {
+      this.ref.close(this.offerTradeTracking);
     } else {
-      Object.keys(this.tracingForm.controls).forEach((control) =>
-        this.tracingForm.controls[control].markAsDirty()
+      Object.keys(this.tradeForm.controls).forEach((control) =>
+        this.tradeForm.controls[control].markAsDirty()
       );
-      this.tracingForm.markAllAsTouched();
+      this.tradeForm.markAllAsTouched();
     }
   }
 
@@ -74,7 +70,7 @@ export class TracingEditComponent implements OnInit {
         this.personCourrent = this.mappingPerson(
           res.find((item) => item.username == this.auth.getUserInfo().username)
         ).field;
-        this.offerTracing.date = new Date();
+        this.offerTradeTracking.date = new Date();
       },
       error: () => {},
       complete: () => {},
@@ -82,7 +78,7 @@ export class TracingEditComponent implements OnInit {
   }
 
   mappingPerson(person: Person): any {
-    this.offerTracing.person = person;
+    this.offerTradeTracking.person = person;
     return {
       field: person.name + ' ' + person.lastname + ' - ' + person.username,
       value: person,
@@ -91,10 +87,10 @@ export class TracingEditComponent implements OnInit {
 
   checkValidation(control: string): boolean {
     if (
-      this.tracingForm.get(control).invalid &&
-      this.tracingForm.get(control).touched
+      this.tradeForm.get(control).invalid &&
+      this.tradeForm.get(control).touched
     ) {
-      this.tracingForm.controls[control].markAsDirty();
+      this.tradeForm.controls[control].markAsDirty();
       return true;
     }
     return false;

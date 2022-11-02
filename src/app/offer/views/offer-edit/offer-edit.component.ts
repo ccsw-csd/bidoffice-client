@@ -80,8 +80,7 @@ export class OfferEditComponent implements OnInit {
 
   onSave() {
     if (this.offerForm.valid) {
-      this.offer.tracings.forEach((item) => delete item.uuid);
-      this.offer.dataFiles.forEach((item) => delete item.uuid);
+      this.deleteUUID();
       this.isLoading = true;
       this.offerService.save(this.offer).subscribe({
         next: (res: Offer) => {
@@ -119,5 +118,11 @@ export class OfferEditComponent implements OnInit {
 
   titleHeader(value: string){
     this.config.header = `${this.title}: ${value ? value : ""}`;
+  }
+
+  private deleteUUID(){
+    this.offer.tracings.forEach((item) => delete item.uuid);
+    this.offer.dataFiles.forEach((item) => delete item.uuid);
+    this.offer.tradeTrackings.forEach((item) => delete item.uuid);
   }
 }
