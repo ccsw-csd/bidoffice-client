@@ -36,7 +36,8 @@ export class NavComponent implements OnInit {
           {label: "Tipos de oportunidad", routerLink: '/opportunitytype'},
           {label: "Offering", routerLink: '/offering'},
           {label: "Tipos de proyecto", routerLink: '/projecttype'},
-          {label: "Sectores", routerLink: '/sector'}
+          {label: "Sectores", routerLink: '/sector'},
+          {label: "Formatos de documento", routerLink: '/formatdocument'}
         ]
       }
     ];

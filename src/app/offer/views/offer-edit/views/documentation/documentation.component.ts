@@ -25,7 +25,7 @@ export class DocumentationComponent implements OnInit {
     private dinamicDialogService: DialogService,
     private offerService: OfferService,
     private confirmationService: ConfirmationService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
   }
@@ -44,14 +44,14 @@ export class DocumentationComponent implements OnInit {
           this.data.dataFiles[
             this.data.dataFiles.findIndex((item) => item.id == dataFile.id)
           ] = dataFile;
-          
-        } else{
+
+        } else {
           let index = this.data.dataFiles.findIndex((item) => item.uuid == dataFile.uuid);
-          if(index != -1)
+          if (index != -1)
             this.data.dataFiles[index] = dataFile
           else
             this.data.dataFiles.push(dataFile);
-        } 
+        }
         delete this.clonedDataFile;
       }
     });
@@ -73,7 +73,7 @@ export class DocumentationComponent implements OnInit {
       acceptIcon: 'none',
       rejectIcon: 'none',
       accept: () => {
-        if(dataFile.id != null)
+        if (dataFile.id != null)
           this.data.dataFiles = this.data.dataFiles.filter(
             (item) => item.id != dataFile.id
           );
@@ -82,11 +82,12 @@ export class DocumentationComponent implements OnInit {
             (item) => item.uuid != dataFile.uuid
           );
       },
-      reject: () => {},
+      reject: () => { },
     });
   }
 
-  clipText(url: string): string{
+  clipText(url: string): string {
+    if (url.length <= 25) return url;
     return url.substring(0, 25).concat('...');
   }
 }

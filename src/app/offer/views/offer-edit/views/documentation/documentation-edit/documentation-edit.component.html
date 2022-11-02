@@ -3,7 +3,7 @@
     <span class="p-float-label">
       <p-dropdown [options]="fileTypes" formControlName="typeDoc" aria-describedby="typeDoc-help"
         [(ngModel)]="dataFile.fileType" optionLabel="name" appendTo="body"></p-dropdown>
-      <label>Tipo documento</label>
+      <label>Tipo documento*</label>
     </span>
   </div>
   <div class="p-fluid field col-12 md:col-12 mt-1">
@@ -14,8 +14,8 @@
   </div>
   <div class="p-fluid field col-12 md:col-12 mt-1">
     <span class="p-float-label">
-      <p-dropdown formControlName="formatFile"></p-dropdown>
-      <label>Formato documento</label>
+      <p-dropdown [options]="formatDocuments" [(ngModel)]="dataFile.formatDocument" formControlName="formatFile" optionLabel="name" appendTo="body"></p-dropdown>
+      <label>Formato documento*</label>
     </span>
   </div>
   <div class="p-fluid field col-12 md:col-12 mt-1">
