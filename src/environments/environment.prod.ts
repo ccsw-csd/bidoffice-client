@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
   appCode: 'bidOffice',
-  server: '../codequest-data',
+  server: '../bidoffice-data',
   sso: '../sso'
 };
