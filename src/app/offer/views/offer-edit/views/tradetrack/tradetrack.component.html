@@ -3,8 +3,8 @@
 <div class="mt-3 flex justify-content-end">
   <button class="p-3 mb-1 p-button-outlined" pButton (click)="createtradeTracking()">Nuevo seguimiento</button>
 </div>
-<p-table #table [value]="data.tradeTrackings" scrollable="true" scrollHeight="calc(70vh - 202px)" responsiveLayout="scroll"
-  sortField="date" sortOrder="-1">
+<p-table #table [value]="data.tradeTrackings" scrollable="true" scrollHeight="calc(70vh - 202px)"
+  responsiveLayout="scroll" sortField="date" sortOrder="-1">
   <ng-template pTemplate="header">
     <tr>
       <th>Comentario</th>
@@ -22,10 +22,9 @@
       <td style='flex: 0 0 150px;'>
         <div *ngIf="tradeTrackings.uuid != null && commentFromCurrentPerson(tradeTrackings.person)">
           <button pButton icon="pi pi-pencil" (click)="onRowEditInit(tradeTrackings)"
-            class="p-button-rounded p-button-text p-button-plain icon"></button>
-          <button *ngIf="tradeTrackings.uuid != null && commentFromCurrentPerson(tradeTrackings.person)"
-            (click)="onDeleteRow(tradeTrackings)" pButton icon="pi pi-trash"
-            class="p-button-rounded p-button-text p-button-plain icon"></button>
+            class="h-1rem p-button-sm p-button-rounded p-button-text p-button-plain icon"></button>
+          <button (click)="onDeleteRow(tradeTrackings)" pButton icon="pi pi-trash"
+            class="h-1rem p-button-sm p-button-rounded p-button-text p-button-plain icon"></button>
         </div>
     </tr>
   </ng-template>

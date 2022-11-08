@@ -1,59 +1,100 @@
 <p-toast position="top-center"></p-toast>
-<p-table [formGroup]="filterForm" [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)"
-  [loading]="isloading" scrollable="true" scrollHeight="calc(84vh - 190px)" responsiveLayout="scroll" [paginator]="true"
-  [rows]="10" [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]"
-  currentPageReportTemplate="{first} - {last} / {totalRecords}" paginatorPosition="bottom"
-  [globalFilterFields]="['opportunityStatus.name']">
-  <ng-template pTemplate="caption">
-    <div class="ui-fluid formgrid grid">
-      <div class="p-fluid field col-12 md:col-3">
+<div [formGroup]="filterForm" class="grid">
+  <div class="col-5">
+    <div class="grid">
+      <div class="p-fluid field col-12 md:col-4">
         <span class="p-float-label">
           <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
             [emptyMessage]="message" (completeMethod)="searchPerson($event)"
-            (onSelect)="offerSearch.requestedBy = $event.value" field="field" appendTo="body" [showClear]="offerSearch.requestedBy"
-            (onClear)="resetValueForm('requestedBy')" formControlName="requestedBy">
+            (onSelect)="offerSearch.requestedBy = $event.value" field="field" appendTo="body"
+            [showClear]="offerSearch.requestedBy" (onClear)="resetValueForm('requestedBy')"
+            formControlName="requestedBy">
           </p-autoComplete>
           <label>Comercial</label>
         </span>
       </div>
-      <div class="p-fluid field col-12 md:col-3">
+      <div class="p-fluid field col-12 md:col-4">
         <span class="p-float-label">
           <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
             [emptyMessage]="message" (completeMethod)="searchPerson($event)"
-            (onSelect)="offerSearch.involved = $event.value" field="field" appendTo="body" [showClear]="offerSearch.involved"
-            (onClear)="resetValueForm('involved')" formControlName="involved">
+            (onSelect)="offerSearch.involved = $event.value" field="field" appendTo="body"
+            [showClear]="offerSearch.involved" (onClear)="resetValueForm('involved')" formControlName="involved">
           </p-autoComplete>
           <label>Persona implicada</label>
         </span>
       </div>
+      <div class="p-fluid field col-12 md:col-4">
+        <span class="p-float-label">
+          <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
+            [emptyMessage]="message" (completeMethod)="searchPerson($event)"
+            (onSelect)="offerSearch.managedBy = $event.value" field="field" appendTo="body"
+            [showClear]="offerSearch.managedBy" (onClear)="resetValueForm('managedBy')" formControlName="managedBy">
+          </p-autoComplete>
+          <label>Gestor responsable</label>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-7">
+    <div class="grid">
       <div class="p-fluid field col-12 md:col-2">
         <span class="p-float-label">
-          <p-calendar [showIcon]="!offerSearch.startDateModification" [showClear]="offerSearch.startDateModification" [(ngModel)]="offerSearch.startDateModification" appendTo="body"
-            formControlName="startDateModification" (onClear)="resetValueForm('startDateModification')"
-            >
+          <p-dropdown [(ngModel)]="offerSearch.sector" [options]="sectors" optionLabel="name" appendTo="body"
+            [showClear]="true" formControlName="sector" (onClear)="resetValueForm('sector')" [autoDisplayFirst]="false">
+          </p-dropdown>
+          <label>Sector</label>
+        </span>
+      </div>
+      <div class="p-fluid field col-12 md:col-2">
+        <span class="p-float-label">
+          <p-dropdown [(ngModel)]="offerSearch.type" [options]="types" optionLabel="name" appendTo="body"
+            [showClear]="true" formControlName="type" (onClear)="resetValueForm('type')" [autoDisplayFirst]="false">
+          </p-dropdown>
+          <label>Tipo</label>
+        </span>
+      </div>
+      <div class="p-fluid field col-12 md:col-2">
+        <span class="p-float-label">
+          <p-dropdown [(ngModel)]="offerSearch.status" [options]="status" optionLabel="name" appendTo="body"
+            [showClear]="true" formControlName="status" (onClear)="resetValueForm('status')" [autoDisplayFirst]="false">
+          </p-dropdown>
+          <label>Estado</label>
+        </span>
+      </div>
+      <div class="p-fluid field col-12 md:col-2">
+        <span class="p-float-label">
+          <p-calendar [showIcon]="!offerSearch.startDateModification" [showClear]="offerSearch.startDateModification"
+            [(ngModel)]="offerSearch.startDateModification" appendTo="body" formControlName="startDateModification"
+            (onClear)="resetValueForm('startDateModification')">
           </p-calendar>
           <label>Fecha inicio</label>
         </span>
       </div>
       <div class="p-fluid field col-12 md:col-2">
         <span class="p-float-label">
-          <p-calendar [showClear]="offerSearch.endDateModification" [(ngModel)]="offerSearch.endDateModification" appendTo="body"
-            formControlName="endDateModification" [showIcon]="!offerSearch.endDateModification" (onClear)="resetValueForm('endDateModification')"
-            >
+          <p-calendar [showClear]="offerSearch.endDateModification" [(ngModel)]="offerSearch.endDateModification"
+            appendTo="body" formControlName="endDateModification" [showIcon]="!offerSearch.endDateModification"
+            (onClear)="resetValueForm('endDateModification')">
           </p-calendar>
           <label>Fecha fin</label>
         </span>
       </div>
-      <div class="p-fluid field col-1">
+      <div class="p-fluid field col-12 md:col-1">
         <button pButton label="Limpiar" class="p-button-outlined p-button-danger" [disabled]="!isAssignValuesFilter()"
           (click)="resetForm()"></button>
       </div>
-      <div class="p-fluid field col-1">
+      <div class="p-fluid field col-12 md:col-1">
         <button pButton label="Filtrar" class="p-button-outlined" [disabled]="filterForm.invalid"
           (click)="loadPage()"></button>
       </div>
     </div>
-  </ng-template>
+  </div>
+</div>
+<p-table [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="isloading" scrollable="true"
+  scrollHeight="calc(83vh - 190px)" responsiveLayout="scroll" [paginator]="true" [rows]="10"
+  [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]"
+  currentPageReportTemplate="{first} - {last} / {totalRecords}" paginatorPosition="bottom"
+  [globalFilterFields]="['opportunityStatus.name']">
   <ng-template pTemplate="header">
     <tr>
       <th>Nombre</th>
@@ -71,37 +112,6 @@
       </th>
       <th style="flex: 0 0 150px">Acción</th>
     </tr>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>
-        <p-dropdown styleClass="mr-8" [(ngModel)]="offerSearch.sector" [options]="sectors" optionLabel="name"
-          appendTo="body" [showClear]="true" placeholder="Opciones" formControlName="sector" [style]="{'width':'160px'}"
-          (onClear)="resetValueForm('sector')">
-        </p-dropdown>
-      </th>
-      <th>
-        <p-dropdown styleClass="-ml-8" [(ngModel)]="offerSearch.type" [options]="types" optionLabel="name"
-          appendTo="body" [showClear]="true" placeholder="Opciones" formControlName="type" [style]="{'width':'170px'}"
-          (onClear)="resetValueForm('type')">
-        </p-dropdown>
-      </th>
-      <th>
-        <p-dropdown styleClass="-ml-6" [(ngModel)]="offerSearch.status" [options]="status" optionLabel="name"
-          appendTo="body" [showClear]="true" placeholder="Opciones" formControlName="status" [style]="{'width':'170px'}"
-          (onClear)="resetValueForm('status')">
-        </p-dropdown>
-      </th>
-      <th>
-        <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
-          [emptyMessage]="message" (completeMethod)="searchPerson($event)"
-          (onSelect)="offerSearch.managedBy = $event.value" field="field" appendTo="body" [showClear]="offerSearch.managedBy"
-          (onClear)="resetValueForm('managedBy')" placeholder="Buscar" formControlName="managedBy" inputStyleClass="max-w-13rem">
-        </p-autoComplete>
-      </th>
-      <th></th>
-      <th></th>
-      <th></th>
   </ng-template>
   <ng-template pTemplate="body" let-offerItemList>
     <tr>
@@ -112,7 +122,9 @@
       <td>{{ offerItemList.opportunityStatus.name }}</td>
       <td>{{ transformPerson(offerItemList.managedBy) }}</td>
       <td>{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
-      <td>{{ offerItemList.lastModification | date: "dd/MM/yyyy hh:mm:ss" }}</td>
+      <td>
+        {{ offerItemList.lastModification | date: "dd/MM/yyyy hh:mm:ss" }}
+      </td>
       <td style="flex: 0 0 150px">
         <div>
           <button pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)"
@@ -125,9 +137,11 @@
       </td>
     </tr>
   </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="flex justify-content-end">
+      <button pButton id="create-offer" (click)="toOfferEdit()" class="p-3">
+        Nueva oportunidad
+      </button>
+    </div>
+  </ng-template>
 </p-table>
-<div class="mt-3 flex justify-content-end">
-  <button pButton id="create-offer" (click)="toOfferEdit()" class="p-3">
-    Nueva oportunidad
-  </button>
-</div>

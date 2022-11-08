@@ -125,4 +125,9 @@ export class OfferEditComponent implements OnInit {
     this.offer.dataFiles.forEach((item) => delete item.uuid);
     this.offer.tradeTrackings.forEach((item) => delete item.uuid);
   }
+
+  offerIsFinished(){
+    if(this.offer.opportunityStatus.name == "Finalizada") return true;
+    return false;
+  }
 }
