@@ -1,4 +1,4 @@
-<div class="flex justify-content-end">
+<div *ngIf="offerIsFinished()" class="flex justify-content-end">
   <p-tag *ngIf="offer.opportunityWin" styleClass="text-white text-base mr-2" severity="success" value="Ganada" [rounded]="true"></p-tag>
   <p-tag *ngIf="!offer.opportunityWin" styleClass="text-white text-base mr-2" severity="warning" value="No ganada" [rounded]="true"></p-tag>
 </div>

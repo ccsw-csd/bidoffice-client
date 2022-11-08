@@ -22,10 +22,9 @@
       <td style='flex: 0 0 150px;'>
         <div *ngIf="tracings.uuid != null && commentFromCurrentPerson(tracings.person)">
           <button pButton icon="pi pi-pencil" (click)="onRowEditInit(tracings)"
-            class="p-button-rounded p-button-text p-button-plain icon"></button>
-          <button *ngIf="tracings.uuid != null && commentFromCurrentPerson(tracings.person)"
-            (click)="onDeleteRow(tracings)" pButton icon="pi pi-trash"
-            class="p-button-rounded p-button-text p-button-plain icon"></button>
+            class="h-1rem p-button-sm p-button-text p-button-rounded p-button-plain icon"></button>
+          <button (click)="onDeleteRow(tracings)" pButton icon="pi pi-trash"
+            class="h-1rem p-button-sm p-button-text p-button-rounded p-button-plain icon"></button>
         </div>
     </tr>
   </ng-template>
