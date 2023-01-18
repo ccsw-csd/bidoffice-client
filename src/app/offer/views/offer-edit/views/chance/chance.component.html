@@ -77,14 +77,14 @@
   <div class="ui-fluid formgrid grid mt-3">
     <div class="p-fluid field col-12 md:col-4">
       <span class="p-float-label">
-        <p-multiSelect [options]="offerings" [(ngModel)]="data.offerings" formControlName="offerings" optionLabel="name"
+        <p-multiSelect [options]="offerings" [filter]="false" [(ngModel)]="data.offerings" formControlName="offerings" optionLabel="name"
           appendTo="body"></p-multiSelect>
         <label>Offering</label>
       </span>
     </div>
     <div class="p-fluid field col-12 md:col-4">
       <span class="p-float-label">
-        <p-multiSelect [options]="technologies" [(ngModel)]="data.technologies" formControlName="technologies"
+        <p-multiSelect [options]="technologies" [filter]="false" [(ngModel)]="data.technologies" formControlName="technologies"
           optionLabel="name" appendTo="body"></p-multiSelect>
         <label>Tecnologías</label>
       </span>
