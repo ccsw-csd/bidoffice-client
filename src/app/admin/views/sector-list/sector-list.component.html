@@ -1,7 +1,7 @@
 <p-toast position="top-center"></p-toast>
 <p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
     <ng-template pTemplate="footer">
-        <button type="button" pButton label="Cerrar" class="p-button-secondary" (click)="closeDialog()"></button>
+        <button type="button" pButton label="Cerrar" class="p-button-outlined" (click)="closeDialog()"></button>
         <button type="button" pButton label="Borrar" class="p-button-primary" (click)="confirmDeletion()"></button>
     </ng-template>
 </p-confirmDialog>
