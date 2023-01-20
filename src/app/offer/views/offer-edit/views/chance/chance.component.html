@@ -78,7 +78,7 @@
     <div class="p-fluid field col-12 md:col-4">
       <span class="p-float-label">
         <p-multiSelect [options]="offerings" [filter]="false" [(ngModel)]="data.offerings" formControlName="offerings" optionLabel="name"
-          appendTo="body"></p-multiSelect>
+          appendTo="body" [showToggleAll]="false" [showClear]="true"></p-multiSelect>
         <label>Offering</label>
       </span>
     </div>

@@ -91,8 +91,6 @@ export class OfferListComponent implements OnInit {
         this.status = requestOfferStatus;
       }
     );
-
-    this.loadPage();
   }
 
   ngAfterViewChecked() {
@@ -200,7 +198,7 @@ export class OfferListComponent implements OnInit {
   }
   mappingPerson(person: Person): any {
     return {
-      field: person.name + ' ' + person.lastname + ' - ' + person.username,
+      field: person.name + ' ' + person.lastname,
       value: person,
     };
   }

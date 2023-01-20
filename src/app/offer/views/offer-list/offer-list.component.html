@@ -91,57 +91,51 @@
   </div>
 </div>
 <p-table [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="isloading" scrollable="true"
-  scrollHeight="calc(83vh - 190px)" responsiveLayout="scroll" [paginator]="true" [rows]="10"
-  [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 25, 50]"
+  scrollHeight="calc(83vh - 85px)" responsiveLayout="scroll" [paginator]="true" [rows]="25"
+  [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[25, 50, 100]"
   currentPageReportTemplate="{first} - {last} / {totalRecords}" paginatorPosition="bottom"
-  [globalFilterFields]="['opportunityStatus.name']">
+  [globalFilterFields]="['opportunityStatus.name']" styleClass="p-datatable-striped">
   <ng-template pTemplate="header">
     <tr>
-      <th>Nombre</th>
-      <th>Cliente</th>
-      <th>Sector</th>
-      <th>Tipo</th>
-      <th>Estado</th>
-      <th>Gestor responsable</th>
-      <th pSortableColumn="requestedDate">
-        Fecha solicitud<p-sortIcon field="requestedDate"></p-sortIcon>
+      <th class="flex-1">Nombre</th>
+      <th class="w-20rem flex-none">Cliente</th>
+      <th class="w-9rem flex-none">Sector</th>
+      <th class="w-9rem flex-none">Tipo</th>
+      <th class="w-12rem flex-none">Estado</th>
+      <th class="w-15rem flex-none">Gestor responsable</th>
+      <th class="w-9rem flex-none" pSortableColumn="requestedDate">
+        F. Solicitud<p-sortIcon field="requestedDate"></p-sortIcon>
       </th>
-      <th pSortableColumn="lastModification">
-        Última modificación
+      <th class="w-12rem flex-none" pSortableColumn="lastModification">
+        F. Modificada
         <p-sortIcon field="lastModification"></p-sortIcon>
       </th>
-      <th style="flex: 0 0 150px">Acción</th>
+      <th style="flex: 0 0 100px">Acción</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-offerItemList>
     <tr>
-      <td>{{ offerItemList.name }}</td>
-      <td>{{ offerItemList.client }}</td>
-      <td>{{ offerItemList.sector.name }}</td>
-      <td>{{ offerItemList.opportunityType.name }}</td>
-      <td>{{ offerItemList.opportunityStatus.name }}</td>
-      <td>{{ transformPerson(offerItemList.managedBy) }}</td>
-      <td>{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
-      <td>
+      <td class="flex-1 h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.name }}</td>
+      <td class="w-20rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.client }}</td>
+      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.sector.name }}</td>
+      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.opportunityType.name }}</td>
+      <td class="w-12rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.opportunityStatus.name }}</td>
+      <td class="w-15rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ transformPerson(offerItemList.managedBy) }}</td>
+      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
+      <td class="w-12rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">
         {{ offerItemList.lastModification | date: "dd/MM/yyyy hh:mm:ss" }}
       </td>
-      <td style="flex: 0 0 150px">
-        <div>
-          <button pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)"
-            class="p-button-rounded p-button-text p-button-plain icon"></button>
-        </div>
-        <div *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)">
-          <button pButton type="button" icon="pi pi-sitemap" (click)="onStatusChange(offerItemList)"
-            class="p-button-rounded p-button-text p-button-plain icon"></button>
-        </div>
+      <td style="flex: 0 0 100px" class="h-3rem white-space-normal overflow-hidden text-overflow-clip">
+        <button title="Cambiar estado" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <div *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)==false" style="width:38px"></div> 
+
+        <button title="Editar oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <button title="Ver oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name) == false" pButton type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="summary">
-    <div class="flex justify-content-end">
-      <button pButton id="create-offer" (click)="toOfferEdit()" class="p-3">
-        Nueva oportunidad
-      </button>
-    </div>
+  <ng-template pTemplate="paginatorleft"></ng-template>
+  <ng-template pTemplate="paginatorright">
+      <button pButton id="create-offer" (click)="toOfferEdit()" class="p-button-primary">Nueva oportunidad</button>
   </ng-template>
 </p-table>
