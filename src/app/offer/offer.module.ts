@@ -33,6 +33,7 @@ import { OptionStatusComponent } from './views/offer-list/option-status/option-s
 import { TradetrackComponent } from './views/offer-edit/views/tradetrack/tradetrack.component';
 import { TagModule } from 'primeng/tag';
 import { TradetrackEditComponent } from './views/offer-edit/views/tradetrack/tradetrack-edit/tradetrack-edit.component';
+import { ConfirmDialogComponent } from './views/confirm-dialog/confirm-dialog.component';
 @NgModule({
   declarations: [
     OfferListComponent,
@@ -47,7 +48,8 @@ import { TradetrackEditComponent } from './views/offer-edit/views/tradetrack/tra
     StatusChangeComponent,
     OptionStatusComponent,
     TradetrackComponent,
-    TradetrackEditComponent
+    TradetrackEditComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,

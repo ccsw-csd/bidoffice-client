@@ -6,10 +6,12 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { Offer } from '../../model/Offer';
 import { OfferService } from '../../services/offer.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { LazyLoadEvent } from 'primeng/api';
 
 @Component({
   selector: 'app-offer-edit',
@@ -20,6 +22,7 @@ import { OfferService } from '../../services/offer.service';
 export class OfferEditComponent implements OnInit {
   activeItem: number = 0;
   offer: Offer;
+  offerModification: Offer;
   offerForm: FormGroup;
   chanceForm: FormGroup;
   offerStatus: string;
@@ -32,7 +35,8 @@ export class OfferEditComponent implements OnInit {
     public ref: DynamicDialogRef,
     private offerService: OfferService,
     private snackbarService: SnackbarService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private dinamicDialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -102,7 +106,7 @@ export class OfferEditComponent implements OnInit {
             `La oferta ha sido ${this.offerStatus} correctamente.`
           );
           this.isLoading = true;
-          this.onClose();
+          this.ref.destroy();
         },
       });
     } else {
@@ -113,7 +117,19 @@ export class OfferEditComponent implements OnInit {
     }
   }
   onClose() {
-    this.ref.close();
+    if(this.offerForm.dirty){
+      const ref = this.dinamicDialogService.open(ConfirmDialogComponent, {
+        width: '50%',
+        height: '50%',
+        closable: false,
+      });
+  
+      ref.onClose.subscribe(() => {
+
+        this.ref.close();
+      });
+
+    }
   }
 
   titleHeader(value: string){

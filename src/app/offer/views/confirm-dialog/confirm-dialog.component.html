@@ -1,0 +1,26 @@
+<!-- <div class="w-50 h-50 p-3">
+    <div class="ui-fluid formgrid grid absolute justify-content-end">
+        <p>¿Está usted de acuerdo en descartar los cambios realizados en la edición?</p>
+    </div>
+    <div class="ui-fluid formgrid grid absolute right-0 left-0 bottom-0 justify-content-end mb-1 mr-4">
+        <div class="p-fluid field col-12 md:col-1">
+          <button class="p-3 p-button-outlined" pButton (click)="onClose()" label="Seguir editando"></button>
+        </div>
+        <div class="p-fluid field col-12 md:col-1">
+          <button class="p-3" pButton (click)="onSave()" label="Descartar cambios y salir"></button>
+        </div>
+    </div>
+</div> -->
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer ui-fluid formgrid grid absolute right-0 left-0 bottom-0 justify-content-end mb-1 mr-4">
+          <button class="p-3 p-button-outlined" pButton data-dismiss="modal" (click)="onSave()">Seguir editando</button>
+          <button class="p-3" pButton (click)="onClose()">Descartar cambios y salir</button>
+        </div>
+      </div>
+    </div>
+  </div>
