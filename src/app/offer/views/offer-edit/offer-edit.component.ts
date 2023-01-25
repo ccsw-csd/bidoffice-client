@@ -118,17 +118,17 @@ export class OfferEditComponent implements OnInit {
   }
   onClose() {
     if(this.offerForm.dirty){
-      const ref = this.dinamicDialogService.open(ConfirmDialogComponent, {
+      const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {
         width: '50%',
         height: '50%',
         closable: false,
       });
   
-      ref.onClose.subscribe(() => {
-
+      dialogoRef.onClose.subscribe(() => {
         this.ref.close();
       });
-
+    }else{
+      this.ref.close();
     }
   }
 
