@@ -121,7 +121,7 @@ export class OfferEditComponent implements OnInit {
       const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {
         header: 'Se ha modificado la oportunidad',
         width: '500px',
-        height: '325px',
+        height: '300px',
         closable: false,
       });
       dialogoRef.onClose.subscribe((response: boolean) => {
