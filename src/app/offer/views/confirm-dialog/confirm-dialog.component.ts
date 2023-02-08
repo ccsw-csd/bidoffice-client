@@ -13,10 +13,10 @@ export class ConfirmDialogComponent implements OnInit {
   ngOnInit(): void {
   }
   onClose(){
-    this.ref.close();
+    this.ref.close(true);
   }
   onSave(){
-    this.ref.destroy();
+    this.ref.close();
     
   }
 }

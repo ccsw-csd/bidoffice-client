@@ -106,7 +106,7 @@ export class OfferEditComponent implements OnInit {
             `La oferta ha sido ${this.offerStatus} correctamente.`
           );
           this.isLoading = true;
-          this.ref.destroy();
+          this.ref.close();
         },
       });
     } else {
@@ -119,13 +119,12 @@ export class OfferEditComponent implements OnInit {
   onClose() {
     if(this.offerForm.dirty){
       const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {
-        width: '50%',
-        height: '50%',
+        width: '300px',
+        height: '300px',
         closable: false,
       });
-  
-      dialogoRef.onClose.subscribe(() => {
-        this.ref.close();
+      dialogoRef.onClose.subscribe((response: boolean) => {
+        if(response) this.ref.close();
       });
     }else{
       this.ref.close();
