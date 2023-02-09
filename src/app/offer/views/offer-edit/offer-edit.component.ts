@@ -117,19 +117,22 @@ export class OfferEditComponent implements OnInit {
     }
   }
   onClose() {
-    if(this.offerForm.dirty){
-      const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {
-        header: 'Se ha modificado la oportunidad',
-        width: '500px',
-        height: '300px',
-        closable: false,
-      });
-      dialogoRef.onClose.subscribe((response: boolean) => {
-        if(response) this.ref.close();
-      });
-    }else{
+    if(this.offerForm.dirty == false) 
       this.ref.close();
-    }
+      
+
+    const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {
+      header: 'Atención, datos no guardados',
+      width: '500px',
+      height: '250px',
+      closable: false,
+    });
+
+    dialogoRef.onClose.subscribe((response: boolean) => {
+      if(response) 
+        this.ref.close();
+    });
+
   }
 
   titleHeader(value: string){
