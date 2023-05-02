@@ -68,6 +68,12 @@
       </div>
     </div>
     <div class="p-fluid field col-12 md:col-2">
+      <div class="p-float-label">
+        <p-calendar [showIcon]="true" [(ngModel)]="data.releaseDate" formControlName="releaseDate" appendTo="body" aria-describedby="releaseDate-help"></p-calendar>
+        <label>Fecha Entrega Oportunidad</label>
+      </div>
+    </div>
+    <div class="p-fluid field col-12 md:col-2">
       <span class="p-float-label">
         <input formControlName="state" [(ngModel)]="data.opportunityStatus.name" pInputText />
         <label>Estado</label>

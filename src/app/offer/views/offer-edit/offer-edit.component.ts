@@ -66,6 +66,7 @@ export class OfferEditComponent implements OnInit {
         bdcCode: [''],
         opportunityWin: [{ value: '', disabled: true }],
         observations: [''],
+        releaseDate: ['', Validators.required]
       }),
     });
     this.chanceForm = this.offerForm.get('chance') as FormGroup;
@@ -117,7 +118,7 @@ export class OfferEditComponent implements OnInit {
     }
   }
   onClose() {
-    
+
     if (this.offerForm.dirty == false) {
       this.ref.close();
     } else {
