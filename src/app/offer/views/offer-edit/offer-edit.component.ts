@@ -37,7 +37,7 @@ export class OfferEditComponent implements OnInit {
     private snackbarService: SnackbarService,
     private cdRef: ChangeDetectorRef,
     private dinamicDialogService: DialogService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.title = this.config.header.split(':')[0];
@@ -52,7 +52,7 @@ export class OfferEditComponent implements OnInit {
       chance: this.formBuilder.group({
         nameOpportunity: ['', Validators.required],
         client: ['', Validators.required],
-        state: [{value: '', disabled: true}, Validators.required],
+        state: [{ value: '', disabled: true }, Validators.required],
         requestedBy: [''],
         managedBy: [''],
         requestedDate: ['', Validators.required],
@@ -64,7 +64,7 @@ export class OfferEditComponent implements OnInit {
         goNogoDate: [''],
         deliveryDate: [''],
         bdcCode: [''],
-        opportunityWin: [{value: '', disabled: true}],
+        opportunityWin: [{ value: '', disabled: true }],
         observations: [''],
       }),
     });
@@ -76,9 +76,9 @@ export class OfferEditComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
-  onChange(){
-    this.chanceForm.get('nameOpportunity').valueChanges.subscribe(value =>{
-      if(value != null) this.titleHeader(value);
+  onChange() {
+    this.chanceForm.get('nameOpportunity').valueChanges.subscribe(value => {
+      if (value != null) this.titleHeader(value);
     })
   }
 
@@ -117,36 +117,37 @@ export class OfferEditComponent implements OnInit {
     }
   }
   onClose() {
-    if(this.offerForm.dirty == false) 
+    
+    if (this.offerForm.dirty == false) {
       this.ref.close();
-      
+    } else {
+      const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {
+        header: 'Atención, datos no guardados',
+        width: '500px',
+        height: '250px',
+        closable: false,
+      });
 
-    const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {
-      header: 'Atención, datos no guardados',
-      width: '500px',
-      height: '250px',
-      closable: false,
-    });
+      dialogoRef.onClose.subscribe((response: boolean) => {
+        if (response)
+          this.ref.close();
+      });
 
-    dialogoRef.onClose.subscribe((response: boolean) => {
-      if(response) 
-        this.ref.close();
-    });
-
+    }
   }
 
-  titleHeader(value: string){
+  titleHeader(value: string) {
     this.config.header = `${this.title}: ${value ? value : ""}`;
   }
 
-  private deleteUUID(){
+  private deleteUUID() {
     this.offer.tracings.forEach((item) => delete item.uuid);
     this.offer.dataFiles.forEach((item) => delete item.uuid);
     this.offer.tradeTrackings.forEach((item) => delete item.uuid);
   }
 
-  offerIsFinished(){
-    if(this.offer.opportunityStatus.name == "Finalizada") return true;
+  offerIsFinished() {
+    if (this.offer.opportunityStatus.name == "Finalizada") return true;
     return false;
   }
 }
