@@ -36,6 +36,7 @@ export class Offer {
   tracings: OfferTracing[] = new Array();
   changeStatus: OfferChangeStatus[] = new Array();
   tradeTrackings: OfferTradeTracking[] = new Array();
+  releaseDate: Date; 
 
   parseStringToDate() {
     if (this.goNogoDate != null)
@@ -55,5 +56,8 @@ export class Offer {
 
     this.tracings.forEach(item => item.date = new Date(item.date.toLocaleString()))
     this.tradeTrackings.forEach(item => item.date = new Date(item.date.toLocaleString()))
+
+    if(this.releaseDate != null)
+      this.releaseDate = new Date(this.releaseDate.toLocaleString());
   }
 }
