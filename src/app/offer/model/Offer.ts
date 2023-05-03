@@ -23,7 +23,7 @@ export class Offer {
   opportunityStatus: BaseClass = new BaseClass();
   opportunityWin: boolean = false;
   lastModification: Date;
-  creationDate: Date;
+  userLastUpdate: Date;
   observations: string;
   dataChapter: OfferDataChapter = new OfferDataChapter();
   dataFiles: OfferDataFile[] = new Array();
@@ -51,8 +51,8 @@ export class Offer {
     if(this.lastModification != null)
       this.lastModification = new Date(this.lastModification.toLocaleString());
     
-    if(this.creationDate != null)
-      this.creationDate = new Date(this.creationDate.toLocaleString())
+    if(this.userLastUpdate != null)
+      this.userLastUpdate = new Date(this.userLastUpdate.toLocaleString())
 
     this.tracings.forEach(item => item.date = new Date(item.date.toLocaleString()))
     this.tradeTrackings.forEach(item => item.date = new Date(item.date.toLocaleString()))
