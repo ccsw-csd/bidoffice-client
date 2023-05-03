@@ -28,7 +28,16 @@ export class OfferEditComponent implements OnInit {
   offerStatus: string;
   isLoading: boolean = false;
   title: string;
-
+  offerStates = [
+    { value: 'Ganada', severity: 'success' },
+    { value: 'Pendiente Go/NoGo', severity: 'info' },
+    { value: 'Desestimada', severity: 'info' },
+    { value: 'Stand by', severity: 'info' },
+    { value: 'Entregada', severity: 'info' },
+    { value: 'No ganada', severity: 'warning' },
+    { value: 'En Curso', severity: 'info' }
+  ];
+  
   constructor(
     private formBuilder: FormBuilder,
     public config: DynamicDialogConfig,
@@ -148,7 +157,21 @@ export class OfferEditComponent implements OnInit {
   }
 
   offerIsFinished() {
-    if (this.offer.opportunityStatus.name == "Finalizada") return true;
-    return false;
+    return this.offer.opportunityStatus.name == "Finalizada";
   }
+
+  getOfferState() {
+    if (this.offerIsFinished()) {
+      return this.offer.opportunityWin ? this.offerStates[0] : this.offerStates[5];
+    } else {
+      const offerStatus = this.offer.opportunityStatus.name;
+      if (offerStatus === "En Curso") {
+        return { value: offerStatus, severity: 'info' };
+      } else {
+        const state = this.offerStates.find(state => state.value === offerStatus);
+        return state ? state : { value: offerStatus, severity: 'info' };
+      }
+    }
+  }
+  
 }
