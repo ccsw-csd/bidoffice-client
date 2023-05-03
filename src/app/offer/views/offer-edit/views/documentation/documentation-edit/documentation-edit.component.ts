@@ -32,7 +32,7 @@ export class DocumentationEditComponent implements OnInit {
   ngOnInit(): void {
     this.dataFileForm = this.formBuilder.group({
       typeDoc: ['', Validators.required],
-      nameFile: ['', Validators.required],
+      nameFile: [''],
       formatFile: ['', Validators.required],
       link: ['', [Validators.required, ValidateURL]],
       observation: [''],
