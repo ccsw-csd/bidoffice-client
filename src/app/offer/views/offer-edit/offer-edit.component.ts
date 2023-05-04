@@ -37,7 +37,7 @@ export class OfferEditComponent implements OnInit {
     { value: 'No ganada', severity: 'warning' },
     { value: 'En Curso', severity: 'info' }
   ];
-  
+
   constructor(
     private formBuilder: FormBuilder,
     public config: DynamicDialogConfig,
@@ -126,9 +126,9 @@ export class OfferEditComponent implements OnInit {
       this.offerForm.markAllAsTouched();
     }
   }
-  onClose() {
 
-    if (this.offerForm.dirty == false) {
+  onClose() {
+    if (this.offerForm.dirty == false || this.offerForm.touched == false) {
       this.ref.close();
     } else {
       const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {
@@ -137,14 +137,14 @@ export class OfferEditComponent implements OnInit {
         height: '250px',
         closable: false,
       });
-
+  
       dialogoRef.onClose.subscribe((response: boolean) => {
         if (response)
           this.ref.close();
       });
-
+  
     }
-  }
+  }  
 
   titleHeader(value: string) {
     this.config.header = `${this.title}: ${value ? value : ""}`;
@@ -173,5 +173,5 @@ export class OfferEditComponent implements OnInit {
       }
     }
   }
-  
+
 }
