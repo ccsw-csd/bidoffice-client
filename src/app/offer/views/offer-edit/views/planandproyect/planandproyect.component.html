@@ -74,7 +74,7 @@
       </div>
       <div class="p-fluid field col-12 md:col-4">
         <span class="p-float-label">
-          <p-calendar [showIcon]="true" appendTo="body" [(ngModel)]="data.userLastUpdate" [disabled]="true"></p-calendar>
+          <input pInputText [ngModel]="data.userLastUpdate.name + ' ' + data.userLastUpdate.lastname" [disabled]="true">
           <label>Usuario última actualización</label>
         </span>
       </div>
