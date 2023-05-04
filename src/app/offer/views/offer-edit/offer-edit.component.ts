@@ -75,7 +75,7 @@ export class OfferEditComponent implements OnInit {
         bdcCode: [''],
         opportunityWin: [{ value: '', disabled: true }],
         observations: [''],
-        releaseDate: ['', Validators.required]
+        releaseDate: ['']
       }),
     });
     this.chanceForm = this.offerForm.get('chance') as FormGroup;
