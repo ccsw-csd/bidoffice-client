@@ -30,7 +30,7 @@
             (onSelect)="offerSearch.managedBy = $event.value" field="field" appendTo="body"
             [showClear]="offerSearch.managedBy" (onClear)="resetValueForm('managedBy')" formControlName="managedBy">
           </p-autoComplete>
-          <label>Gestor responsable</label>
+          <label>Responsable CCA</label>
         </span>
       </div>
     </div>
@@ -97,7 +97,7 @@
   [globalFilterFields]="['opportunityStatus.name']" styleClass="p-datatable-striped">
   <ng-template pTemplate="header">
     <tr>
-      <th class="flex-1">Nombre</th>
+      <th class="flex-1">Nombre Oportunidad</th>
       <th class="w-20rem flex-none">Cliente</th>
       <th class="w-9rem flex-none">Sector</th>
       <th class="w-9rem flex-none">Tipo</th>
