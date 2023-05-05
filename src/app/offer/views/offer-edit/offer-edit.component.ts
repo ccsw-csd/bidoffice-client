@@ -28,6 +28,15 @@ export class OfferEditComponent implements OnInit {
   offerStatus: string;
   isLoading: boolean = false;
   title: string;
+  offerStates = [
+    { value: 'Ganada', severity: 'success' },
+    { value: 'Pendiente Go/NoGo', severity: 'info' },
+    { value: 'Desestimada', severity: 'info' },
+    { value: 'Stand by', severity: 'info' },
+    { value: 'Entregada', severity: 'info' },
+    { value: 'No ganada', severity: 'warning' },
+    { value: 'En Curso', severity: 'info' }
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,7 +46,7 @@ export class OfferEditComponent implements OnInit {
     private snackbarService: SnackbarService,
     private cdRef: ChangeDetectorRef,
     private dinamicDialogService: DialogService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.title = this.config.header.split(':')[0];
@@ -52,7 +61,7 @@ export class OfferEditComponent implements OnInit {
       chance: this.formBuilder.group({
         nameOpportunity: ['', Validators.required],
         client: ['', Validators.required],
-        state: [{value: '', disabled: true}, Validators.required],
+        state: [{ value: '', disabled: true }, Validators.required],
         requestedBy: [''],
         managedBy: [''],
         requestedDate: ['', Validators.required],
@@ -64,8 +73,9 @@ export class OfferEditComponent implements OnInit {
         goNogoDate: [''],
         deliveryDate: [''],
         bdcCode: [''],
-        opportunityWin: [{value: '', disabled: true}],
+        opportunityWin: [{ value: '', disabled: true }],
         observations: [''],
+        releaseDate: ['']
       }),
     });
     this.chanceForm = this.offerForm.get('chance') as FormGroup;
@@ -76,9 +86,9 @@ export class OfferEditComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
-  onChange(){
-    this.chanceForm.get('nameOpportunity').valueChanges.subscribe(value =>{
-      if(value != null) this.titleHeader(value);
+  onChange() {
+    this.chanceForm.get('nameOpportunity').valueChanges.subscribe(value => {
+      if (value != null) this.titleHeader(value);
     })
   }
 
@@ -116,37 +126,52 @@ export class OfferEditComponent implements OnInit {
       this.offerForm.markAllAsTouched();
     }
   }
+
   onClose() {
-    if(this.offerForm.dirty == false) 
+    if (this.offerForm.dirty == false || this.offerForm.touched == false) {
       this.ref.close();
-      
+    } else {
+      const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {
+        header: 'Atención, datos no guardados',
+        width: '500px',
+        height: '250px',
+        closable: false,
+      });
+  
+      dialogoRef.onClose.subscribe((response: boolean) => {
+        if (response)
+          this.ref.close();
+      });
+  
+    }
+  }  
 
-    const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {
-      header: 'Atención, datos no guardados',
-      width: '500px',
-      height: '250px',
-      closable: false,
-    });
-
-    dialogoRef.onClose.subscribe((response: boolean) => {
-      if(response) 
-        this.ref.close();
-    });
-
-  }
-
-  titleHeader(value: string){
+  titleHeader(value: string) {
     this.config.header = `${this.title}: ${value ? value : ""}`;
   }
 
-  private deleteUUID(){
+  private deleteUUID() {
     this.offer.tracings.forEach((item) => delete item.uuid);
     this.offer.dataFiles.forEach((item) => delete item.uuid);
     this.offer.tradeTrackings.forEach((item) => delete item.uuid);
   }
 
-  offerIsFinished(){
-    if(this.offer.opportunityStatus.name == "Finalizada") return true;
-    return false;
+  offerIsFinished() {
+    return this.offer.opportunityStatus.name == "Finalizada";
   }
+
+  getOfferState() {
+    if (this.offerIsFinished()) {
+      return this.offer.opportunityWin ? this.offerStates[0] : this.offerStates[5];
+    } else {
+      const offerStatus = this.offer.opportunityStatus.name;
+      if (offerStatus === "En Curso") {
+        return { value: offerStatus, severity: 'info' };
+      } else {
+        const state = this.offerStates.find(state => state.value === offerStatus);
+        return state ? state : { value: offerStatus, severity: 'info' };
+      }
+    }
+  }
+
 }

@@ -26,7 +26,7 @@
         [emptyMessage]="message" [(ngModel)]="selectedPerson" (completeMethod)="searchPerson($event)"
         (onSelect)="assignTeamPerson()" field="field">
       </p-autoComplete>
-      <label>Personas oferta</label>
+      <label>Añadir personas implicadas a la oferta</label>
     </span>
   </div>
 </div>
@@ -59,7 +59,7 @@
       <div class="p-fluid field col-12 md:col-3">
         <span class="p-float-label">
           <p-inputNumber locale="es-ES" [(ngModel)]="data.dataProject.months" [min]="0" inputId="minmaxfraction" mode="decimal"
-            [minFractionDigits]="2" [maxFractionDigits]="5">
+            [minFractionDigits]="0" [maxFractionDigits]="0">
           </p-inputNumber>
           <label>Duración</label>
         </span>
@@ -74,20 +74,20 @@
       </div>
       <div class="p-fluid field col-12 md:col-4">
         <span class="p-float-label">
-          <p-calendar [showIcon]="true" appendTo="body" [(ngModel)]="data.creationDate" [disabled]="true"></p-calendar>
-          <label>Fecha creación</label>
+          <input pInputText [ngModel]="data.userLastUpdate.name + ' ' + data.userLastUpdate.lastname" [disabled]="true">
+          <label>Usuario última actualización</label>
         </span>
       </div>
       <div class="p-fluid field col-12 md:col-4">
         <span class="p-float-label">
           <p-calendar [showIcon]="true" appendTo="body" [(ngModel)]="data.lastModification" [disabled]="true"></p-calendar>
-          <label>Fecha actualización</label>
+          <label>Fecha última actualización</label>
         </span>
       </div>
       <div class="p-fluid field col-12 md:col-4">
         <span class="p-float-label">
-          <p-calendar [showClear]="data.deliveryDate"[showIcon]="!data.deliveryDate" appendTo="body" [(ngModel)]="data.deliveryDate"></p-calendar>
-          <label>Fecha entrega</label>
+          <p-calendar [showClear]="data.releaseDate"[showIcon]="!data.releaseDate" appendTo="body" [(ngModel)]="data.releaseDate"></p-calendar>
+          <label>Fecha liberación oportunidad</label>
         </span>
       </div>
     </div>

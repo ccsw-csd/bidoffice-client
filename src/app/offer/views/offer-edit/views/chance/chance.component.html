@@ -30,7 +30,7 @@
       <span class="p-float-label">
         <p-dropdown [options]="offerTypes" [(ngModel)]="data.opportunityType" formControlName="opportunityType"
           optionLabel="name" appendTo="body" aria-describedby="opportunityType-help"></p-dropdown>
-        <label>Tipo de Oferta</label>
+        <label>Tipo de Oportunidad</label>
       </span>
     </div>
   </div>
@@ -68,10 +68,10 @@
       </div>
     </div>
     <div class="p-fluid field col-12 md:col-2">
-      <span class="p-float-label">
-        <input formControlName="state" [(ngModel)]="data.opportunityStatus.name" pInputText />
-        <label>Estado</label>
-      </span>
+      <div class="p-float-label">
+        <p-calendar [showIcon]="true" [(ngModel)]="data.deliveryDate" formControlName="deliveryDate" appendTo="body" aria-describedby="deliveryDate-help"></p-calendar>
+        <label>Fecha Entrega Oportunidad</label>
+      </div>
     </div>
   </div>
   <div class="ui-fluid formgrid grid mt-3">
