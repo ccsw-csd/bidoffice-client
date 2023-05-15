@@ -4,6 +4,12 @@
     <div class="grid">
       <div class="p-fluid field col-12 md:col-4">
         <span class="p-float-label">
+          <input pInputText [(ngModel)]="offerSearch.client" field="field" formControlName="client">
+          <label>Cliente</label>
+        </span>
+      </div>
+      <div class="p-fluid field col-12 md:col-4">
+        <span class="p-float-label">
           <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
             [emptyMessage]="message" (completeMethod)="searchPerson($event)"
             (onSelect)="offerSearch.requestedBy = $event.value" field="field" appendTo="body"
@@ -55,30 +61,21 @@
       </div>
       <div class="p-fluid field col-12 md:col-2">
         <span class="p-float-label">
-          <p-dropdown [(ngModel)]="offerSearch.status" [options]="status" optionLabel="name" appendTo="body"
-            [showClear]="true" formControlName="status" (onClear)="resetValueForm('status')" [autoDisplayFirst]="false">
-          </p-dropdown>
+          <p-multiSelect [(ngModel)]="offerSearch.status" [options]="status" optionLabel="name" appendTo="body"
+            [showClear]="true" formControlName="status" (onClear)="filterStatus=[]">
+          </p-multiSelect>
           <label>Estado</label>
         </span>
       </div>
-      <div class="p-fluid field col-12 md:col-2">
+
+      <div class="p-fluid field col-12 md:col-3">
         <span class="p-float-label">
-          <p-calendar [showIcon]="!offerSearch.startDateModification" [showClear]="offerSearch.startDateModification"
-            [(ngModel)]="offerSearch.startDateModification" appendTo="body" formControlName="startDateModification"
-            (onClear)="resetValueForm('startDateModification')">
+          <p-calendar [showIcon]="true" [(ngModel)]="offerSearch.deliveryDate" selectionMode="range" [readonlyInput]="true" appendTo="body" formControlName="deliveryDate" (onClear)="resetValueForm('startDateModification')">
           </p-calendar>
-          <label>Fecha inicio</label>
+          <label>Fecha Entrega Oportunidad</label>
         </span>
       </div>
-      <div class="p-fluid field col-12 md:col-2">
-        <span class="p-float-label">
-          <p-calendar [showClear]="offerSearch.endDateModification" [(ngModel)]="offerSearch.endDateModification"
-            appendTo="body" formControlName="endDateModification" [showIcon]="!offerSearch.endDateModification"
-            (onClear)="resetValueForm('endDateModification')">
-          </p-calendar>
-          <label>Fecha fin</label>
-        </span>
-      </div>
+
       <div class="p-fluid field col-12 md:col-1">
         <button pButton label="Limpiar" class="p-button-outlined p-button-danger" [disabled]="!isAssignValuesFilter()"
           (click)="resetForm()"></button>
@@ -116,26 +113,38 @@
   <ng-template pTemplate="body" let-offerItemList>
     <tr>
       <td class="flex-1 h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.name }}</td>
-      <td class="w-20rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.client }}</td>
-      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.sector.name }}</td>
-      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.opportunityType.name }}</td>
-      <td class="w-12rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.opportunityStatus.name }}</td>
-      <td class="w-15rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ transformPerson(offerItemList.managedBy) }}</td>
-      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
+      <td class="w-20rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.client
+        }}</td>
+      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+        offerItemList.sector.name }}</td>
+      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+        offerItemList.opportunityType.name }}</td>
+      <td class="w-12rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+        offerItemList.opportunityStatus.name }}</td>
+      <td class="w-15rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+        transformPerson(offerItemList.managedBy) }}</td>
+      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+        offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
       <td class="w-12rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">
         {{ offerItemList.lastModification | date: "dd/MM/yyyy hh:mm:ss" }}
       </td>
       <td style="flex: 0 0 100px" class="h-3rem white-space-normal overflow-hidden text-overflow-clip">
-        <button title="Cambiar estado" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
-        <div *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)==false" style="width:38px"></div> 
+        <button title="Cambiar estado" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton
+          type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)"
+          class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <div *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)==false" style="width:38px"></div>
 
-        <button title="Editar oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
-        <button title="Ver oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name) == false" pButton type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <button title="Editar oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton
+          type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)"
+          class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <button title="Ver oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name) == false" pButton
+          type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)"
+          class="p-button-rounded p-button-text p-button-plain icon"></button>
       </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="paginatorleft"></ng-template>
   <ng-template pTemplate="paginatorright">
-      <button pButton id="create-offer" (click)="toOfferEdit()" class="p-button-primary">Nueva oportunidad</button>
+    <button pButton id="create-offer" (click)="toOfferEdit()" class="p-button-primary">Nueva oportunidad</button>
   </ng-template>
 </p-table>

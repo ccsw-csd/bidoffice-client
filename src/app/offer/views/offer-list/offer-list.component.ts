@@ -55,6 +55,8 @@ export class OfferListComponent implements OnInit {
   filterForm: FormGroup;
   filterOptions: OfferSearch = new OfferSearch();
   headerChoice = 'Nueva Oportunidad';
+  filterStatus: BaseClass[];
+
   constructor(
     private offerService: OfferService,
     private cdRef: ChangeDetectorRef,
@@ -73,6 +75,8 @@ export class OfferListComponent implements OnInit {
         involved: [''],
         startDateModification: [''],
         endDateModification: [''],
+        client: [''],
+        deliveryDate: [''],
       },
       {
         validators: [verfierFilterDate],
@@ -113,7 +117,7 @@ export class OfferListComponent implements OnInit {
     }
     
     this.isloading = true;
-    this.offerService.findPage(this.pageable, this.offerSearch.status, this.offerSearch.type, this.offerSearch.sector, this.offerSearch.requestedBy, this.offerSearch.managedBy, this.offerSearch.involved, this.offerSearch.startDateModification, this.offerSearch.endDateModification).subscribe({
+    this.offerService.findPage(this.pageable, this.offerSearch.status, this.offerSearch.type, this.offerSearch.sector, this.offerSearch.requestedBy, this.offerSearch.managedBy, this.offerSearch.involved, this.offerSearch.startDateModification, this.offerSearch.endDateModification, this.offerSearch.client, this.offerSearch.deliveryDate).subscribe({
       next: (res: OfferPage) => {
         this.offerPage = res;
       },
@@ -124,6 +128,8 @@ export class OfferListComponent implements OnInit {
         this.isloading = false;
       },
     });
+
+    this.filterStatus?.map(item => item.id).toString();
   }
 
   toOfferEdit() {
@@ -186,7 +192,8 @@ export class OfferListComponent implements OnInit {
         complete: () => {},
       });
     }
-  }
+  }  
+
   getAllOfferStatus() {
     this.offerService.getAllOfferStatus().subscribe({
       next: (res: BaseClass[]) => {
