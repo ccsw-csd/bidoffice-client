@@ -1,108 +1,110 @@
 <p-toast position="top-center"></p-toast>
-<div [formGroup]="filterForm" class="grid">
-  <div class="col-5">
-    <div class="grid">
-      <div class="p-fluid field col-12 md:col-4">
-        <span class="p-float-label">
+<div [formGroup]="filterForm" class="w-full flex flex-row pb-4" >
+  <div class="w-full flex flex-row gap-4">
+    <div class="flex flex-1 flex-column gap-2">
+      <div class="flex flex-row gap-4">
+        <span class="p-float-label flex flex-1">
+          <input pInputText [(ngModel)]="offerSearch.client" field="field" formControlName="client" class="w-full">
+          <label>Cliente</label>
+        </span>
+        <span class="p-float-label flex-1">
           <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
             [emptyMessage]="message" (completeMethod)="searchPerson($event)"
             (onSelect)="offerSearch.requestedBy = $event.value" field="field" appendTo="body"
             [showClear]="offerSearch.requestedBy" (onClear)="resetValueForm('requestedBy')"
-            formControlName="requestedBy">
+            formControlName="requestedBy" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
           </p-autoComplete>
           <label>Comercial</label>
         </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-4">
-        <span class="p-float-label">
-          <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
-            [emptyMessage]="message" (completeMethod)="searchPerson($event)"
-            (onSelect)="offerSearch.involved = $event.value" field="field" appendTo="body"
-            [showClear]="offerSearch.involved" (onClear)="resetValueForm('involved')" formControlName="involved">
-          </p-autoComplete>
-          <label>Persona implicada</label>
-        </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-4">
-        <span class="p-float-label">
-          <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
-            [emptyMessage]="message" (completeMethod)="searchPerson($event)"
-            (onSelect)="offerSearch.managedBy = $event.value" field="field" appendTo="body"
-            [showClear]="offerSearch.managedBy" (onClear)="resetValueForm('managedBy')" formControlName="managedBy">
-          </p-autoComplete>
-          <label>Gestor responsable</label>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div class="col-7">
-    <div class="grid">
-      <div class="p-fluid field col-12 md:col-2">
-        <span class="p-float-label">
+
+        <span class="p-float-label w-15rem">
           <p-dropdown [(ngModel)]="offerSearch.sector" [options]="sectors" optionLabel="name" appendTo="body"
-            [showClear]="true" formControlName="sector" (onClear)="resetValueForm('sector')" [autoDisplayFirst]="false">
+            [showClear]="true" formControlName="sector" (onClear)="resetValueForm('sector')" [autoDisplayFirst]="false" [style]="{width: '100%'}">
           </p-dropdown>
           <label>Sector</label>
         </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-2">
-        <span class="p-float-label">
+
+        <span class="p-float-label w-15rem">
           <p-dropdown [(ngModel)]="offerSearch.type" [options]="types" optionLabel="name" appendTo="body"
-            [showClear]="true" formControlName="type" (onClear)="resetValueForm('type')" [autoDisplayFirst]="false">
+            [showClear]="true" formControlName="type" (onClear)="resetValueForm('type')" [autoDisplayFirst]="false" [style]="{width: '100%'}">
           </p-dropdown>
           <label>Tipo</label>
         </span>
       </div>
-      <div class="p-fluid field col-12 md:col-2">
-        <span class="p-float-label">
-          <p-dropdown [(ngModel)]="offerSearch.status" [options]="status" optionLabel="name" appendTo="body"
-            [showClear]="true" formControlName="status" (onClear)="resetValueForm('status')" [autoDisplayFirst]="false">
-          </p-dropdown>
+
+      <div class="flex flex-row gap-4">
+
+        <span class="p-float-label flex-1">
+          <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
+            [emptyMessage]="message" (completeMethod)="searchPerson($event)"
+            (onSelect)="offerSearch.involved = $event.value" field="field" appendTo="body"
+            [showClear]="offerSearch.involved" (onClear)="resetValueForm('involved')" formControlName="involved"
+            [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+          </p-autoComplete>
+          <label>Persona implicada</label>
+        </span>
+
+        <span class="p-float-label flex-1">
+          <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
+            [emptyMessage]="message" (completeMethod)="searchPerson($event)"
+            (onSelect)="offerSearch.managedBy = $event.value" field="field" appendTo="body"
+            [showClear]="offerSearch.managedBy" (onClear)="resetValueForm('managedBy')" formControlName="managedBy"
+            [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+          </p-autoComplete>
+          <label>Responsable CCA</label>
+        </span>
+
+        <span class="p-float-label w-15rem">
+          <p-multiSelect [(ngModel)]="offerSearch.status" [options]="status" optionLabel="name" appendTo="body"
+            [showClear]="true" formControlName="status" (onClear)="filterStatus=[]" [style]="{'width':'100%'}">
+          </p-multiSelect>
           <label>Estado</label>
         </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-2">
-        <span class="p-float-label">
-          <p-calendar [showIcon]="!offerSearch.startDateModification" [showClear]="offerSearch.startDateModification"
-            [(ngModel)]="offerSearch.startDateModification" appendTo="body" formControlName="startDateModification"
-            (onClear)="resetValueForm('startDateModification')">
+
+        <span class="p-float-label w-15rem">
+          <p-calendar [showIcon]="true" [(ngModel)]="offerSearch.deliveryDate" selectionMode="range"
+            [readonlyInput]="true" appendTo="body" formControlName="deliveryDate"
+            (onClear)="resetValueForm('startDateModification')" [style]="{'width':'100%'}">
           </p-calendar>
-          <label>Fecha inicio</label>
+          <label>Fecha Entrega Oportunidad</label>
         </span>
       </div>
-      <div class="p-fluid field col-12 md:col-2">
-        <span class="p-float-label">
-          <p-calendar [showClear]="offerSearch.endDateModification" [(ngModel)]="offerSearch.endDateModification"
-            appendTo="body" formControlName="endDateModification" [showIcon]="!offerSearch.endDateModification"
-            (onClear)="resetValueForm('endDateModification')">
-          </p-calendar>
-          <label>Fecha fin</label>
-        </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-1">
-        <button pButton label="Limpiar" class="p-button-outlined p-button-danger" [disabled]="!isAssignValuesFilter()"
-          (click)="resetForm()"></button>
-      </div>
-      <div class="p-fluid field col-12 md:col-1">
-        <button pButton label="Filtrar" class="p-button-outlined" [disabled]="filterForm.invalid"
-          (click)="loadPage()"></button>
-      </div>
+
+    </div>
+    <div class="align-self-center flex flex-row gap-2">
+      <button pButton label="Limpiar" class="p-button-outlined p-button-danger" [disabled]="!isAssignValuesFilter()"
+        (click)="resetForm()"></button>
+      <button pButton label="Filtrar" class="p-button-outlined" [disabled]="filterForm.invalid"
+        (click)="loadPage()"></button>
     </div>
   </div>
 </div>
+
 <p-table [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="isloading" scrollable="true"
-  scrollHeight="calc(83vh - 85px)" responsiveLayout="scroll" [paginator]="true" [rows]="25"
+  scrollHeight="calc(100vh - 310px)" responsiveLayout="scroll" [paginator]="true" [rows]="25"
   [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[25, 50, 100]"
   currentPageReportTemplate="{first} - {last} / {totalRecords}" paginatorPosition="bottom"
   [globalFilterFields]="['opportunityStatus.name']" styleClass="p-datatable-striped">
   <ng-template pTemplate="header">
     <tr>
-      <th class="flex-1">Nombre</th>
-      <th class="w-20rem flex-none">Cliente</th>
-      <th class="w-9rem flex-none">Sector</th>
-      <th class="w-9rem flex-none">Tipo</th>
-      <th class="w-12rem flex-none">Estado</th>
-      <th class="w-15rem flex-none">Gestor responsable</th>
+      <th class="flex-1" pSortableColumn="name">Nombre Oportunidad
+        <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th class="w-20rem flex-none" pSortableColumn="client">Cliente
+        <p-sortIcon field="client"></p-sortIcon>
+      </th>
+      <th class="w-9rem flex-none" pSortableColumn="sector">Sector
+        <p-sortIcon field="sector"></p-sortIcon>
+      </th>
+      <th class="w-9rem flex-none" pSortableColumn="opportunityType">Tipo
+        <p-sortIcon field="opportunityType"></p-sortIcon>
+      </th>
+      <th class="w-12rem flex-none" pSortableColumn="status">Estado
+        <p-sortIcon field="status"></p-sortIcon>
+      </th>
+      <th class="w-15rem flex-none" pSortableColumn="managedBy">Gestor responsable
+        <p-sortIcon field="managedBy"> </p-sortIcon>
+      </th>
       <th class="w-9rem flex-none" pSortableColumn="requestedDate">
         F. Solicitud<p-sortIcon field="requestedDate"></p-sortIcon>
       </th>
@@ -116,26 +118,38 @@
   <ng-template pTemplate="body" let-offerItemList>
     <tr>
       <td class="flex-1 h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.name }}</td>
-      <td class="w-20rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.client }}</td>
-      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.sector.name }}</td>
-      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.opportunityType.name }}</td>
-      <td class="w-12rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.opportunityStatus.name }}</td>
-      <td class="w-15rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ transformPerson(offerItemList.managedBy) }}</td>
-      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
+      <td class="w-20rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.client
+        }}</td>
+      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+        offerItemList.sector.name }}</td>
+      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+        offerItemList.opportunityType.name }}</td>
+      <td class="w-12rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+        offerItemList.opportunityStatus.name }}</td>
+      <td class="w-15rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+        transformPerson(offerItemList.managedBy) }}</td>
+      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+        offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
       <td class="w-12rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">
         {{ offerItemList.lastModification | date: "dd/MM/yyyy hh:mm:ss" }}
       </td>
       <td style="flex: 0 0 100px" class="h-3rem white-space-normal overflow-hidden text-overflow-clip">
-        <button title="Cambiar estado" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
-        <div *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)==false" style="width:38px"></div> 
+        <button title="Cambiar estado" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton
+          type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)"
+          class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <div *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)==false" style="width:38px"></div>
 
-        <button title="Editar oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
-        <button title="Ver oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name) == false" pButton type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <button title="Editar oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton
+          type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)"
+          class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <button title="Ver oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name) == false" pButton
+          type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)"
+          class="p-button-rounded p-button-text p-button-plain icon"></button>
       </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="paginatorleft"></ng-template>
   <ng-template pTemplate="paginatorright">
-      <button pButton id="create-offer" (click)="toOfferEdit()" class="p-button-primary">Nueva oportunidad</button>
+    <button pButton id="create-offer" (click)="toOfferEdit()" class="p-button-primary">Nueva oportunidad</button>
   </ng-template>
 </p-table>

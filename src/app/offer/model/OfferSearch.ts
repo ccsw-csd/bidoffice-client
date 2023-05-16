@@ -9,5 +9,7 @@ export class OfferSearch{
     managedBy: Person;
     involved: Person;
     startDateModification: Date;
-    endDateModification: Date
+    endDateModification: Date;
+    client: String;
+    deliveryDate: Date;
 }
