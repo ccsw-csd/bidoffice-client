@@ -1,14 +1,15 @@
 <p-toast position="top-center"></p-toast>
-<div [formGroup]="filterForm" class="grid">
-  <div class="col-5">
+<div [formGroup]="filterForm" class="row">
+  
+  <div class="col-10">
     <div class="grid">
-      <div class="p-fluid field col-12 md:col-4">
+      <div class="p-fluid field col-12 md:col-3">
         <span class="p-float-label">
           <input pInputText [(ngModel)]="offerSearch.client" field="field" formControlName="client">
           <label>Cliente</label>
         </span>
       </div>
-      <div class="p-fluid field col-12 md:col-4">
+      <div class="p-fluid field col-12 md:col-3">
         <span class="p-float-label">
           <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
             [emptyMessage]="message" (completeMethod)="searchPerson($event)"
@@ -19,7 +20,7 @@
           <label>Comercial</label>
         </span>
       </div>
-      <div class="p-fluid field col-12 md:col-4">
+      <div class="p-fluid field col-12 md:col-3">
         <span class="p-float-label">
           <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
             [emptyMessage]="message" (completeMethod)="searchPerson($event)"
@@ -29,7 +30,7 @@
           <label>Persona implicada</label>
         </span>
       </div>
-      <div class="p-fluid field col-12 md:col-4">
+      <div class="p-fluid field col-12 md:col-3">
         <span class="p-float-label">
           <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
             [emptyMessage]="message" (completeMethod)="searchPerson($event)"
@@ -80,7 +81,7 @@
         <button pButton label="Limpiar" class="p-button-outlined p-button-danger" [disabled]="!isAssignValuesFilter()"
           (click)="resetForm()"></button>
       </div>
-      <div class="p-fluid field col-12 md:col-1">
+      <div class="p-fluid field col-12 md:col-1 ">
         <button pButton label="Filtrar" class="p-button-outlined" [disabled]="filterForm.invalid"
           (click)="loadPage()"></button>
       </div>
@@ -94,12 +95,24 @@
   [globalFilterFields]="['opportunityStatus.name']" styleClass="p-datatable-striped">
   <ng-template pTemplate="header">
     <tr>
-      <th class="flex-1">Nombre Oportunidad</th>
-      <th class="w-20rem flex-none">Cliente</th>
-      <th class="w-9rem flex-none">Sector</th>
-      <th class="w-9rem flex-none">Tipo</th>
-      <th class="w-12rem flex-none">Estado</th>
-      <th class="w-15rem flex-none">Gestor responsable</th>
+      <th class="flex-1" pSortableColumn="name">Nombre Oportunidad 
+        <p-sortIcon field="name"></p-sortIcon>
+      </th>
+      <th class="w-20rem flex-none" pSortableColumn="client" >Cliente
+        <p-sortIcon field="client"></p-sortIcon>
+      </th>
+      <th class="w-9rem flex-none" pSortableColumn="sector" >Sector
+        <p-sortIcon field="sector"></p-sortIcon>
+      </th>
+      <th class="w-9rem flex-none" pSortableColumn="opportunityType">Tipo
+        <p-sortIcon field="opportunityType"></p-sortIcon>
+      </th>
+      <th class="w-12rem flex-none" pSortableColumn="status">Estado
+        <p-sortIcon field="status"></p-sortIcon>
+      </th>
+      <th class="w-15rem flex-none" pSortableColumn="managedBy">Gestor responsable
+        <p-sortIcon field="managedBy"> </p-sortIcon>
+      </th>
       <th class="w-9rem flex-none" pSortableColumn="requestedDate">
         F. Solicitud<p-sortIcon field="requestedDate"></p-sortIcon>
       </th>
