@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Pageable } from 'src/app/core/models/Pageable';
 import { environment } from 'src/environments/environment';
 import { BaseClass } from '../model/BaseClass';
@@ -90,7 +90,8 @@ export class OfferService {
 
     return this.http.put<OfferItemList>(environment.server + "/offer/status", modifyStatus);
   }
-  findByOfferId(id: number): Observable<OfferChangeStatus> {
-    return this.http.get<OfferChangeStatus>(environment.server + "/offerchangestatus/" + id);
+  
+  findByOfferId(id: number): Observable<OfferChangeStatus[]> {
+    return this.http.get<OfferChangeStatus[]>(environment.server + "/offerchangestatus/" + id);
   }
 }
