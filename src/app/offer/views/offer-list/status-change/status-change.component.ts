@@ -24,6 +24,7 @@ export class StatusChangeComponent implements OnInit {
   readonly labelInDelivered: string = 'Entregada';
   readonly labelInFinish: string = 'Finalizada';
   offerItemList: OfferItemList;
+  offerChangeStatus: OfferChangeStatus;
   offerStatus: BaseClass[];
   optionStatus: BaseClass[] = [];
   selectedOptionStatus: BaseClass;
@@ -46,7 +47,18 @@ export class StatusChangeComponent implements OnInit {
 
   ngOnInit(): void {
     this.offerItemList = this.config.data;
+    this.offerService.findByOfferId(this.offerItemList.id).subscribe({
+      next: (res: OfferChangeStatus) => {
+        this.offerChangeStatus = res;
+      },
+      error: () => { },
+      complete: () => {
+        this.isLoading = false;
+        
+      },
+    });
     this.getAllOfferStatus();
+    console.log(this.offerChangeStatus);
 
     this.statusForm = this.formBuilder.group({
       comment: ['', Validators.required],

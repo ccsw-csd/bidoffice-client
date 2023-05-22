@@ -9,6 +9,7 @@ import { Offer } from '../model/Offer';
 import { OfferItemList } from '../model/OfferItemList';
 import { OfferPage } from '../model/OfferPage';
 import { Person } from '../model/Person';
+import { OfferChangeStatus } from '../model/OfferChangeStatus';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class OfferService {
   constructor(private http: HttpClient) { }
 
   findPage(pageable: Pageable, status: BaseClass, type: BaseClass, sector: BaseClass, requestedBy: Person, managedBy: Person, involved: Person, startDateModification: Date, endDateModification: Date, client: String, deliveryDate: any): Observable<OfferPage> {
- 
+
     return this.http.post<OfferPage>(environment.server + "/offer/findPage", { pageable: pageable, status: status, type: type, sector: sector, requestedBy: requestedBy, managedBy: managedBy, involved: involved, startDateModification: startDateModification, endDateModification: endDateModification, client: client, deliveryDateStart: deliveryDate && deliveryDate.length == 2 ? deliveryDate[0] : null, deliveryDateEnd: deliveryDate && deliveryDate.length == 2 ? deliveryDate[1] : null, });
   }
 
@@ -81,7 +82,7 @@ export class OfferService {
     return this.http.get<Offer>(environment.server + "/offer/" + id);
   }
 
-  save(offer: Offer): Observable<Offer>{
+  save(offer: Offer): Observable<Offer> {
 
     return this.http.put<Offer>(environment.server + "/offer/", offer);
   }
@@ -89,5 +90,7 @@ export class OfferService {
 
     return this.http.put<OfferItemList>(environment.server + "/offer/status", modifyStatus);
   }
-
+  findByOfferId(id: number): Observable<OfferChangeStatus> {
+    return this.http.get<OfferChangeStatus>(environment.server + "/offerchangestatus/" + id);
+  }
 }
