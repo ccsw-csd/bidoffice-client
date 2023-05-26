@@ -25,6 +25,7 @@ export class PlanandproyectComponent implements OnInit {
   selectedPersonList = [];
   isLoading: boolean = false;
   @Input() data: Offer;
+  @Input() readOnly: boolean;
   constructor(private offerService: OfferService) {}
 
   ngOnInit(): void {

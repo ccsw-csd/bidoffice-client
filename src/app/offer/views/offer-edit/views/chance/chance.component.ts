@@ -32,6 +32,7 @@ export class ChanceComponent implements OnInit {
 
   @Input() data: Offer;
   @Input() formValidator: FormGroup;
+  @Input() readOnly: boolean;
 
   constructor(
     private offerService: OfferService,

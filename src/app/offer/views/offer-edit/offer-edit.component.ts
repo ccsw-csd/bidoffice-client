@@ -37,6 +37,7 @@ export class OfferEditComponent implements OnInit {
     { value: 'No ganada', severity: 'warning' },
     { value: 'En Curso', severity: 'info' }
   ];
+  readOnly: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,7 +53,8 @@ export class OfferEditComponent implements OnInit {
     this.title = this.config.header.split(':')[0];
     if (this.config.data != null) {
       this.offerStatus = 'modificada';
-      this.offer = this.config.data;
+      this.offer = this.config.data.offer;
+      this.readOnly = this.config.data.readOnly;
     } else {
       this.offerStatus = 'creada';
       this.offer = new Offer();
@@ -93,7 +95,7 @@ export class OfferEditComponent implements OnInit {
   }
 
   onSave() {
-    if (this.offerForm.valid) {
+    if (!this.readOnly && this.offerForm.valid) {
       this.deleteUUID();
       this.isLoading = true;
       this.offerService.save(this.offer).subscribe({

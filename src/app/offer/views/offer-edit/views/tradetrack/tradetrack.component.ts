@@ -18,6 +18,7 @@ export class TradetrackComponent implements OnInit {
   isEditing = false;
   clonedOfferTradeTracking: OfferTradeTracking;
   @Input() data: Offer;
+  @Input() readOnly: boolean;
   @ViewChild('table') table: Table;
 
   constructor(

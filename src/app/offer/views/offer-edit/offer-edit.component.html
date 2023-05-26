@@ -6,22 +6,22 @@
 </div>
 <p-tabView [(activeIndex)]="activeItem">
   <p-tabPanel header="Cabecera">
-    <app-chance [data]="offer" [formValidator]="offerForm.get('chance')"></app-chance>
+    <app-chance [data]="offer" [formValidator]="offerForm.get('chance')" [readOnly]="readOnly"></app-chance>
   </p-tabPanel>
   <p-tabPanel header="Detalle">
-    <app-planandproyect [data]="offer"></app-planandproyect>
+    <app-planandproyect [data]="offer" [readOnly]="readOnly"></app-planandproyect>
   </p-tabPanel>
   <p-tabPanel header="Documentación">
-    <app-documentation [data]="offer"></app-documentation>
+    <app-documentation [data]="offer" [readOnly]="readOnly"></app-documentation>
   </p-tabPanel>
   <p-tabPanel header="Capítulos de interés">
-    <app-interest [data]="offer"></app-interest>
+    <app-interest [data]="offer" [readOnly]="readOnly"></app-interest>
   </p-tabPanel>
   <p-tabPanel header="Mensajes">
-    <app-tracing [data]="offer"></app-tracing>
+    <app-tracing [data]="offer" [readOnly]="readOnly"></app-tracing>
   </p-tabPanel>
   <p-tabPanel header="Seguimiento comercial">
-    <app-tradetrack [data]="offer"></app-tradetrack>
+    <app-tradetrack [data]="offer" [readOnly]="readOnly"></app-tradetrack>
   </p-tabPanel>
 </p-tabView>
 <div class="ui-fluid formgrid grid absolute right-0 left-0 bottom-0 justify-content-end mb-1 mr-4">
@@ -29,7 +29,7 @@
     <button class="p-3 p-button-outlined" pButton (click)="onClose()" label="Cancelar"></button>
   </div>
   <div class="p-fluid field col-12 md:col-1">
-    <button class="p-3" pButton (click)="onSave()" label="Guardar" [disabled]="offerForm.invalid"></button>
+    <button *ngIf="!readOnly" class="p-3" pButton (click)="onSave()" label="Guardar" [disabled]="offerForm.invalid"></button>
   </div>
 </div>
 <div class="loadWrapper flex align-items-center flex-column justify-content-center" *ngIf="isLoading">
