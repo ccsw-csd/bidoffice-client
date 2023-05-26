@@ -6,6 +6,7 @@ import { Person } from 'src/app/offer/model/Person';
 import { OfferService } from 'src/app/offer/services/offer.service';
 import { forkJoin } from 'rxjs';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-chance',
@@ -36,7 +37,8 @@ export class ChanceComponent implements OnInit {
 
   constructor(
     private offerService: OfferService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +53,13 @@ export class ChanceComponent implements OnInit {
     if (this.data.managedBy != null) {
       this.selectedManagedBy = this.mappingPerson(this.data.managedBy);
       this.groupPerson.push(this.selectedManagedBy);
+    } else {
+
+      this.offerService.findByUsername(this.authService.getUserInfo().username).subscribe(person => {
+        this.data.managedBy = person;
+        this.selectedManagedBy = this.mappingPerson(this.data.managedBy);
+        this.groupPerson.push(this.selectedManagedBy);
+      });
     }
   }
 

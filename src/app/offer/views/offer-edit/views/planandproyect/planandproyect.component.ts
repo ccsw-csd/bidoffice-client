@@ -108,4 +108,11 @@ export class PlanandproyectComponent implements OnInit {
       (item) => item.value.id != person.id
     );
   }
+
+  getUserLastModification(person: Person) : string {
+    if (!person) return '';
+
+    return person.name + ' '+ person.lastname;
+
+  }
 }

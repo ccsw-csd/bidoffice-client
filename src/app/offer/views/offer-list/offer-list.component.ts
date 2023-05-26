@@ -142,7 +142,7 @@ export class OfferListComponent implements OnInit {
       height: '800px',
       data: {
         offer: this.selectedOffer,
-        readOnly: !this.canEdit(this.selectedOffer)
+        readOnly: this.selectedOffer == null ? false : this.canEditOffer(this.selectedOffer) == false
       },
       closable: false,
     });
@@ -183,8 +183,8 @@ export class OfferListComponent implements OnInit {
     });
   }
 
-  isNotStatushFinish(optionStatus: string): boolean {
-    return optionStatus != this.labelInFinish;
+  isFinishStatus(optionStatus: string): boolean {
+    return optionStatus == this.labelInFinish;
   }
 
   searchPerson($event) {
@@ -236,20 +236,28 @@ export class OfferListComponent implements OnInit {
     this.offerSearch = new OfferSearch();
   }
 
-  canEdit(selectedOffer: Offer): boolean {
-    const userRole = 'USER';
+  canEditOffer(offer: Offer): boolean {
+    if (this.isFinishStatus(offer.opportunityStatus.name)) return false;
+
+    return this.isAdminOrOwner(offer);
+  }
+
+  isAdminOrOwner(offer: Offer): boolean {
 
     if (this.authService.isAdmin()) {
       return true;
     }
 
-    if (selectedOffer && selectedOffer.managedBy) {
-      const selectedManagedByUsername = selectedOffer.managedBy.username;
+    const userRole = 'USER';
+
+    if (offer && offer.managedBy) {
+      const selectedManagedByUsername = offer.managedBy.username;
       const currentUserUsername = this.authService.getUserInfo().username;
 
-      return (this.authService.getRoles().includes(userRole) && selectedManagedByUsername === currentUserUsername
-      );
+      return (this.authService.getRoles().includes(userRole) && selectedManagedByUsername === currentUserUsername);
     }
     return false;
+
   }
+
 }

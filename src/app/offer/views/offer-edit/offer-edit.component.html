@@ -28,8 +28,8 @@
   <div class="p-fluid field col-12 md:col-1">
     <button class="p-3 p-button-outlined" pButton (click)="onClose()" label="Cancelar"></button>
   </div>
-  <div class="p-fluid field col-12 md:col-1">
-    <button *ngIf="!readOnly" class="p-3" pButton (click)="onSave()" label="Guardar" [disabled]="offerForm.invalid"></button>
+  <div *ngIf="!readOnly" class="p-fluid field col-12 md:col-1">
+    <button class="p-3" pButton (click)="onSave()" label="Guardar" [disabled]="offerForm.invalid"></button>
   </div>
 </div>
 <div class="loadWrapper flex align-items-center flex-column justify-content-center" *ngIf="isLoading">
