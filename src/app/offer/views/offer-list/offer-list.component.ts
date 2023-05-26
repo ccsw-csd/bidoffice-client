@@ -19,6 +19,7 @@ import { Person } from '../../model/Person';
 import { forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { verfierFilterDate } from './validator/ValidatorDate';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-offer-list',
@@ -61,8 +62,9 @@ export class OfferListComponent implements OnInit {
     private offerService: OfferService,
     private cdRef: ChangeDetectorRef,
     private dinamicDialogService: DialogService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.filterForm = this.formBuilder.group(
@@ -115,13 +117,13 @@ export class OfferListComponent implements OnInit {
         ];
       }
     }
-    
+
     this.isloading = true;
     this.offerService.findPage(this.pageable, this.offerSearch.status, this.offerSearch.type, this.offerSearch.sector, this.offerSearch.requestedBy, this.offerSearch.managedBy, this.offerSearch.involved, this.offerSearch.startDateModification, this.offerSearch.endDateModification, this.offerSearch.client, this.offerSearch.deliveryDate).subscribe({
       next: (res: OfferPage) => {
         this.offerPage = res;
       },
-      error: () => {},
+      error: () => { },
       complete: () => {
         this.offerItemList = this.offerPage.content;
         this.totalElements = this.offerPage.totalElements;
@@ -138,7 +140,10 @@ export class OfferListComponent implements OnInit {
       header: this.headerChoice,
       width: '75%',
       height: '800px',
-      data: this.selectedOffer,
+      data: {
+        offer: this.selectedOffer,
+        readOnly: !this.canEdit(this.selectedOffer)
+      },
       closable: false,
     });
 
@@ -188,19 +193,19 @@ export class OfferListComponent implements OnInit {
         next: (res: Person[]) => {
           this.groupPerson = res.map((person) => this.mappingPerson(person));
         },
-        error: () => {},
-        complete: () => {},
+        error: () => { },
+        complete: () => { },
       });
     }
-  }  
+  }
 
   getAllOfferStatus() {
     this.offerService.getAllOfferStatus().subscribe({
       next: (res: BaseClass[]) => {
         this.status = res;
       },
-      error: () => {},
-      complete: () => {},
+      error: () => { },
+      complete: () => { },
     });
   }
   mappingPerson(person: Person): any {
@@ -219,15 +224,32 @@ export class OfferListComponent implements OnInit {
       (item) => this.filterForm.value[item]
     );
   }
-  resetValueForm(formControlName: string){
-    if(formControlName == 'requestedBy') this.offerSearch.requestedBy = null;
-    if(formControlName == 'involved') this.offerSearch.involved = null;
-    if(formControlName == 'managedBy') this.offerSearch.managedBy = null;
+  resetValueForm(formControlName: string) {
+    if (formControlName == 'requestedBy') this.offerSearch.requestedBy = null;
+    if (formControlName == 'involved') this.offerSearch.involved = null;
+    if (formControlName == 'managedBy') this.offerSearch.managedBy = null;
     this.filterForm.get(formControlName).setValue(null);
   }
 
-  resetForm(){
+  resetForm() {
     this.filterForm.reset();
     this.offerSearch = new OfferSearch();
+  }
+
+  canEdit(selectedOffer: Offer): boolean {
+    const userRole = 'USER';
+
+    if (this.authService.isAdmin()) {
+      return true;
+    }
+
+    if (selectedOffer && selectedOffer.managedBy) {
+      const selectedManagedByUsername = selectedOffer.managedBy.username;
+      const currentUserUsername = this.authService.getUserInfo().username;
+
+      return (this.authService.getRoles().includes(userRole) && selectedManagedByUsername === currentUserUsername
+      );
+    }
+    return false;
   }
 }

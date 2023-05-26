@@ -139,10 +139,10 @@
           class="p-button-rounded p-button-text p-button-plain icon"></button>
         <div *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)==false" style="width:38px"></div>
 
-        <button title="Editar oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton
+        <button title="Editar oferta" *ngIf="canEdit(offerItemList)" pButton
           type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)"
           class="p-button-rounded p-button-text p-button-plain icon"></button>
-        <button title="Ver oferta" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name) == false" pButton
+        <button title="Ver oferta" *ngIf="!canEdit(offerItemList)" pButton
           type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)"
           class="p-button-rounded p-button-text p-button-plain icon"></button>
       </td>
