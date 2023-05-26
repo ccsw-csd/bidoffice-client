@@ -12,6 +12,7 @@ import { Offer } from '../../model/Offer';
 import { OfferService } from '../../services/offer.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { LazyLoadEvent } from 'primeng/api';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-offer-edit',
@@ -37,6 +38,7 @@ export class OfferEditComponent implements OnInit {
     { value: 'No ganada', severity: 'warning' },
     { value: 'En Curso', severity: 'info' }
   ];
+  readOnly: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,18 +47,22 @@ export class OfferEditComponent implements OnInit {
     private offerService: OfferService,
     private snackbarService: SnackbarService,
     private cdRef: ChangeDetectorRef,
-    private dinamicDialogService: DialogService
+    private dinamicDialogService: DialogService,    
   ) { }
 
   ngOnInit(): void {
     this.title = this.config.header.split(':')[0];
-    if (this.config.data != null) {
+
+    if (this.config.data.offer != null) {
       this.offerStatus = 'modificada';
-      this.offer = this.config.data;
+      this.offer = this.config.data.offer;
+      this.readOnly = this.config.data.readOnly;
     } else {
       this.offerStatus = 'creada';
       this.offer = new Offer();
+      this.readOnly = false;
     }
+
     this.offerForm = this.formBuilder.group({
       chance: this.formBuilder.group({
         nameOpportunity: ['', Validators.required],
@@ -93,7 +99,7 @@ export class OfferEditComponent implements OnInit {
   }
 
   onSave() {
-    if (this.offerForm.valid) {
+    if (!this.readOnly && this.offerForm.valid) {
       this.deleteUUID();
       this.isLoading = true;
       this.offerService.save(this.offer).subscribe({
@@ -128,7 +134,8 @@ export class OfferEditComponent implements OnInit {
   }
 
   onClose() {
-    if (this.offerForm.dirty == false || this.offerForm.touched == false) {
+
+    if (this.readOnly || this.offerForm.dirty == false || this.offerForm.touched == false) {
       this.ref.close();
     } else {
       const dialogoRef = this.dinamicDialogService.open(ConfirmDialogComponent, {

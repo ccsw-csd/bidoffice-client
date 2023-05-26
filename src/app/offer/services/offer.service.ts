@@ -68,6 +68,12 @@ export class OfferService {
     return this.http.get<Person[]>(environment.server + "/person/" + filter)
   }
 
+  findByUsername(username: string): Observable<Person> {
+
+    return this.http.get<Person>(environment.server + "/person/username/" + username)
+  }
+
+
   getAllFileTypes(): Observable<BaseClass[]> {
 
     return this.http.get<BaseClass[]>(environment.server + "/filetype/findAll");

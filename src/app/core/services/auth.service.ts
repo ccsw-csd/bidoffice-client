@@ -8,14 +8,15 @@ import { environment } from 'src/environments/environment';
 import { ResponseCredentials } from '../models/ResponseCredentials';
 import { UserInfoDetailed } from '../models/UserInfoDetailed';
 import { UserInfoSSO } from '../models/UserInfoSSO';
+import { Offer } from 'src/app/offer/model/Offer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  ssoCredentialsKey : string = 'ssoCredentials';
-  ssoToken : string = null;
+  ssoCredentialsKey: string = 'ssoCredentials';
+  ssoToken: string = null;
 
   userInfoSSO: UserInfoSSO | null = null;
   userInfoDetailed: UserInfoDetailed | null = null;
@@ -32,7 +33,7 @@ export class AuthService {
   // *************************** //
 
 
-  public putSSOCredentials(res: ResponseCredentials) : void {
+  public putSSOCredentials(res: ResponseCredentials): void {
     this.ssoToken = res.token;
     localStorage.setItem(this.ssoCredentialsKey, this.ssoToken);
   }
@@ -47,7 +48,7 @@ export class AuthService {
     return this.ssoToken;
   }
 
-  
+
 
   // *************************** //
   // **       LOGOUT          ** //
@@ -62,39 +63,39 @@ export class AuthService {
   public clearCredentials() {
     localStorage.removeItem(this.ssoCredentialsKey);
 
-    this.ssoToken = null;    
+    this.ssoToken = null;
     this.userInfoDetailed = null;
     this.userInfoSSO = null;
-  }  
-    
+  }
+
   // *************************** //
   // **        UTILS          ** //
   // *************************** //
 
 
-  isTokenValid() : boolean {
+  isTokenValid(): boolean {
     let token = this.getSSOToken();
     if (token == null) return false;
-  
+
     try {
 
       let expired = this.jwtHelper.isTokenExpired(token);
       if (expired) return false;
-      
+
       let roles = this.getRoles();
       if (roles == null || roles.length == 0) return false;
-      
-      
+
+
       return true;
     }
     catch {
       return false;
     }
   }
-  
 
 
-  public getUserInfo() : UserInfoSSO {
+
+  public getUserInfo(): UserInfoSSO {
 
     if (this.userInfoSSO == null) {
       let data = this.jwtHelper.decodeToken(this.getSSOToken());
@@ -118,6 +119,11 @@ export class AuthService {
 
   }
 
+  public isAdmin(): boolean {
+    let userInfo = this.getUserInfo();
+    return userInfo.roles[environment.appCode].includes('ADMIN');
+  }
+
   public getRoles(): String[] {
     let userInfo = this.getUserInfo();
     return userInfo.roles[environment.appCode];
@@ -127,16 +133,16 @@ export class AuthService {
     this.userInfoDetailed = userDetailed;
   }
 
-  public getUserInfoDetailed() : UserInfoDetailed | null {
+  public getUserInfoDetailed(): UserInfoDetailed | null {
     return this.userInfoDetailed;
-  }  
+  }
 
   public registerAccess(): Observable<void> {
 
     if (environment.production)
-      return this.http.get<void>(environment.sso + '/register-access/'+environment.appCode);
+      return this.http.get<void>(environment.sso + '/register-access/' + environment.appCode);
     else
       return of();
-  }  
+  }
 
 }

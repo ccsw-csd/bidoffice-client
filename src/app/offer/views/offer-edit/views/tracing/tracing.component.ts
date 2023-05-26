@@ -18,6 +18,7 @@ export class TracingComponent implements OnInit {
   isEditing = false;
   clonedOfferTracing: OfferTracing;
   @Input() data: Offer;
+  @Input() readOnly: boolean;
   @ViewChild('table') table: Table;
 
   constructor(

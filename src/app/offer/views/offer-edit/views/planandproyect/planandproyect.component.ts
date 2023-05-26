@@ -25,6 +25,7 @@ export class PlanandproyectComponent implements OnInit {
   selectedPersonList = [];
   isLoading: boolean = false;
   @Input() data: Offer;
+  @Input() readOnly: boolean;
   constructor(private offerService: OfferService) {}
 
   ngOnInit(): void {
@@ -106,5 +107,12 @@ export class PlanandproyectComponent implements OnInit {
     this.selectedPersonList = this.selectedPersonList.filter(
       (item) => item.value.id != person.id
     );
+  }
+
+  getUserLastModification(person: Person) : string {
+    if (!person) return '';
+
+    return person.name + ' '+ person.lastname;
+
   }
 }
