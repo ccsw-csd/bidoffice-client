@@ -134,17 +134,12 @@
         {{ offerItemList.lastModification | date: "dd/MM/yyyy hh:mm:ss" }}
       </td>
       <td style="flex: 0 0 100px" class="h-3rem white-space-normal overflow-hidden text-overflow-clip">
-        <button title="Cambiar estado" *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)" pButton
-          type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)"
-          class="p-button-rounded p-button-text p-button-plain icon"></button>
-        <div *ngIf="isNotStatushFinish(offerItemList.opportunityStatus.name)==false" style="width:38px"></div>
 
-        <button title="Editar oferta" *ngIf="canEdit(offerItemList)" pButton
-          type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)"
-          class="p-button-rounded p-button-text p-button-plain icon"></button>
-        <button title="Ver oferta" *ngIf="!canEdit(offerItemList)" pButton
-          type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)"
-          class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <button title="Cambiar estado" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <div *ngIf="!canEditOffer(offerItemList)" style="width:38px"></div>
+
+        <button title="Editar oferta" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+        <button title="Ver oferta" *ngIf="!canEditOffer(offerItemList)" pButton type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
       </td>
     </tr>
   </ng-template>

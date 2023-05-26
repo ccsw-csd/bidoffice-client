@@ -20,6 +20,7 @@ export class DocumentationComponent implements OnInit {
   clonedDataFile: OfferDataFile;
 
   @Input() data: Offer;
+  @Input() readOnly: boolean;
 
   constructor(
     private dinamicDialogService: DialogService,

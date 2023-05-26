@@ -10,6 +10,7 @@ import { OfferDataChapter } from 'src/app/offer/model/OfferDataChapter';
 export class InterestComponent implements OnInit {
 
   @Input() data: Offer;
+  @Input() readOnly: boolean;
   constructor() { }
 
   ngOnInit(): void {
