@@ -10,28 +10,33 @@
     padding-left: 0px;
 
     .p-submenu-icon, .p-slidemenu-backward{
-      color: white;
+      color: #15011D;
     }
     .p-menuitem {
       .p-menuitem-link {
         box-shadow: none;
+        height: 40px;
 
         .p-menuitem-text {
-          color: white;
+          color: #15011D !important;
         }
       }
       .p-menuitem-link:not(.p-disabled):hover {
         background-color: rgba(0,0,0,.04);
 
         .p-menuitem-text, .p-submenu-icon, .p-slidemenu-backward {
-          color: white;
+          color: #15011D;
           padding-left: 2px;
         }
       }
       .p-menuitem-link-active {
         background-color: transparent;
-        font-weight: bold;
-        border-left: 6px solid $background;
+        font-weight: 700;
+        border-left: 6px solid #0070AD !important;
+
+        .p-menuitem-text{
+          color: #0070AD !important;
+        }
      }
     }   
   }
