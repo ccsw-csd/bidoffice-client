@@ -80,60 +80,88 @@
   </div>
 </div>
 
-<p-table  [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="isloading" scrollable="true"
+<p-table [style]="{'height':'calc(100vh - 240px)'}" [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="isloading" scrollable="true"
   scrollHeight="calc(100vh - 310px)" responsiveLayout="scroll" [paginator]="true" [rows]="25"
   [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[25, 50, 100]"
   currentPageReportTemplate="{first} - {last} / {totalRecords}" paginatorPosition="bottom"
-  [globalFilterFields]="['opportunityStatus.name']" styleClass="p-datatable-striped">
-  <ng-template pTemplate="header">
+  [globalFilterFields]="['opportunityStatus.name']" styleClass="p-datatable-striped" selectionMode="single" >
+  <ng-template pTemplate="header" >
     <tr>
-      <th class="flex-1 top-header" style="padding-left: 20px;" pSortableColumn="name">Nombre Oportunidad
+      <th class="flex-1"  pSortableColumn="name">Nombre Oportunidad
         <p-sortIcon field="name"></p-sortIcon>
       </th>
-      <th class="w-20rem flex-none" pSortableColumn="client">Cliente
+      <th class="flex-2" pSortableColumn="client">Cliente
         <p-sortIcon field="client"></p-sortIcon>
       </th>
-      <th class="w-9rem flex-none" pSortableColumn="sector">Sector
+      <th class="flex-none w-10rem" pSortableColumn="sector">Sector
         <p-sortIcon field="sector"></p-sortIcon>
       </th>
-      <th class="w-9rem flex-none" pSortableColumn="opportunityType">Tipo
+      <th class="flex-none w-10rem" pSortableColumn="opportunityType">Tipo
         <p-sortIcon field="opportunityType"></p-sortIcon>
       </th>
-      <th class="w-12rem flex-none" pSortableColumn="opportunityStatus">Estado
+      <th class="flex-none w-10rem" pSortableColumn="opportunityStatus">Estado
         <p-sortIcon field="opportunityStatus"></p-sortIcon>
       </th>
-      <th class="w-15rem flex-none" pSortableColumn="managedBy">Gestor responsable
+      <th class="flex-none w-10rem" pSortableColumn="managedBy">Gestor responsable
         <p-sortIcon field="managedBy"> </p-sortIcon>
       </th>
-      <th class="w-9rem flex-none" pSortableColumn="requestedDate">
+      <th class="flex-none w-10rem " pSortableColumn="requestedDate">
         F. Solicitud<p-sortIcon field="requestedDate"></p-sortIcon>
       </th>
-      <th class="w-12rem flex-none" pSortableColumn="lastModification">
+      <th class="flex-none w-10rem" pSortableColumn="lastModification">
         F. Modificada
         <p-sortIcon field="lastModification"></p-sortIcon>
       </th>
-      <th style="flex: 0 0 100px">Acción</th>
+      <th class="flex-none w-10rem">Acción</th>
+    </tr>
+    <tr>
+      <th class="flex-1">
+          <p-columnFilter class="w-full" type="text" field="name" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th>
+      <th class="flex-2" >
+          <p-columnFilter class="w-full" type="text" field="client" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th>
+      <th class="flex-none w-10rem">
+          <p-columnFilter class="w-full" type="text" field="sector" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th>
+      <th class="flex-none w-10rem">
+          <p-columnFilter class="w-full" type="text" field="opportunityType" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th>        
+      <th class="flex-none w-10rem">
+        <p-columnFilter class="w-full" type="text" field="opportunityType" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th> 
+      <th class="flex-none w-10rem">
+        <p-columnFilter class="w-full" type="text" field="opportunityStatus" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th> 
+      <th class="flex-none w-10rem">
+        <p-columnFilter class="w-full" type="text" field="managedBy" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th> 
+      <th class="flex-none w-10rem">
+        <p-columnFilter class="w-full" type="text" field="requestedDate" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th>  
+      <th class="flex-none w-10rem">
+        <p-columnFilter class="w-full" type="text" field="lastModification" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th>                         
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-offerItemList>
     <tr>
-      <td class="flex-1 h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.name }}</td>
-      <td class="w-20rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{ offerItemList.client
-        }}</td>
-      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+      <td class="flex-1">{{ offerItemList.name }}</td>
+      <td class="flex-2">{{ offerItemList.client}}</td>
+      <td class="w-10rem flex-none ">{{
         offerItemList.sector.name }}</td>
-      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+      <td class="w-10rem flex-none">{{
         offerItemList.opportunityType.name }}</td>
-      <td class="w-12rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+      <td class="w-10rem flex-none ">{{
         offerItemList.opportunityStatus.name }}</td>
-      <td class="w-15rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+      <td class="w-10rem flex-none ">{{
         transformPerson(offerItemList.managedBy) }}</td>
-      <td class="w-9rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">{{
+      <td class="w-10rem flex-none ">{{
         offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
-      <td class="w-12rem flex-none h-3rem white-space-normal overflow-hidden text-overflow-clip">
+      <td class="w-10rem flex-none ">
         {{ offerItemList.lastModification | date: "dd/MM/yyyy hh:mm:ss" }}
       </td>
-      <td style="flex: 0 0 100px" class="h-3rem white-space-normal overflow-hidden text-overflow-clip">
+      <td  class="flex-none w-10rem ">
 
         <button title="Cambiar estado" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
         <div *ngIf="!canEditOffer(offerItemList)" style="width:38px"></div>

@@ -7,21 +7,21 @@
   responsiveLayout="scroll" sortField="date" sortOrder="-1">
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="comentario">Comentario <p-sortIcon field="comentario"></p-sortIcon>
+      <th  class="flex-1" pSortableColumn="comentario">Comentario <p-sortIcon field="comentario"></p-sortIcon>
       </th>
-      <th pSortableColumn="persona">Persona<p-sortIcon field="persona"></p-sortIcon>
+      <th class="flex-2" pSortableColumn="persona">Persona<p-sortIcon field="persona"></p-sortIcon>
       </th>
-      <th pSortableColumn="fech">Fecha<p-sortIcon field="fech"></p-sortIcon>
+      <th class="flex-none w-10rem" pSortableColumn="fech">Fecha<p-sortIcon field="fech"></p-sortIcon>
       </th>
-      <th style='flex: 0 0 150px;'>Acción</th>
+      <th class="flex-none w-10rem" style='flex: 0 0 150px;' field="accion">Acción</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-tradeTrackings>
     <tr>
-      <td>{{tradeTrackings.comment}}</td>
-      <td style='flex: 0 0 300px;'>{{transformPerson(tradeTrackings.person)}}</td>
-      <td style='flex: 0 0 300px;'>{{tradeTrackings.date | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
-      <td style='flex: 0 0 150px;'>
+      <td class="flex-1">{{tradeTrackings.comment}}</td>
+      <td class="flex-2">{{transformPerson(tradeTrackings.person)}}</td>
+      <td class="flex-none w-10rem">{{tradeTrackings.date | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+      <td class="flex-none w-10rem">
         <div *ngIf="tradeTrackings.uuid != null && commentFromCurrentPerson(tradeTrackings.person)">
           <button pButton icon="pi pi-pencil" (click)="onRowEditInit(tradeTrackings)"
             class="h-1rem p-button-sm p-button-rounded p-button-text p-button-plain icon"></button>
