@@ -17,6 +17,6 @@
     <button type="button" class=" p-button-primary w-6rem" [disabled]="projectTypeElement.name=='' || projectTypeElement.name==null || projectTypeElement.priority==null || projectTypeElement.priority < 1" (click)="saveItem(projectTypeElement)" pButton label="Guardar"></button>
   </div>
   <div class="px-2">
-    <button type="button" class="p-button-outlined w-6rem" (click)="closeWindow(false)" pButton label="Cerrar"></button>
+    <button type="button" class="p-button-outlined w-6rem p-button-secondary" (click)="closeWindow(false)" pButton label="Cerrar"></button>
   </div>
 </div>

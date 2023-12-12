@@ -1,11 +1,11 @@
 <p-toast position="top-center"></p-toast>
 <p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
     <p-footer>
-        <button type="button" pButton label="Cerrar" class="p-button-outlined" (click)="closeDialog()"></button>
+        <button type="button" pButton label="Cerrar" class="p-button-outlined p-button-secondary" (click)="closeDialog()"></button>
         <button type="button" pButton label="Borrar" class="p-button-primary" (click)="confirmDeletion()"></button>
     </p-footer>
 </p-confirmDialog>
-<p-table [value]="offeringList" [loading]="isLoading" [scrollable]="true" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
+<p-table [value]="offeringList" styleClass="p-datatable-striped" [loading]="isLoading" [scrollable]="true" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
     <tr>
         <th pSortableColumn="name">Nombre <p-sortIcon field="name"></p-sortIcon></th>
@@ -22,7 +22,7 @@
                     <button pButton type="button" icon="pi pi-pencil" pTooltip="Editar offering" tooltipPosition="top" (click)="saveOffering(offeringList)"
                         class="p-button-rounded p-button-text p-button-plain icon"></button>
                     <button pButton type="button" icon="pi pi-trash" pTooltip="Borrar offering" tooltipPosition="top" (click)="showDialog(offeringList)"
-                        class="p-button-rounded p-button-text p-button-plain icon"></button>
+                        class="p-button-rounded p-button-text p-button-plain icon p-button-danger"></button>
                 </div>
             </td>
         </tr>

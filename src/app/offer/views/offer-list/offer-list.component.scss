@@ -1,1 +1,13 @@
 @import "./src/assets/scss/master";
+
+
+.p-float-label {
+    position: relative;
+    align-self: center; /* Espaciado entre campos */
+  }
+
+.p-calendar{
+    width: 150px;
+    height: 41px;
+}
+

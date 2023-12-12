@@ -7,9 +7,11 @@
   responsiveLayout="scroll" sortField="date" sortOrder="-1">
   <ng-template pTemplate="header">
     <tr>
-      <th>Comentario</th>
-      <th style='flex: 0 0 300px;'>Persona</th>
-      <th style='flex: 0 0 300px;' pSortableColumn="date">Fecha<p-sortIcon field="date"></p-sortIcon>
+      <th pSortableColumn="comentario">Comentario <p-sortIcon field="comentario"></p-sortIcon>
+      </th>
+      <th pSortableColumn="persona">Persona<p-sortIcon field="persona"></p-sortIcon>
+      </th>
+      <th pSortableColumn="fech">Fecha<p-sortIcon field="fech"></p-sortIcon>
       </th>
       <th style='flex: 0 0 150px;'>Acción</th>
     </tr>
@@ -24,7 +26,7 @@
           <button pButton icon="pi pi-pencil" (click)="onRowEditInit(tradeTrackings)"
             class="h-1rem p-button-sm p-button-rounded p-button-text p-button-plain icon"></button>
           <button (click)="onDeleteRow(tradeTrackings)" pButton icon="pi pi-trash"
-            class="h-1rem p-button-sm p-button-rounded p-button-text p-button-plain icon"></button>
+            class="h-1rem p-button-sm p-button-rounded p-button-text p-button-plain icon p-button-danger"></button>
         </div>
     </tr>
   </ng-template>

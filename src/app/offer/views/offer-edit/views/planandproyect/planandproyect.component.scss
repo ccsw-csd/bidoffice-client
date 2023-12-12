@@ -1,3 +1,13 @@
 :host ::ng-deep .p-autoComplete .ui-inputfield {
     max-height: 3rem;
 }
+
+.p-fluid {
+    position: relative;
+    margin-bottom: 5px; /* Espaciado entre campos */
+  }
+
+.p-calendar{
+    width: 150px;
+    height: 41px;
+}

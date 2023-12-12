@@ -27,6 +27,11 @@ body {
     height: 42px; 
 }
 
+.field-error {
+    border-color: rgba(255, 0, 0, 1) !important;
+    border-width: 2px !important;
+}
+
 h3{
     color: #272936;
     font-size: 20px;
@@ -56,4 +61,12 @@ h3{
 
 .ml-auto {
     margin-left: 10px!important;
+}
+
+.flex-1{
+    flex-grow: 1;
+}
+
+.p-menuitem-link {
+    height: 30px;
 }

@@ -1,12 +1,14 @@
 .p-datatable .p-datatable-thead>tr>th{
     text-align: left;
     padding: 0px;
+    padding-left: 10px;
     border: 1px solid #babfc7;
     border-width: 0 0 1px 0;
     font-weight: 700;
     color: #000000de;
     background: #f8f8f8;
     transition: none;
+
     input, .p-dropdown, .p-multiselect {
         height: 1.6rem;
         padding-left: 0.25rem;
@@ -35,7 +37,7 @@
         .p-dropdown-label {
             padding-right: 0px;
         }
-
+  
     }    
 }
 

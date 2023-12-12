@@ -1,11 +1,11 @@
 <p-toast position="top-center"></p-toast>
 <p-confirmDialog header="Confirmation" [closable]="false" icon="pi pi-exclamation-triangle" [transitionOptions]="'0ms'">
     <p-footer>
-        <button type="button" pButton label="Cerrar" class="p-button-outlined" (click)="closeDialog()"></button>
+        <button type="button" pButton label="Cerrar" class="p-button-outlined p-button-secondary" (click)="closeDialog()"></button>
         <button type="button" pButton label="Borrar" class="p-button-primary" (click)="confirmDeletion()"></button>
     </p-footer>
 </p-confirmDialog>
-<p-table [value]="dataSource" [scrollable]="true" [loading]="isloading" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
+<p-table [value]="dataSource" styleClass="p-datatable-striped" [scrollable]="true" [loading]="isloading" scrollHeight="calc(100vh - 184px)" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="name">Nombre<p-sortIcon field="name"></p-sortIcon></th>
@@ -20,10 +20,10 @@
             <td style='flex: 0 0 150px'>
                 <div>
                     <button pButton type="button" icon="pi pi-pencil" (click)="editFileType(element)"
-                        pTooltip="Editar tipo de fichero" tooltipPosition="top" class="p-button-rounded p-button-text p-button-plain icon"></button>
+                        pTooltip="Editar tipo de fichero" tooltipPosition="top" class="p-button-rounded p-button-text p-button-plain icon "></button>
                     <button pButton type="button" icon="pi pi-trash" (click)="showDialog(element)"
-                        pTooltip="Borrar tipo de fichero" tooltipPosition="top" class="p-button-rounded p-button-text p-button-plain icon"></button>
-                </div>
+                        pTooltip="Borrar tipo de fichero" tooltipPosition="top" class="p-button-rounded p-button-text p-button-plain icon p-button-danger"></button>
+                </div>                                                                  
             </td>
         </tr>
     </ng-template>

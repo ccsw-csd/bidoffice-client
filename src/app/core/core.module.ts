@@ -20,6 +20,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { LayoutComponent } from './views/layout/layout.component';
 import { HeaderComponent } from './views/layout/header/header.component';
 import { NavComponent } from './views/layout/nav/nav.component';
+import { PanelMenuModule } from 'primeng/panelmenu';
 
 
 
@@ -41,7 +42,8 @@ import { NavComponent } from './views/layout/nav/nav.component';
     ButtonModule,
     TooltipModule,
     MenuModule,
-    SlideMenuModule
+    SlideMenuModule,
+    PanelMenuModule,
   ],
   providers: [
     HttpClientModule,

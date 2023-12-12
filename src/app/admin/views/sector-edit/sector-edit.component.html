@@ -15,7 +15,7 @@
         <p-calendar [showIcon]="true"  [(ngModel)]="sector.startDate" appendTo="body"></p-calendar>
         <label>Fecha de inicio</label>
     </div>
-    <div class="p-float-label field">
+    <div class="p-float-label field" style="margin-left: 10px;">
         <p-calendar [showIcon]="true" [(ngModel)]="sector.endDate" appendTo="body"></p-calendar>
         <label>Fecha final</label>
     </div>  
@@ -30,6 +30,6 @@
         </button>
     </div>
     <div class="px-2">
-        <button type="button" class="p-button-outlined w-6rem" (click)="close(false)" pButton label="Cerrar"></button>
+        <button type="button" class="p-button-outlined w-6rem p-button-secondary" (click)="close(false)" pButton label="Cerrar"></button>
     </div>
 </div>
