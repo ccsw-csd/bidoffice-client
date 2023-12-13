@@ -1,15 +1,16 @@
-<div class="flex flex-column">
-    <br>
-    <span class="p-float-label field">
-        <input id="name-input" type="text" class="w-full" pInputText required [(ngModel)]="offering.name" name="name" required> 
-        <label for="name-input">Nombre</label>
-    </span>  
-    <span class="p-float-label field">
-        <input id="priority-input" type="number" min="1" class="w-full" pInputText required [(ngModel)]="offering.priority" name="priority" required>
-        <label for="priority-input">Prioridad</label>
-    </span>    
-</div>
 
+<br>
+<span class="p-float-label">
+    <input id="name-input" type="text" class="w-full" pInputText required [(ngModel)]="offering.name" name="name" required> 
+    <label for="name-input">Nombre</label>
+</span> 
+<br> 
+<span class="p-float-label">
+    <input id="priority-input" type="number" min="1" class="w-full" pInputText required [(ngModel)]="offering.priority" name="priority" required>
+    <label for="priority-input">Prioridad</label>
+</span>        
+
+<br>
 <br>
 
 <div class = "flex flex-row-reverse w-auto">

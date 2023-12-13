@@ -4,7 +4,7 @@
     <button type="button" pButton label="Sí" class="p-button-primary" (click)="changeFlagForDelete()"></button>
   </p-footer>
 </p-confirmDialog>
-<form [formGroup]="formValidator">
+<form [formGroup]="formValidator" style="margin-bottom: 20px;">
   <div class="ui-fluid formgrid grid mt-3">
     <div class="p-fluid field col-12 md:col-4">
       <span class="p-float-label">
@@ -104,11 +104,10 @@
       </span>
     </div>
   </div>
-  <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-12">
+  <div class="ui-fluid formgrid grid" style="margin-bottom: 15px;">
+    <div class="p-fluid field col-12 md:col-12" >
       <span class="p-float-label">
-        <textarea pInputTextarea [(ngModel)]="data.observations" formControlName="observations" [rows]="14"
-          [ngStyle]="{ width: '100%', height: '60%', resize: 'both'}"></textarea>
+        <textarea  [ngStyle]="{ 'resize': 'none', 'height': '275px' }" pInputTextarea [(ngModel)]="data.observations" formControlName="observations" [rows]="14"></textarea>
         <label>Observaciones comerciales</label>
       </span>
     </div>

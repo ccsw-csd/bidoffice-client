@@ -1,17 +1,15 @@
-<div class="flex flex-column">
-    <br>
-    <span class="p-float-label field">
+<br />
+    <span class="p-float-label">
         <input id="name" type="text" class="w-full" pInputText required [(ngModel)]="elementHyperscaler.name"  required> 
         <label for="name">Nombre</label>
-    </span>  
-    <span class="p-float-label field">
+    </span> 
+    <br />
+    <span class="p-float-label">
         <input id="priority" type="number" min="1"  class="w-full" pInputText required [(ngModel)]="elementHyperscaler.priority" required>
         <label for="priority">Prioridad</label>
     </span>    
-</div>
-
 <br>
-
+<br>
 <div class = "flex flex-row-reverse w-auto">
     <div>
         <button type="button" class=" p-button-primary w-6rem" [disabled]="elementHyperscaler.name=='' || elementHyperscaler.name==null || elementHyperscaler.priority==null || elementHyperscaler.priority < 1" (click)="saveChanges(elementHyperscaler)" pButton label="Guardar"></button>
