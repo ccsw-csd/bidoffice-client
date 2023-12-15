@@ -64,11 +64,11 @@
       <div class="p-float-label">
         <p-calendar [showIcon]="true" [(ngModel)]="data.requestedDate" formControlName="requestedDate" appendTo="body"
           aria-describedby="requestedDate-help"></p-calendar>
-        <label>Fecha Solicitud*</label>
+        <label class="ajustar">Fecha Solicitud*</label>
       </div>
     </div>
     <div class="p-fluid field col-12 md:col-2">
-      <div class="p-float-label">
+      <div class="p-float-label w-full">
         <p-calendar [showIcon]="true" [(ngModel)]="data.deliveryDate" formControlName="deliveryDate" appendTo="body" aria-describedby="deliveryDate-help"></p-calendar>
         <label>Fecha Entrega Oportunidad</label>
       </div>
@@ -104,10 +104,10 @@
       </span>
     </div>
   </div>
-  <div class="ui-fluid formgrid grid" style="margin-bottom: 15px;">
+  <div class="ui-fluid formgrid grid" style="margin-bottom: -38px;">
     <div class="p-fluid field col-12 md:col-12" >
       <span class="p-float-label">
-        <textarea  [ngStyle]="{ 'resize': 'none', 'height': '275px' }" pInputTextarea [(ngModel)]="data.observations" formControlName="observations" [rows]="14"></textarea>
+        <textarea  [ngStyle]="{ 'resize': 'none', 'height': '347px' }" pInputTextarea [(ngModel)]="data.observations" formControlName="observations" [rows]="14"></textarea>
         <label>Observaciones comerciales</label>
       </span>
     </div>

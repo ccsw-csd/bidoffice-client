@@ -80,94 +80,92 @@
   </div>
 </div>
 
-<p-table [style]="{'height':'calc(100vh - 240px)'}" [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" [loading]="isloading" scrollable="true"
-  scrollHeight="calc(100vh - 310px)" responsiveLayout="scroll" [paginator]="true" [rows]="25"
+<p-table [style]="{'height':'calc(100vh - 240px)', 'width': '100%'}" [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" 
+  [loading]="isloading" [scrollable]="true"
+  scrollHeight="flex" responsiveLayout="scroll" [paginator]="true" [rows]="25"
   [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[25, 50, 100]"
   currentPageReportTemplate="{first} - {last} / {totalRecords}" paginatorPosition="bottom"
   [globalFilterFields]="['opportunityStatus.name']" styleClass="p-datatable-striped" selectionMode="single" >
   <ng-template pTemplate="header" >
     <tr>
-      <th class="flex-1"  pSortableColumn="name">Nombre Oportunidad
-        <p-sortIcon field="name"></p-sortIcon>
+      <th class="flex-1 flex-column  align-items-center justify-content-center"> 
+        <div class="flex flex-row w-full top-header" pSortableColumn="name">
+            <span class="flex flex-1 justify-content-center">Nombre Oportunidad</span>
+            <p-sortIcon field="name"></p-sortIcon>
+        </div>   
       </th>
-      <th class="flex-2" pSortableColumn="client">Cliente
-        <p-sortIcon field="client"></p-sortIcon>
+      <th class="flex-none w-2  flex-column  align-items-center justify-content-center" >
+        <div class="flex flex-row w-full top-header" pSortableColumn="client">
+          <span class="flex flex-1 justify-content-center">Cliente</span>
+          <p-sortIcon field="client"></p-sortIcon>
+        </div>
       </th>
-      <th class="flex-none w-10rem" pSortableColumn="sector">Sector
-        <p-sortIcon field="sector"></p-sortIcon>
+      <th class="flex-none w-1 flex-column align-items-center justify-content-center" >
+        <div class="flex flex-row w-full top-header" pSortableColumn="sector">
+          <span class="flex flex-1 justify-content-center">Sector</span>
+          <p-sortIcon field="sector"></p-sortIcon>
+        </div>
       </th>
-      <th class="flex-none w-10rem" pSortableColumn="opportunityType">Tipo
-        <p-sortIcon field="opportunityType"></p-sortIcon>
+      <th class="flex-none w-1 flex-column align-items-center justify-content-center" >
+        <div class="flex flex-row w-full top-header" pSortableColumn="opportunityType">
+          <span class="flex flex-1 justify-content-center">Tipo</span>
+          <p-sortIcon field="opportunityType"></p-sortIcon>
+        </div>
       </th>
-      <th class="flex-none w-10rem" pSortableColumn="opportunityStatus">Estado
-        <p-sortIcon field="opportunityStatus"></p-sortIcon>
+      <th class="flex-none w-2 flex-column align-items-center justify-content-center" >
+        <div class="flex flex-row w-full top-header" pSortableColumn="opportunityStatus">
+          <span class="flex flex-1 justify-content-center">Estado</span>
+          <p-sortIcon field="opportunityStatus"></p-sortIcon>
+        </div>
       </th>
-      <th class="flex-none w-10rem" pSortableColumn="managedBy">Gestor responsable
-        <p-sortIcon field="managedBy"> </p-sortIcon>
+      <th class="flex-none w-2 flex-column align-items-center justify-content-center" >
+        <div class="flex flex-row w-full top-header" pSortableColumn="managedBy">
+          <span class="flex flex-1 justify-content-center">Gestor responsable</span>
+          <p-sortIcon field="managedBy"> </p-sortIcon>
+        </div>
       </th>
-      <th class="flex-none w-10rem " pSortableColumn="requestedDate">
-        F. Solicitud<p-sortIcon field="requestedDate"></p-sortIcon>
+      <th class="flex-none w-1 flex-column align-items-center justify-content-center" >
+        <div class="flex flex-row w-full top-header" pSortableColumn="requestedDate">
+          <span class="flex flex-1 justify-content-center">F. Solicitud</span>
+          <p-sortIcon field="requestedDate"></p-sortIcon>
+        </div>
       </th>
-      <th class="flex-none w-10rem" pSortableColumn="lastModification">
-        F. Modificada
-        <p-sortIcon field="lastModification"></p-sortIcon>
+      <th class="flex-none w-1 flex-column align-items-center justify-content-center" >
+        <div class="flex flex-row w-full top-header" pSortableColumn="lastModification">
+          <span class="flex flex-1 justify-content-center">F. Modificada</span>
+          <p-sortIcon field="lastModification"></p-sortIcon>
+        </div>
       </th>
-      <th class="flex-none w-10rem">Acción</th>
-    </tr>
-    <tr>
-      <th class="flex-1">
-          <p-columnFilter class="w-full" type="text" field="name" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      <th class="buttons flex-none flex-column" style="width: 125px;">
+        <div class="flex flex-row w-full top-header"></div>
+        
       </th>
-      <th class="flex-2" >
-          <p-columnFilter class="w-full" type="text" field="client" matchMode="contains" [showMenu]="false"></p-columnFilter>
-      </th>
-      <th class="flex-none w-10rem">
-          <p-columnFilter class="w-full" type="text" field="sector" matchMode="contains" [showMenu]="false"></p-columnFilter>
-      </th>
-      <th class="flex-none w-10rem">
-          <p-columnFilter class="w-full" type="text" field="opportunityType" matchMode="contains" [showMenu]="false"></p-columnFilter>
-      </th>        
-      <th class="flex-none w-10rem">
-        <p-columnFilter class="w-full" type="text" field="opportunityType" matchMode="contains" [showMenu]="false"></p-columnFilter>
-      </th> 
-      <th class="flex-none w-10rem">
-        <p-columnFilter class="w-full" type="text" field="opportunityStatus" matchMode="contains" [showMenu]="false"></p-columnFilter>
-      </th> 
-      <th class="flex-none w-10rem">
-        <p-columnFilter class="w-full" type="text" field="managedBy" matchMode="contains" [showMenu]="false"></p-columnFilter>
-      </th> 
-      <th class="flex-none w-10rem">
-        <p-columnFilter class="w-full" type="text" field="requestedDate" matchMode="contains" [showMenu]="false"></p-columnFilter>
-      </th>  
-      <th class="flex-none w-10rem">
-        <p-columnFilter class="w-full" type="text" field="lastModification" matchMode="contains" [showMenu]="false"></p-columnFilter>
-      </th>                         
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-offerItemList>
     <tr>
       <td class="flex-1">{{ offerItemList.name }}</td>
-      <td class="flex-2">{{ offerItemList.client}}</td>
-      <td class="w-10rem flex-none ">{{
+      <td class="flex-none w-2 align-items-center justify-content-center">{{ offerItemList.client}}</td>
+      <td class="flex-none w-1 align-items-center justify-content-center">{{
         offerItemList.sector.name }}</td>
-      <td class="w-10rem flex-none">{{
+      <td class="flex-none w-1 align-items-center justify-content-center">{{
         offerItemList.opportunityType.name }}</td>
-      <td class="w-10rem flex-none ">{{
+      <td class="flex-none w-2 align-items-center justify-content-center">{{
         offerItemList.opportunityStatus.name }}</td>
-      <td class="w-10rem flex-none ">{{
+      <td class="flex-none w-2 align-items-center justify-content-center">{{
         transformPerson(offerItemList.managedBy) }}</td>
-      <td class="w-10rem flex-none ">{{
+      <td class="flex-none w-1 align-items-center justify-content-center">{{
         offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
-      <td class="w-10rem flex-none ">
+      <td class="flex-none w-1 align-items-center justify-content-center">
         {{ offerItemList.lastModification | date: "dd/MM/yyyy hh:mm:ss" }}
       </td>
-      <td  class="flex-none w-10rem ">
-
-        <button title="Cambiar estado" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
-        <div *ngIf="!canEditOffer(offerItemList)" style="width:38px"></div>
-
-        <button title="Editar oferta" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
-        <button title="Ver oferta" *ngIf="!canEditOffer(offerItemList)" pButton type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+      <td  class="flex-none" style="width: 125px;">
+        <div class="justify-content-between">
+          <button title="Cambiar estado" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+          <div *ngIf="!canEditOffer(offerItemList)" style="width:38px"></div>
+          <button title="Editar oferta" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+          <button title="Ver oferta" *ngIf="!canEditOffer(offerItemList)" pButton type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+        </div>
       </td>
     </tr>
   </ng-template>

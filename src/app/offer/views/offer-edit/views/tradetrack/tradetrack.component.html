@@ -1,27 +1,41 @@
 <p-confirmDialog styleClass="max-w-26rem" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"
   [closable]="false"></p-confirmDialog>
 <div class="mt-3 flex justify-content-end">
-  <button *ngIf="!readOnly" class="p-3 mb-1 p-button-outlined" pButton (click)="createtradeTracking()">Nuevo seguimiento</button>
+  <button *ngIf="!readOnly" tooltipPosition="top" pButton pRipple type="button" icon="pi pi-plus" class="p-button-lg m-2 p-button-outlined" pTooltip="Añadir" (click)="createtradeTracking()"></button>
 </div>
 <p-table #table [value]="data.tradeTrackings" scrollable="true" scrollHeight="calc(70vh - 202px)"
   responsiveLayout="scroll" sortField="date" sortOrder="-1">
   <ng-template pTemplate="header">
     <tr>
-      <th  class="flex-1" pSortableColumn="comentario">Comentario <p-sortIcon field="comentario"></p-sortIcon>
+      <th  class="flex-1 flex-column align-items-center justify-content-center">
+        <div class="flex flex-row w-full top-header" pSortableColumn="comentario">
+          <span class="flex flex-1 justify-content-center">Comentario</span>
+          <p-sortIcon field="comentario"></p-sortIcon>
+        </div>
       </th>
-      <th class="flex-2" pSortableColumn="persona">Persona<p-sortIcon field="persona"></p-sortIcon>
+      <th  class="flex-none w-2 flex-column align-items-center justify-content-center">
+        <div class="flex flex-row w-full top-header" pSortableColumn="persona">
+          <span class="flex flex-1 justify-content-center">Persona</span>
+          <p-sortIcon field="persona"></p-sortIcon>
+        </div>
       </th>
-      <th class="flex-none w-10rem" pSortableColumn="fech">Fecha<p-sortIcon field="fech"></p-sortIcon>
+      <th  class="flex-none w-2 flex-column align-items-center justify-content-center">
+        <div class="flex flex-row w-full top-header" pSortableColumn="fech">
+          <span class="flex flex-1 justify-content-center">Fecha</span>
+          <p-sortIcon field="fech"></p-sortIcon>
+        </div>
       </th>
-      <th class="flex-none w-10rem" style='flex: 0 0 150px;' field="accion">Acción</th>
+      <th  th class="buttons flex-1 flex-none flex-column " style="width: 125px;">
+        <div class="w-full "></div>
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-tradeTrackings>
     <tr>
-      <td class="flex-1">{{tradeTrackings.comment}}</td>
-      <td class="flex-2">{{transformPerson(tradeTrackings.person)}}</td>
-      <td class="flex-none w-10rem">{{tradeTrackings.date | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
-      <td class="flex-none w-10rem">
+      <td class="flex-1 align-items-center justify-content-center">{{tradeTrackings.comment}}</td>
+      <td class="flex-none w-2 align-items-center justify-content-center">{{transformPerson(tradeTrackings.person)}}</td>
+      <td class="flex-none w-2 align-items-center justify-content-center">{{tradeTrackings.date | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+      <td class="flex-1 flex-none">
         <div *ngIf="tradeTrackings.uuid != null && commentFromCurrentPerson(tradeTrackings.person)">
           <button pButton icon="pi pi-pencil" (click)="onRowEditInit(tradeTrackings)"
             class="h-1rem p-button-sm p-button-rounded p-button-text p-button-plain icon"></button>
