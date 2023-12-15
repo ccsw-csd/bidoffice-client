@@ -80,7 +80,7 @@
   </div>
 </div>
 
-<p-table [style]="{'height':'calc(100vh - 240px)', 'width': '100%'}" [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" 
+<p-table [style]="{'height':'calc(100vh - 240px)', 'width': tableWidth}" [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" 
   [loading]="isloading" [scrollable]="true"
   scrollHeight="flex" responsiveLayout="scroll" [paginator]="true" [rows]="25"
   [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[25, 50, 100]"
