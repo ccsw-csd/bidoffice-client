@@ -4,6 +4,7 @@ import { ProjectTypeService } from "../../services/project-type.service";
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from "primeng/dynamicdialog";
 import { ProjectTypeEditComponent } from "../project-type-edit/project-type-edit.component";
+import { GeneralConfirmationService } from 'src/app/core/services/general-confirmation.service';
 
 @Component({
     selector: 'app-project-type-list',
@@ -23,6 +24,7 @@ export class ProjectTypeListComponent implements OnInit {
         private ref: DynamicDialogRef,
         private dialogService: DialogService,
         private snackbarService: SnackbarService,
+        private confirmationService : GeneralConfirmationService,
     ) { }
 
     ngOnInit(): void {
@@ -43,7 +45,7 @@ export class ProjectTypeListComponent implements OnInit {
 
     showDialog(element?: ProjectType){
         this.item=element
-        this.snackbarService.showConfirmDialog()
+        this.confirmationService.showConfirmDialog()
     }
 
     /**
@@ -51,7 +53,7 @@ export class ProjectTypeListComponent implements OnInit {
      * ninguna acción.
      */
     closeDialog() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
     }
 
     /**
@@ -59,7 +61,7 @@ export class ProjectTypeListComponent implements OnInit {
      * borrar posteriormente el sector implicado.
      */
     confirmDeletion() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
         this.delete(this.item);  
     }
 

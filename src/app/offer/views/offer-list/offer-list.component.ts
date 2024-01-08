@@ -168,7 +168,7 @@ export class OfferListComponent implements OnInit {
       this.loadPage();
     });
   }
-  onRowSelected(offer: Offer) {
+  onRowSelected(offer: OfferItemList) {
     this.isloading = true;
     this.offerService.getOffer(offer.id).subscribe({
       next: (res: Offer) => {

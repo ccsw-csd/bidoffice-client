@@ -5,6 +5,7 @@ import { OfferingService } from '../../services/offering.service';
 import { OfferingEditComponent } from '../offering-edit/offering-edit.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { Offer } from 'src/app/offer/model/Offer';
+import { GeneralConfirmationService } from 'src/app/core/services/general-confirmation.service';
 
 @Component({
     selector: 'app-offering-list',
@@ -22,7 +23,8 @@ export class OfferingListComponent implements OnInit {
     constructor(private offeringService: OfferingService,
         private dialogService: DialogService,
         private ref: DynamicDialogRef, 
-        private snackbarService: SnackbarService
+        private snackbarService: SnackbarService,
+        private confirmationService : GeneralConfirmationService,
     ) { }
 
     ngOnInit(): void {
@@ -70,7 +72,7 @@ export class OfferingListComponent implements OnInit {
 
     showDialog(element?: Offering){   
         this.item=element 
-        this.snackbarService.showConfirmDialog()
+        this.confirmationService.showConfirmDialog()
     }
 
     /**
@@ -78,7 +80,7 @@ export class OfferingListComponent implements OnInit {
      * ninguna acción.
      */
      closeDialog() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
     }
 
     /**
@@ -86,7 +88,7 @@ export class OfferingListComponent implements OnInit {
      * borrar posteriormente el sector implicado.
      */
     confirmDeletion() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
         this.deleteOffering(this.item);  
     }
 

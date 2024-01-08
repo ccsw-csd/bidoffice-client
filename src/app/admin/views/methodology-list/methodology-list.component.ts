@@ -4,6 +4,7 @@ import { MethodologyService } from '../../services/methodology.service';
 import { MethodologyEditComponent } from '../methodology-edit/methodology-edit.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { GeneralConfirmationService } from 'src/app/core/services/general-confirmation.service';
 
 @Component({
     selector: 'app-methodology-list',
@@ -21,7 +22,8 @@ export class MethodologyListComponent implements OnInit {
     constructor(
         private methodologyService: MethodologyService,
         private dynamicDialogService: DialogService,
-        private snackbarService: SnackbarService
+        private snackbarService: SnackbarService,
+        private confirmationService : GeneralConfirmationService,
     ) { }
 
     ngOnInit(): void {
@@ -68,7 +70,7 @@ export class MethodologyListComponent implements OnInit {
 
     showDialog(element?: Methodology){   
         this.item=element 
-        this.snackbarService.showConfirmDialog()
+        this.confirmationService.showConfirmDialog()
     }
 
     /**
@@ -76,7 +78,7 @@ export class MethodologyListComponent implements OnInit {
      * ninguna acción.
      */
     closeDialog() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
     }
 
     /**
@@ -84,7 +86,7 @@ export class MethodologyListComponent implements OnInit {
      * borrar posteriormente el sector implicado.
      */
     confirmDeletion() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
         this.deleteItem(this.item);  
     }
 

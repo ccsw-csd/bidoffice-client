@@ -1,29 +1,16 @@
 import { Injectable } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class SnackbarService {
+export class GeneralConfirmationService {
   
   constructor(
-    private messageService: MessageService, 
+    private confirmationService: ConfirmationService, 
     ) { }
-
-
-  public error(text: string) : void {
-    this.messageService.add({severity:'error', summary: 'Error', detail: text});
-  }
-
-  showMessage(message: string) {
-    this.messageService.add({severity:'success', summary: 'Ok', detail: message});
-  }
-  
-}
-
-/*
 
   showConfirmDialog(){
     this.confirmationService.confirm({
@@ -44,5 +31,6 @@ export class SnackbarService {
   }
 
 
+  
+}
 
-*/

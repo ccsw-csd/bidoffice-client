@@ -1,47 +1,50 @@
 <p-confirmDialog styleClass="max-w-26rem" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"
   [closable]="false"></p-confirmDialog>
-<div class="mt-3 flex justify-content-end">
-  <button *ngIf="!readOnly" tooltipPosition="top" pButton pRipple type="button" icon="pi pi-plus" class="p-button-lg m-2 p-button-outlined" pTooltip="Añadir" (click)="createTracing()"></button>
+
+<div class="flex flex-column gap-3" style="height: calc(100vh - 355px);">
+  <div class="mt-3 flex justify-content-end">
+    <button *ngIf="!readOnly" tooltipPosition="top" pButton pRipple type="button" icon="pi pi-plus" class="p-button-lg m-2 p-button-outlined" pTooltip="Añadir" (click)="createTracing()"></button>
+  </div>
+  <p-table #table [value]="data.tracings" selectionMode="single" scrollable="true" scrollHeight="calc(70vh - 202px)" responsiveLayout="scroll"
+    sortField="date" sortOrder="-1">
+    <ng-template pTemplate="header">
+      <tr>
+        <th  class="flex-1 flex-column align-items-center justify-content-center">
+          <div class="flex flex-row w-full top-header" pSortableColumn="comentario">
+            <span class="flex flex-1 justify-content-center">Comentario</span>
+            <p-sortIcon field="comentario"></p-sortIcon>
+          </div>
+        </th>
+        <th  class="flex-none w-2 flex-column align-items-center justify-content-center">
+          <div class="flex flex-row w-full top-header" pSortableColumn="persona">
+            <span class="flex flex-1 justify-content-center">Persona</span>
+            <p-sortIcon field="persona"></p-sortIcon>
+          </div>
+        </th>
+        <th  class="flex-none w-2 flex-column align-items-center justify-content-center">
+          <div class="flex flex-row w-full top-header" pSortableColumn="fech">
+            <span class="flex flex-1 justify-content-center">Fecha</span>
+            <p-sortIcon field="fech"></p-sortIcon>
+          </div>
+        </th>
+        <th  th class="buttons flex-1 flex-none flex-column " style="width: 125px;">
+          <div class="w-full "></div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tracings>
+      <tr>
+        <td class="flex-1 align-items-center justify-content-center">{{tracings.comment}}</td>
+        <td class="flex-none w-2 align-items-center justify-content-center">{{transformPerson(tracings.person)}}</td>
+        <td class="flex-none w-2 align-items-center justify-content-center">{{tracings.date | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
+        <td class="flex-1 flex-none">
+          <div *ngIf="tracings.uuid != null && commentFromCurrentPerson(tracings.person)">
+            <button pButton icon="pi pi-pencil" (click)="onRowEditInit(tracings)"
+              class="h-1rem p-button-sm p-button-text p-button-rounded p-button-plain icon"></button>
+            <button (click)="onDeleteRow(tracings)" pButton icon="pi pi-trash"
+              class="h-1rem p-button-sm p-button-text p-button-rounded p-button-plain icon p-button-danger"></button>
+          </div>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
-<p-table #table [value]="data.tracings" selectionMode="single" scrollable="true" scrollHeight="calc(70vh - 202px)" responsiveLayout="scroll"
-  sortField="date" sortOrder="-1">
-  <ng-template pTemplate="header">
-    <tr>
-      <th  class="flex-1 flex-column align-items-center justify-content-center">
-        <div class="flex flex-row w-full top-header" pSortableColumn="comentario">
-          <span class="flex flex-1 justify-content-center">Comentario</span>
-          <p-sortIcon field="comentario"></p-sortIcon>
-        </div>
-      </th>
-      <th  class="flex-none w-2 flex-column align-items-center justify-content-center">
-        <div class="flex flex-row w-full top-header" pSortableColumn="persona">
-          <span class="flex flex-1 justify-content-center">Persona</span>
-          <p-sortIcon field="persona"></p-sortIcon>
-        </div>
-      </th>
-      <th  class="flex-none w-2 flex-column align-items-center justify-content-center">
-        <div class="flex flex-row w-full top-header" pSortableColumn="fech">
-          <span class="flex flex-1 justify-content-center">Fecha</span>
-          <p-sortIcon field="fech"></p-sortIcon>
-        </div>
-      </th>
-      <th  th class="buttons flex-1 flex-none flex-column " style="width: 125px;">
-        <div class="w-full "></div>
-      </th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-tracings>
-    <tr>
-      <td class="flex-1 align-items-center justify-content-center">{{tracings.comment}}</td>
-      <td class="flex-none w-2 align-items-center justify-content-center">{{transformPerson(tracings.person)}}</td>
-      <td class="flex-none w-2 align-items-center justify-content-center">{{tracings.date | date: 'dd/MM/yyyy hh:mm:ss'}}</td>
-      <td class="flex-1 flex-none">
-        <div *ngIf="tracings.uuid != null && commentFromCurrentPerson(tracings.person)">
-          <button pButton icon="pi pi-pencil" (click)="onRowEditInit(tracings)"
-            class="h-1rem p-button-sm p-button-text p-button-rounded p-button-plain icon"></button>
-          <button (click)="onDeleteRow(tracings)" pButton icon="pi pi-trash"
-            class="h-1rem p-button-sm p-button-text p-button-rounded p-button-plain icon p-button-danger"></button>
-        </div>
-    </tr>
-  </ng-template>
-</p-table>

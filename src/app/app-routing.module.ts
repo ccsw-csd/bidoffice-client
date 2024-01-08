@@ -13,6 +13,7 @@ import { OfferingListComponent } from './admin/views/offering-list/offering-list
 import { ProjectTypeListComponent } from './admin/views/project-type-list/project-type-list.component';
 import { SectorListComponent } from './admin/views/sector-list/sector-list.component';
 import { FormatDocumentListComponent } from './admin/views/format-document-list/format-document-list.component';
+import { RefreshTokenResolverService } from './core/services/refresh-token-resolver.service';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    resolve: {credentials: RefreshTokenResolverService},
     canActivate: [AuthGuard],
     children: [
       { path: 'methodology', component: MethodologyListComponent },

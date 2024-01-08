@@ -10,11 +10,17 @@ import { LoginModule } from './login/login.module';
 import { OfferModule } from './offer/offer.module';
 import { AdminModule } from './admin/admin.module';
 
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { HttpInterceptorService } from './core/services/http-interceptor.service';
+import { RefreshTokenResolverService } from './core/services/refresh-token-resolver.service';
+import { GeneralConfirmationService } from './core/services/general-confirmation.service';
 
 
 registerLocaleData(localeEs, 'es');
@@ -40,7 +46,17 @@ export function HttpLoeaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers: [],
+  providers: [
+    HttpClientModule,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    DialogService,
+    MessageService,
+    GeneralConfirmationService,
+    RefreshTokenResolverService,
+    DatePipe
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

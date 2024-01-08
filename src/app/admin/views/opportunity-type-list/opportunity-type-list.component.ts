@@ -6,6 +6,7 @@ import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { OpportunityTypeEditComponent } from '../opportunity-type-edit/opportunity-type-edit.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { GeneralConfirmationService } from 'src/app/core/services/general-confirmation.service';
 
 @Component({
     selector: 'app-opportunity-type-list',
@@ -23,6 +24,7 @@ export class OpportunityTypeListComponent implements OnInit {
         private ref: DynamicDialogRef,
         private dialogService: DialogService,
         private snackbarService: SnackbarService,
+        private confirmationService : GeneralConfirmationService,
     ) { }
 
     ngOnInit(): void {
@@ -43,7 +45,7 @@ export class OpportunityTypeListComponent implements OnInit {
 
   showDialog(element?: OpportunityType){   
     this.item=element 
-    this.snackbarService.showConfirmDialog()
+    this.confirmationService.showConfirmDialog()
   }
 
      /**
@@ -51,7 +53,7 @@ export class OpportunityTypeListComponent implements OnInit {
      * ninguna acción.
      */
     closeDialog() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
     }
 
     /**
@@ -59,7 +61,7 @@ export class OpportunityTypeListComponent implements OnInit {
      * borrar posteriormente el sector implicado.
      */
     confirmDeletion() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
         this.deleteRow(this.item);  
     }
 

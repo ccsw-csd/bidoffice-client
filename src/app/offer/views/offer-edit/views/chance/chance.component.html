@@ -4,115 +4,103 @@
     <button type="button" pButton label="Sí" class="p-button-primary" (click)="changeFlagForDelete()"></button>
   </p-footer>
 </p-confirmDialog>
-<form [formGroup]="formValidator" style="margin-bottom: 20px;">
-  <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-4">
-      <span class="p-float-label">
-        <input pInputText formControlName="nameOpportunity" [(ngModel)]="data.name" maxlength="100"
-          aria-describedby="nameOpportunity-help" />
+
+<form [formGroup]="formValidator">
+  <div class="flex flex-column gap-3" style="height: calc(100vh - 355px);">
+
+    <div class="flex flex-row gap-2 w-full pt-2">
+      <div class="flex flex-2 p-float-label">
+        <input class="w-full" pInputText formControlName="nameOpportunity" [(ngModel)]="data.name" maxlength="100" aria-describedby="nameOpportunity-help" />
         <label>Nombre Oportunidad*</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-4">
-      <span class="p-float-label">
-        <p-autoComplete [suggestions]="results" [(ngModel)]="data.client" formControlName="client"
-          (completeMethod)="searchClient($event)" appendTo="body" aria-describedby="client-help"></p-autoComplete>
+      </div>
+
+      <div class="flex flex-2 p-float-label">
+        <p-autoComplete class="w-full" [suggestions]="results" [(ngModel)]="data.client" formControlName="client" (completeMethod)="searchClient($event)" appendTo="body" aria-describedby="client-help"></p-autoComplete>
         <label>Cliente*</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-2">
-      <span class="p-float-label">
-        <input pInputText [(ngModel)]="data.bdcCode" formControlName="bdcCode" />
+      </div>
+
+      <div class="flex flex-1 p-float-label">
+        <input class="w-full" pInputText [(ngModel)]="data.bdcCode" formControlName="bdcCode" />
         <label>Código BDC</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-2">
-      <span class="p-float-label">
-        <p-dropdown [options]="offerTypes" [(ngModel)]="data.opportunityType" formControlName="opportunityType"
-          optionLabel="name" appendTo="body" aria-describedby="opportunityType-help"></p-dropdown>
+      </div>
+
+      <div class="flex flex-1 p-float-label">
+        <p-dropdown class="w-full" styleClass="w-full" [options]="offerTypes" [(ngModel)]="data.opportunityType" formControlName="opportunityType" optionLabel="name" appendTo="body" aria-describedby="opportunityType-help"></p-dropdown>
         <label>Tipo de Oportunidad</label>
-      </span>
+      </div>
     </div>
-  </div>
-  <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-3">
-      <span class="p-float-label">
-        <p-autoComplete [(ngModel)]="selectedRequestedBy" formControlName="requestedBy" [suggestions]="groupPerson"
+
+    <div class="flex flex-row gap-2 w-full">
+      <div class="flex flex-1 p-float-label">
+        <p-autoComplete class="w-full" [(ngModel)]="selectedRequestedBy" formControlName="requestedBy" [suggestions]="groupPerson"
           [forceSelection]="true" [showEmptyMessage]="true" [emptyMessage]="message"
           (completeMethod)="searchPerson($event)" (onSelect)="data.requestedBy = $event.value" field="field"
           appendTo="body"></p-autoComplete>
         <label>Quien solicita</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-3">
-      <span class="p-float-label">
-        <p-autoComplete [(ngModel)]="selectedManagedBy" formControlName="managedBy" [suggestions]="groupPerson"
+      </div>
+      
+      <div class="flex flex-1 p-float-label">
+        <p-autoComplete class="w-full" [(ngModel)]="selectedManagedBy" formControlName="managedBy" [suggestions]="groupPerson"
           [forceSelection]="true" [showEmptyMessage]="true" [emptyMessage]="message"
           (completeMethod)="searchPerson($event)" (onSelect)="data.managedBy = $event.value" field="field"
           appendTo="body"></p-autoComplete>
         <label>Responsable CCA</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-2">
-      <span class="p-float-label">
-        <p-calendar [showIcon]="true" [(ngModel)]="data.goNogoDate" formControlName="goNogoDate" appendTo="body">
+      </div>
+
+      <div class="flex-none w-8rem p-float-label">
+        <p-calendar class="w-full" styleClass="w-full" [style]="{'height':'42px'}" [showIcon]="true" [(ngModel)]="data.goNogoDate" formControlName="goNogoDate" appendTo="body">
         </p-calendar>
         <label>Fecha Go/No Go</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-2">
-      <div class="p-float-label">
-        <p-calendar [showIcon]="true" [(ngModel)]="data.requestedDate" formControlName="requestedDate" appendTo="body"
+      </div>
+
+      <div class="flex-none w-8rem p-float-label">
+        <p-calendar class="w-full" styleClass="w-full" [style]="{'height':'42px'}" [showIcon]="true" [(ngModel)]="data.requestedDate" formControlName="requestedDate" appendTo="body"
           aria-describedby="requestedDate-help"></p-calendar>
         <label class="ajustar">Fecha Solicitud*</label>
       </div>
-    </div>
-    <div class="p-fluid field col-12 md:col-2">
-      <div class="p-float-label w-full">
-        <p-calendar [showIcon]="true" [(ngModel)]="data.deliveryDate" formControlName="deliveryDate" appendTo="body" aria-describedby="deliveryDate-help"></p-calendar>
-        <label>Fecha Entrega Oportunidad</label>
+      
+      <div class="flex-none w-8rem p-float-label">
+        <p-calendar class="w-full" styleClass="w-full" styleClass="w-full" [style]="{'height':'42px'}" [showIcon]="true" [(ngModel)]="data.deliveryDate" formControlName="deliveryDate" appendTo="body" aria-describedby="deliveryDate-help"></p-calendar>
+        <label>F. Entrega Op.</label>
       </div>
     </div>
-  </div>
-  <div class="ui-fluid formgrid grid mt-3">
-    <div class="p-fluid field col-12 md:col-4">
-      <span class="p-float-label">
-        <p-multiSelect [options]="offerings" [filter]="false" [(ngModel)]="data.offerings" formControlName="offerings" optionLabel="name"
+
+
+    <div class="flex flex-row gap-2 w-full">
+
+      <div class="flex-none w-20rem p-float-label">
+        <p-multiSelect class="w-20rem text-overflow-ellipsis" styleClass="w-20rem text-overflow-ellipsis" [options]="offerings" [filter]="false" [(ngModel)]="data.offerings" formControlName="offerings" optionLabel="name"
           appendTo="body" [showToggleAll]="false" [showClear]="true"></p-multiSelect>
         <label>Offering</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-4">
-      <span class="p-float-label">
-        <p-multiSelect [options]="technologies" [filter]="false" [(ngModel)]="data.technologies" formControlName="technologies"
-          optionLabel="name" appendTo="body"></p-multiSelect>
+      </div>
+
+      <div class="flex-none w-20rem p-float-label">
+        <p-multiSelect class="w-20rem" styleClass="w-20rem" [options]="technologies" [filter]="false" [(ngModel)]="data.technologies" formControlName="technologies"
+          optionLabel="name" appendTo="body" [showToggleAll]="false" [showClear]="true"></p-multiSelect>
         <label>Tecnologías</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-2">
-      <span class="p-float-label">
-        <p-dropdown [(ngModel)]="data.sector" [options]="sectors" formControlName="sector" optionLabel="name"
+      </div>
+
+      <div class="flex flex-1 p-float-label">
+        <p-dropdown class="w-full" styleClass="w-full" [(ngModel)]="data.sector" [options]="sectors" formControlName="sector" optionLabel="name"
           appendTo="body" aria-describedby="sector-help"></p-dropdown>
         <label>Sector*</label>
-      </span>
-    </div>
-    <div class="p-fluid field col-12 md:col-2">
-      <span class="p-float-label">
-        <p-dropdown [(ngModel)]="data.dataProject.projectType" [options]="projectType" formControlName="dataProject"
+      </div>
+
+      <div class="flex flex-1 p-float-label">
+        <p-dropdown class="w-full" styleClass="w-full" [(ngModel)]="data.dataProject.projectType" [options]="projectType" formControlName="dataProject"
           optionLabel="name" appendTo="body"></p-dropdown>
         <label>Tipo de Proyecto</label>
-      </span>
+      </div>      
     </div>
-  </div>
-  <div class="ui-fluid formgrid grid" style="margin-bottom: -38px;">
-    <div class="p-fluid field col-12 md:col-12" >
-      <span class="p-float-label">
-        <textarea  [ngStyle]="{ 'resize': 'none', 'height': '347px' }" pInputTextarea [(ngModel)]="data.observations" formControlName="observations" [rows]="14"></textarea>
+    
+    <div class="flex flex-1 p-float-label w-full h-full" >
+        <textarea class="w-full h-full" pInputTextarea [(ngModel)]="data.observations" formControlName="observations" [rows]="14"></textarea>
         <label>Observaciones comerciales</label>
-      </span>
     </div>
-  </div>
+
+  </div>  
 </form>
+
 <div class="loadWrapper flex align-items-center flex-column justify-content-center" *ngIf="isLoading">
   <p-progressSpinner></p-progressSpinner>
 </div>

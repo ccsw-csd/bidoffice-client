@@ -6,6 +6,7 @@ import {DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { HyperscalerEditComponent } from '../hyperscaler-edit/hyperscaler-edit.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { GeneralConfirmationService } from 'src/app/core/services/general-confirmation.service';
 
 @Component({
     selector: 'app-hyperscaler',
@@ -24,6 +25,7 @@ export class HyperscalerListComponent implements OnInit {
         private dialogService: DialogService,
         private ref: DynamicDialogRef, 
         private snackbarService: SnackbarService,
+        private confirmationService : GeneralConfirmationService,
         ) { }
 
     ngOnInit(): void {
@@ -79,7 +81,7 @@ export class HyperscalerListComponent implements OnInit {
 
     showDialog(element?: Hyperscaler){   
         this.item=element 
-        this.snackbarService.showConfirmDialog()
+        this.confirmationService.showConfirmDialog()
     }
 
     /**
@@ -87,7 +89,7 @@ export class HyperscalerListComponent implements OnInit {
      * ninguna acción.
      */
     closeDialog() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
     }
 
     /**
@@ -95,7 +97,7 @@ export class HyperscalerListComponent implements OnInit {
      * borrar posteriormente el sector implicado.
      */
     confirmDeletion() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
         this.deleteRow(this.item);  
     }
 

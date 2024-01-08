@@ -1,119 +1,127 @@
 
-<div class="ui-fluid formgrid grid mt-3">
-  <div class="p-fluid col-12 md:col-1 mt-2">
-    <span class="field-checkbox">
-      <p-checkbox labelStyleClass="cursor-pointer" [binary]="true" inputId="binary" [(ngModel)]="data.dataTeam.cca" label="Lidera C&CA">
-      </p-checkbox>
-    </span>
-  </div>
-  <div class="p-fluid field col-12 md:col-3">
-    <span class="p-float-label">
-      <p-dropdown [(ngModel)]="data.dataTechnology.hyperscaler" [options]="hyperscalers" optionLabel="name"
-        appendTo="body"></p-dropdown>
-      <label>Cloud</label>
-    </span>
-  </div>
-  <div class="p-fluid field col-12 md:col-2">
-    <span class="p-float-label">
-      <p-dropdown [(ngModel)]="data.dataTechnology.methodology" [options]="methodologies" optionLabel="name"
-        appendTo="body"></p-dropdown>
-      <label>Metodologías</label>
-    </span>
-  </div>
-  <div class="p-fluid field col-12 md:col-6">
-    <span class="p-float-label">
-      <p-autoComplete [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
-        [emptyMessage]="message" [(ngModel)]="selectedPerson" (completeMethod)="searchPerson($event)"
-        (onSelect)="assignTeamPerson()" field="field">
-      </p-autoComplete>
-      <label>Añadir personas implicadas a la oferta</label>
-    </span>
-  </div>
-</div>
-<div class="grid">
-  <div class="col-6 mt-1">
-    <div class="grid">
-      <div class="p-fluid col-12 md:col-2 mt-2">
-        <p-checkbox labelStyleClass="cursor-pointer" [binary]="true" inputId="binary" [(ngModel)]="data.dataTeam.multitower" label="Es multitower"></p-checkbox>
-      </div>
-      <div class="p-fluid field col-12 md:col-10">
-        <span class="p-float-label">
-          <input pInputText [(ngModel)]="data.dataTeam.practices" />
-          <label>Prácticas implicadas</label>
-        </span>
-      </div>
-      <div class="p-fluid col-12 md:col-3">
-        <span class="p-float-label field">
-          <p-inputNumber locale="es-ES" [(ngModel)]="data.dataProject.amount" [min]="0" inputId="minmaxfraction" mode="currency"
-            [minFractionDigits]="2" [maxFractionDigits]="5" currency="EUR">
-          </p-inputNumber>
-          <label>Importe</label>
-        </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-3">
-        <span class="p-float-label">
-          <p-inputNumber locale="es-ES" [(ngModel)]="data.dataProject.ftes" [min]="0"></p-inputNumber>
-          <label>Tamaño del equipo</label>
-        </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-3">
-        <span class="p-float-label">
-          <p-inputNumber locale="es-ES" [(ngModel)]="data.dataProject.months" [min]="0" inputId="minmaxfraction" mode="decimal"
-            [minFractionDigits]="0" [maxFractionDigits]="0">
-          </p-inputNumber>
-          <label>Duración</label>
-        </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-3">
-        <span class="p-float-label">
-          <p-inputNumber locale="es-ES" [(ngModel)]="data.dataProject.contributionMargin" [min]="0" inputId="minmaxfraction" mode="decimal"
-            [minFractionDigits]="2" [maxFractionDigits]="5" inputId="percent" suffix=" %">
-          </p-inputNumber>
-          <label>Margen Contribución</label>
-        </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-4">
-        <span class="p-float-label">
-          <input pInputText [ngModel]="getUserLastModification(data.userLastUpdate)" [disabled]="true">
-          <label>Usuario última actualización</label>
-        </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-4">
-        <span class="p-float-label">
-          <p-calendar [showIcon]="true" appendTo="body" [(ngModel)]="data.lastModification" [disabled]="true"></p-calendar>
-          <label>Fecha última actualización</label>
-        </span>
-      </div>
-      <div class="p-fluid field col-12 md:col-4">
-        <span class="p-float-label">
-          <p-calendar [showClear]="data.releaseDate"[showIcon]="!data.releaseDate" appendTo="body" [(ngModel)]="data.releaseDate"></p-calendar>
-          <label>Fecha liberación oportunidad</label>
-        </span>
-      </div>
-    </div>
-  </div>
-  <div class="p-fluid field col-6 mt-1">
-    <p-listbox listStyleClass="max-h-12rem h-12rem" emptyMessage="No hay personas seleccionadas"
-      [options]="selectedPersonList" optionLabel="field">
-      <ng-template let-person pTemplate="item">
-        <div class="flex flex-row justify-content-center align-items-center">
-          <button (click)="onDeletePerson(person.value)" pButton icon="pi pi-trash"
-            class="p-button-rounded p-button-text p-button-plain icon"></button>
-          <label>{{person.field}}</label>
+<div class="flex flex-column gap-3" style="height: calc(100vh - 355px);">
+
+  <div class="flex flex-row gap-2 w-full mt-2">
+
+    <div class="flex flex-1 flex-column gap-3">
+
+      <div class="flex flex-row gap-2 align-content-center">
+        <p-checkbox class="w-8rem" labelStyleClass="cursor-pointer" [binary]="true" inputId="binary" [(ngModel)]="data.dataTeam.cca" label="Lidera C&CA"></p-checkbox>
+        
+        <div class="flex flex-1 p-float-label">
+          <p-dropdown class="w-full" styleClass="w-full" [(ngModel)]="data.dataTechnology.hyperscaler" [options]="hyperscalers" optionLabel="name" appendTo="body"></p-dropdown>
+          <label>Cloud</label>
         </div>
-      </ng-template>
-    </p-listbox>
+        
+        <div class="flex flex-1 p-float-label">
+          <p-dropdown class="w-full" styleClass="w-full" [(ngModel)]="data.dataTechnology.methodology" [options]="methodologies" optionLabel="name" appendTo="body"></p-dropdown>
+          <label>Metodologías</label>
+        </div>
+      </div>
+      
+      <div class="flex flex-row gap-2 align-content-center">
+        <p-checkbox class="w-8rem" labelStyleClass="cursor-pointer" [binary]="true" inputId="binary" [(ngModel)]="data.dataTeam.multitower" label="Es multitower"></p-checkbox>
+        
+        <div class="flex flex-1 p-float-label">
+          <input class="w-full"  pInputText [(ngModel)]="data.dataTeam.practices" />
+          <label>Prácticas implicadas</label>
+        </div>
+      </div>
+
+
+        <div class="flex flex-row gap-2 align-content-center">
+          
+          <div class="flex flex-1">
+
+              <span class="w-full p-float-label">
+                <p-inputNumber class="w-full" styleClass="w-full" [inputStyle]="{'width':'100%'}" locale="es-ES" [(ngModel)]="data.dataProject.amount" [min]="0" inputId="minmaxfraction" mode="currency" [minFractionDigits]="2" [maxFractionDigits]="5" currency="EUR"></p-inputNumber>
+                <label>Importe</label>
+              </span>
+          </div>
+          
+          <div class="flex flex-1">
+              <div class="p-float-label">
+                <p-inputNumber class="w-full" styleClass="w-full" [inputStyle]="{'width':'100%'}" locale="es-ES" [(ngModel)]="data.dataProject.ftes" [min]="0"></p-inputNumber>
+                <label>Tamaño del equipo</label>
+              </div>
+          </div>
+          
+          <div class="flex flex-1">
+              <div class="p-float-label">
+                <p-inputNumber class="w-full" styleClass="w-full" [inputStyle]="{'width':'100%'}" locale="es-ES" [(ngModel)]="data.dataProject.months" [min]="0" inputId="minmaxfraction" mode="decimal" [minFractionDigits]="0" [maxFractionDigits]="0"></p-inputNumber>
+                <label>Duración (meses)</label>
+              </div>
+          </div>
+          
+          <div class="flex flex-1">
+              <div class="p-float-label">
+                <p-inputNumber class="w-full" styleClass="w-full" [inputStyle]="{'width':'100%'}" locale="es-ES" [(ngModel)]="data.dataProject.contributionMargin" [min]="0" inputId="minmaxfraction" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5" inputId="percent" suffix=" %"></p-inputNumber>
+                <label>Margen Contribución</label>
+              </div>
+          </div>
+          
+        </div>
+
+
+      <div class="flex flex-row gap-2 align-content-center">
+        
+        <div class="flex flex-1 p-float-label">
+          <input class="w-full" pInputText [ngModel]="getUserLastModification(data.userLastUpdate)" [disabled]="true">
+          <label>Usuario última actualización</label>
+        </div>
+        
+        <div class="flex flex-1 p-float-label">
+          <p-calendar class="w-full" styleClass="w-full" [style]="{'height':'42px'}" [showIcon]="true" appendTo="body" [(ngModel)]="data.lastModification" [disabled]="true"></p-calendar>
+          <label>Fecha última actualización</label>
+        </div>
+        
+        <div class="flex flex-1 p-float-label">
+          <p-calendar class="w-full" styleClass="w-full" [style]="{'height':'42px'}" [showClear]="data.releaseDate"[showIcon]="!data.releaseDate" appendTo="body" [(ngModel)]="data.releaseDate"></p-calendar>
+          <label>Fecha liberación oportunidad</label>
+        </div>
+        
+      </div>
+      
+
+    </div>
+
+    <div class="flex flex-1 flex-column gap-2">
+      
+      <div class="w-full">
+        <div class="p-float-label w-full">
+          <p-autoComplete class="w-full" styleClass="w-full" [suggestions]="groupPerson" [forceSelection]="true" [showEmptyMessage]="true"
+            [emptyMessage]="message" [(ngModel)]="selectedPerson" (completeMethod)="searchPerson($event)"
+            (onSelect)="assignTeamPerson()" field="field">
+          </p-autoComplete>
+          <label>Añadir personas implicadas a la oferta</label>
+        </div>
+      </div>
+
+        <p-listbox class="flex flex-1 w-full" styleClass="w-full" emptyMessage="No hay personas seleccionadas" [options]="selectedPersonList" optionLabel="field">
+          <ng-template let-person pTemplate="item">
+            <div class="flex flex-row justify-content-center align-items-center">
+              <button (click)="onDeletePerson(person.value)" pButton icon="pi pi-trash" class="p-button-rounded p-button-text p-button-plain icon"></button>
+              <label>{{person.field}}</label>
+            </div>
+          </ng-template>
+        </p-listbox>      
+    </div>
+
   </div>
-</div>
-<div class="ui-fluid formgrid grid" style="margin-bottom: -17px;">
-  <div class="p-fluid field col-12 md:col-12" >
-    <span class="p-float-label">
-      <textarea [ngStyle]="{ 'resize': 'none', 'height': '271px' }" pInputTextarea [(ngModel)]="data.dataTechnology.observations"
-        [rows]="11"></textarea>
+
+
+  <div class="flex flex-1">
+    <span class="p-float-label w-full h-full">
+      <textarea class="w-full h-full" pInputTextarea [(ngModel)]="data.dataTechnology.observations"></textarea>
       <label>Observaciones</label>
     </span>
   </div>
+  
+
 </div>
+
+
+
 <div class="loadWrapper flex align-items-center flex-column justify-content-center" *ngIf="isLoading">
   <p-progressSpinner></p-progressSpinner>
 </div>
