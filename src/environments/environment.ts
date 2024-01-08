@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   appCode: 'bidOffice',
   server: 'http://localhost:8080',
-  sso: 'http://frparccsw/dev/sso'
+  sso: 'http://frparccsw/dev/sso',
+  ssoApp: '/dev/apps'
 };
 
 /*

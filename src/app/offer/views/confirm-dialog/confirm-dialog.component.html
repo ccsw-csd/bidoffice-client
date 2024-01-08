@@ -4,8 +4,12 @@
       <p>Se han realizado cambios en el formulario y no se han guardado. ¿Está seguro que desea cerrar la ventana sin guardar?</p>
     </div>
     <div class="modal-footer ui-fluid formgrid grid absolute right-0 left-0 bottom-0 justify-content-end mb-1 mr-4 p-3">
-        <button class="p-3 p-button-outlined mb-2 mr-2" pButton data-dismiss="modal" (click)="onSave()">Seguir editando</button>
-        <button class="p-3" pButton (click)="onClose()">Salir sin guardar</button>
-    </div>
+      <div> 
+        <button class="p-button-outlined w-6rem p-button-secondary" pButton (click)="onClose()">Salir sin guardar</button>
+      </div>
+      <div class="px-2"> 
+        <button class="w-6rem" pButton data-dismiss="modal" (click)="onSave()">Seguir editando</button>
+      </div> 
+      </div>
   </div>
 </div>

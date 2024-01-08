@@ -69,7 +69,7 @@ export class DocumentationComponent implements OnInit {
       message: '¿Esta seguro que desea eliminar este registro?',
       acceptLabel: 'Eliminar',
       rejectLabel: 'Cancelar',
-      rejectButtonStyleClass: 'p-button-secondary',
+      rejectButtonStyleClass: ' p-button-outlined p-button-secondary',
       icon: 'pi pi-exclamation-triangle',
       acceptIcon: 'none',
       rejectIcon: 'none',

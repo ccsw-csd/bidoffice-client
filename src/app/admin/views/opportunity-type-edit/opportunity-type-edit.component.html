@@ -1,15 +1,16 @@
-<div class="flex flex-column">
-    <br>
-    <span class="p-float-label field">
-        <input id="name" type="text" class="w-full" pInputText required [(ngModel)]="opportunityElement.name"  required> 
-        <label for="name">Nombre</label>
-    </span>  
-    <span class="p-float-label field">
-        <input id="priority" type="number" min="1"  class="w-full" pInputText required [(ngModel)]="opportunityElement.priority" required>
-        <label for="priority">Prioridad</label>
-    </span>    
-</div>
 
+<br>
+<span class="p-float-label">
+    <input id="name" type="text" class="w-full" pInputText required [(ngModel)]="opportunityElement.name"  required> 
+    <label for="name">Nombre</label>
+</span>
+<br> 
+<span class="p-float-label">
+    <input id="priority" type="number" min="1"  class="w-full" pInputText required [(ngModel)]="opportunityElement.priority" required>
+    <label for="priority">Prioridad</label>
+</span>    
+
+<br>
 <br>
 
 <div class = "flex flex-row-reverse w-auto">
@@ -17,6 +18,6 @@
         <button type="button" class=" p-button-primary w-6rem" [disabled]="opportunityElement.name=='' || opportunityElement.name==null || opportunityElement.priority==null || opportunityElement.priority < 1" (click)="saveItem(opportunityElement)" pButton label="Guardar"></button>
     </div>
     <div class="px-2">
-        <button type="button" class="p-button-outlined w-6rem" (click)="closeWindow(false)" pButton label="Cerrar"></button>
+        <button type="button" class="p-button-outlined w-6rem p-button-secondary" (click)="closeWindow(false)" pButton label="Cerrar"></button>
     </div>   
 </div>

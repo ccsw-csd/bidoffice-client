@@ -1,21 +1,21 @@
-<div class="flex flex-column" >
-    <br>
-    <span class="p-float-label field">
+<div class="flex flex-column mt-1" >
+    <span class="p-float-label label-full-width">
         <input id="name" type="text" class="w-full"  pInputText [(ngModel)]="sector.name" required>
         <label for="name">Nombre</label>
     </span>
-    <span class="p-float-label field">
+    <br>
+    <span class="p-float-label label-full-width">
         <input id="priority" type="number" min="1" class="w-full" pInputText [(ngModel)]="sector.priority" required>
         <label for="priority">Prioridad</label>
     </span>
-</div>
-<br>
-<div class="flex flex-row" style="margin-bottom: 20px">
-    <div class="p-float-label field">
+    <br>
+
+<div class="flex flex-row flex-1 gap-2" style="margin-bottom: 20px">
+    <div class="flex-1 p-float-label">
         <p-calendar [showIcon]="true"  [(ngModel)]="sector.startDate" appendTo="body"></p-calendar>
         <label>Fecha de inicio</label>
     </div>
-    <div class="p-float-label field">
+    <div class="flex-2 p-float-label" style="margin-left: 10px;">
         <p-calendar [showIcon]="true" [(ngModel)]="sector.endDate" appendTo="body"></p-calendar>
         <label>Fecha final</label>
     </div>  
@@ -30,6 +30,7 @@
         </button>
     </div>
     <div class="px-2">
-        <button type="button" class="p-button-outlined w-6rem" (click)="close(false)" pButton label="Cerrar"></button>
+        <button type="button" class="p-button-outlined w-6rem p-button-secondary" (click)="close(false)" pButton label="Cerrar"></button>
     </div>
+</div>
 </div>

@@ -7,6 +7,7 @@ import { OfferService } from 'src/app/offer/services/offer.service';
 import { forkJoin } from 'rxjs';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { GeneralConfirmationService } from 'src/app/core/services/general-confirmation.service';
 
 @Component({
   selector: 'app-chance',
@@ -39,6 +40,7 @@ export class ChanceComponent implements OnInit {
     private offerService: OfferService,
     private snackbarService: SnackbarService,
     private authService: AuthService,
+    private confirmationService : GeneralConfirmationService,
   ) {}
 
   ngOnInit(): void {
@@ -91,7 +93,7 @@ export class ChanceComponent implements OnInit {
         this.isLoading = false;
 
         if (this.data.id == null) {
-          this.snackbarService.showMessageConfirm(
+          this.confirmationService.showMessageConfirm(
             'Estado',
             '¿La oferta requiere Go/NoGo?'
           );
@@ -135,12 +137,12 @@ export class ChanceComponent implements OnInit {
     this.data.opportunityStatus = this.status.find(
       (item) => item.name == this.labelInProgress
     );
-    this.snackbarService.closeConfirmDialog();
+    this.confirmationService.closeConfirmDialog();
   }
   changeFlagForDelete() {
     this.data.opportunityStatus = this.status.find(
       (item) => item.name == this.labelInGoNoGo
     );
-    this.snackbarService.closeConfirmDialog();
+    this.confirmationService.closeConfirmDialog();
   }
 }

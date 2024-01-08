@@ -30,12 +30,12 @@
     <label>Observaciones</label>
   </div>
 </div>
-<div class="ui-fluid formgrid grid mt-2 flex justify-content-end">
-  <div class="p-fluid p-float-label field col-12 md:col-3">
-    <button class="p-3 p-button-outlined" pButton label="Cancelar" (click)="onCancel()"></button>
+<div class="flex flex-row-reverse w-auto">
+  <div >
+    <button class="p-button-primary w-6rem" pButton label="Guardar" (click)="onSave()" [disabled]="dataFileForm.invalid"></button>
   </div>
-  <div class="p-fluid p-float-label field col-12 md:col-3">
-    <button class="p-3" pButton label="Guardar" (click)="onSave()" [disabled]="dataFileForm.invalid"></button>
+  <div class="px-2">
+    <button class="p-button-outlined w-6rem p-button-secondary" pButton label="Cancelar" (click)="onCancel()"></button>
   </div>
 </div>
 <div class="loadWrapper flex align-items-center flex-column justify-content-center" *ngIf="isLoading">

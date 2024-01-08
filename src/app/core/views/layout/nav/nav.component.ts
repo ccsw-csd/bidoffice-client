@@ -28,6 +28,7 @@ export class NavComponent implements OnInit {
       {label: "Oportunidades", routerLink: '/main'},
       {label: "Buscador de Oportunidades"},
       {label: "Administración",
+        expanded: true,
         items: [
           {label: "Tipos de ficheros",  routerLink: "/filetype"},
           {label: 'Hyperscaler', routerLink: '/hyperscaler'},

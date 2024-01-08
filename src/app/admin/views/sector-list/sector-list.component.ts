@@ -6,6 +6,7 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { Sector } from '../../model/Sector';
 import { SectorService } from '../../services/sector.service';
 import { SectorEditComponent } from '../sector-edit/sector-edit.component';
+import { GeneralConfirmationService } from 'src/app/core/services/general-confirmation.service';
 
 @Component({
     selector: 'app-sector-list',
@@ -25,6 +26,7 @@ export class SectorListComponent implements OnInit {
         private snackBarService: SnackbarService,
         private ref: DynamicDialogRef,
         private dialogService: DialogService,
+        private confirmationService : GeneralConfirmationService,
     ) {}
 
     ngOnInit(): void {
@@ -57,7 +59,7 @@ export class SectorListComponent implements OnInit {
      */
     showDeleteDialog(sector?: Sector) {
         this.sector = sector;
-        this.snackBarService.showConfirmDialog();
+        this.confirmationService.showConfirmDialog();
     }
 
     /**
@@ -65,7 +67,7 @@ export class SectorListComponent implements OnInit {
      * ninguna acción.
      */
     closeDialog() {
-        this.snackBarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
     }
 
     /**
@@ -73,7 +75,7 @@ export class SectorListComponent implements OnInit {
      * borrar posteriormente el sector implicado.
      */
     confirmDeletion() {
-        this.snackBarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
         this.deleteSector(this.sector);
     }
 

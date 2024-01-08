@@ -4,6 +4,7 @@ import { FileType } from '../../model/FileType';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FileTypeEditComponent } from '../file-type-edit/file-type-edit.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { GeneralConfirmationService } from 'src/app/core/services/general-confirmation.service';
 
 @Component({
     selector: 'app-file-type',
@@ -21,7 +22,8 @@ export class FileTypeListComponent implements OnInit {
     constructor(
         private fileTypeService: FileTypeService,
         public dialogService: DialogService,
-        private snackbarService: SnackbarService
+        private snackbarService: SnackbarService,
+        private confirmationService : GeneralConfirmationService,
         ) { }
 
     ngOnInit(): void {
@@ -66,7 +68,7 @@ export class FileTypeListComponent implements OnInit {
 
     showDialog(element: FileType){    
         this.item = element
-        this.snackbarService.showConfirmDialog()
+        this.confirmationService.showConfirmDialog()
     }
 
    /**
@@ -74,7 +76,7 @@ export class FileTypeListComponent implements OnInit {
      * ninguna acción.
      */
     closeDialog() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
     }
 
     /**
@@ -82,7 +84,7 @@ export class FileTypeListComponent implements OnInit {
      * borrar posteriormente el sector implicado.
      */
     confirmDeletion() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
         this.deleteFileType(this.item);  
     }
 

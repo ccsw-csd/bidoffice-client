@@ -20,6 +20,7 @@ import { forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { verfierFilterDate } from './validator/ValidatorDate';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { NavigatorService } from 'src/app/core/services/navigator.service';
 
 @Component({
   selector: 'app-offer-list',
@@ -57,16 +58,23 @@ export class OfferListComponent implements OnInit {
   filterOptions: OfferSearch = new OfferSearch();
   headerChoice = 'Nueva Oportunidad';
   filterStatus: BaseClass[];
+  tableWidth: string;
 
   constructor(
     private offerService: OfferService,
     private cdRef: ChangeDetectorRef,
     private dinamicDialogService: DialogService,
     private formBuilder: FormBuilder,
+    private navigatorService: NavigatorService,
     private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.resizeTable();
+    this.navigatorService.getNavivagorChangeEmitter().subscribe(menuVisible => {
+      if (menuVisible) this.tableWidth = 'calc(100vw - 255px)';
+      else this.tableWidth = 'calc(100vw - 55px)';
+    });
     this.filterForm = this.formBuilder.group(
       {
         status: [''],
@@ -134,6 +142,14 @@ export class OfferListComponent implements OnInit {
     this.filterStatus?.map(item => item.id).toString();
   }
 
+  resizeTable(){
+    if(document.getElementById("p-slideMenu")){
+      this.tableWidth = 'calc(100vw - 255px)';
+    }else{
+      this.tableWidth = 'calc(100vw - 55px)';
+    }
+  }
+
   toOfferEdit() {
 
     const ref = this.dinamicDialogService.open(OfferEditComponent, {
@@ -152,7 +168,7 @@ export class OfferListComponent implements OnInit {
       this.loadPage();
     });
   }
-  onRowSelected(offer: Offer) {
+  onRowSelected(offer: OfferItemList) {
     this.isloading = true;
     this.offerService.getOffer(offer.id).subscribe({
       next: (res: Offer) => {

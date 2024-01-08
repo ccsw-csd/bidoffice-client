@@ -7,6 +7,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { TechnologyEditComponent } from '../technology-edit/technology-edit.component';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { GeneralConfirmationService } from 'src/app/core/services/general-confirmation.service';
 
 @Component({
     selector: 'app-technology-list',
@@ -25,7 +26,8 @@ export class TechnologyListComponent implements OnInit {
         private technologyService: TechnologyService,
         private dialogService: DialogService,
         private snackbarService: SnackbarService,
-        private ref: DynamicDialogRef
+        private ref: DynamicDialogRef,
+        private confirmationService : GeneralConfirmationService,
     ) { }
 
     ngOnInit(): void {
@@ -85,7 +87,7 @@ export class TechnologyListComponent implements OnInit {
 
     showDialog(element?: Technology){   
         this.item=element 
-        this.snackbarService.showConfirmDialog()
+        this.confirmationService.showConfirmDialog()
     }
     
     /**
@@ -93,7 +95,7 @@ export class TechnologyListComponent implements OnInit {
      * ninguna acción.
      */
      closeDialog() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
     }
 
     /**
@@ -101,7 +103,7 @@ export class TechnologyListComponent implements OnInit {
      * borrar posteriormente el sector implicado.
      */
     confirmDeletion() {
-        this.snackbarService.closeConfirmDialog();
+        this.confirmationService.closeConfirmDialog();
         this.deleteTechnology(this.item);  
     }
 

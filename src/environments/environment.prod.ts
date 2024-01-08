@@ -2,5 +2,6 @@ export const environment = {
   production: true,
   appCode: 'bidOffice',
   server: '../bidoffice-data',
-  sso: '../sso'
+  sso: '../sso',
+  ssoApp: '/apps'
 };

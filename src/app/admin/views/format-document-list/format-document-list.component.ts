@@ -5,6 +5,7 @@ import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { FormatDocument } from '../../model/FormatDocument';
 import { FormatDocumentService } from '../../services/format-document.service';
 import { FormatDocumentEditComponent } from '../format-document-edit/format-document-edit.component';
+import { GeneralConfirmationService } from 'src/app/core/services/general-confirmation.service';
 
 @Component({
   selector: 'app-format-document-list',
@@ -22,7 +23,8 @@ export class FormatDocumentListComponent implements OnInit {
   constructor(
     private formatDocumentService: FormatDocumentService,
     private dinamicDialogService: DialogService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private confirmationService : GeneralConfirmationService,
   ) {}
 
   ngOnInit(): void {
@@ -61,11 +63,11 @@ export class FormatDocumentListComponent implements OnInit {
 
   showDialog(formatDocument: FormatDocument) {
     this.formatDocumentDelete = formatDocument;
-    this.snackbarService.showConfirmDialog();
+    this.confirmationService.showConfirmDialog();
   }
 
   closeDialog() {
-    this.snackbarService.closeConfirmDialog();
+    this.confirmationService.closeConfirmDialog();
   }
 
   confirmDeletion() {
