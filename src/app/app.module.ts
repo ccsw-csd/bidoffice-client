@@ -16,7 +16,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { HttpInterceptorService } from './core/services/http-interceptor.service';
 import { RefreshTokenResolverService } from './core/services/refresh-token-resolver.service';
@@ -53,7 +53,7 @@ export function HttpLoeaderFactory(http: HttpClient) {
     JwtHelperService,
     DialogService,
     MessageService,
-    GeneralConfirmationService,
+    ConfirmationService,
     RefreshTokenResolverService,
     DatePipe
   ],
