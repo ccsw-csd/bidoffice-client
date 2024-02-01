@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-ng build --configuration=production  --base-href "/bidoffice/" --deploy-url "/bidoffice/"
+ng build --configuration=production  --base-href "/presales-cca/" --deploy-url "/presales-cca/"
 
 ## Code scaffolding
 

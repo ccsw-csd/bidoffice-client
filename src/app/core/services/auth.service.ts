@@ -145,8 +145,7 @@ export class AuthService {
   }
 
   public isAdmin(): boolean {
-    let userInfo = this.getUserInfo();
-    return userInfo.roles[environment.appCode].includes('ADMIN');
+    return this.hasRole('ADMIN');
   }
 
   public getRoles(): String[] {
@@ -173,4 +172,11 @@ export class AuthService {
   public refreshToken(credentials : ResponseCredentials): void {
     this.putSSOCredentials(credentials);
   }   
+
+  public hasRole(role : string) : boolean  {
+    let roles = this.getRoles();
+
+    if (roles == null || roles.length == 0) return false;
+    return roles.indexOf(role) >= 0;
+  }  
 }

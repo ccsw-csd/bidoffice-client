@@ -9,22 +9,22 @@
   <div class="flex flex-column gap-3" style="height: calc(100vh - 355px);">
 
     <div class="flex flex-row gap-2 w-full pt-2">
-      <div class="flex flex-2 p-float-label">
+      <div class="flex flex-1 p-float-label">
         <input class="w-full" pInputText formControlName="nameOpportunity" [(ngModel)]="data.name" maxlength="100" aria-describedby="nameOpportunity-help" />
         <label>Nombre Oportunidad*</label>
       </div>
 
-      <div class="flex flex-2 p-float-label">
+      <div class="flex flex-1 p-float-label">
         <p-autoComplete class="w-full" [suggestions]="results" [(ngModel)]="data.client" formControlName="client" (completeMethod)="searchClient($event)" appendTo="body" aria-describedby="client-help"></p-autoComplete>
         <label>Cliente*</label>
       </div>
 
-      <div class="flex flex-1 p-float-label">
+      <div class="flex-none w-9rem p-float-label">
         <input class="w-full" pInputText [(ngModel)]="data.bdcCode" formControlName="bdcCode" />
         <label>Código BDC</label>
       </div>
 
-      <div class="flex flex-1 p-float-label">
+      <div class="flex-none w-18rem p-float-label">
         <p-dropdown class="w-full" styleClass="w-full" [options]="offerTypes" [(ngModel)]="data.opportunityType" formControlName="opportunityType" optionLabel="name" appendTo="body" aria-describedby="opportunityType-help"></p-dropdown>
         <label>Tipo de Oportunidad</label>
       </div>
@@ -47,19 +47,19 @@
         <label>Responsable CCA</label>
       </div>
 
-      <div class="flex-none w-8rem p-float-label">
+      <div class="flex-none w-9rem p-float-label">
         <p-calendar class="w-full" styleClass="w-full" [style]="{'height':'42px'}" [showIcon]="true" [(ngModel)]="data.goNogoDate" formControlName="goNogoDate" appendTo="body">
         </p-calendar>
         <label>Fecha Go/No Go</label>
       </div>
 
-      <div class="flex-none w-8rem p-float-label">
+      <div class="flex-none w-9rem p-float-label">
         <p-calendar class="w-full" styleClass="w-full" [style]="{'height':'42px'}" [showIcon]="true" [(ngModel)]="data.requestedDate" formControlName="requestedDate" appendTo="body"
           aria-describedby="requestedDate-help"></p-calendar>
         <label class="ajustar">Fecha Solicitud*</label>
       </div>
       
-      <div class="flex-none w-8rem p-float-label">
+      <div class="flex-none w-9rem p-float-label">
         <p-calendar class="w-full" styleClass="w-full" styleClass="w-full" [style]="{'height':'42px'}" [showIcon]="true" [(ngModel)]="data.deliveryDate" formControlName="deliveryDate" appendTo="body" aria-describedby="deliveryDate-help"></p-calendar>
         <label>F. Entrega Op.</label>
       </div>
@@ -68,14 +68,14 @@
 
     <div class="flex flex-row gap-2 w-full">
 
-      <div class="flex-none w-20rem p-float-label">
-        <p-multiSelect class="w-20rem text-overflow-ellipsis" styleClass="w-20rem text-overflow-ellipsis" [options]="offerings" [filter]="false" [(ngModel)]="data.offerings" formControlName="offerings" optionLabel="name"
+      <div class="flex-none p-float-label" style="width:calc(45vw - 200px)">
+        <p-multiSelect class="w-full text-overflow-ellipsis" styleClass="w-full text-overflow-ellipsis" [options]="offerings" [filter]="false" [(ngModel)]="data.offerings" formControlName="offerings" optionLabel="name"
           appendTo="body" [showToggleAll]="false" [showClear]="true"></p-multiSelect>
         <label>Offering</label>
       </div>
 
-      <div class="flex-none w-20rem p-float-label">
-        <p-multiSelect class="w-20rem" styleClass="w-20rem" [options]="technologies" [filter]="false" [(ngModel)]="data.technologies" formControlName="technologies"
+      <div class="flex-none p-float-label" style="width:calc(45vw - 200px)">
+        <p-multiSelect class="w-full text-overflow-ellipsis" styleClass="w-full text-overflow-ellipsis" [options]="technologies" [filter]="false" [(ngModel)]="data.technologies" formControlName="technologies"
           optionLabel="name" appendTo="body" [showToggleAll]="false" [showClear]="true"></p-multiSelect>
         <label>Tecnologías</label>
       </div>

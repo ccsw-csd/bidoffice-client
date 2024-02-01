@@ -154,8 +154,8 @@ export class OfferListComponent implements OnInit {
 
     const ref = this.dinamicDialogService.open(OfferEditComponent, {
       header: this.headerChoice,
-      width: '75%',
-      height: '800px',
+      width: '95%',
+      height: '90%',
       data: {
         offer: this.selectedOffer,
         readOnly: this.selectedOffer == null ? false : this.canEditOffer(this.selectedOffer) == false
