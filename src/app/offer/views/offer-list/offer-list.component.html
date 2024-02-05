@@ -83,7 +83,7 @@
 
 <p-table [style]="{'height':'calc(100vh - 240px)'}" [value]="offerItemList" [lazy]="true" (onLazyLoad)="loadPage($event)" 
   [loading]="isloading" [scrollable]="true" scrollHeight="flex" responsiveLayout="scroll" [paginator]="true" [rows]="50"
-  [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[20, 50, 100]" sortField="lastModification" [sortOrder]="-1"
+  [totalRecords]="totalElements" [showCurrentPageReport]="true" [rowsPerPageOptions]="[20, 50, 100]" sortField="deliveryDate" [sortOrder]="-1"
   currentPageReportTemplate="{first} - {last} / {totalRecords}" paginatorPosition="bottom" [globalFilterFields]="['opportunityStatus.name']" 
   styleClass="p-datatable-striped" selectionMode="single" >
   <ng-template pTemplate="header" >
@@ -131,9 +131,9 @@
         </div>
       </th>
       <th class="flex-none w-7rem flex-column align-items-center justify-content-center" >
-        <div class="flex flex-row w-full top-header" pSortableColumn="lastModification">
-          <span class="flex flex-1 justify-content-center">F. Modif.</span>
-          <p-sortIcon field="lastModification"></p-sortIcon>
+        <div class="flex flex-row w-full top-header" pSortableColumn="deliveryDate">
+          <span class="flex flex-1 justify-content-center">F. Entrega</span>
+          <p-sortIcon field="deliveryDate"></p-sortIcon>
         </div>
       </th>
       <th class="flex-none w-7rem">
@@ -151,7 +151,7 @@
       <td class="flex-none w-8rem align-items-center justify-content-left">{{ offerItemList.opportunityStatus.name }}</td>
       <td class="flex-none w-14rem align-items-center justify-content-left">{{ transformPerson(offerItemList.managedBy) }}</td>
       <td class="flex-none w-7rem align-items-center text-center">{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
-      <td class="flex-none w-7rem align-items-center text-center">{{ offerItemList.lastModification | date: "dd/MM/yyyy hh:mm:ss" }}</td>
+      <td class="flex-none w-7rem align-items-center text-center">{{ offerItemList.deliveryDate | date: "dd/MM/yyyy" }}</td>
       <td  class="flex-none w-7rem">
         <div class="flex flex-row justify-content-center">
           <button title="Cambiar estado" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>          

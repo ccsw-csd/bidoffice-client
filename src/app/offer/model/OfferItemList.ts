@@ -9,7 +9,7 @@ export class OfferItemList{
   requestDate: Date;
   opportunityType: BaseClass = new BaseClass();
   opportunityStatus: BaseClass = new BaseClass();
-  lastModification: Date;
+  deliveryDate: Date;
   managedBy: Person;
   
   public constructor(init?:Partial<OfferItemList>) {
