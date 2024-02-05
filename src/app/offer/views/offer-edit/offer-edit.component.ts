@@ -52,7 +52,7 @@ export class OfferEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = this.config.header.split(':')[0];
-
+    
     if (this.config.data.offer != null) {
       this.offerStatus = 'modificada';
       this.offer = this.config.data.offer;
@@ -62,7 +62,7 @@ export class OfferEditComponent implements OnInit {
       this.offer = new Offer();
       this.readOnly = false;
     }
-
+    
     this.offerForm = this.formBuilder.group({
       chance: this.formBuilder.group({
         nameOpportunity: ['', Validators.required],
@@ -84,6 +84,7 @@ export class OfferEditComponent implements OnInit {
         releaseDate: ['']
       }),
     });
+    
     this.chanceForm = this.offerForm.get('chance') as FormGroup;
     this.onChange();
   }

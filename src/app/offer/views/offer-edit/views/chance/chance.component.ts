@@ -100,6 +100,10 @@ export class ChanceComponent implements OnInit {
         }
       }
     );
+
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 5000)
   }
 
   searchClient($event) {

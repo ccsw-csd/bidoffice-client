@@ -34,6 +34,7 @@ import { TradetrackComponent } from './views/offer-edit/views/tradetrack/tradetr
 import { TagModule } from 'primeng/tag';
 import { TradetrackEditComponent } from './views/offer-edit/views/tradetrack/tradetrack-edit/tradetrack-edit.component';
 import { ConfirmDialogComponent } from './views/confirm-dialog/confirm-dialog.component';
+import { TooltipModule } from 'primeng/tooltip';
 @NgModule({
   declarations: [
     OfferListComponent,
@@ -73,7 +74,8 @@ import { ConfirmDialogComponent } from './views/confirm-dialog/confirm-dialog.co
     ProgressSpinnerModule,
     SelectButtonModule,
     ListboxModule,
-    TagModule
+    TagModule,
+    TooltipModule,
   ],
 })
 export class OfferModule {}

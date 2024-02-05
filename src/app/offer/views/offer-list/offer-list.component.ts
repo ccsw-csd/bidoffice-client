@@ -30,6 +30,7 @@ import { NavigatorService } from 'src/app/core/services/navigator.service';
 })
 export class OfferListComponent implements OnInit {
   readonly labelInFinish: string = 'Finalizada';
+  readonly labelInDesestimada: string = 'Desestimada';
   pageable: Pageable = {
     pageNumber: 0,
     pageSize: 10,
@@ -200,7 +201,7 @@ export class OfferListComponent implements OnInit {
   }
 
   isFinishStatus(optionStatus: string): boolean {
-    return optionStatus == this.labelInFinish;
+    return optionStatus == this.labelInFinish || optionStatus == this.labelInDesestimada;
   }
 
   searchPerson($event) {
