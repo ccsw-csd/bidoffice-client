@@ -21,6 +21,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { verfierFilterDate } from './validator/ValidatorDate';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { NavigatorService } from 'src/app/core/services/navigator.service';
+import { ExportService } from 'src/app/core/services/export.service';
 
 @Component({
   selector: 'app-offer-list',
@@ -46,6 +47,7 @@ export class OfferListComponent implements OnInit {
   offerPage: OfferPage;
   offerItemList: OfferItemList[];
   totalElements: number;
+  offerItemListToExport: OfferItemList[];
   isloading: boolean = false;
   selectedOffer: Offer;
   opportunityStatusOption: BaseClass[];
@@ -67,7 +69,8 @@ export class OfferListComponent implements OnInit {
     private dinamicDialogService: DialogService,
     private formBuilder: FormBuilder,
     private navigatorService: NavigatorService,
-    private authService: AuthService
+    private authService: AuthService,
+    private exportService: ExportService
   ) { }
 
   ngOnInit(): void {
@@ -141,6 +144,19 @@ export class OfferListComponent implements OnInit {
     });
 
     this.filterStatus?.map(item => item.id).toString();
+  }
+
+  export() {
+    this.offerService.findListToExport(this.pageable, this.offerSearch.status, this.offerSearch.type, this.offerSearch.sector, this.offerSearch.requestedBy, this.offerSearch.managedBy, this.offerSearch.involved, this.offerSearch.startDateModification, this.offerSearch.endDateModification, this.offerSearch.client, this.offerSearch.deliveryDate).subscribe({
+      next: (res: OfferItemList[]) => {
+        this.offerItemListToExport = res;
+      },
+      error: () => { },
+      complete: () => {
+
+          this.exportService.exportOffers(this.offerItemListToExport);
+      }
+    });
   }
 
   resizeTable(){
@@ -235,6 +251,11 @@ export class OfferListComponent implements OnInit {
   transformPerson(person: Person): any {
     if (person != null) return this.mappingPerson(person).field;
   }
+
+  transformYesNo(value: Boolean): any {
+    return value ? 'Sí' : '';
+  }
+
 
   isAssignValuesFilter(): boolean {
     return Object.keys(this.filterForm.value).some(

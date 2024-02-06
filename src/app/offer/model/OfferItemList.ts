@@ -6,11 +6,12 @@ export class OfferItemList{
   client: string;
   name: string;
   sector: BaseClass;
-  requestDate: Date;
+  requestedDate: Date;
   opportunityType: BaseClass = new BaseClass();
   opportunityStatus: BaseClass = new BaseClass();
   deliveryDate: Date;
   managedBy: Person;
+  genAi: boolean;
   
   public constructor(init?:Partial<OfferItemList>) {
     Object.assign(this, init);

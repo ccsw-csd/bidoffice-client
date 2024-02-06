@@ -8,6 +8,7 @@ import { OfferDataTechnology } from './OfferDataTechnology';
 import { OfferTracing } from './OfferTracing';
 import { OfferTradeTracking } from './OfferTradeTracking';
 import { Person } from './Person';
+
 export class Offer {
   id: number;
   client: string;
@@ -26,6 +27,7 @@ export class Offer {
   creationDate: Date;
   userLastUpdate: Person;
   observations: string;
+  genAi: boolean = false;
   dataChapter: OfferDataChapter = new OfferDataChapter();
   dataFiles: OfferDataFile[] = new Array();
   dataProject: OfferDataProject = new OfferDataProject();

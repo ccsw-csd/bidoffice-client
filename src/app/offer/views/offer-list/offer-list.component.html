@@ -112,6 +112,12 @@
           <p-sortIcon field="opportunityType"></p-sortIcon>
         </div>
       </th>
+      <th class="flex-none w-7rem flex-column align-items-center justify-content-center" >
+        <div class="flex flex-row w-full top-header" pSortableColumn="genAi">
+          <span class="flex flex-1 justify-content-center">Gen AI</span>
+          <p-sortIcon field="genAi"></p-sortIcon>
+        </div>
+      </th>
       <th class="flex-none w-8rem flex-column align-items-center justify-content-center" >
         <div class="flex flex-row w-full top-header" pSortableColumn="opportunityStatus">
           <span class="flex flex-1 justify-content-center">Estado</span>
@@ -148,6 +154,7 @@
       <td class="flex-none w-16rem align-items-center justify-content-left">{{ offerItemList.client}}</td>
       <td class="flex-none w-8rem align-items-center justify-content-left">{{ offerItemList.sector.name }}</td>
       <td class="flex-none w-8rem align-items-center justify-content-left">{{ offerItemList.opportunityType.name }}</td>
+      <td class="flex-none w-7rem align-items-center justify-content-left">{{ transformYesNo(offerItemList.genAi) }}</td>
       <td class="flex-none w-8rem align-items-center justify-content-left">{{ offerItemList.opportunityStatus.name }}</td>
       <td class="flex-none w-14rem align-items-center justify-content-left">{{ transformPerson(offerItemList.managedBy) }}</td>
       <td class="flex-none w-7rem align-items-center text-center">{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
@@ -163,7 +170,9 @@
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="paginatorleft"></ng-template>
+  <ng-template pTemplate="paginatorleft">
+    <button pButton id="export" (click)="export()" class="p-button-outlined">Exportar oportunidades</button>
+  </ng-template>
   <ng-template pTemplate="paginatorright">
     <button pButton id="create-offer" (click)="toOfferEdit()" class="p-button-primary">Nueva oportunidad</button>
   </ng-template>

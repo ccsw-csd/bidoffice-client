@@ -24,10 +24,12 @@
         <label>Código BDC</label>
       </div>
 
-      <div class="flex-none w-18rem p-float-label">
+      <div class="flex-none w-9rem p-float-label">
         <p-dropdown class="w-full" styleClass="w-full" [options]="offerTypes" [(ngModel)]="data.opportunityType" formControlName="opportunityType" optionLabel="name" appendTo="body" aria-describedby="opportunityType-help"></p-dropdown>
         <label>Tipo de Oportunidad</label>
       </div>
+
+      <p-checkbox class="w-9rem justify-content-center" labelStyleClass="cursor-pointer" [binary]="true" inputId="binary" [(ngModel)]="data.genAi" formControlName="genAi" label="Gen AI"></p-checkbox>
     </div>
 
     <div class="flex flex-row gap-2 w-full">

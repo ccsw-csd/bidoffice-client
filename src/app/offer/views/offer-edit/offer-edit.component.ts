@@ -81,6 +81,7 @@ export class OfferEditComponent implements OnInit {
         bdcCode: [''],
         opportunityWin: [{ value: '', disabled: true }],
         observations: [''],
+        genAi: [],
         releaseDate: ['']
       }),
     });
