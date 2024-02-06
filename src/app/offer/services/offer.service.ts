@@ -117,7 +117,7 @@ export class OfferService {
     if (!date) return null;
 
     let year = date.getFullYear();
-    let month = ''+date.getMonth();
+    let month = ''+(date.getMonth()+1);
     let day = ''+date.getDate();
 
     if (month.length == 1) month = '0'+month;
