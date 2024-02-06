@@ -26,7 +26,6 @@ export class NavComponent implements OnInit {
 
     this.items = [
       {label: "Oportunidades", routerLink: '/main'},
-      {label: "Buscador de Oportunidades", visible: this.authService.hasRole('ADMIN')},
       {label: "Administración",
         expanded: true,
         visible: this.authService.hasRole('ADMIN'),
