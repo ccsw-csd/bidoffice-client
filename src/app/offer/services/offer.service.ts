@@ -20,7 +20,10 @@ export class OfferService {
 
   findPage(pageable: Pageable, status: BaseClass, type: BaseClass, sector: BaseClass, requestedBy: Person, managedBy: Person, involved: Person, startDateModification: Date, endDateModification: Date, client: String, deliveryDate: any): Observable<OfferPage> {
 
-    return this.http.post<OfferPage>(environment.server + "/offer/findPage", { pageable: pageable, status: status, type: type, sector: sector, requestedBy: requestedBy, managedBy: managedBy, involved: involved, startDateModification: startDateModification, endDateModification: endDateModification, client: client, deliveryDateStart: deliveryDate && deliveryDate.length == 2 ? deliveryDate[0] : null, deliveryDateEnd: deliveryDate && deliveryDate.length == 2 ? deliveryDate[1] : null, });
+    let startDate = this.extractStringDate(startDateModification);
+    let endDate = this.extractStringDate(endDateModification);
+
+    return this.http.post<OfferPage>(environment.server + "/offer/findPage", { pageable: pageable, status: status, type: type, sector: sector, requestedBy: requestedBy, managedBy: managedBy, involved: involved, startDateModification: startDate, endDateModification: endDate, client: client, deliveryDateStart: deliveryDate && deliveryDate.length == 2 ? deliveryDate[0] : null, deliveryDateEnd: deliveryDate && deliveryDate.length == 2 ? deliveryDate[1] : null, });
   }
 
   searchClient(filter: string): Observable<string[]> {
@@ -90,7 +93,15 @@ export class OfferService {
 
   save(offer: Offer): Observable<Offer> {
 
-    return this.http.put<Offer>(environment.server + "/offer/", offer);
+    let offerRaw : any = offer;
+
+    offerRaw.releaseDate = this.extractStringDate(offer.releaseDate);
+    offerRaw.deliveryDate = this.extractStringDate(offer.deliveryDate);
+    offerRaw.requestedDate = this.extractStringDate(offer.requestedDate);
+    offerRaw.goNogoDate = this.extractStringDate(offer.goNogoDate);
+
+
+    return this.http.put<Offer>(environment.server + "/offer/", offerRaw);
   }
   modifyStatus(modifyStatus: ModifyStatus): Observable<OfferItemList> {
 
@@ -100,4 +111,19 @@ export class OfferService {
   findByOfferId(id: number): Observable<OfferChangeStatus[]> {
     return this.http.get<OfferChangeStatus[]>(environment.server + "/offerchangestatus/" + id);
   }
+
+
+  extractStringDate(date: Date) : string {
+    if (!date) return null;
+
+    let year = date.getFullYear();
+    let month = ''+date.getMonth();
+    let day = ''+date.getDate();
+
+    if (month.length == 1) month = '0'+month;
+    if (day.length == 1) day = '0'+day;
+
+    return year+"-"+month+"-"+day;
+  }
+
 }
