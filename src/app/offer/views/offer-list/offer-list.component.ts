@@ -275,7 +275,7 @@ export class OfferListComponent implements OnInit {
   }
 
   canEditOffer(offer: Offer): boolean {
-    if (this.isFinishStatus(offer.opportunityStatus.name)) return false;
+    //if (this.isFinishStatus(offer.opportunityStatus.name)) return false;
 
     return this.isAdminOrOwner(offer);
   }
