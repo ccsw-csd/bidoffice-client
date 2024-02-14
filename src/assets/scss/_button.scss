@@ -1,6 +1,7 @@
 
 $button-primary: #0070AD;
 $button-secondary: #FF5770;
+$button-info: #d3d3d3;
 
 .p-button.p-button-outlined {
   color: $button-primary !important;
@@ -12,12 +13,21 @@ $button-secondary: #FF5770;
   border:0px solid $button-secondary !important;
 }
 
+.p-button-info.p-button-outlined {
+  color: $button-info !important;
+  border:0px solid $button-info !important;
+}
+
 .p-button.p-button-text {
   color: $button-primary !important;
 }
 
 .p-button.p-button-text.p-button-danger {
   color: $button-secondary !important;
+}
+
+.p-button.p-button-text.p-button-info {
+  color: $button-info !important;
 }
 
 .p-button-outlined {   

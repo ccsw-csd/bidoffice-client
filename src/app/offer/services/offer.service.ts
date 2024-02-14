@@ -10,6 +10,7 @@ import { OfferItemList } from '../model/OfferItemList';
 import { OfferPage } from '../model/OfferPage';
 import { Person } from '../model/Person';
 import { OfferChangeStatus } from '../model/OfferChangeStatus';
+import { OfferDataExportList } from '../model/OfferDataExportList';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,11 @@ export class OfferService {
     let endDate = this.extractStringDate(endDateModification);
 
     return this.http.post<OfferItemList[]>(environment.server + "/offer/findListToExport", { pageable: pageable, status: status, type: type, sector: sector, requestedBy: requestedBy, managedBy: managedBy, involved: involved, startDateModification: startDate, endDateModification: endDate, client: client, deliveryDateStart: deliveryDate && deliveryDate.length == 2 ? deliveryDate[0] : null, deliveryDateEnd: deliveryDate && deliveryDate.length == 2 ? deliveryDate[1] : null });
+  }
+
+  findDataToExport(): Observable<OfferDataExportList[]> {
+
+    return this.http.get<OfferDataExportList[]>(environment.server + "/offer/findDataToExport");
   }
 
   searchClient(filter: string): Observable<string[]> {
@@ -111,15 +117,21 @@ export class OfferService {
 
     return this.http.put<Offer>(environment.server + "/offer/", offerRaw);
   }
+
+  changePriority(id: number): Observable<void> {
+
+    return this.http.get<void>(environment.server + "/offer/priority/" + id);
+  }
+
   modifyStatus(modifyStatus: ModifyStatus): Observable<OfferItemList> {
 
     return this.http.put<OfferItemList>(environment.server + "/offer/status", modifyStatus);
   }
   
   findByOfferId(id: number): Observable<OfferChangeStatus[]> {
+
     return this.http.get<OfferChangeStatus[]>(environment.server + "/offerchangestatus/" + id);
   }
-
 
   extractStringDate(date: Date) : string {
     if (!date) return null;

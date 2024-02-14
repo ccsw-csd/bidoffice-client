@@ -75,7 +75,7 @@
     <div class="align-self-center flex flex-row gap-2">
       <button pButton label="Limpiar" class="p-button-outlined p-button-secondary" [disabled]="!isAssignValuesFilter()"
         (click)="resetForm()"></button>
-      <button pButton label="Filtrar" class=" p-button-outlined" [disabled]="filterForm.invalid"
+      <button pButton label="Filtrar" class="p-button-outlined" [disabled]="filterForm.invalid"
         (click)="loadPage()"></button>
     </div>
   </div>
@@ -88,6 +88,9 @@
   styleClass="p-datatable-striped" selectionMode="single" >
   <ng-template pTemplate="header" >
     <tr>
+      <th class="flex-none w-3rem">
+        <div class="top-header"></div>
+      </th>
       <th class="flex-1 flex-column  align-items-center justify-content-center"> 
         <div class="flex flex-row w-full top-header" pSortableColumn="name">
             <span class="flex flex-1 justify-content-center">Nombre Oportunidad</span>
@@ -144,26 +147,29 @@
       </th>
       <th class="flex-none w-7rem">
         <div class="top-header"></div>
-        
       </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-offerItemList>
     <tr>
-      <td class="flex-1 overflow-hidden text-overflow-ellipsis" pTooltip="{{offerItemList.name}}" tooltipPosition="top">{{ offerItemList.name }}</td>
-      <td class="flex-none w-16rem align-items-center justify-content-left">{{ offerItemList.client}}</td>
-      <td class="flex-none w-8rem align-items-center justify-content-left">{{ offerItemList.sector.name }}</td>
-      <td class="flex-none w-8rem align-items-center justify-content-left">{{ offerItemList.opportunityType.name }}</td>
-      <td class="flex-none w-7rem align-items-center justify-content-left">{{ transformYesNo(offerItemList.genAi) }}</td>
-      <td class="flex-none w-8rem align-items-center justify-content-left">{{ offerItemList.opportunityStatus.name }}</td>
-      <td class="flex-none w-14rem align-items-center justify-content-left">{{ transformPerson(offerItemList.managedBy) }}</td>
-      <td class="flex-none w-7rem align-items-center text-center">{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
-      <td class="flex-none w-7rem align-items-center text-center">{{ offerItemList.deliveryDate | date: "dd/MM/yyyy" }}</td>
-      <td  class="flex-none w-7rem">
+      <td  class="flex-none w-3rem">
+        <div class="flex flex-row justify-content-center">
+          <button title="Cambiar proridad" [ngClass]="{'p-button-info': !offerItemList.priority}" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-exclamation-triangle" (click)="onPriorityChange(offerItemList)" class="p-button-rounded p-button-text"></button>
+        </div>
+      </td>
+      <td class="flex-1 overflow-hidden text-overflow-ellipsis" [ngClass]="{'font-bold text-red-700': offerItemList.priority}" pTooltip="{{offerItemList.name}}" tooltipPosition="top">{{ offerItemList.name }}</td>
+      <td class="flex-none w-16rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.client}}</td>
+      <td class="flex-none w-8rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.sector.name }}</td>
+      <td class="flex-none w-8rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.opportunityType.name }}</td>
+      <td class="flex-none w-7rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ transformYesNo(offerItemList.genAi) }}</td>
+      <td class="flex-none w-8rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.opportunityStatus.name }}</td>
+      <td class="flex-none w-14rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ transformPerson(offerItemList.managedBy) }}</td>
+      <td class="flex-none w-7rem align-items-center text-center" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
+      <td class="flex-none w-7rem align-items-center text-center" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.deliveryDate | date: "dd/MM/yyyy" }}</td>
+      <td class="flex-none w-7rem">
         <div class="flex flex-row justify-content-center">
           <button title="Cambiar estado" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>          
           <div *ngIf="!canEditOffer(offerItemList)" style="width:44px"></div>
-
           <button title="Editar oferta" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>          
           <button title="Ver oferta" *ngIf="!canEditOffer(offerItemList)" pButton type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
         </div>
@@ -171,7 +177,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="paginatorleft">
-    <button pButton id="export" (click)="export()" class="p-button-outlined">Exportar oportunidades</button>
+    <button pButton id="export" (click)="exportAll()" class="p-button-outlined" [loading]="isloadingExport">Exportar oportunidades</button>
   </ng-template>
   <ng-template pTemplate="paginatorright">
     <button pButton id="create-offer" (click)="toOfferEdit()" class="p-button-primary">Nueva oportunidad</button>

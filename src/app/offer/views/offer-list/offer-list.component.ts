@@ -22,6 +22,7 @@ import { verfierFilterDate } from './validator/ValidatorDate';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { NavigatorService } from 'src/app/core/services/navigator.service';
 import { ExportService } from 'src/app/core/services/export.service';
+import { OfferDataExportList } from '../../model/OfferDataExportList';
 
 @Component({
   selector: 'app-offer-list',
@@ -48,7 +49,9 @@ export class OfferListComponent implements OnInit {
   offerItemList: OfferItemList[];
   totalElements: number;
   offerItemListToExport: OfferItemList[];
+  offerDataToExport: OfferDataExportList[];
   isloading: boolean = false;
+  isloadingExport: boolean = false;
   selectedOffer: Offer;
   opportunityStatusOption: BaseClass[];
   offerSearch: OfferSearch = new OfferSearch();
@@ -153,8 +156,21 @@ export class OfferListComponent implements OnInit {
       },
       error: () => { },
       complete: () => {
+        this.exportService.exportOffers(this.offerItemListToExport);
+      }
+    });
+  }
 
-          this.exportService.exportOffers(this.offerItemListToExport);
+  exportAll() {
+    this.isloadingExport = true;
+    this.offerService.findDataToExport().subscribe({
+      next: (res: OfferDataExportList[]) => {
+        this.offerDataToExport = res;
+      },
+      error: () => { },
+      complete: () => {
+        this.exportService.exportOfferDataExport(this.offerDataToExport);
+        this.isloadingExport = false;
       }
     });
   }
@@ -168,7 +184,6 @@ export class OfferListComponent implements OnInit {
   }
 
   toOfferEdit() {
-
     const ref = this.dinamicDialogService.open(OfferEditComponent, {
       header: this.headerChoice,
       width: '95%',
@@ -185,6 +200,7 @@ export class OfferListComponent implements OnInit {
       this.loadPage();
     });
   }
+
   onRowSelected(offer: OfferItemList) {
     this.isloading = true;
     this.offerService.getOffer(offer.id).subscribe({
@@ -200,6 +216,18 @@ export class OfferListComponent implements OnInit {
         this.headerChoice = 'Editar Oportunidad: ' + this.selectedOffer.name;
         this.toOfferEdit();
       },
+    });
+  }
+
+  onPriorityChange(offerItemList: OfferItemList) {
+
+    this.offerService.changePriority(offerItemList.id).subscribe({
+      next: () => { },
+      error: () => { },
+      complete: () => {
+        this.selectedOffer = null;
+        this.loadPage();
+      }
     });
   }
 
@@ -241,6 +269,7 @@ export class OfferListComponent implements OnInit {
       complete: () => { },
     });
   }
+
   mappingPerson(person: Person): any {
     return {
       field: person.name + ' ' + person.lastname,
@@ -256,12 +285,12 @@ export class OfferListComponent implements OnInit {
     return value ? 'Sí' : '';
   }
 
-
   isAssignValuesFilter(): boolean {
     return Object.keys(this.filterForm.value).some(
       (item) => this.filterForm.value[item]
     );
   }
+
   resetValueForm(formControlName: string) {
     if (formControlName == 'requestedBy') this.offerSearch.requestedBy = null;
     if (formControlName == 'involved') this.offerSearch.involved = null;
@@ -295,7 +324,6 @@ export class OfferListComponent implements OnInit {
       return (this.authService.getRoles().includes(userRole) && selectedManagedByUsername === currentUserUsername);
     }
     return false;
-
   }
 
 }
