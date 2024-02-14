@@ -167,7 +167,9 @@ export class OfferListComponent implements OnInit {
       next: (res: OfferDataExportList[]) => {
         this.offerDataToExport = res;
       },
-      error: () => { },
+      error: () => {
+        this.isloadingExport = false;
+      },
       complete: () => {
         this.exportService.exportOfferDataExport(this.offerDataToExport);
         this.isloadingExport = false;
