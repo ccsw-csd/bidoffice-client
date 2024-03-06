@@ -36,6 +36,12 @@ export class OptionStatusComponent implements OnInit {
     optionStatus,
     formControlName: string
   ): boolean {
+
+    if (this.offer.opportunityStatus.name == this.labelInDelivered && this.selectedOptionStatus.name == this.labelInProgress) {
+      this.disabledValidation('');
+      return false;
+    }
+
     if (selectedStatus == optionStatus) {
       if (formControlName != null) this.disabledValidation(formControlName);
       return true;
@@ -67,9 +73,8 @@ export class OptionStatusComponent implements OnInit {
       this.disabledControlValidation(control, formControlName)
     );
   }
-  private disabledControlValidation(control: string, formControlName: string) {
-    if (control != formControlName) {
-      this.form.controls[control].disable();
-    } else this.form.controls[formControlName].enable();
+  private disabledControlValidation(control: string, formControlName: string) {    
+    if (control != formControlName) this.form.controls[control].disable();
+    else this.form.controls[formControlName].enable();
   }
 }

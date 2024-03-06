@@ -12,4 +12,6 @@ export class OfferSearch{
     endDateModification: Date;
     client: String;
     deliveryDate: Date;
+    genAi: any;
+    opportunityWin: any;
 }

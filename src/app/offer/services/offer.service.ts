@@ -19,12 +19,12 @@ export class OfferService {
 
   constructor(private http: HttpClient) { }
 
-  findPage(pageable: Pageable, status: BaseClass, type: BaseClass, sector: BaseClass, requestedBy: Person, managedBy: Person, involved: Person, startDateModification: Date, endDateModification: Date, client: String, deliveryDate: any): Observable<OfferPage> {
+  findPage(pageable: Pageable, status: BaseClass, type: BaseClass, sector: BaseClass, requestedBy: Person, managedBy: Person, involved: Person, startDateModification: Date, endDateModification: Date, client: String, deliveryDate: any, genAi: boolean, opportunityWin: boolean): Observable<OfferPage> {
 
     let startDate = this.extractStringDate(startDateModification);
     let endDate = this.extractStringDate(endDateModification);
 
-    return this.http.post<OfferPage>(environment.server + "/offer/findPage", { pageable: pageable, status: status, type: type, sector: sector, requestedBy: requestedBy, managedBy: managedBy, involved: involved, startDateModification: startDate, endDateModification: endDate, client: client, deliveryDateStart: deliveryDate && deliveryDate.length == 2 ? deliveryDate[0] : null, deliveryDateEnd: deliveryDate && deliveryDate.length == 2 ? deliveryDate[1] : null });
+    return this.http.post<OfferPage>(environment.server + "/offer/findPage", { pageable: pageable, status: status, type: type, sector: sector, requestedBy: requestedBy, managedBy: managedBy, involved: involved, startDateModification: startDate, endDateModification: endDate, client: client, deliveryDateStart: deliveryDate && deliveryDate.length == 2 ? deliveryDate[0] : null, deliveryDateEnd: deliveryDate && deliveryDate.length == 2 ? deliveryDate[1] : null, genAi: genAi, opportunityWin: opportunityWin });
   }
 
   findListToExport(pageable: Pageable, status: BaseClass, type: BaseClass, sector: BaseClass, requestedBy: Person, managedBy: Person, involved: Person, startDateModification: Date, endDateModification: Date, client: String, deliveryDate: any): Observable<OfferItemList[]> {

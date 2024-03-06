@@ -86,6 +86,8 @@ export class StatusChangeComponent implements OnInit {
       this.filterOptionStatus(item.name)
     );
 
+    if (this.offerItemList.opportunityStatus.name == this.labelInDelivered) this.optionStatus = this.optionStatus.reverse();
+
     if (this.optionStatus.length == 0) this.onClose();
 
     this.selectedOptionStatus = this.optionStatus[0];
@@ -108,7 +110,7 @@ export class StatusChangeComponent implements OnInit {
       return status == this.labelInGoNoGo || status == this.labelInProgress;
 
     if (this.offerItemList.opportunityStatus.name == this.labelInDelivered)
-      return status == this.labelInFinish;
+      return status == this.labelInFinish || status == this.labelInProgress;
 
     if (this.offerItemList.opportunityStatus.name == this.labelInStandBy)
       return status == this.labelInProgress || status == this.labelInReject;
@@ -117,7 +119,7 @@ export class StatusChangeComponent implements OnInit {
   }
 
   onSave() {
-    if (this.statusForm.valid) {
+    if (this.statusForm.valid || (this.offerItemList.opportunityStatus.name == this.labelInDelivered && this.selectedOptionStatus.name == this.labelInProgress))  {
       this.setData();
       this.isLoading = true;
       this.offerService.modifyStatus(this.modifyStatus).subscribe({
@@ -131,8 +133,9 @@ export class StatusChangeComponent implements OnInit {
         },
       });
     } else {
-      Object.keys(this.statusForm.controls).forEach((control) =>
-        this.statusForm.controls[control].markAsDirty()
+      Object.keys(this.statusForm.controls).forEach((control) => {
+        this.statusForm.controls[control].markAsDirty();
+      }
       );
       this.statusForm.markAllAsTouched();
     }

@@ -27,10 +27,18 @@
 
         <span class="p-float-label w-15rem">
           <p-dropdown [(ngModel)]="offerSearch.type" [options]="types" optionLabel="name" appendTo="body"
-            [showClear]="true" formControlName="type" (onClear)="resetValueForm('type')" [autoDisplayFirst]="false" [style]="{width: '100%'}"  (onChange)="loadPage()" (onClear)="loadPage()">
+            [showClear]="false" formControlName="type" (onClear)="resetValueForm('type')" [autoDisplayFirst]="false" [style]="{width: '100%'}"  (onChange)="loadPage()" (onClear)="loadPage()">
           </p-dropdown>
           <label>Tipo</label>
         </span>
+
+        <span class="p-float-label w-8rem">
+          <p-dropdown [(ngModel)]="offerSearch.genAi" [options]="yesNoOption" optionLabel="name" appendTo="body"
+            [showClear]="false" formControlName="genAi" (onClear)="resetValueForm('genAi')" [autoDisplayFirst]="false" [style]="{width: '100%'}"  (onChange)="loadPage()" (onClear)="loadPage()">
+          </p-dropdown>
+          <label>GenAI</label>
+        </span>
+
       </div>
 
       <div class="flex flex-row gap-4">
@@ -69,14 +77,22 @@
           </p-calendar>
           <label>Fecha Entrega Oportunidad</label>
         </span>
+
+        <span class="p-float-label w-8rem">
+          <p-dropdown [(ngModel)]="offerSearch.opportunityWin" [options]="yesNoOption" optionLabel="name" appendTo="body"
+            [showClear]="false" formControlName="opportunityWin" (onClear)="resetValueForm('opportunityWin')" [autoDisplayFirst]="false" [style]="{width: '100%'}"  (onChange)="loadPage()" (onClear)="loadPage()">
+          </p-dropdown>
+          <label>Ganada</label>
+        </span>
+
       </div>
 
+
+
     </div>
-    <div class="align-self-center flex flex-row gap-2">
-      <button pButton label="Limpiar" class="p-button-outlined p-button-secondary" [disabled]="!isAssignValuesFilter()"
-        (click)="resetForm()"></button>
-      <button pButton label="Filtrar" class="p-button-outlined" [disabled]="filterForm.invalid"
-        (click)="loadPage()"></button>
+    <div class="align-self-center flex flex-column gap-2">
+      <button pButton label="Filtrar" class="p-button-outlined" [disabled]="filterForm.invalid" (click)="loadPage()"></button>
+      <button pButton label="Limpiar" class="p-button-outlined p-button-secondary" [disabled]="!isAssignValuesFilter()" (click)="resetForm()"></button>
     </div>
   </div>
 </div>
@@ -88,7 +104,7 @@
   styleClass="p-datatable-striped" selectionMode="single" >
   <ng-template pTemplate="header" >
     <tr>
-      <th class="flex-none w-3rem">
+      <th class="flex-none w-2rem">
         <div class="top-header"></div>
       </th>
       <th class="flex-1 flex-column  align-items-center justify-content-center"> 
@@ -115,7 +131,7 @@
           <p-sortIcon field="opportunityType"></p-sortIcon>
         </div>
       </th>
-      <th class="flex-none w-7rem flex-column align-items-center justify-content-center" >
+      <th class="flex-none w-5rem flex-column align-items-center justify-content-center" >
         <div class="flex flex-row w-full top-header" pSortableColumn="genAi">
           <span class="flex flex-1 justify-content-center">Gen AI</span>
           <p-sortIcon field="genAi"></p-sortIcon>
@@ -127,51 +143,58 @@
           <p-sortIcon field="opportunityStatus"></p-sortIcon>
         </div>
       </th>
+      <th class="flex-none w-5rem flex-column align-items-center justify-content-center" >
+        <div class="flex flex-row w-full top-header" pSortableColumn="opportunityWin">
+          <span class="flex flex-1 justify-content-center">Ganada</span>
+          <p-sortIcon field="opportunityWin"></p-sortIcon>
+        </div>
+      </th>
       <th class="flex-none w-14rem flex-column align-items-center justify-content-center" >
         <div class="flex flex-row w-full top-header" pSortableColumn="managedBy">
           <span class="flex flex-1 justify-content-center">Gestor responsable</span>
           <p-sortIcon field="managedBy"> </p-sortIcon>
         </div>
       </th>
-      <th class="flex-none w-7rem flex-column align-items-center justify-content-center" >
+      <th class="flex-none w-6rem flex-column align-items-center justify-content-center" >
         <div class="flex flex-row w-full top-header" pSortableColumn="requestedDate">
-          <span class="flex flex-1 justify-content-center">F. Solicitud</span>
+          <span class="flex flex-1 justify-content-center">Solicitud</span>
           <p-sortIcon field="requestedDate"></p-sortIcon>
         </div>
       </th>
-      <th class="flex-none w-7rem flex-column align-items-center justify-content-center" >
+      <th class="flex-none w-6rem flex-column align-items-center justify-content-center" >
         <div class="flex flex-row w-full top-header" pSortableColumn="deliveryDate">
-          <span class="flex flex-1 justify-content-center">F. Entrega</span>
+          <span class="flex flex-1 justify-content-center">Entrega</span>
           <p-sortIcon field="deliveryDate"></p-sortIcon>
         </div>
       </th>
-      <th class="flex-none w-7rem">
+      <th class="flex-none w-5rem">
         <div class="top-header"></div>
       </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-offerItemList>
     <tr>
-      <td  class="flex-none w-3rem">
+      <td  class="flex-none w-2rem pl-1">
         <div class="flex flex-row justify-content-center">
-          <button title="Cambiar proridad" [ngClass]="{'p-button-info': !offerItemList.priority}" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-exclamation-triangle" (click)="onPriorityChange(offerItemList)" class="p-button-rounded p-button-text"></button>
+          <button title="Cambiar proridad" [ngClass]="{'p-button-info': !offerItemList.priority}" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-exclamation-triangle" (click)="onPriorityChange(offerItemList)" class="w-2rem p-button-rounded p-button-text p-button-plain icon"></button>
         </div>
       </td>
       <td class="flex-1 overflow-hidden text-overflow-ellipsis" [ngClass]="{'font-bold text-red-700': offerItemList.priority}" pTooltip="{{offerItemList.name}}" tooltipPosition="top">{{ offerItemList.name }}</td>
       <td class="flex-none w-16rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.client}}</td>
       <td class="flex-none w-8rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.sector.name }}</td>
       <td class="flex-none w-8rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.opportunityType.name }}</td>
-      <td class="flex-none w-7rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ transformYesNo(offerItemList.genAi) }}</td>
+      <td class="flex-none w-5rem align-items-center justify-content-center" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ transformYesBlank(offerItemList.genAi) }}</td>
       <td class="flex-none w-8rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.opportunityStatus.name }}</td>
+      <td class="flex-none w-5rem align-items-center justify-content-center" [ngClass]="{'font-bold text-red-700': offerItemList.priority}"><span *ngIf="offerItemList.opportunityStatus.name == 'Finalizada'">{{ transformYesNo(offerItemList.opportunityWin) }}</span></td>
       <td class="flex-none w-14rem align-items-center justify-content-left" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ transformPerson(offerItemList.managedBy) }}</td>
-      <td class="flex-none w-7rem align-items-center text-center" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
-      <td class="flex-none w-7rem align-items-center text-center" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.deliveryDate | date: "dd/MM/yyyy" }}</td>
-      <td class="flex-none w-7rem">
+      <td class="flex-none w-6rem align-items-center text-center" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.requestedDate | date: "dd/MM/yyyy" }}</td>
+      <td class="flex-none w-6rem align-items-center text-center" [ngClass]="{'font-bold text-red-700': offerItemList.priority}">{{ offerItemList.deliveryDate | date: "dd/MM/yyyy" }}</td>
+      <td class="flex-none w-5rem">
         <div class="flex flex-row justify-content-center">
-          <button title="Cambiar estado" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>          
-          <div *ngIf="!canEditOffer(offerItemList)" style="width:44px"></div>
-          <button title="Editar oferta" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>          
-          <button title="Ver oferta" *ngIf="!canEditOffer(offerItemList)" pButton type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)" class="p-button-rounded p-button-text p-button-plain icon"></button>
+          <button title="Cambiar estado" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-th-large" (click)="onStatusChange(offerItemList)" class="w-2rem p-button-rounded p-button-text p-button-plain icon"></button>          
+          <div *ngIf="!canEditOffer(offerItemList)" class="w-2rem"></div>
+          <button title="Editar oferta" *ngIf="canEditOffer(offerItemList)" pButton type="button" icon="pi pi-pencil" (click)="onRowSelected(offerItemList)" class="w-2rem p-button-rounded p-button-text p-button-plain icon"></button>          
+          <button title="Ver oferta" *ngIf="!canEditOffer(offerItemList)" pButton type="button" icon="pi pi-eye" (click)="onRowSelected(offerItemList)" class="w-2rem p-button-rounded p-button-text p-button-plain icon"></button>
         </div>
       </td>
     </tr>

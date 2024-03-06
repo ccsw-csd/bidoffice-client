@@ -65,6 +65,7 @@ export class OfferListComponent implements OnInit {
   headerChoice = 'Nueva Oportunidad';
   filterStatus: BaseClass[];
   tableWidth: string;
+  yesNoOption: any[] = [{value:true, name:'Sí'}, {value:false, name:'No'}];
 
   constructor(
     private offerService: OfferService,
@@ -94,6 +95,8 @@ export class OfferListComponent implements OnInit {
         endDateModification: [''],
         client: [''],
         deliveryDate: [''],
+        genAi: [''],
+        opportunityWin: [''],
       },
       {
         validators: [verfierFilterDate],
@@ -134,7 +137,7 @@ export class OfferListComponent implements OnInit {
     }
 
     this.isloading = true;
-    this.offerService.findPage(this.pageable, this.offerSearch.status, this.offerSearch.type, this.offerSearch.sector, this.offerSearch.requestedBy, this.offerSearch.managedBy, this.offerSearch.involved, this.offerSearch.startDateModification, this.offerSearch.endDateModification, this.offerSearch.client, this.offerSearch.deliveryDate).subscribe({
+    this.offerService.findPage(this.pageable, this.offerSearch.status, this.offerSearch.type, this.offerSearch.sector, this.offerSearch.requestedBy, this.offerSearch.managedBy, this.offerSearch.involved, this.offerSearch.startDateModification, this.offerSearch.endDateModification, this.offerSearch.client, this.offerSearch.deliveryDate, this.offerSearch.genAi?.value, this.offerSearch.opportunityWin?.value).subscribe({
       next: (res: OfferPage) => {
         this.offerPage = res;
       },
@@ -284,6 +287,11 @@ export class OfferListComponent implements OnInit {
   }
 
   transformYesNo(value: Boolean): any {
+    return value ? 'Sí' : 'No';
+  }
+
+
+  transformYesBlank(value: Boolean): any {
     return value ? 'Sí' : '';
   }
 
@@ -303,11 +311,10 @@ export class OfferListComponent implements OnInit {
   resetForm() {
     this.filterForm.reset();
     this.offerSearch = new OfferSearch();
+    this.loadPage();
   }
 
   canEditOffer(offer: Offer): boolean {
-    //if (this.isFinishStatus(offer.opportunityStatus.name)) return false;
-
     return this.isAdminOrOwner(offer);
   }
 

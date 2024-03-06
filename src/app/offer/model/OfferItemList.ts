@@ -12,6 +12,7 @@ export class OfferItemList{
   deliveryDate: Date;
   managedBy: Person;
   genAi: boolean;
+  opportunityWin: boolean;
   
   public constructor(init?:Partial<OfferItemList>) {
     Object.assign(this, init);
